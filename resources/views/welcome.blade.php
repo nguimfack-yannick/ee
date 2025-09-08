@@ -107,7 +107,7 @@
 
     <!-- Hero Section avec Image en Arrière-plan -->
     <section class="relative h-screen overflow-hidden bg-cover bg-center"
-             style="background: url('{{ asset('image/arbre.png') }}') center/auto 200% no-repeat;">
+             style="background: url('{{ asset('image/fotos.jpg') }}') center/auto 200% no-repeat;">
         <div class="relative max-w-7xl mx-auto px-4 sm:px-5 lg:px-8 h-full flex items-center justify-center text-center">
             <div>
                 <h1 class="text-6xl font-extrabold text-white sm:text-7xl">Organisation du Bien-Être Communautaire</h1>

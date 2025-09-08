@@ -97,7 +97,7 @@
     <main class="flex-1">
         <!-- Section Don insérée -->
        <section class="relative h-screen bg-cover bg-center"
-             style="background: url('{{ asset('/image/mer.png') }}') center/auto 200% no-repeat;">
+             style="background: url('{{ asset('/image/fotos4.jpg') }}') center/auto 200% no-repeat;">
             <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-full flex items-center justify-center">
                 <div class="text-center">
                     <h1 class="text-5xl font-extrabold text-white sm:text-6xl">Faites un Don</h1>
