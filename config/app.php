@@ -1,7 +1,6 @@
 <?php
 
 return [
-
     /*
     |--------------------------------------------------------------------------
     | Application Name
@@ -65,7 +64,7 @@ return [
     |
     */
 
-    'timezone' => 'UTC',
+    'timezone' => 'Africa/Douala', // Changé à Africa/Douala pour correspondre à Yaoundé, Cameroun
 
     /*
     |--------------------------------------------------------------------------
@@ -78,11 +77,10 @@ return [
     |
     */
 
-    'locale' => env('APP_LOCALE', 'en'),
-
-    'fallback_locale' => env('APP_FALLBACK_LOCALE', 'en'),
-
-    'faker_locale' => env('APP_FAKER_LOCALE', 'en_US'),
+    'locale' => env('APP_LOCALE', 'fr'), // Français par défaut
+    'fallback_locale' => env('APP_FALLBACK_LOCALE', 'fr'), // Français comme langue de secours
+    'available_locales' => ['en', 'fr', 'de', 'zh', 'ar'], // Langues supportées
+    'faker_locale' => env('APP_FAKER_LOCALE', 'fr_FR'), // Changé pour correspondre au français
 
     /*
     |--------------------------------------------------------------------------
@@ -122,5 +120,4 @@ return [
         'driver' => env('APP_MAINTENANCE_DRIVER', 'file'),
         'store' => env('APP_MAINTENANCE_STORE', 'database'),
     ],
-
 ];

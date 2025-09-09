@@ -55,7 +55,7 @@
                 <a href="#" target="_blank"><img src="/image/wastapp.jpg" alt="WhatsApp" class="w-6 h-6 rounded-full"></a>
                 <a href="#" target="_blank"><img src="/image/insta.jpg" alt="Instagram" class="w-6 h-6 rounded-full"></a>
             </div>
-            <a href="mailto:globaluniversalwelfare@gmail.com"><img src="/image/m.jpg" alt="Email" class="w-6 h-6 rounded-full"></a>
+            <a href="Contact@universalwelfare.org"><img src="/image/m.jpg" alt="Email" class="w-6 h-6 rounded-full"></a>
         </div>
     </nav>
 

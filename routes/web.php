@@ -30,3 +30,4 @@ Route::post('/dons', [DonController::class, 'store'])->name('dons.store');
 Route::get('/dons', [DonController::class, 'dons'])->name('dons');
 // Route::get('/contact', [ContactController, 'index'])->name('contact');
 Route::get('/news', [NewsController::class, 'index'])->name('news');
+

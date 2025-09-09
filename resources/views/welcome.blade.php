@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -23,6 +24,17 @@
         }
 
         .font-all-bold, body, h1, h2, h3, p, a, li { font-weight: bold; }
+
+        /* Partner Logo Styles */
+        .partner-logo {
+            width: 100px;
+            height: 100px;
+            object-fit: contain;
+            transition: transform 0.6s ease; /* Transition encore plus fluide */
+        }
+        .swiper-slide-active .partner-logo {
+            transform: scale(1.3); /* Agrandissement du logo actif */
+        }
     </style>
 
     <!-- AlpineJS -->
@@ -105,24 +117,154 @@
         </div>
     </header>
 
-    <!-- Hero Section avec Image en Arrière-plan -->
-    <section class="relative h-screen overflow-hidden bg-cover bg-center"
-             style="background: url('{{ asset('image/fotos.jpg') }}') center/auto 200% no-repeat;">
-        <div class="relative max-w-7xl mx-auto px-4 sm:px-5 lg:px-8 h-full flex items-center justify-center text-center">
-            <div>
-                <h1 class="text-6xl font-extrabold text-white sm:text-7xl">Organisation du Bien-Être Communautaire</h1>
-                <p class="mt-4 text-xl text-gray-100 font-bold">
-                    Une ONG dédiée à l’aide humanitaire : dons essentiels pour hôpitaux et orphelinats.
-                </p>
-                <div class="mt-8">
-                    <a href="santos/dons.php"
-                       class="inline-block bg-yellow text-black px-8 py-3 font-bold rounded-md hover:bg-gray-100 transition transform hover:scale-105">
-                        Faites un don
-                    </a>
-                    <a href="#about"
-                       class="inline-block bg-yellow text-black px-8 py-3 font-bold rounded-md hover:bg-gray-100 transition transform hover:scale-105">
-                        En savoir plus
-                    </a>
+    <!-- Hero Section avec Swiper Slider -->
+    <section class="relative h-screen overflow-hidden">
+        <div class="swiper heroSwiper h-full">
+            <div class="swiper-wrapper">
+                <div class="swiper-slide">
+                    <div
+                        class="h-full bg-cover bg-center flex items-center justify-center"
+                        style="background: url('{{ asset('image/elev.png') }}') center/cover no-repeat;"
+                    >
+                        <div class="text-center">
+                            <h1 class="text-6xl font-extrabold text-white sm:text-7xl">
+                                Organisation du Bien-Être Communautaire
+                            </h1>
+                            <p class="mt-4 text-xl text-gray-100 font-bold">
+                                Une ONG dédiée à l’aide humanitaire : dons essentiels pour hôpitaux et orphelinats.
+                            </p>
+                            <div class="mt-8">
+                                <a
+                                    href="santos/dons.php"
+                                    class="inline-block bg-yellow text-black px-8 py-3 font-bold rounded-md hover:bg-gray-100 transition transform hover:scale-105"
+                                >
+                                    Faites un don
+                                </a>
+                                <a
+                                    href="#about"
+                                    class="inline-block bg-yellow text-black px-8 py-3 font-bold rounded-md hover:bg-gray-100 transition transform hover:scale-105"
+                                >
+                                    En savoir plus
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="swiper-slide">
+                    <div
+                        class="h-full bg-cover bg-center flex items-center justify-center"
+                        style="background: url('{{ asset('image/pl.png') }}') center/cover no-repeat;"
+                    >
+                        <div class="text-center">
+                            <h1 class="text-6xl font-extrabold text-white sm:text-7xl">
+                                Organisation du Bien-Être Communautaire
+                            </h1>
+                            <p class="mt-4 text-xl text-gray-100 font-bold">
+                                Une ONG dédiée à l’aide humanitaire : dons essentiels pour hôpitaux et orphelinats.
+                            </p>
+                            <div class="mt-8">
+                                <a
+                                    href="santos/dons.php"
+                                    class="inline-block bg-yellow text-black px-8 py-3 font-bold rounded-md hover:bg-gray-100 transition transform hover:scale-105"
+                                >
+                                    Faites un don
+                                </a>
+                                <a
+                                    href="#about"
+                                    class="inline-block bg-yellow text-black px-8 py-3 font-bold rounded-md hover:bg-gray-100 transition transform hover:scale-105"
+                                >
+                                    En savoir plus
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="swiper-slide">
+                    <div
+                        class="h-full bg-cover bg-center flex items-center justify-center"
+                        style="background: url('{{ asset('image/enfants.png') }}') center/cover no-repeat;"
+                    >
+                        <div class="text-center">
+                            <h1 class="text-6xl font-extrabold text-white sm:text-7xl">
+                                Organisation du Bien-Être Communautaire
+                            </h1>
+                            <p class="mt-4 text-xl text-gray-100 font-bold">
+                                Une ONG dédiée à l’aide humanitaire : dons essentiels pour hôpitaux et orphelinats.
+                            </p>
+                            <div class="mt-8">
+                                <a
+                                    href="santos/dons.php"
+                                    class="inline-block bg-yellow text-black px-8 py-3 font-bold rounded-md hover:bg-gray-100 transition transform hover:scale-105"
+                                >
+                                    Faites un don
+                                </a>
+                                <a
+                                    href="#about"
+                                    class="inline-block bg-yellow text-black px-8 py-3 font-bold rounded-md hover:bg-gray-100 transition transform hover:scale-105"
+                                >
+                                    En savoir plus
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="swiper-slide">
+                    <div
+                        class="h-full bg-cover bg-center flex items-center justify-center"
+                        style="background: url('{{ asset('image/p.png') }}') center/cover no-repeat;"
+                    >
+                        <div class="text-center">
+                            <h1 class="text-6xl font-extrabold text-white sm:text-7xl">
+                                Organisation du Bien-Être Communautaire
+                            </h1>
+                            <p class="mt-4 text-xl text-gray-100 font-bold">
+                                Une ONG dédiée à l’aide humanitaire : dons essentiels pour hôpitaux et orphelinats.
+                            </p>
+                            <div class="mt-8">
+                                <a
+                                    href="santos/dons.php"
+                                    class="inline-block bg-yellow text-black px-8 py-3 font-bold rounded-md hover:bg-gray-100 transition transform hover:scale-105"
+                                >
+                                    Faites un don
+                                </a>
+                                <a
+                                    href="#about"
+                                    class="inline-block bg-yellow text-black px-8 py-3 font-bold rounded-md hover:bg-gray-100 transition transform hover:scale-105"
+                                >
+                                    En savoir plus
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="swiper-slide">
+                    <div
+                        class="h-full bg-cover bg-center flex items-center justify-center"
+                        style="background: url('{{ asset('image/e.png') }}') center/cover no-repeat;"
+                    >
+                        <div class="text-center">
+                            <h1 class="text-6xl font-extrabold text-white sm:text-7xl">
+                                Organisation du Bien-Être Communautaire
+                            </h1>
+                            <p class="mt-4 text-xl text-gray-100 font-bold">
+                                Une ONG dédiée à l’aide humanitaire : dons essentiels pour hôpitaux et orphelinats.
+                            </p>
+                            <div class="mt-8">
+                                <a
+                                    href="santos/dons.php"
+                                    class="inline-block bg-yellow text-black px-8 py-3 font-bold rounded-md hover:bg-gray-100 transition transform hover:scale-105"
+                                >
+                                    Faites un don
+                                </a>
+                                <a
+                                    href="#about"
+                                    class="inline-block bg-yellow text-black px-8 py-3 font-bold rounded-md hover:bg-gray-100 transition transform hover:scale-105"
+                                >
+                                    En savoir plus
+                                </a>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -135,7 +277,70 @@
             <p class="mt-4 font-bold text-gray-700 leading-relaxed">
                 Découvrez nos projets phares pour soutenir les hôpitaux et orphelinats. Nous mettons en œuvre divers programmes visant à améliorer l'accès aux soins et à offrir un environnement sûr et stimulant pour l'éducation des plus jeunes.
             </p>
-            <div class="mt-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            <!-- Première grille -->
+            <div class="mt-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 my-8">
+                <div class="bg-white p-4 rounded shadow-lg text-center">
+                    <img src="{{ asset('image/fotos.jpg') }}" alt="Dons aux Hôpitaux" class="w-full h-40 object-cover rounded-lg shadow-md">
+                    <h3 class="font-bold text-gray-800 mt-2">Dons aux Hôpitaux</h3>
+                    <p class="text-gray-600 mt-2">
+                        Fourniture de matériel médical essentiel, formations pour le personnel et soutien aux infrastructures sanitaires dans les zones démunies.
+                    </p>
+                </div>
+                <div class="bg-white p-4 rounded shadow-lg text-center">
+                    <img src="{{ asset('image/fotos2.jpg') }}" alt="Soutien aux Orphelinats" class="w-full h-40 object-cover rounded-lg shadow-md">
+                    <h3 class="font-bold text-gray-800 mt-2">Soutien aux Orphelinats</h3>
+                    <p class="text-gray-600 mt-2">
+                        Dons alimentaires, éducatifs et matériels pour offrir un environnement chaleureux et bien équipé aux enfants en difficulté.
+                    </p>
+                </div>
+                <div class="bg-white p-4 rounded shadow-lg text-center">
+                    <img src="{{ asset('image/fotos.jpg') }}" alt="Programmes Communautaires" class="w-full h-40 object-cover rounded-lg shadow-md">
+                    <h3 class="font-bold text-gray-800 mt-2">Programmes Communautaires</h3>
+                    <p class="text-gray-600 mt-2">
+                        Initiatives pour sensibiliser aux enjeux de santé et d’éducation, ateliers communautaires et partenariats locaux pour un soutien durable.
+                    </p>
+                </div>
+                <div class="bg-white p-4 rounded shadow-lg text-center">
+                    <img src="{{ asset('image/fotos4.jpg') }}" alt="Campagnes de Sensibilisation" class="w-full h-40 object-cover rounded-lg shadow-md">
+                    <h3 class="font-bold text-gray-800 mt-2">Campagnes de Sensibilisation</h3>
+                    <p class="text-gray-600 mt-2">
+                        Organisation d’événements et de campagnes pour impliquer directement les citoyens et promouvoir une approche collective face aux défis sociaux.
+                    </p>
+                </div>
+            </div>
+            <!-- Deuxième grille -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 my-8">
+                <div class="bg-white p-4 rounded shadow-lg text-center">
+                    <img src="{{ asset('image/fotos.jpg') }}" alt="Dons aux Hôpitaux" class="w-full h-40 object-cover rounded-lg shadow-md">
+                    <h3 class="font-bold text-gray-800 mt-2">Dons aux Hôpitaux</h3>
+                    <p class="text-gray-600 mt-2">
+                        Fourniture de matériel médical essentiel, formations pour le personnel et soutien aux infrastructures sanitaires dans les zones démunies.
+                    </p>
+                </div>
+                <div class="bg-white p-4 rounded shadow-lg text-center">
+                    <img src="{{ asset('image/fotos2.jpg') }}" alt="Soutien aux Orphelinats" class="w-full h-40 object-cover rounded-lg shadow-md">
+                    <h3 class="font-bold text-gray-800 mt-2">Soutien aux Orphelinats</h3>
+                    <p class="text-gray-600 mt-2">
+                        Dons alimentaires, éducatifs et matériels pour offrir un environnement chaleureux et bien équipé aux enfants en difficulté.
+                    </p>
+                </div>
+                <div class="bg-white p-4 rounded shadow-lg text-center">
+                    <img src="{{ asset('image/fotos.jpg') }}" alt="Programmes Communautaires" class="w-full h-40 object-cover rounded-lg shadow-md">
+                    <h3 class="font-bold text-gray-800 mt-2">Programmes Communautaires</h3>
+                    <p class="text-gray-600 mt-2">
+                        Initiatives pour sensibiliser aux enjeux de santé et d’éducation, ateliers communautaires et partenariats locaux pour un soutien durable.
+                    </p>
+                </div>
+                <div class="bg-white p-4 rounded shadow-lg text-center">
+                    <img src="{{ asset('image/fotos4.jpg') }}" alt="Campagnes de Sensibilisation" class="w-full h-40 object-cover rounded-lg shadow-md">
+                    <h3 class="font-bold text-gray-800 mt-2">Campagnes de Sensibilisation</h3>
+                    <p class="text-gray-600 mt-2">
+                        Organisation d’événements et de campagnes pour impliquer directement les citoyens et promouvoir une approche collective face aux défis sociaux.
+                    </p>
+                </div>
+            </div>
+            <!-- Troisième grille -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 my-8">
                 <div class="bg-white p-4 rounded shadow-lg text-center">
                     <img src="{{ asset('image/fotos.jpg') }}" alt="Dons aux Hôpitaux" class="w-full h-40 object-cover rounded-lg shadow-md">
                     <h3 class="font-bold text-gray-800 mt-2">Dons aux Hôpitaux</h3>
@@ -191,7 +396,7 @@
 
             <!-- Swiper Container -->
             <div class="swiper mySwiper">
-                <div class="swiper-wrapper flex justify-center gap-8">
+                <div class="swiper-wrapper">
                     <div class="swiper-slide flex justify-center items-center">
                         <img src="{{ asset('image/brasserie (3).png') }}" alt="Partenaire 1" class="partner-logo" />
                     </div>
@@ -208,23 +413,9 @@
                         <img src="{{ asset('image/aas.png') }}" alt="Partenaire 5" class="partner-logo" />
                     </div>
                 </div>
-                <!-- Pagination -->
-                <div class="swiper-pagination mt-8"></div>
             </div>
         </div>
     </section>
-
-    <style>
-        .partner-logo {
-            width: 100px;
-            height: 100px;
-            object-fit: contain;
-            transition: transform 0.3s ease;
-        }
-        .swiper-slide-active .partner-logo {
-            transform: scale(1.3);
-        }
-    </style>
 
     <!-- Footer -->
     <footer id="contact" class="bg-primary text-white" role="contentinfo">
@@ -275,27 +466,31 @@
     <script>
       // Initialize Swiper pour la section des partenaires
       const partnerSwiper = new Swiper(".mySwiper", {
-        effect: "coverflow",
-        grabCursor: true,
-        centeredSlides: true,
-        slidesPerView: "auto",
+        effect: "slide",
         loop: true,
-        spaceBetween: 30,
-        coverflowEffect: {
-          rotate: 0,
-          stretch: 0,
-          depth: 100,
-          modifier: 2,
-          slideShadows: false,
-        },
+        centeredSlides: true, // Centre le logo actif
+        slidesPerView: 3,
+        spaceBetween: 10, // Espacement réduit entre les logos
+        speed: 5000, // Transition plus lente (1 seconde)
         autoplay: {
-            delay: 3000,
-            disableOnInteraction: false,
-            pauseOnMouseEnter: true,
+          delay: 0, // Défilement continu sans pause
         },
-        pagination: {
-          el: ".swiper-pagination",
-          clickable: true,
+        breakpoints: {
+          320: { slidesPerView: 1 }, // 1 logo sur mobile
+          640: { slidesPerView: 2 }, // 2 logos sur tablette
+          1024: { slidesPerView: 3 } // 3 logos sur ordinateur
+        }
+      });
+
+      // Initialize Swiper pour la section hero
+      const heroSwiper = new Swiper(".heroSwiper", {
+        effect: "fade",
+        fadeEffect: {
+          crossFade: true,
+        },
+        loop: true,
+        autoplay: {
+          delay: 5000,
         },
       });
     </script>
