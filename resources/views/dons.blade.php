@@ -41,9 +41,57 @@
       .swiper-slide-active .partner-logo { transform: scale(1.3); }
       .dropdown-menu { background-color: white; z-index: 50; }
       .font-all-bold, body, h1, h2, h3, p, a, li { font-weight: bold; font-family: 'Arial Black', sans-serif; }
+      .loading-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(255, 255, 255, 0.8);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 1000;
+      }
+      .loading-spinner {
+        position: relative;
+        width: 120px;
+        height: 120px;
+      }
+      .loading-spinner::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        border: 4px solid transparent;
+        border-top: 4px solid #1E90FF;
+        border-radius: 50%;
+        animation: spin 1s linear infinite;
+      }
+      .loading-spinner img {
+        width: 80px;
+        height: 80px;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+      }
+      @keyframes spin {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
+      }
     </style>
 </head>
-<body id="top" x-data="{ mobileMenuOpen: false }" class="bg-white font-all-bold flex flex-col min-h-screen">
+<body id="top" x-data="{ mobileMenuOpen: false, isLoading: true }" class="bg-white font-all-bold flex flex-col min-h-screen" @load.window="setTimeout(() => isLoading = false, 2000)">
+
+    <!-- Loading Overlay -->
+    <div x-show="isLoading" x-cloak class="loading-overlay">
+        <div class="loading-spinner">
+            <img src="/image/ab.png" alt="Loading Logo">
+        </div>
+    </div>
 
     <!-- Top Bar avec réseaux sociaux -->
     <nav class="bg-primary text-white w-full z-50">
@@ -95,8 +143,8 @@
 
     <!-- Contenu dynamique -->
     <main class="flex-1">
-        <!-- Section Don insérée -->
-       <section class="relative h-screen bg-cover bg-center"
+        <!-- Section Don -->
+        <section class="relative h-screen bg-cover bg-center"
              style="background: url('{{ asset('/image/dons.png') }}') center/auto 200% no-repeat;">
             <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-full flex items-center justify-center">
                 <div class="text-center">
@@ -154,25 +202,30 @@
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <h2 class="text-3xl font-bold text-gray-900 text-center">Faites Votre Don</h2>
 
-                <form method="POST" id="form" class="mt-8 max-w-lg mx-auto">
+                <form action="{{ route('dons.store') }}" method="POST" class="mt-8 max-w-lg mx-auto" @submit="isLoading = true">
                     <!-- CSRF Token -->
-                    <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                    @csrf
+
+                    @if ($errors->has('general'))
+                        <p class="text-red-500 text-center mb-4">{{ $errors->first('general') }}</p>
+                    @endif
 
                     <div class="mb-4">
                         <label for="nature" class="block text-gray-700 text-sm font-bold mb-2">Nature des dons</label>
-                        <select id="nature" name="nature"
-                                class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+                        <select id="nature" name="nature" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
                             <option value="">Sélectionner la nature du don</option>
                             <option value="Financier">Financier</option>
                             <option value="Matériel">Matériel</option>
                             <option value="Bénévole">Bénévole</option>
                         </select>
+                        @error('nature')
+                            <span class="text-red-500 text-sm">{{ $message }}</span>
+                        @enderror
                     </div>
 
                     <div class="mb-4">
                         <label class="block text-gray-700 text-sm font-bold mb-2" for="pays">Sélectionnez un pays</label>
-                        <select id="pays" name="country_currency"
-                                class="block appearance-none w-full bg-white border border-gray-300 text-gray-700 py-2 px-3 pr-8 rounded leading-tight focus:outline-none focus:shadow-outline">
+                        <select id="pays" name="country_currency" class="block appearance-none w-full bg-white border border-gray-300 text-gray-700 py-2 px-3 pr-8 rounded leading-tight focus:outline-none focus:shadow-outline">
                             <option value="CM|XAF">Cameroun (XAF)</option>
                             <option value="BJ|XOF">Bénin (XOF)</option>
                             <option value="CI|XOF">Côte d'Ivoire (XOF)</option>
@@ -180,63 +233,75 @@
                             <option value="UG|UGX">Ouganda (UGX)</option>
                             <option value="KE|KES">Kenya (KES)</option>
                         </select>
+                        @error('country_currency')
+                            <span class="text-red-500 text-sm">{{ $message }}</span>
+                        @enderror
                     </div>
 
                     <div class="mb-4">
                         <label for="phone" class="block text-gray-700 text-sm font-bold mb-2">Numéro de téléphone</label>
-                        <input type="tel" id="phone" name="phone"
-                               class="shadow border rounded w-full py-2 px-3 text-gray-700" placeholder="Ex: 696123456">
+                        <input type="tel" id="phone" name="phone" class="shadow border rounded w-full py-2 px-3 text-gray-700" placeholder="Ex: 696123456">
+                        @error('phone')
+                            <span class="text-red-500 text-sm">{{ $message }}</span>
+                        @enderror
                     </div>
 
                     <div class="mb-4">
                         <label for="amount" class="block text-gray-700 text-sm font-bold mb-2">Montant (en €, si financier)</label>
-                        <input type="number" id="amount" name="amount" min="5"
-                               class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                               placeholder="Entrez un montant">
+                        <input type="number" id="amount" name="amount" min="5" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" placeholder="Entrez un montant">
+                        @error('amount')
+                            <span class="text-red-500 text-sm">{{ $message }}</span>
+                        @enderror
                     </div>
 
                     <div class="mb-4">
                         <label for="name" class="block text-gray-700 text-sm font-bold mb-2">Nom (ou Anonyme)</label>
-                        <input type="text" id="name" name="name"
-                               class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                               placeholder="Votre nom ou Anonyme">
+                        <input type="text" id="name" name="name" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" placeholder="Votre nom ou Anonyme">
+                        @error('name')
+                            <span class="text-red-500 text-sm">{{ $message }}</span>
+                        @enderror
                     </div>
 
                     <div class="mb-4">
                         <label for="email" class="block text-gray-700 text-sm font-bold mb-2">Email</label>
-                        <input type="email" id="email" name="email"
-                               class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                               placeholder="Votre email">
+                        <input type="email" id="email" name="email" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" placeholder="Votre email">
+                        @error('email')
+                            <span class="text-red-500 text-sm">{{ $message }}</span>
+                        @enderror
                     </div>
 
-                    <div class="mb-4">  
+                    <div class="mb-4">
                         <label for="service" class="block text-gray-700 text-sm font-bold mb-2">Opérateur</label>
-                        <select id="service" name="service"
-                                class="shadow border rounded w-full py-2 px-3 text-gray-700">
+                        <select id="service" name="service" class="shadow border rounded w-full py-2 px-3 text-gray-700">
                             <option value="">Choisissez un opérateur</option>
                             <option value="ORANGE">Orange</option>
                             <option value="MTN">MTN</option>
                         </select>
+                        @error('service')
+                            <span class="text-red-500 text-sm">{{ $message }}</span>
+                        @enderror
                     </div>
 
                     <div class="mb-4">
                         <label for="comment" class="block text-gray-700 text-sm font-bold mb-2">Commentaire (facultatif)</label>
-                        <textarea id="comment" name="comment"
-                                  class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                                  placeholder="Ex. : Don pour la campagne de santé"></textarea>
+                        <textarea id="comment" name="comment" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" placeholder="Ex. : Don pour la campagne de santé"></textarea>
+                        @error('comment')
+                            <span class="text-red-500 text-sm">{{ $message }}</span>
+                        @enderror
                     </div>
 
                     <div class="text-center">
-                        <button type="submit"
-                                class="bg-yellow text-black px-6 py-3 font-bold rounded-md hover:bg-yellow-400 transition transform hover:scale-105">
+                        <button type="submit" class="bg-yellow text-black px-6 py-3 font-bold rounded-md hover:bg-yellow-400 transition transform hover:scale-105">
                             Soumettre le Don
                         </button>
                     </div>
                 </form>
 
-                <p class="mt-4 text-gray-600 text-center max-w-2xl mx-auto">
-                    Merci de votre soutien ! Vous recevrez une confirmation par email une fois votre don reçu.
-                </p>
+                @if (session('success'))
+                    <p class="mt-4 text-green-600 text-center max-w-2xl mx-auto">
+                        {{ session('success') }}
+                    </p>
+                @endif
             </div>
         </section>
     </main>
@@ -264,6 +329,5 @@
             </div>
         </footer>
     </section>
-
 </body>
 </html>

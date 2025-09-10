@@ -7,6 +7,10 @@
 
     <!-- Favicon -->
     <link rel="icon" type="image/png" sizes="64x64" href="{{ asset('image/ab.png') }}">
+    <link rel="apple-touch-icon" sizes="180x180" href="{{ asset('image/ab-180.png') }}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{{ asset('image/ab-32.png') }}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('image/ab-16.png') }}">
+    <link rel="manifest" href="{{ asset('manifest.json') }}">
 
     <!-- Swiper CSS -->
     <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
@@ -43,7 +47,7 @@
 
         /* Responsive text sizes */
         .hero-text {
-            font-size: clamp(1.5rem, 5vw, 2.5rem); /* Adjusted for smaller screens */
+            font-size: clamp(1.5rem, 5vw, 2.5rem);
         }
         .hero-subtext {
             font-size: clamp(1rem, 3vw, 1.25rem);
@@ -179,7 +183,7 @@
                             </p>
                             <div class="mt-6 flex flex-col sm:flex-row justify-center gap-4">
                                 <a
-                                    href="santos/dons.php"
+                                    href="{{ url('/dons') }}"
                                     class="inline-block bg-yellow text-black px-6 py-2 font-bold rounded-md hover:bg-gray-100 transition transform hover:scale-105"
                                 >
                                     Faites un don
@@ -321,8 +325,8 @@
             <p class="mt-4 text-sm sm:text-base font-bold text-gray-700 leading-relaxed">
                 Découvrez nos projets phares pour soutenir les hôpitaux et orphelinats. Nous mettons en œuvre divers programmes visant à améliorer l'accès aux soins et à offrir un environnement sûr et stimulant pour l'éducation des plus jeunes.
             </p>
-            <!-- Grille unique avec contenu réduit pour simplifier -->
             <div class="mt-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
+                <!-- Élément 1 -->
                 <div class="bg-white p-4 rounded shadow-lg text-center">
                     <img src="{{ asset('image/fotos.jpg') }}" alt="Dons aux Hôpitaux" class="action-image">
                     <h3 class="text-lg font-bold text-gray-800 mt-2">Dons aux Hôpitaux</h3>
@@ -330,6 +334,7 @@
                         Fourniture de matériel médical essentiel, formations pour le personnel et soutien aux infrastructures sanitaires dans les zones démunies.
                     </p>
                 </div>
+                <!-- Élément 2 -->
                 <div class="bg-white p-4 rounded shadow-lg text-center">
                     <img src="{{ asset('image/fotos2.jpg') }}" alt="Soutien aux Orphelinats" class="action-image">
                     <h3 class="text-lg font-bold text-gray-800 mt-2">Soutien aux Orphelinats</h3>
@@ -337,6 +342,7 @@
                         Dons alimentaires, éducatifs et matériels pour offrir un environnement chaleureux et bien équipé aux enfants en difficulté.
                     </p>
                 </div>
+                <!-- Élément 3 -->
                 <div class="bg-white p-4 rounded shadow-lg text-center">
                     <img src="{{ asset('image/fotos.jpg') }}" alt="Programmes Communautaires" class="action-image">
                     <h3 class="text-lg font-bold text-gray-800 mt-2">Programmes Communautaires</h3>
@@ -344,11 +350,76 @@
                         Initiatives pour sensibiliser aux enjeux de santé et d’éducation, ateliers communautaires et partenariats locaux pour un soutien durable.
                     </p>
                 </div>
+                <!-- Élément 4 -->
                 <div class="bg-white p-4 rounded shadow-lg text-center">
                     <img src="{{ asset('image/fotos4.jpg') }}" alt="Campagnes de Sensibilisation" class="action-image">
                     <h3 class="text-lg font-bold text-gray-800 mt-2">Campagnes de Sensibilisation</h3>
                     <p class="text-sm text-gray-600 mt-2">
                         Organisation d’événements et de campagnes pour impliquer directement les citoyens et promouvoir une approche collective face aux défis sociaux.
+                    </p>
+                </div>
+                <!-- Élément 5 -->
+                <div class="bg-white p-4 rounded shadow-lg text-center">
+                    <img src="{{ asset('image/fotos2.jpg') }}" alt="Éducation pour Enfants" class="action-image">
+                    <h3 class="text-lg font-bold text-gray-800 mt-2">Éducation pour Enfants</h3>
+                    <p class="text-sm text-gray-600 mt-2">
+                        Fourniture de fournitures scolaires et création de programmes éducatifs pour soutenir l’apprentissage des enfants dans les orphelinats.
+                    </p>
+                </div>
+                <!-- Élément 6 -->
+                <div class="bg-white p-4 rounded shadow-lg text-center">
+                    <img src="{{ asset('image/fotos.jpg') }}" alt="Soins d’Urgence" class="action-image">
+                    <h3 class="text-lg font-bold text-gray-800 mt-2">Soins d’Urgence</h3>
+                    <p class="text-sm text-gray-600 mt-2">
+                        Mise en place de kits de premiers secours et interventions rapides pour répondre aux crises sanitaires dans les communautés vulnérables.
+                    </p>
+                </div>
+                <!-- Élément 7 -->
+                <div class="bg-white p-4 rounded shadow-lg text-center">
+                    <img src="{{ asset('image/fotos4.jpg') }}" alt="Renforcement des Capacités" class="action-image">
+                    <h3 class="text-lg font-bold text-gray-800 mt-2">Renforcement des Capacités</h3>
+                    <p class="text-sm text-gray-600 mt-2">
+                        Formations pour les professionnels de santé et les éducateurs pour améliorer la qualité des services dans les hôpitaux et orphelinats.
+                    </p>
+                </div>
+                <!-- Élément 8 -->
+                <div class="bg-white p-4 rounded shadow-lg text-center">
+                    <img src="{{ asset('image/fotos2.jpg') }}" alt="Aide Alimentaire" class="action-image">
+                    <h3 class="text-lg font-bold text-gray-800 mt-2">Aide Alimentaire</h3>
+                    <p class="text-sm text-gray-600 mt-2">
+                        Distribution de repas nutritifs pour les enfants et les familles dans les zones touchées par l’insécurité alimentaire.
+                    </p>
+                </div>
+                <!-- Élément 9 -->
+                <div class="bg-white p-4 rounded shadow-lg text-center">
+                    <img src="{{ asset('image/fotos.jpg') }}" alt="Projets d’Infrastructure" class="action-image">
+                    <h3 class="text-lg font-bold text-gray-800 mt-2">Projets d’Infrastructure</h3>
+                    <p class="text-sm text-gray-600 mt-2">
+                        Construction et rénovation de salles de classe et d’espaces médicaux pour améliorer les conditions d’apprentissage et de soin.
+                    </p>
+                </div>
+                <!-- Élément 10 -->
+                <div class="bg-white p-4 rounded shadow-lg text-center">
+                    <img src="{{ asset('image/fotos4.jpg') }}" alt="Santé Maternelle" class="action-image">
+                    <h3 class="text-lg font-bold text-gray-800 mt-2">Santé Maternelle</h3>
+                    <p class="text-sm text-gray-600 mt-2">
+                        Programmes pour soutenir les mères avec des consultations prénatales et des kits d’hygiène pour les nouveau-nés.
+                    </p>
+                </div>
+                <!-- Élément 11 -->
+                <div class="bg-white p-4 rounded shadow-lg text-center">
+                    <img src="{{ asset('image/fotos2.jpg') }}" alt="Activités Récréatives" class="action-image">
+                    <h3 class="text-lg font-bold text-gray-800 mt-2">Activités Récréatives</h3>
+                    <p class="text-sm text-gray-600 mt-2">
+                        Organisation d’activités sportives et culturelles pour favoriser le bien-être psychologique des enfants orphelins.
+                    </p>
+                </div>
+                <!-- Élément 12 -->
+                <div class="bg-white p-4 rounded shadow-lg text-center">
+                    <img src="{{ asset('image/fotos.jpg') }}" alt="Sensibilisation à l’Hygiène" class="action-image">
+                    <h3 class="text-lg font-bold text-gray-800 mt-2">Sensibilisation à l’Hygiène</h3>
+                    <p class="text-sm text-gray-600 mt-2">
+                        Ateliers éducatifs pour promouvoir les pratiques d’hygiène dans les communautés et réduire les risques de maladies.
                     </p>
                 </div>
             </div>
@@ -378,19 +449,19 @@
             <div class="swiper mySwiper">
                 <div class="swiper-wrapper">
                     <div class="swiper-slide flex justify-center items-center">
-                        <img src="{{ asset('image/brasserie (3).png') }}" alt="Partenaire 1" class="partner-logo" />
+                        <img src="{{ asset('image/la paix.png') }}" alt="Partenaire 1" class="partner-logo" />
                     </div>
                     <div class="swiper-slide flex justify-center items-center">
-                        <img src="{{ asset('image/brasserie (4).png') }}" alt="Partenaire 2" class="partner-logo" />
+                        <img src="{{ asset('image/lion.png') }}" alt="Partenaire 2" class="partner-logo" />
                     </div>
                     <div class="swiper-slide flex justify-center items-center">
                         <img src="{{ asset('image/brasserie (5).png') }}" alt="Partenaire 3" class="partner-logo" />
                     </div>
+                        <!-- <div class="swiper-slide flex justify-center items-center">
+                            <img src="{{ asset('image/wars(2).png') }}" alt="Partenaire 4" class="partner-logo" />
+                        </div> -->
                     <div class="swiper-slide flex justify-center items-center">
-                        <img src="{{ asset('image/brasserie (7).png') }}" alt="Partenaire 4" class="partner-logo" />
-                    </div>
-                    <div class="swiper-slide flex justify-center items-center">
-                        <img src="{{ asset('image/aas.png') }}" alt="Partenaire 5" class="partner-logo" />
+                        <img src="{{ asset('image/yo.png') }}" alt="Partenaire 5" class="partner-logo" />
                     </div>
                 </div>
             </div>
