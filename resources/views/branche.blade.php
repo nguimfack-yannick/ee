@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ABEC - Nos Événements</title>
-        <!-- Favicon -->
+    <!-- Favicon -->
     <link rel="icon" type="image/png" sizes="64x64" href="{{ asset('image/ab.png') }}">
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -30,9 +30,77 @@
       h1, h2, h3, .font-custom {
         font-family: 'custom', sans-serif;
       }
+      /* Loading Spinner Styles */
+      #loading {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(255, 255, 255, 0.8); /* Semi-transparent white background */
+        z-index: 9999;
+        transition: opacity 0.5s ease-out;
+      }
+      #loading.hidden {
+        opacity: 0;
+        pointer-events: none;
+      }
+      .spinner-container {
+        position: relative;
+        width: 80px; /* Size of the spinner */
+        height: 80px;
+      }
+      .spinner-circle {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        border: 4px solid transparent;
+        border-top-color: #1E90FF; /* Matches primary color */
+        border-radius: 50%;
+        animation: spin 1s linear infinite;
+      }
+      .spinner-logo {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%); /* Precise centering */
+        width: 48px; /* 60% of spinner-container size for balance */
+        height: 48px;
+        object-fit: contain; /* Ensure logo scales correctly */
+      }
+      @keyframes spin {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
+      }
+      /* Responsive adjustments for spinner */
+      @media (max-width: 640px) {
+        .spinner-container {
+          width: 60px; /* Smaller size for mobile */
+          height: 60px;
+        }
+        .spinner-logo {
+          width: 36px; /* Adjusted logo size for mobile */
+          height: 36px;
+        }
+      }
     </style>
 </head>
 <body id="top" x-data="{ mobileMenuOpen: false }" class="bg-white font-sans antialiased">
+
+    <!-- Loading Spinner -->
+    <div id="loading" class="fixed inset-0 bg-white bg-opacity-80 flex items-center justify-center z-50">
+        <div class="spinner-container">
+            <!-- Cercle bleu rotatif -->
+            <div class="spinner-circle"></div>
+            <!-- Logo statique au centre -->
+            <img src="{{ asset('image/ab.png') }}" alt="Logo ABEC" class="spinner-logo">
+        </div>
+    </div>
 
     <!-- Top Nav -->
     <nav class="bg-primary text-white">
@@ -236,5 +304,17 @@
 
     <!-- Alpine.js -->
     <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
+    <!-- Spinner Script -->
+    <script>
+      window.addEventListener('load', () => {
+          const loading = document.getElementById('loading');
+          setTimeout(() => {
+              loading.classList.add('hidden');
+              setTimeout(() => {
+                  loading.style.display = 'none';
+              }, 500); // Correspond à la durée de la transition CSS
+          }, 1000); // Délai avant de masquer le spinner (ajustez si nécessaire)
+      });
+    </script>
 </body>
 </html>

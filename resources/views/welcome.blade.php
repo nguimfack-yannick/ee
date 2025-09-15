@@ -61,11 +61,49 @@
             border-radius: 0.5rem;
         }
 
+        /* Animation automatique pour les cartes de la section Nos Actions */
+        .action-card {
+            animation: float 3s ease-in-out infinite;
+        }
+        @keyframes float {
+            0% { transform: translateY(0); }
+            50% { transform: translateY(-8px); }
+            100% { transform: translateY(0); }
+        }
+
         /* Responsive video */
         .responsive-video {
             width: 100%;
             max-width: 100%;
             height: auto;
+        }
+
+        /* Loading Spinner Styles */
+        #loading {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 9999;
+            transition: opacity 0.5s ease-out;
+        }
+
+        #loading.hidden {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .animate-spin {
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
         }
 
         @media (max-width: 640px) {
@@ -103,6 +141,16 @@
     </script>
 </head>
 <body id="top" x-data="{ mobileMenuOpen: false, dropdownOpen: false }" class="bg-white font-sans antialiased font-all-bold">
+
+    <!-- Loading Spinner -->
+    <div id="loading" class="fixed inset-0 bg-white bg-opacity-80 flex items-center justify-center z-50">
+        <div class="relative w-24 h-24">
+            <!-- Cercle bleu rotatif -->
+            <div class="absolute inset-0 border-4 border-t-primary border-transparent rounded-full animate-spin"></div>
+            <!-- Logo statique au centre -->
+            <img src="{{ asset('image/ab.png') }}" alt="Logo ABEC" class="w-16 h-16 absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
+        </div>
+    </div>
 
     <!-- Top Bar -->
     <nav class="bg-primary text-white">
@@ -183,7 +231,7 @@
                             </p>
                             <div class="mt-6 flex flex-col sm:flex-row justify-center gap-4">
                                 <a
-                                    href="{{ url('/dons') }}"
+                                    href="santos/dons.php"
                                     class="inline-block bg-yellow text-black px-6 py-2 font-bold rounded-md hover:bg-gray-100 transition transform hover:scale-105"
                                 >
                                     Faites un don
@@ -327,7 +375,7 @@
             </p>
             <div class="mt-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
                 <!-- Élément 1 -->
-                <div class="bg-white p-4 rounded shadow-lg text-center">
+                <div class="bg-white p-4 rounded shadow-lg text-center action-card">
                     <img src="{{ asset('image/fotos.jpg') }}" alt="Dons aux Hôpitaux" class="action-image">
                     <h3 class="text-lg font-bold text-gray-800 mt-2">Dons aux Hôpitaux</h3>
                     <p class="text-sm text-gray-600 mt-2">
@@ -335,7 +383,7 @@
                     </p>
                 </div>
                 <!-- Élément 2 -->
-                <div class="bg-white p-4 rounded shadow-lg text-center">
+                <div class="bg-white p-4 rounded shadow-lg text-center action-card">
                     <img src="{{ asset('image/fotos2.jpg') }}" alt="Soutien aux Orphelinats" class="action-image">
                     <h3 class="text-lg font-bold text-gray-800 mt-2">Soutien aux Orphelinats</h3>
                     <p class="text-sm text-gray-600 mt-2">
@@ -343,7 +391,7 @@
                     </p>
                 </div>
                 <!-- Élément 3 -->
-                <div class="bg-white p-4 rounded shadow-lg text-center">
+                <div class="bg-white p-4 rounded shadow-lg text-center action-card">
                     <img src="{{ asset('image/fotos.jpg') }}" alt="Programmes Communautaires" class="action-image">
                     <h3 class="text-lg font-bold text-gray-800 mt-2">Programmes Communautaires</h3>
                     <p class="text-sm text-gray-600 mt-2">
@@ -351,7 +399,7 @@
                     </p>
                 </div>
                 <!-- Élément 4 -->
-                <div class="bg-white p-4 rounded shadow-lg text-center">
+                <div class="bg-white p-4 rounded shadow-lg text-center action-card">
                     <img src="{{ asset('image/fotos4.jpg') }}" alt="Campagnes de Sensibilisation" class="action-image">
                     <h3 class="text-lg font-bold text-gray-800 mt-2">Campagnes de Sensibilisation</h3>
                     <p class="text-sm text-gray-600 mt-2">
@@ -359,7 +407,7 @@
                     </p>
                 </div>
                 <!-- Élément 5 -->
-                <div class="bg-white p-4 rounded shadow-lg text-center">
+                <div class="bg-white p-4 rounded shadow-lg text-center action-card">
                     <img src="{{ asset('image/fotos2.jpg') }}" alt="Éducation pour Enfants" class="action-image">
                     <h3 class="text-lg font-bold text-gray-800 mt-2">Éducation pour Enfants</h3>
                     <p class="text-sm text-gray-600 mt-2">
@@ -367,7 +415,7 @@
                     </p>
                 </div>
                 <!-- Élément 6 -->
-                <div class="bg-white p-4 rounded shadow-lg text-center">
+                <div class="bg-white p-4 rounded shadow-lg text-center action-card">
                     <img src="{{ asset('image/fotos.jpg') }}" alt="Soins d’Urgence" class="action-image">
                     <h3 class="text-lg font-bold text-gray-800 mt-2">Soins d’Urgence</h3>
                     <p class="text-sm text-gray-600 mt-2">
@@ -375,7 +423,7 @@
                     </p>
                 </div>
                 <!-- Élément 7 -->
-                <div class="bg-white p-4 rounded shadow-lg text-center">
+                <div class="bg-white p-4 rounded shadow-lg text-center action-card">
                     <img src="{{ asset('image/fotos4.jpg') }}" alt="Renforcement des Capacités" class="action-image">
                     <h3 class="text-lg font-bold text-gray-800 mt-2">Renforcement des Capacités</h3>
                     <p class="text-sm text-gray-600 mt-2">
@@ -383,7 +431,7 @@
                     </p>
                 </div>
                 <!-- Élément 8 -->
-                <div class="bg-white p-4 rounded shadow-lg text-center">
+                <div class="bg-white p-4 rounded shadow-lg text-center action-card">
                     <img src="{{ asset('image/fotos2.jpg') }}" alt="Aide Alimentaire" class="action-image">
                     <h3 class="text-lg font-bold text-gray-800 mt-2">Aide Alimentaire</h3>
                     <p class="text-sm text-gray-600 mt-2">
@@ -391,7 +439,7 @@
                     </p>
                 </div>
                 <!-- Élément 9 -->
-                <div class="bg-white p-4 rounded shadow-lg text-center">
+                <div class="bg-white p-4 rounded shadow-lg text-center action-card">
                     <img src="{{ asset('image/fotos.jpg') }}" alt="Projets d’Infrastructure" class="action-image">
                     <h3 class="text-lg font-bold text-gray-800 mt-2">Projets d’Infrastructure</h3>
                     <p class="text-sm text-gray-600 mt-2">
@@ -399,7 +447,7 @@
                     </p>
                 </div>
                 <!-- Élément 10 -->
-                <div class="bg-white p-4 rounded shadow-lg text-center">
+                <div class="bg-white p-4 rounded shadow-lg text-center action-card">
                     <img src="{{ asset('image/fotos4.jpg') }}" alt="Santé Maternelle" class="action-image">
                     <h3 class="text-lg font-bold text-gray-800 mt-2">Santé Maternelle</h3>
                     <p class="text-sm text-gray-600 mt-2">
@@ -407,7 +455,7 @@
                     </p>
                 </div>
                 <!-- Élément 11 -->
-                <div class="bg-white p-4 rounded shadow-lg text-center">
+                <div class="bg-white p-4 rounded shadow-lg text-center action-card">
                     <img src="{{ asset('image/fotos2.jpg') }}" alt="Activités Récréatives" class="action-image">
                     <h3 class="text-lg font-bold text-gray-800 mt-2">Activités Récréatives</h3>
                     <p class="text-sm text-gray-600 mt-2">
@@ -415,7 +463,7 @@
                     </p>
                 </div>
                 <!-- Élément 12 -->
-                <div class="bg-white p-4 rounded shadow-lg text-center">
+                <div class="bg-white p-4 rounded shadow-lg text-center action-card">
                     <img src="{{ asset('image/fotos.jpg') }}" alt="Sensibilisation à l’Hygiène" class="action-image">
                     <h3 class="text-lg font-bold text-gray-800 mt-2">Sensibilisation à l’Hygiène</h3>
                     <p class="text-sm text-gray-600 mt-2">
@@ -457,9 +505,6 @@
                     <div class="swiper-slide flex justify-center items-center">
                         <img src="{{ asset('image/brasserie (5).png') }}" alt="Partenaire 3" class="partner-logo" />
                     </div>
-                        <!-- <div class="swiper-slide flex justify-center items-center">
-                            <img src="{{ asset('image/wars(2).png') }}" alt="Partenaire 4" class="partner-logo" />
-                        </div> -->
                     <div class="swiper-slide flex justify-center items-center">
                         <img src="{{ asset('image/yo.png') }}" alt="Partenaire 5" class="partner-logo" />
                     </div>
@@ -534,6 +579,17 @@
         autoplay: {
           delay: 5000,
         },
+      });
+
+      // Gérer le spinner de chargement
+      window.addEventListener('load', () => {
+          const loading = document.getElementById('loading');
+          setTimeout(() => {
+              loading.classList.add('hidden');
+              setTimeout(() => {
+                  loading.style.display = 'none';
+              }, 500); // Correspond à la durée de la transition CSS
+          }, 1000); // Délai avant de masquer le spinner (ajustez si nécessaire)
       });
     </script>
 </body>

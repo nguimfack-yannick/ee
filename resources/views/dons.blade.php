@@ -41,46 +41,90 @@
       .swiper-slide-active .partner-logo { transform: scale(1.3); }
       .dropdown-menu { background-color: white; z-index: 50; }
       .font-all-bold, body, h1, h2, h3, p, a, li { font-weight: bold; font-family: 'Arial Black', sans-serif; }
+      /* Loading Spinner Styles */
       .loading-overlay {
         position: fixed;
         top: 0;
         left: 0;
         width: 100%;
         height: 100%;
-        background: rgba(255, 255, 255, 0.8);
+        background: rgba(255, 255, 255, 0.8); /* Semi-transparent white background */
         display: flex;
         justify-content: center;
         align-items: center;
-        z-index: 1000;
+        z-index: 9999;
+        transition: opacity 0.5s ease-out;
       }
-      .loading-spinner {
+      .loading-overlay[x-show="isLoading"] {
+        opacity: 1;
+      }
+      .loading-overlay:not([x-show="isLoading"]) {
+        opacity: 0;
+        pointer-events: none;
+      }
+      .spinner-container {
         position: relative;
-        width: 120px;
-        height: 120px;
+        width: 80px; /* Consistent size with other pages */
+        height: 80px;
       }
-      .loading-spinner::before {
-        content: '';
+      .spinner-circle {
         position: absolute;
         top: 0;
         left: 0;
         width: 100%;
         height: 100%;
         border: 4px solid transparent;
-        border-top: 4px solid #1E90FF;
+        border-top-color: #1E90FF; /* Matches primary color */
         border-radius: 50%;
         animation: spin 1s linear infinite;
       }
-      .loading-spinner img {
-        width: 80px;
-        height: 80px;
+      .spinner-logo {
         position: absolute;
         top: 50%;
         left: 50%;
-        transform: translate(-50%, -50%);
+        transform: translate(-50%, -50%); /* Precise centering */
+        width: 56px; /* Increased from 48px for larger logo */
+        height: 56px;
+        object-fit: contain; /* Ensure logo scales correctly */
       }
       @keyframes spin {
         0% { transform: rotate(0deg); }
         100% { transform: rotate(360deg); }
+      }
+      /* Responsive adjustments for spinner */
+      @media (max-width: 640px) {
+        .spinner-container {
+          width: 60px; /* Smaller size for mobile */
+          height: 60px;
+        }
+        .spinner-logo {
+          width: 42px; /* Increased from 36px for larger logo */
+          height: 42px;
+        }
+      }
+      /* Animations pour la grille de la section Action */
+      .action-card {
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      .action-card:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        background-color: #f0f8ff; /* Légère teinte bleue au survol */
+      }
+      .animate-card {
+        animation: fadeInUp 0.6s ease-out forwards;
+      }
+      @keyframes fadeInUp {
+        from {
+          opacity: 0;
+          transform: translateY(20px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
       }
     </style>
 </head>
@@ -88,8 +132,11 @@
 
     <!-- Loading Overlay -->
     <div x-show="isLoading" x-cloak class="loading-overlay">
-        <div class="loading-spinner">
-            <img src="/image/ab.png" alt="Loading Logo">
+        <div class="spinner-container">
+            <!-- Cercle bleu rotatif -->
+            <div class="spinner-circle"></div>
+            <!-- Logo statique au centre -->
+            <img src="{{ asset('image/ab.png') }}" alt="Logo ABEC" class="spinner-logo">
         </div>
     </div>
 
@@ -97,11 +144,11 @@
     <nav class="bg-primary text-white w-full z-50">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between h-10">
             <div class="flex space-x-4">
-                <a href="#" target="_blank"><img src="/image/feacebook.jpg" alt="Facebook" class="w-6 h-6 rounded-full"></a>
-                <a href="#" target="_blank"><img src="/image/wastapp.jpg" alt="WhatsApp" class="w-6 h-6 rounded-full"></a>
-                <a href="#" target="_blank"><img src="/image/insta.jpg" alt="Instagram" class="w-6 h-6 rounded-full"></a>
+                <a href="https://www.facebook.com/profile.php?id=61568266295634" target="_blank"><img src="{{ asset('image/feacebook.jpg') }}" alt="Facebook" class="w-6 h-6 rounded-full"></a>
+                <a href="https://whatsapp.com/channel/0029VaYTsNkD8SE42sDpnk1w" target="_blank"><img src="{{ asset('image/wastapp.jpg') }}" alt="WhatsApp" class="w-6 h-6 rounded-full"></a>
+                <a href="https://www.instagram.com/abec.officiel/" target="_blank"><img src="{{ asset('image/insta.jpg') }}" alt="Instagram" class="w-6 h-6 rounded-full"></a>
             </div>
-            <a href="mailto:globaluniversalwelfare@gmail.com"><img src="/image/m.jpg" alt="Email" class="w-6 h-6 rounded-full"></a>
+            <a href="mailto:globaluniversalwelfare@gmail.com"><img src="{{ asset('image/m.jpg') }}" alt="Email" class="w-6 h-6 rounded-full"></a>
         </div>
     </nav>
 
@@ -110,12 +157,12 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between h-16">
             <!-- Logo responsive -->
             <div class="flex-shrink-0">
-              <a href="/"><img src="/image/ab.png" alt="logo" class="max-w-[100px] sm:max-w-[120px] h-16 md:max-w-[140px] lg:max-w-[160px]"></a>
+              <a href="/"><img src="{{ asset('image/ab.png') }}" alt="logo" class="max-w-[100px] sm:max-w-[120px] h-16 md:max-w-[140px] lg:max-w-[160px]"></a>
             </div>
 
             <!-- Menu Desktop -->
             <nav class="hidden md:flex space-x-4">
-                <a href="/" class="px-3 py-2 rounded-md text-sm font-bold text-gray-800 hover:bg-blue-500 hover:text-white">Acceuil</a>
+                <a href="/" class="px-3 py-2 rounded-md text-sm font-bold text-gray-800 hover:bg-blue-500 hover:text-white">Accueil</a>
                 <a href="/news" class="px-3 py-2 rounded-md text-sm font-bold text-gray-800 hover:bg-blue-500 hover:text-white">News</a>
                 <a href="#contact" class="px-3 py-2 rounded-md text-sm font-bold text-gray-800 hover:bg-blue-500 hover:text-white">Contact</a>
             </nav>
@@ -145,7 +192,7 @@
     <main class="flex-1">
         <!-- Section Don -->
         <section class="relative h-screen bg-cover bg-center"
-             style="background: url('{{ asset('/image/dons.png') }}') center/auto 200% no-repeat;">
+             style="background: url('{{ asset('image/dons.png') }}') center/auto 200% no-repeat;">
             <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-full flex items-center justify-center">
                 <div class="text-center">
                     <h1 class="text-5xl font-extrabold text-white sm:text-6xl">Faites un Don</h1>
@@ -180,14 +227,14 @@
                     qu’il soit grand ou petit, contribue à améliorer la qualité de vie des personnes dans le besoin.
                 </p>
                 <div class="mt-8 grid grid-cols-1 sm:grid-cols-2 gap-6 max-w-4xl mx-auto">
-                    <div class="bg-white p-4 rounded shadow text-center">
+                    <div class="bg-white p-4 rounded shadow text-center action-card" x-data="{ isVisible: false }" x-intersect="isVisible = true" :class="{ 'animate-card': isVisible }">
                         <h3 class="font-bold text-gray-800">Impact de Votre Don</h3>
                         <p class="text-gray-600 mt-2">
                             Un don de 10 € peut offrir un repas à un enfant, tandis qu’un don de 50 € peut fournir du
                             matériel médical essentiel.
                         </p>
                     </div>
-                    <div class="bg-white p-4 rounded shadow text-center">
+                    <div class="bg-white p-4 rounded shadow text-center action-card" x-data="{ isVisible: false }" x-intersect="isVisible = true" :class="{ 'animate-card': isVisible }" style="animation-delay: 0.2s;">
                         <h3 class="font-bold text-gray-900">Sécurité et Transparence</h3>
                         <p class="text-gray-600 mt-2">
                             Vos dons sont gérés avec transparence et utilisés directement pour nos projets humanitaires.
@@ -322,12 +369,12 @@
                 <p class="text-sm font-bold mt-4">Basée à Yaoundé, Cameroun</p>
                 <p class="text-sm font-bold mt-2">Organisation internationale. Tous droits réservés.</p>
                 <div class="flex justify-center space-x-4 mt-4">
-                    <a href="#"><img src="/image/feacebook.jpg" alt="Facebook" class="w-6 h-6 sm:w-7 sm:h-7 md:w-8 md:h-8 rounded-full"></a>
-                    <a href="#"><img src="/image/wastapp.jpg" alt="WhatsApp" class="w-6 h-6 sm:w-7 sm:h-7 md:w-8 md:h-8 rounded-full"></a>
-                    <a href="#"><img src="/image/insta.jpg" alt="Instagram" class="w-6 h-6 sm:w-7 sm:h-7 md:w-8 md:h-8 rounded-full"></a>
+                    <a href="https://www.facebook.com/profile.php?id=61568266295634"><img src="{{ asset('image/feacebook.jpg') }}" alt="Facebook" class="w-6 h-6 sm:w-7 sm:h-7 md:w-8 md:h-8 rounded-full"></a>
+                    <a href="https://whatsapp.com/channel/0029VaYTsNkD8SE42sDpnk1w"><img src="{{ asset('image/wastapp.jpg') }}" alt="WhatsApp" class="w-6 h-6 sm:w-7 sm:h-7 md:w-8 md:h-8 rounded-full"></a>
+                    <a href="https://www.instagram.com/abec.officiel/"><img src="{{ asset('image/insta.jpg') }}" alt="Instagram" class="w-6 h-6 sm:w-7 sm:h-7 md:w-8 md:h-8 rounded-full"></a>
                 </div>
             </div>
         </footer>
     </section>
 </body>
-</html>
+</html> 
