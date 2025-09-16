@@ -47,7 +47,7 @@
 
         /* Responsive text sizes */
         .hero-text {
-            font-size: clamp(1.5rem, 5vw, 2.5rem);
+            font-size: clamp(2rem, 6vw, 3.5rem);
         }
         .hero-subtext {
             font-size: clamp(1rem, 3vw, 1.25rem);
@@ -108,7 +108,7 @@
 
         @media (max-width: 640px) {
             .hero-text {
-                font-size: clamp(1.25rem, 4vw, 1.75rem);
+                font-size: clamp(1.5rem, 5vw, 2.5rem);
             }
             .hero-subtext {
                 font-size: clamp(0.875rem, 2.5vw, 1rem);
@@ -227,7 +227,7 @@
                                 Organisation du Bien-Être Communautaire
                             </h1>
                             <p class="mt-4 hero-subtext text-gray-100 font-bold">
-                                Une ONG dédiée à l’aide humanitaire : dons essentiels pour hôpitaux et orphelinats.
+                               Une Organisation internationale œuvrant dans le monde entier pour le Bien-être des communautés.
                             </p>
                             <div class="mt-6 flex flex-col sm:flex-row justify-center gap-4">
                                 <a
@@ -377,7 +377,7 @@
                 <!-- Élément 1 -->
                 <div class="bg-white p-4 rounded shadow-lg text-center action-card">
                     <img src="{{ asset('image/fotos.jpg') }}" alt="Dons aux Hôpitaux" class="action-image">
-                    <h3 class="text-lg font-bold text-gray-800 mt-2">Dons aux Hôpitaux</h3>
+                    <h3 class="text-lg font-bold text-gray-800 mt-2">La Jeunesse</h3>
                     <p class="text-sm text-gray-600 mt-2">
                         Fourniture de matériel médical essentiel, formations pour le personnel et soutien aux infrastructures sanitaires dans les zones démunies.
                     </p>
@@ -385,7 +385,7 @@
                 <!-- Élément 2 -->
                 <div class="bg-white p-4 rounded shadow-lg text-center action-card">
                     <img src="{{ asset('image/fotos2.jpg') }}" alt="Soutien aux Orphelinats" class="action-image">
-                    <h3 class="text-lg font-bold text-gray-800 mt-2">Soutien aux Orphelinats</h3>
+                    <h3 class="text-lg font-bold text-gray-800 mt-2">L'environnement</h3>
                     <p class="text-sm text-gray-600 mt-2">
                         Dons alimentaires, éducatifs et matériels pour offrir un environnement chaleureux et bien équipé aux enfants en difficulté.
                     </p>
@@ -393,7 +393,7 @@
                 <!-- Élément 3 -->
                 <div class="bg-white p-4 rounded shadow-lg text-center action-card">
                     <img src="{{ asset('image/fotos.jpg') }}" alt="Programmes Communautaires" class="action-image">
-                    <h3 class="text-lg font-bold text-gray-800 mt-2">Programmes Communautaires</h3>
+                    <h3 class="text-lg font-bold text-gray-800 mt-2">Les droits De l'Homme</h3>
                     <p class="text-sm text-gray-600 mt-2">
                         Initiatives pour sensibiliser aux enjeux de santé et d’éducation, ateliers communautaires et partenariats locaux pour un soutien durable.
                     </p>
@@ -401,7 +401,7 @@
                 <!-- Élément 4 -->
                 <div class="bg-white p-4 rounded shadow-lg text-center action-card">
                     <img src="{{ asset('image/fotos4.jpg') }}" alt="Campagnes de Sensibilisation" class="action-image">
-                    <h3 class="text-lg font-bold text-gray-800 mt-2">Campagnes de Sensibilisation</h3>
+                    <h3 class="text-lg font-bold text-gray-800 mt-2"> La Santé</h3>
                     <p class="text-sm text-gray-600 mt-2">
                         Organisation d’événements et de campagnes pour impliquer directement les citoyens et promouvoir une approche collective face aux défis sociaux.
                     </p>
@@ -409,7 +409,7 @@
                 <!-- Élément 5 -->
                 <div class="bg-white p-4 rounded shadow-lg text-center action-card">
                     <img src="{{ asset('image/fotos2.jpg') }}" alt="Éducation pour Enfants" class="action-image">
-                    <h3 class="text-lg font-bold text-gray-800 mt-2">Éducation pour Enfants</h3>
+                    <h3 class="text-lg font-bold text-gray-800 mt-2">La Paix</h3>
                     <p class="text-sm text-gray-600 mt-2">
                         Fourniture de fournitures scolaires et création de programmes éducatifs pour soutenir l’apprentissage des enfants dans les orphelinats.
                     </p>
@@ -417,7 +417,7 @@
                 <!-- Élément 6 -->
                 <div class="bg-white p-4 rounded shadow-lg text-center action-card">
                     <img src="{{ asset('image/fotos.jpg') }}" alt="Soins d’Urgence" class="action-image">
-                    <h3 class="text-lg font-bold text-gray-800 mt-2">Soins d’Urgence</h3>
+                    <h3 class="text-lg font-bold text-gray-800 mt-2">La Justice</h3>
                     <p class="text-sm text-gray-600 mt-2">
                         Mise en place de kits de premiers secours et interventions rapides pour répondre aux crises sanitaires dans les communautés vulnérables.
                     </p>
@@ -425,7 +425,7 @@
                 <!-- Élément 7 -->
                 <div class="bg-white p-4 rounded shadow-lg text-center action-card">
                     <img src="{{ asset('image/fotos4.jpg') }}" alt="Renforcement des Capacités" class="action-image">
-                    <h3 class="text-lg font-bold text-gray-800 mt-2">Renforcement des Capacités</h3>
+                    <h3 class="text-lg font-bold text-gray-800 mt-2">Le Développement Durable</h3>
                     <p class="text-sm text-gray-600 mt-2">
                         Formations pour les professionnels de santé et les éducateurs pour améliorer la qualité des services dans les hôpitaux et orphelinats.
                     </p>
@@ -433,7 +433,7 @@
                 <!-- Élément 8 -->
                 <div class="bg-white p-4 rounded shadow-lg text-center action-card">
                     <img src="{{ asset('image/fotos2.jpg') }}" alt="Aide Alimentaire" class="action-image">
-                    <h3 class="text-lg font-bold text-gray-800 mt-2">Aide Alimentaire</h3>
+                    <h3 class="text-lg font-bold text-gray-800 mt-2"> Le bien-être des Communautés</h3>
                     <p class="text-sm text-gray-600 mt-2">
                         Distribution de repas nutritifs pour les enfants et les familles dans les zones touchées par l’insécurité alimentaire.
                     </p>
@@ -441,7 +441,7 @@
                 <!-- Élément 9 -->
                 <div class="bg-white p-4 rounded shadow-lg text-center action-card">
                     <img src="{{ asset('image/fotos.jpg') }}" alt="Projets d’Infrastructure" class="action-image">
-                    <h3 class="text-lg font-bold text-gray-800 mt-2">Projets d’Infrastructure</h3>
+                    <h3 class="text-lg font-bold text-gray-800 mt-2">La Culture</h3>
                     <p class="text-sm text-gray-600 mt-2">
                         Construction et rénovation de salles de classe et d’espaces médicaux pour améliorer les conditions d’apprentissage et de soin.
                     </p>
@@ -449,7 +449,7 @@
                 <!-- Élément 10 -->
                 <div class="bg-white p-4 rounded shadow-lg text-center action-card">
                     <img src="{{ asset('image/fotos4.jpg') }}" alt="Santé Maternelle" class="action-image">
-                    <h3 class="text-lg font-bold text-gray-800 mt-2">Santé Maternelle</h3>
+                    <h3 class="text-lg font-bold text-gray-800 mt-2">L'Histoire</h3>
                     <p class="text-sm text-gray-600 mt-2">
                         Programmes pour soutenir les mères avec des consultations prénatales et des kits d’hygiène pour les nouveau-nés.
                     </p>
@@ -457,7 +457,7 @@
                 <!-- Élément 11 -->
                 <div class="bg-white p-4 rounded shadow-lg text-center action-card">
                     <img src="{{ asset('image/fotos2.jpg') }}" alt="Activités Récréatives" class="action-image">
-                    <h3 class="text-lg font-bold text-gray-800 mt-2">Activités Récréatives</h3>
+                    <h3 class="text-lg font-bold text-gray-800 mt-2">Le Panafricanisme</h3>
                     <p class="text-sm text-gray-600 mt-2">
                         Organisation d’activités sportives et culturelles pour favoriser le bien-être psychologique des enfants orphelins.
                     </p>
@@ -465,7 +465,7 @@
                 <!-- Élément 12 -->
                 <div class="bg-white p-4 rounded shadow-lg text-center action-card">
                     <img src="{{ asset('image/fotos.jpg') }}" alt="Sensibilisation à l’Hygiène" class="action-image">
-                    <h3 class="text-lg font-bold text-gray-800 mt-2">Sensibilisation à l’Hygiène</h3>
+                    <h3 class="text-lg font-bold text-gray-800 mt-2">Promotion de l’égalité et de l’équité</h3>
                     <p class="text-sm text-gray-600 mt-2">
                         Ateliers éducatifs pour promouvoir les pratiques d’hygiène dans les communautés et réduire les risques de maladies.
                     </p>
