@@ -64,6 +64,23 @@
         /* Animation automatique pour les cartes de la section Nos Actions */
         .action-card {
             animation: float 3s ease-in-out infinite;
+            transition: transform 0.3s ease, height 0.3s ease;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+        .action-card.expanded {
+            transform: scale(1.05);
+            height: auto;
+            z-index: 10;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+        .action-card .expanded-content {
+            display: none;
+        }
+        .action-card.expanded .expanded-content {
+            display: block;
+            margin-top: 1rem;
         }
         @keyframes float {
             0% { transform: translateY(0); }
@@ -131,7 +148,7 @@
         theme: {
           extend: {
             colors: {
-              primary: '#1E90FF',
+              primary: '#4169E1', /* Bleu royal */
               secondary: '#87CEFA',
               yellow: '#FFD700'
             }
@@ -140,7 +157,7 @@
       }
     </script>
 </head>
-<body id="top" x-data="{ mobileMenuOpen: false, dropdownOpen: false }" class="bg-white font-sans antialiased font-all-bold">
+<body id="top" x-data="{ mobileMenuOpen: false, dropdownOpen: false, expandedCard: null }" class="bg-white font-sans antialiased font-all-bold">
 
     <!-- Loading Spinner -->
     <div id="loading" class="fixed inset-0 bg-white bg-opacity-80 flex items-center justify-center z-50">
@@ -182,13 +199,13 @@
                     <img src="{{ asset('image/ab.png') }}" alt="logo" class="w-10/12 sm:w-8/12 md:w-6/12 lg:w-4/12">
                 </div>
                 <nav class="hidden md:flex space-x-4">
-                    <a href="#top" class="px-3 py-2 rounded-md text-sm font-bold text-gray-800 hover:bg-blue-500 hover:text-white">Accueil</a>
-                    <a href="#actions" class="px-3 py-2 rounded-md text-sm font-bold text-gray-800 hover:bg-blue-500 hover:text-white">Nos Actions</a>
-                    <a href="#about" class="px-3 py-2 rounded-md text-sm font-bold text-gray-800 hover:bg-blue-500 hover:text-white">À propos</a>
-                    <a href="{{route('news')}}" class="px-3 py-2 rounded-md text-sm font-bold text-gray-800 hover:bg-blue-500 hover:text-white">News</a>
-                    <a href="#contact" class="px-3 py-2 rounded-md text-sm font-bold text-gray-800 hover:bg-blue-500 hover:text-white">Contact</a>
-                    <a href="{{ url('/dons') }}" class="px-3 py-2 rounded-md text-sm font-bold text-gray-800 hover:bg-blue-500 hover:text-white">Dons</a>
-                    <a href="{{ route('branche') }}" class="px-3 py-2 rounded-md text-sm font-bold text-gray-800 hover:bg-blue-500 hover:text-white">Evenements</a>
+                    <a href="#top" class="px-3 py-2 rounded-md text-sm font-bold text-gray-800 hover:bg-primary hover:text-white">Accueil</a>
+                    <a href="#actions" class="px-3 py-2 rounded-md text-sm font-bold text-gray-800 hover:bg-primary hover:text-white">Nos Actions</a>
+                    <a href="#about" class="px-3 py-2 rounded-md text-sm font-bold text-gray-800 hover:bg-primary hover:text-white">À propos</a>
+                    <a href="{{route('news')}}" class="px-3 py-2 rounded-md text-sm font-bold text-gray-800 hover:bg-primary hover:text-white">News</a>
+                    <a href="#contact" class="px-3 py-2 rounded-md text-sm font-bold text-gray-800 hover:bg-primary hover:text-white">Contact</a>
+                    <a href="{{ url('/dons') }}" class="px-3 py-2 rounded-md text-sm font-bold text-gray-800 hover:bg-primary hover:text-white">Dons</a>
+                    <a href="{{ route('branche') }}" class="px-3 py-2 rounded-md text-sm font-bold text-gray-800 hover:bg-primary hover:text-white">Evenements</a>
                 </nav>
                 <div class="md:hidden">
                     <button @click="mobileMenuOpen = !mobileMenuOpen" class="text-gray-500 focus:outline-none">
@@ -203,13 +220,13 @@
             </div>
         </div>
         <div x-show="mobileMenuOpen" x-cloak class="md:hidden px-2 pt-2 pb-3 space-y-1">
-            <a href="#top" class="block px-3 py-2 rounded-md text-base font-bold text-gray-800 hover:bg-blue-500 hover:text-white">Accueil</a>
-            <a href="#about" class="block px-3 py-2 rounded-md text-base font-bold text-gray-800 hover:bg-blue-500 hover:text-white">À propos</a>
-            <a href="#actions" class="block px-3 py-2 rounded-md text-base font-bold text-gray-800 hover:bg-blue-500 hover:text-white">Nos Actions</a>
-            <a href="{{route('news')}}" class="block px-3 py-2 rounded-md text-base font-bold text-gray-800 hover:bg-blue-500 hover:text-white">News</a>
-            <a href="#contact" class="block px-3 py-2 rounded-md text-base font-bold text-gray-800 hover:bg-blue-500 hover:text-white">Contact</a>
-            <a href="{{ url('/dons') }}" class="block px-3 py-2 rounded-md text-base font-bold text-gray-800 hover:bg-blue-500 hover:text-white">Dons</a>
-            <a href="{{route('branche')}}" class="block px-3 py-2 rounded-md text-base font-bold text-gray-800 hover:bg-blue-500 hover:text-white">Evenements</a>
+            <a href="#top" class="block px-3 py-2 rounded-md text-base font-bold text-gray-800 hover:bg-primary hover:text-white">Accueil</a>
+            <a href="#about" class="block px-3 py-2 rounded-md text-base font-bold text-gray-800 hover:bg-primary hover:text-white">À propos</a>
+            <a href="#actions" class="block px-3 py-2 rounded-md text-base font-bold text-gray-800 hover:bg-primary hover:text-white">Nos Actions</a>
+            <a href="{{route('news')}}" class="block px-3 py-2 rounded-md text-base font-bold text-gray-800 hover:bg-primary hover:text-white">News</a>
+            <a href="#contact" class="block px-3 py-2 rounded-md text-base font-bold text-gray-800 hover:bg-primary hover:text-white">Contact</a>
+            <a href="{{ url('/dons') }}" class="block px-3 py-2 rounded-md text-base font-bold text-gray-800 hover:bg-primary hover:text-white">Dons</a>
+            <a href="{{route('branche')}}" class="block px-3 py-2 rounded-md text-base font-bold text-gray-800 hover:bg-primary hover:text-white">Evenements</a>
         </div>
     </header>
 
@@ -375,100 +392,148 @@
             </p>
             <div class="mt-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
                 <!-- Élément 1 -->
-                <div class="bg-white p-4 rounded shadow-lg text-center action-card">
+                <div class="bg-white p-4 rounded shadow-lg text-center action-card" x-data="{ expanded: false }" @click="expanded = !expanded; expandedCard = expanded ? 'card1' : null" :class="{ 'expanded': expanded }">
                     <img src="{{ asset('image/fotos.jpg') }}" alt="Dons aux Hôpitaux" class="action-image">
                     <h3 class="text-lg font-bold text-gray-800 mt-2">La Jeunesse</h3>
                     <p class="text-sm text-gray-600 mt-2">
                         Fourniture de matériel médical essentiel, formations pour le personnel et soutien aux infrastructures sanitaires dans les zones démunies.
                     </p>
+                    <p class="text-xs text-gray-500 mt-2">Publié le : 15/09/2025</p>
+                    <div class="expanded-content text-sm text-gray-600">
+                        Nous collaborons avec des hôpitaux locaux pour fournir des équipements médicaux modernes, des formations spécialisées pour le personnel soignant, et des améliorations structurelles pour garantir des soins de qualité dans les régions les plus vulnérables.
+                    </div>
                 </div>
                 <!-- Élément 2 -->
-                <div class="bg-white p-4 rounded shadow-lg text-center action-card">
+                <div class="bg-white p-4 rounded shadow-lg text-center action-card" x-data="{ expanded: false }" @click="expanded = !expanded; expandedCard = expanded ? 'card2' : null" :class="{ 'expanded': expanded }">
                     <img src="{{ asset('image/fotos2.jpg') }}" alt="Soutien aux Orphelinats" class="action-image">
                     <h3 class="text-lg font-bold text-gray-800 mt-2">L'environnement</h3>
                     <p class="text-sm text-gray-600 mt-2">
                         Dons alimentaires, éducatifs et matériels pour offrir un environnement chaleureux et bien équipé aux enfants en difficulté.
                     </p>
+                    <p class="text-xs text-gray-500 mt-2">Publié le : 14/09/2025</p>
+                    <div class="expanded-content text-sm text-gray-600">
+                        Nos initiatives incluent la distribution de fournitures scolaires, de vêtements chauds et de repas équilibrés pour créer un cadre propice au développement des enfants orphelins.
+                    </div>
                 </div>
                 <!-- Élément 3 -->
-                <div class="bg-white p-4 rounded shadow-lg text-center action-card">
+                <div class="bg-white p-4 rounded shadow-lg text-center action-card" x-data="{ expanded: false }" @click="expanded = !expanded; expandedCard = expanded ? 'card3' : null" :class="{ 'expanded': expanded }">
                     <img src="{{ asset('image/fotos.jpg') }}" alt="Programmes Communautaires" class="action-image">
                     <h3 class="text-lg font-bold text-gray-800 mt-2">Les droits De l'Homme</h3>
                     <p class="text-sm text-gray-600 mt-2">
                         Initiatives pour sensibiliser aux enjeux de santé et d’éducation, ateliers communautaires et partenariats locaux pour un soutien durable.
                     </p>
+                    <p class="text-xs text-gray-500 mt-2">Publié le : 13/09/2025</p>
+                    <div class="expanded-content text-sm text-gray-600">
+                        Nos programmes communautaires incluent des ateliers éducatifs sur les droits humains, des campagnes de sensibilisation et des partenariats avec des organisations locales pour promouvoir l’égalité et la justice sociale.
+                    </div>
                 </div>
                 <!-- Élément 4 -->
-                <div class="bg-white p-4 rounded shadow-lg text-center action-card">
+                <div class="bg-white p-4 rounded shadow-lg text-center action-card" x-data="{ expanded: false }" @click="expanded = !expanded; expandedCard = expanded ? 'card4' : null" :class="{ 'expanded': expanded }">
                     <img src="{{ asset('image/fotos4.jpg') }}" alt="Campagnes de Sensibilisation" class="action-image">
                     <h3 class="text-lg font-bold text-gray-800 mt-2"> La Santé</h3>
                     <p class="text-sm text-gray-600 mt-2">
                         Organisation d’événements et de campagnes pour impliquer directement les citoyens et promouvoir une approche collective face aux défis sociaux.
                     </p>
+                    <p class="text-xs text-gray-500 mt-2">Publié le : 12/09/2025</p>
+                    <div class="expanded-content text-sm text-gray-600">
+                        Nos campagnes de sensibilisation mobilisent les communautés à travers des événements éducatifs et des initiatives participatives pour relever les défis sociaux et promouvoir la santé publique.
+                    </div>
                 </div>
                 <!-- Élément 5 -->
-                <div class="bg-white p-4 rounded shadow-lg text-center action-card">
+                <div class="bg-white p-4 rounded shadow-lg text-center action-card" x-data="{ expanded: false }" @click="expanded = !expanded; expandedCard = expanded ? 'card5' : null" :class="{ 'expanded': expanded }">
                     <img src="{{ asset('image/fotos2.jpg') }}" alt="Éducation pour Enfants" class="action-image">
                     <h3 class="text-lg font-bold text-gray-800 mt-2">La Paix</h3>
                     <p class="text-sm text-gray-600 mt-2">
                         Fourniture de fournitures scolaires et création de programmes éducatifs pour soutenir l’apprentissage des enfants dans les orphelinats.
                     </p>
+                    <p class="text-xs text-gray-500 mt-2">Publié le : 11/09/2025</p>
+                    <div class="expanded-content text-sm text-gray-600">
+                        Nous soutenons l’éducation en fournissant des livres, des fournitures scolaires et en organisant des programmes pédagogiques adaptés pour encourager l’apprentissage et le développement des enfants.
+                    </div>
                 </div>
                 <!-- Élément 6 -->
-                <div class="bg-white p-4 rounded shadow-lg text-center action-card">
+                <div class="bg-white p-4 rounded shadow-lg text-center action-card" x-data="{ expanded: false }" @click="expanded = !expanded; expandedCard = expanded ? 'card6' : null" :class="{ 'expanded': expanded }">
                     <img src="{{ asset('image/fotos.jpg') }}" alt="Soins d’Urgence" class="action-image">
                     <h3 class="text-lg font-bold text-gray-800 mt-2">La Justice</h3>
                     <p class="text-sm text-gray-600 mt-2">
                         Mise en place de kits de premiers secours et interventions rapides pour répondre aux crises sanitaires dans les communautés vulnérables.
                     </p>
+                    <p class="text-xs text-gray-500 mt-2">Publié le : 10/09/2025</p>
+                    <div class="expanded-content text-sm text-gray-600">
+                        Nos interventions d’urgence incluent la distribution de kits de premiers secours et la mise en place de cliniques mobiles pour répondre rapidement aux besoins médicaux des communautés en crise.
+                    </div>
                 </div>
                 <!-- Élément 7 -->
-                <div class="bg-white p-4 rounded shadow-lg text-center action-card">
+                <div class="bg-white p-4 rounded shadow-lg text-center action-card" x-data="{ expanded: false }" @click="expanded = !expanded; expandedCard = expanded ? 'card7' : null" :class="{ 'expanded': expanded }">
                     <img src="{{ asset('image/fotos4.jpg') }}" alt="Renforcement des Capacités" class="action-image">
                     <h3 class="text-lg font-bold text-gray-800 mt-2">Le Développement Durable</h3>
                     <p class="text-sm text-gray-600 mt-2">
                         Formations pour les professionnels de santé et les éducateurs pour améliorer la qualité des services dans les hôpitaux et orphelinats.
                     </p>
+                    <p class="text-xs text-gray-500 mt-2">Publié le : 09/09/2025</p>
+                    <div class="expanded-content text-sm text-gray-600">
+                        Nos programmes de formation renforcent les compétences des professionnels de santé et des éducateurs pour offrir des services de qualité et durables dans les institutions partenaires.
+                    </div>
                 </div>
                 <!-- Élément 8 -->
-                <div class="bg-white p-4 rounded shadow-lg text-center action-card">
+                <div class="bg-white p-4 rounded shadow-lg text-center action-card" x-data="{ expanded: false }" @click="expanded = !expanded; expandedCard = expanded ? 'card8' : null" :class="{ 'expanded': expanded }">
                     <img src="{{ asset('image/fotos2.jpg') }}" alt="Aide Alimentaire" class="action-image">
                     <h3 class="text-lg font-bold text-gray-800 mt-2"> Le bien-être des Communautés</h3>
                     <p class="text-sm text-gray-600 mt-2">
                         Distribution de repas nutritifs pour les enfants et les familles dans les zones touchées par l’insécurité alimentaire.
                     </p>
+                    <p class="text-xs text-gray-500 mt-2">Publié le : 08/09/2025</p>
+                    <div class="expanded-content text-sm text-gray-600">
+                        Nos initiatives d’aide alimentaire garantissent des repas nutritifs aux enfants et aux familles, réduisant ainsi l’impact de l’insécurité alimentaire dans les zones vulnérables.
+                    </div>
                 </div>
                 <!-- Élément 9 -->
-                <div class="bg-white p-4 rounded shadow-lg text-center action-card">
+                <div class="bg-white p-4 rounded shadow-lg text-center action-card" x-data="{ expanded: false }" @click="expanded = !expanded; expandedCard = expanded ? 'card9' : null" :class="{ 'expanded': expanded }">
                     <img src="{{ asset('image/fotos.jpg') }}" alt="Projets d’Infrastructure" class="action-image">
                     <h3 class="text-lg font-bold text-gray-800 mt-2">La Culture</h3>
                     <p class="text-sm text-gray-600 mt-2">
                         Construction et rénovation de salles de classe et d’espaces médicaux pour améliorer les conditions d’apprentissage et de soin.
                     </p>
+                    <p class="text-xs text-gray-500 mt-2">Publié le : 07/09/2025</p>
+                    <div class="expanded-content text-sm text-gray-600">
+                        Nous investissons dans la construction et la rénovation d’infrastructures éducatives et médicales pour offrir des environnements sûrs et modernes aux communautés.
+                    </div>
                 </div>
                 <!-- Élément 10 -->
-                <div class="bg-white p-4 rounded shadow-lg text-center action-card">
+                <div class="bg-white p-4 rounded shadow-lg text-center action-card" x-data="{ expanded: false }" @click="expanded = !expanded; expandedCard = expanded ? 'card10' : null" :class="{ 'expanded': expanded }">
                     <img src="{{ asset('image/fotos4.jpg') }}" alt="Santé Maternelle" class="action-image">
                     <h3 class="text-lg font-bold text-gray-800 mt-2">L'Histoire</h3>
                     <p class="text-sm text-gray-600 mt-2">
                         Programmes pour soutenir les mères avec des consultations prénatales et des kits d’hygiène pour les nouveau-nés.
                     </p>
+                    <p class="text-xs text-gray-500 mt-2">Publié le : 06/09/2025</p>
+                    <div class="expanded-content text-sm text-gray-600">
+                        Nos programmes de santé maternelle offrent des consultations prénatales, des kits d’hygiène et un soutien continu pour assurer la santé des mères et des nouveau-nés.
+                    </div>
                 </div>
                 <!-- Élément 11 -->
-                <div class="bg-white p-4 rounded shadow-lg text-center action-card">
+                <div class="bg-white p-4 rounded shadow-lg text-center action-card" x-data="{ expanded: false }" @click="expanded = !expanded; expandedCard = expanded ? 'card11' : null" :class="{ 'expanded': expanded }">
                     <img src="{{ asset('image/fotos2.jpg') }}" alt="Activités Récréatives" class="action-image">
                     <h3 class="text-lg font-bold text-gray-800 mt-2">Le Panafricanisme</h3>
                     <p class="text-sm text-gray-600 mt-2">
                         Organisation d’activités sportives et culturelles pour favoriser le bien-être psychologique des enfants orphelins.
                     </p>
+                    <p class="text-xs text-gray-500 mt-2">Publié le : 05/09/2025</p>
+                    <div class="expanded-content text-sm text-gray-600">
+                        Nos activités récréatives incluent des événements sportifs et culturels qui favorisent l’épanouissement psychologique et social des enfants orphelins.
+                    </div>
                 </div>
                 <!-- Élément 12 -->
-                <div class="bg-white p-4 rounded shadow-lg text-center action-card">
+                <div class="bg-white p-4 rounded shadow-lg text-center action-card" x-data="{ expanded: false }" @click="expanded = !expanded; expandedCard = expanded ? 'card12' : null" :class="{ 'expanded': expanded }">
                     <img src="{{ asset('image/fotos.jpg') }}" alt="Sensibilisation à l’Hygiène" class="action-image">
                     <h3 class="text-lg font-bold text-gray-800 mt-2">Promotion de l’égalité et de l’équité</h3>
                     <p class="text-sm text-gray-600 mt-2">
                         Ateliers éducatifs pour promouvoir les pratiques d’hygiène dans les communautés et réduire les risques de maladies.
                     </p>
+                    <p class="text-xs text-gray-500 mt-2">Publié le : 04/09/2025</p>
+                    <div class="expanded-content text-sm text-gray-600">
+                        Nos ateliers éducatifs sur l’hygiène enseignent des pratiques essentielles pour prévenir les maladies et promouvoir la santé communautaire à long terme.
+                    </div>
                 </div>
             </div>
         </div>
@@ -589,7 +654,7 @@
               setTimeout(() => {
                   loading.style.display = 'none';
               }, 500); // Correspond à la durée de la transition CSS
-          }, 1000); // Délai avant de masquer le spinner (ajustez si nécessaire)
+          }, 1000); // Délai avant de masquer le spinner
       });
     </script>
 </body>
