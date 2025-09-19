@@ -24,75 +24,201 @@
         body {
             background-color: #ffffff;
             font-family: 'Arial Black', sans-serif;
+            overflow-x: hidden;
+            padding-top: 40px; /* Espace pour la top-bar fixe uniquement */
         }
 
         .font-all-bold, body, h1, h2, h3, p, a, li { font-weight: bold; }
+
+        /* Smooth Scroll Behavior */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* Top Bar (reste fixe) */
+        .top-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 50;
+            transition: background-color 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        /* Main Header (non fixe, défile avec la page) */
+        .main-header {
+            width: 100%;
+            z-index: 40;
+            background-color: #ffffff;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Logo Styles */
+        .logo-container {
+            max-width: 36px; /* Mobile */
+            max-height: 36px; /* Mobile */
+            height: auto;
+            overflow: hidden; /* Empêche le débordement */
+            transition: transform 0.3s ease;
+        }
+        .logo-container img {
+            width: 100%;
+            height: auto;
+            object-fit: contain;
+        }
+        @media (min-width: 641px) {
+            .logo-container {
+                max-width: 48px; /* Tablette */
+                max-height: 48px; /* Tablette */
+            }
+        }
+        @media (min-width: 1024px) {
+            .logo-container {
+                max-width: 80px; /* Desktop */
+                max-height: 80px; /* Desktop */
+            }
+        }
 
         /* Partner Logo Styles */
         .partner-logo {
             width: 80px;
             height: 80px;
             object-fit: contain;
-            transition: transform 0.6s ease;
+            transition: transform 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55), opacity 0.4s ease;
+            opacity: 0;
         }
         .swiper-slide-active .partner-logo {
-            transform: scale(1.2);
+            transform: scale(1.2) rotate(5deg);
+            opacity: 1;
         }
 
-        /* Responsive Hero Section */
+        /* Hero Section */
         .heroSwiper .swiper-slide {
             background-size: cover;
             background-position: center;
+            opacity: 0;
+            transition: opacity 1s ease-in-out;
+        }
+        .heroSwiper .swiper-slide-active {
+            opacity: 1;
         }
 
-        /* Responsive text sizes */
+        /* Responsive text sizes with animation */
         .hero-text {
-            font-size: clamp(2rem, 6vw, 3.5rem);
+            font-size: clamp(1.5rem, 5vw, 3rem);
+            transform: translateY(30px);
+            opacity: 0;
+            transition: transform 0.8s ease-out, opacity 0.8s ease-out;
         }
         .hero-subtext {
-            font-size: clamp(1rem, 3vw, 1.25rem);
+            font-size: clamp(0.875rem, 2.5vw, 1.125rem);
+            transform: translateY(30px);
+            opacity: 0;
+            transition: transform 0.8s ease-out 0.2s, opacity 0.8s ease-out 0.2s;
+        }
+        .heroSwiper .swiper-slide-active .hero-text,
+        .heroSwiper .swiper-slide-active .hero-subtext {
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        /* Hero buttons animation */
+        .hero-button {
+            transition: transform 0.3s ease, background-color 0.3s ease, opacity 0.3s ease;
+            opacity: 0;
+            transform: scale(0.95);
+        }
+        .heroSwiper .swiper-slide-active .hero-button {
+            opacity: 1;
+            transform: scale(1);
+        }
+        .hero-button:hover {
+            transform: scale(1.1);
         }
 
         /* Responsive images in Nos Actions */
         .action-image {
             width: 100%;
-            height: 150px;
+            height: 120px;
             object-fit: cover;
             border-radius: 0.5rem;
+            transition: transform 0.3s ease, opacity 0.3s ease;
+        }
+        .action-card:hover .action-image {
+            transform: scale(1.05);
+            opacity: 0.9;
         }
 
-        /* Animation automatique pour les cartes de la section Nos Actions */
+        /* Action Card Styles with Before/After */
         .action-card {
-            animation: float 3s ease-in-out infinite;
-            transition: transform 0.3s ease, height 0.3s ease;
-            cursor: pointer;
+            background-color: #FFF8DC;
             position: relative;
             overflow: hidden;
+            transition: transform 0.5s ease, box-shadow 0.5s ease, opacity 0.5s ease;
+            opacity: 0;
+            transform: translateY(50px);
         }
-        .action-card.expanded {
+        .action-card.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .action-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 215, 0, 0.3), transparent);
+            transition: left 0.6s ease;
+        }
+        .action-card:hover::before {
+            left: 100%;
+        }
+        .action-card::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 3px;
+            background-color: #FFD700;
+            transition: width 0.3s ease;
+        }
+        .action-card:hover::after {
+            width: 100%;
+        }
+        .action-card:hover {
             transform: scale(1.05);
-            height: auto;
-            z-index: 10;
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 10px 15px rgba(0, 0, 0, 0.2);
         }
-        .action-card .expanded-content {
-            display: none;
-        }
-        .action-card.expanded .expanded-content {
-            display: block;
-            margin-top: 1rem;
-        }
-        @keyframes float {
-            0% { transform: translateY(0); }
-            50% { transform: translateY(-8px); }
-            100% { transform: translateY(0); }
-        }
+
+        /* Stagger animation for cards */
+        .action-card:nth-child(1).visible { transition-delay: 0.1s; }
+        .action-card:nth-child(2).visible { transition-delay: 0.2s; }
+        .action-card:nth-child(3).visible { transition-delay: 0.3s; }
+        .action-card:nth-child(4).visible { transition-delay: 0.4s; }
+        .action-card:nth-child(5).visible { transition-delay: 0.1s; }
+        .action-card:nth-child(6).visible { transition-delay: 0.2s; }
+        .action-card:nth-child(7).visible { transition-delay: 0.3s; }
+        .action-card:nth-child(8).visible { transition-delay: 0.4s; }
+        .action-card:nth-child(9).visible { transition-delay: 0.1s; }
+        .action-card:nth-child(10).visible { transition-delay: 0.2s; }
+        .action-card:nth-child(11).visible { transition-delay: 0.3s; }
+        .action-card:nth-child(12).visible { transition-delay: 0.4s; }
 
         /* Responsive video */
         .responsive-video {
             width: 100%;
-            max-width: 100%;
+            max-width: 90%;
             height: auto;
+            opacity: 0;
+            transform: scale(0.95);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+        }
+        .responsive-video.visible {
+            opacity: 1;
+            transform: scale(1);
         }
 
         /* Loading Spinner Styles */
@@ -105,50 +231,231 @@
             left: 0;
             width: 100%;
             height: 100%;
+            background: rgba(255, 255, 255, 0.95);
             z-index: 9999;
-            transition: opacity 0.5s ease-out;
+            transition: opacity 0.7s ease-out;
         }
-
-        #loading.hidden {
+        .loading-hidden {
             opacity: 0;
             pointer-events: none;
         }
-
         .animate-spin {
-            animation: spin 1s linear infinite;
+            animation: spin 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
         }
-
         @keyframes spin {
             0% { transform: rotate(0deg); }
             100% { transform: rotate(360deg); }
         }
 
+        /* Mobile Menu Animation */
+        .mobile-menu {
+            transform: translateX(100%);
+            transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
+            opacity: 0;
+        }
+        .mobile-menu.open {
+            transform: translateX(0);
+            opacity: 1;
+        }
+        .mobile-menu a {
+            transition: background-color 0.3s ease, color 0.3s ease, transform 0.3s ease;
+        }
+        .mobile-menu a:hover {
+            transform: translateX(5px);
+        }
+
+        /* Section Entrance Animation on Scroll */
+        .section-animate {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+        }
+        .section-animate.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Navigation Links Animation */
+        nav a {
+            transition: background-color 0.3s ease, color 0.3s ease, transform 0.3s ease;
+        }
+        nav a:hover {
+            transform: translateY(-2px);
+        }
+
+        /* Modal Styles */
+        .modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+            display: none;
+            transition: opacity 0.3s ease;
+        }
+        .modal.show {
+            display: flex !important;
+            opacity: 1;
+        }
+        .modal-content {
+            background: #FFF8DC;
+            border-radius: 0.5rem;
+            padding: 1rem;
+            max-width: 95%;
+            max-height: 90vh;
+            overflow-y: auto;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+            opacity: 0;
+            transform: scale(0.9);
+            transition: opacity 0.3s ease, transform 0.3s ease;
+        }
+        .modal.show .modal-content {
+            opacity: 1;
+            transform: scale(1);
+        }
+        .modal-close {
+            position: absolute;
+            top: 8px;
+            right: 8px;
+            cursor: pointer;
+            transition: transform 0.2s ease, opacity 0.2s ease;
+        }
+        .modal-close:hover {
+            transform: scale(1.2);
+            opacity: 0.8;
+        }
+        .modal-image {
+            width: 100%;
+            max-height: 40vh;
+            object-fit: cover;
+            border-radius: 0.5rem;
+        }
+        .modal-title {
+            font-size: clamp(1.25rem, 3vw, 1.5rem);
+            color: #1E90FF;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+            background: rgba(255, 248, 220, 0.8);
+            padding: 0.5rem;
+            border-radius: 0.25rem;
+            transform: translateY(20px);
+            opacity: 0;
+            transition: transform 0.4s ease, opacity 0.4s ease;
+        }
+        .modal.show .modal-title {
+            transform: translateY(0);
+            opacity: 1;
+        }
+        .modal-content p {
+            font-size: clamp(0.75rem, 2vw, 0.875rem);
+            transition: opacity 0.4s ease 0.2s;
+            opacity: 0;
+        }
+        .modal.show .modal-content p {
+            opacity: 1;
+        }
+
+        /* Footer animations */
+        footer a, footer p {
+            transition: color 0.3s ease, transform 0.3s ease, opacity 0.3s ease;
+            opacity: 0;
+            transform: translateY(10px);
+        }
+        footer.visible a, footer.visible p {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        footer a:hover {
+            transform: translateY(-2px);
+        }
+
+        /* Responsive adjustments */
         @media (max-width: 640px) {
+            body {
+                padding-top: 32px; /* Espace réduit pour la top-bar uniquement */
+            }
+            .top-bar {
+                height: 32px;
+            }
+            .main-header {
+                padding-top: 32px; /* Espace pour la top-bar */
+            }
             .hero-text {
-                font-size: clamp(1.5rem, 5vw, 2.5rem);
+                font-size: clamp(1.25rem, 4vw, 2rem);
             }
             .hero-subtext {
-                font-size: clamp(0.875rem, 2.5vw, 1rem);
+                font-size: clamp(0.75rem, 2vw, 0.875rem);
             }
             .partner-logo {
                 width: 60px;
                 height: 60px;
             }
             .action-image {
-                height: 120px;
+                height: 100px;
+            }
+            .modal-content {
+                padding: 0.75rem;
+                max-width: 98%;
+            }
+            .modal-image {
+                max-height: 30vh;
+            }
+            .modal-title {
+                font-size: clamp(1rem, 2.5vw, 1.25rem);
+            }
+            .modal-content p {
+                font-size: clamp(0.7rem, 1.8vw, 0.8rem);
+            }
+            .modal-close {
+                width: 20px;
+                height: 20px;
+            }
+            .action-card {
+                padding: 0.75rem;
+            }
+        }
+        @media (min-width: 641px) and (max-width: 1023px) {
+            .hero-text {
+                font-size: clamp(1.5rem, 4.5vw, 2.5rem);
+            }
+            .hero-subtext {
+                font-size: clamp(0.875rem, 2.5vw, 1rem);
+            }
+            .action-image {
+                height: 130px;
+            }
+            .modal-content {
+                max-width: 90%;
+            }
+            .modal-image {
+                max-height: 35vh;
+            }
+        }
+        @media (min-width: 1024px) {
+            .action-image {
+                height: 150px;
+            }
+            .modal-content {
+                max-width: 80%;
+            }
+            .modal-image {
+                max-height: 40vh;
             }
         }
     </style>
-
-    <!-- AlpineJS -->
-    <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
 
     <script>
       tailwind.config = {
         theme: {
           extend: {
             colors: {
-              primary: '#4169E1', /* Bleu royal */
+              primary: '#1E90FF',
               secondary: '#87CEFA',
               yellow: '#FFD700'
             }
@@ -157,34 +464,44 @@
       }
     </script>
 </head>
-<body id="top" x-data="{ mobileMenuOpen: false, dropdownOpen: false, expandedCard: null }" class="bg-white font-sans antialiased font-all-bold">
-
+<body id="top" class="bg-white font-sans antialiased font-all-bold">
     <!-- Loading Spinner -->
-    <div id="loading" class="fixed inset-0 bg-white bg-opacity-80 flex items-center justify-center z-50">
-        <div class="relative w-24 h-24">
-            <!-- Cercle bleu rotatif -->
+    <div id="loading" class="fixed inset-0 bg-white bg-opacity-95 flex items-center justify-center z-50">
+        <div class="relative w-20 h-20">
             <div class="absolute inset-0 border-4 border-t-primary border-transparent rounded-full animate-spin"></div>
-            <!-- Logo statique au centre -->
-            <img src="{{ asset('image/ab.png') }}" alt="Logo ABEC" class="w-16 h-16 absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
+            <img src="{{ asset('image/ab.png') }}" alt="Logo ABEC" class="w-12 h-12 absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
+        </div>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal" id="modal">
+        <div class="modal-content">
+            <img id="modalImage" class="modal-image" src="" alt="">
+            <h3 class="modal-title" id="modalTitle"></h3>
+            <p class="text-sm text-gray-600" id="modalContent"></p>
+            <svg class="modal-close" onclick="closeModal()" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="18" y1="6" x2="6" y2="18"></line>
+                <line x1="6" y1="6" x2="18" y2="18"></line>
+            </svg>
         </div>
     </div>
 
     <!-- Top Bar -->
-    <nav class="bg-primary text-white">
+    <nav class="bg-primary text-white top-bar section-animate">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex items-center justify-between h-10">
                 <div class="flex items-center space-x-4">
-                    <a href="https://www.facebook.com/profile.php?id=61568266295634" target="_blank" class="hover:opacity-80" title="Facebook">
+                    <a href="https://www.facebook.com/profile.php?id=61568266295634" target="_blank" class="hover:opacity-80 transition-opacity duration-300" title="Facebook">
                         <img src="{{ asset('image/feacebook.jpg') }}" alt="Facebook" class="w-6 h-6 rounded-full">
                     </a>
-                    <a href="https://whatsapp.com/channel/0029VaYTsNkD8SE42sDpnk1w" target="_blank" class="hover:opacity-80" title="WhatsApp">
+                    <a href="https://whatsapp.com/channel/0029VaYTsNkD8SE42sDpnk1w" target="_blank" class="hover:opacity-80 transition-opacity duration-300" title="WhatsApp">
                         <img src="{{ asset('image/wastapp.jpg') }}" alt="WhatsApp" class="w-6 h-6 rounded-full">
                     </a>
-                    <a href="https://www.instagram.com/abec.officiel/" target="_blank" class="hover:opacity-80" title="Instagram">
+                    <a href="https://www.instagram.com/abec.officiel/" target="_blank" class="hover:opacity-80 transition-opacity duration-300" title="Instagram">
                         <img src="{{ asset('image/insta.jpg') }}" alt="Instagram" class="w-6 h-6 rounded-full">
                     </a>
                 </div>
-                <a href="mailto:globaluniversalwelfare@gmail.com" class="hover:opacity-80" title="Email">
+                <a href="mailto:globaluniversalwelfare@gmail.com" class="hover:opacity-80 transition-opacity duration-300" title="Email">
                     <img src="{{ asset('image/m.jpg') }}" alt="Email" class="w-6 h-6 rounded-full">
                 </a>
             </div>
@@ -192,46 +509,46 @@
     </nav>
 
     <!-- Nav Bar Principale -->
-    <header class="bg-white shadow py-4">
+    <header class="bg-white shadow py-3 main-header section-animate">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex items-center justify-between h-16">
-                <div class="flex-shrink-0 w-[100px] sm:w-[120px] md:w-[180px] lg:w-[240px] h-auto flex justify-center">
-                    <img src="{{ asset('image/ab.png') }}" alt="logo" class="w-10/12 sm:w-8/12 md:w-6/12 lg:w-4/12">
+                <div class="logo-container flex-shrink-0 flex justify-center items-center">
+                    <img src="{{ asset('image/ab.png') }}" alt="logo" class="transition-transform duration-300 hover:scale-105">
                 </div>
-                <nav class="hidden md:flex space-x-4">
-                    <a href="#top" class="px-3 py-2 rounded-md text-sm font-bold text-gray-800 hover:bg-primary hover:text-white">Accueil</a>
-                    <a href="#actions" class="px-3 py-2 rounded-md text-sm font-bold text-gray-800 hover:bg-primary hover:text-white">Nos Actions</a>
-                    <a href="#about" class="px-3 py-2 rounded-md text-sm font-bold text-gray-800 hover:bg-primary hover:text-white">À propos</a>
-                    <a href="{{route('news')}}" class="px-3 py-2 rounded-md text-sm font-bold text-gray-800 hover:bg-primary hover:text-white">News</a>
-                    <a href="#contact" class="px-3 py-2 rounded-md text-sm font-bold text-gray-800 hover:bg-primary hover:text-white">Contact</a>
-                    <a href="{{ url('/dons') }}" class="px-3 py-2 rounded-md text-sm font-bold text-gray-800 hover:bg-primary hover:text-white">Dons</a>
-                    <a href="{{ route('branche') }}" class="px-3 py-2 rounded-md text-sm font-bold text-gray-800 hover:bg-primary hover:text-white">Evenements</a>
+                <nav class="hidden md:flex space-x-3">
+                    <a href="#top" class="px-2 py-1 rounded-md text-sm font-bold text-gray-800 hover:bg-blue-500 hover:text-white transition-all duration-300">Accueil</a>
+                    <a href="#actions" class="px-2 py-1 rounded-md text-sm font-bold text-gray-800 hover:bg-blue-500 hover:text-white transition-all duration-300">Nos Actions</a>
+                    <a href="#about" class="px-2 py-1 rounded-md text-sm font-bold text-gray-800 hover:bg-blue-500 hover:text-white transition-all duration-300">À propos</a>
+                    <a href="{{route('news')}}" class="px-2 py-1 rounded-md text-sm font-bold text-gray-800 hover:bg-blue-500 hover:text-white transition-all duration-300">News</a>
+                    <a href="#contact" class="px-2 py-1 rounded-md text-sm font-bold text-gray-800 hover:bg-blue-500 hover:text-white transition-all duration-300">Contact</a>
+                    <a href="{{ url('/dons') }}" class="px-2 py-1 rounded-md text-sm font-bold text-gray-800 hover:bg-blue-500 hover:text-white transition-all duration-300">Dons</a>
+                    <a href="{{ route('branche') }}" class="px-2 py-1 rounded-md text-sm font-bold text-gray-800 hover:bg-blue-500 hover:text-white transition-all duration-300">Evenements</a>
                 </nav>
                 <div class="md:hidden">
-                    <button @click="mobileMenuOpen = !mobileMenuOpen" class="text-gray-500 focus:outline-none">
-                        <svg x-show="!mobileMenuOpen" x-cloak xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <button onclick="toggleMobileMenu()" class="text-gray-500 focus:outline-none transition-transform duration-300" id="mobileMenuButton">
+                        <svg id="menuOpenIcon" class="w-6 h-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
                         </svg>
-                        <svg x-show="mobileMenuOpen" x-cloak xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <svg id="menuCloseIcon" class="w-6 h-6 hidden" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
                         </svg>
                     </button>
                 </div>
             </div>
         </div>
-        <div x-show="mobileMenuOpen" x-cloak class="md:hidden px-2 pt-2 pb-3 space-y-1">
-            <a href="#top" class="block px-3 py-2 rounded-md text-base font-bold text-gray-800 hover:bg-primary hover:text-white">Accueil</a>
-            <a href="#about" class="block px-3 py-2 rounded-md text-base font-bold text-gray-800 hover:bg-primary hover:text-white">À propos</a>
-            <a href="#actions" class="block px-3 py-2 rounded-md text-base font-bold text-gray-800 hover:bg-primary hover:text-white">Nos Actions</a>
-            <a href="{{route('news')}}" class="block px-3 py-2 rounded-md text-base font-bold text-gray-800 hover:bg-primary hover:text-white">News</a>
-            <a href="#contact" class="block px-3 py-2 rounded-md text-base font-bold text-gray-800 hover:bg-primary hover:text-white">Contact</a>
-            <a href="{{ url('/dons') }}" class="block px-3 py-2 rounded-md text-base font-bold text-gray-800 hover:bg-primary hover:text-white">Dons</a>
-            <a href="{{route('branche')}}" class="block px-3 py-2 rounded-md text-base font-bold text-gray-800 hover:bg-primary hover:text-white">Evenements</a>
+        <div id="mobileMenu" class="md:hidden px-2 pt-2 pb-3 space-y-1 mobile-menu hidden">
+            <a href="#top" class="block px-3 py-2 rounded-md text-sm font-bold text-gray-800 hover:bg-blue-500 hover:text-white transition-all duration-300">Accueil</a>
+            <a href="#about" class="block px-3 py-2 rounded-md text-sm font-bold text-gray-800 hover:bg-blue-500 hover:text-white transition-all duration-300">À propos</a>
+            <a href="#actions" class="block px-3 py-2 rounded-md text-sm font-bold text-gray-800 hover:bg-blue-500 hover:text-white transition-all duration-300">Nos Actions</a>
+            <a href="{{route('news')}}" class="block px-3 py-2 rounded-md text-sm font-bold text-gray-800 hover:bg-blue-500 hover:text-white transition-all duration-300">News</a>
+            <a href="#contact" class="block px-3 py-2 rounded-md text-sm font-bold text-gray-800 hover:bg-blue-500 hover:text-white transition-all duration-300">Contact</a>
+            <a href="{{ url('/dons') }}" class="block px-3 py-2 rounded-md text-sm font-bold text-gray-800 hover:bg-blue-500 hover:text-white transition-all duration-300">Dons</a>
+            <a href="{{route('branche')}}" class="block px-3 py-2 rounded-md text-sm font-bold text-gray-800 hover:bg-blue-500 hover:text-white transition-all duration-300">Evenements</a>
         </div>
     </header>
 
     <!-- Hero Section avec Swiper Slider -->
-    <section class="relative h-[70vh] sm:h-screen overflow-hidden">
+    <section class="relative h-[60vh] sm:h-[80vh] lg:h-screen overflow-hidden section-animate">
         <div class="swiper heroSwiper h-full">
             <div class="swiper-wrapper">
                 <div class="swiper-slide">
@@ -243,19 +560,19 @@
                             <h1 class="hero-text font-extrabold text-white">
                                 Organisation du Bien-Être Communautaire
                             </h1>
-                            <p class="mt-4 hero-subtext text-gray-100 font-bold">
+                            <p class="mt-3 hero-subtext text-gray-100 font-bold">
                                Une Organisation internationale œuvrant dans le monde entier pour le Bien-être des communautés.
                             </p>
-                            <div class="mt-6 flex flex-col sm:flex-row justify-center gap-4">
+                            <div class="mt-4 flex flex-col sm:flex-row justify-center gap-3">
                                 <a
                                     href="santos/dons.php"
-                                    class="inline-block bg-yellow text-black px-6 py-2 font-bold rounded-md hover:bg-gray-100 transition transform hover:scale-105"
+                                    class="hero-button inline-block bg-yellow text-black px-4 py-2 text-sm font-bold rounded-md hover:bg-gray-100 transition-all duration-300"
                                 >
                                     Faites un don
                                 </a>
                                 <a
                                     href="#about"
-                                    class="inline-block bg-yellow text-black px-6 py-2 font-bold rounded-md hover:bg-gray-100 transition transform hover:scale-105"
+                                    class="hero-button inline-block bg-yellow text-black px-4 py-2 text-sm font-bold rounded-md hover:bg-gray-100 transition-all duration-300"
                                 >
                                     En savoir plus
                                 </a>
@@ -272,19 +589,19 @@
                             <h1 class="hero-text font-extrabold text-white">
                                 Organisation du Bien-Être Communautaire
                             </h1>
-                            <p class="mt-4 hero-subtext text-gray-100 font-bold">
+                            <p class="mt-3 hero-subtext text-gray-100 font-bold">
                                 Une ONG dédiée à l’aide humanitaire : dons essentiels pour hôpitaux et orphelinats.
                             </p>
-                            <div class="mt-6 flex flex-col sm:flex-row justify-center gap-4">
+                            <div class="mt-4 flex flex-col sm:flex-row justify-center gap-3">
                                 <a
                                     href="santos/dons.php"
-                                    class="inline-block bg-yellow text-black px-6 py-2 font-bold rounded-md hover:bg-gray-100 transition transform hover:scale-105"
+                                    class="hero-button inline-block bg-yellow text-black px-4 py-2 text-sm font-bold rounded-md hover:bg-gray-100 transition-all duration-300"
                                 >
                                     Faites un don
                                 </a>
                                 <a
                                     href="#about"
-                                    class="inline-block bg-yellow text-black px-6 py-2 font-bold rounded-md hover:bg-gray-100 transition transform hover:scale-105"
+                                    class="hero-button inline-block bg-yellow text-black px-4 py-2 text-sm font-bold rounded-md hover:bg-gray-100 transition-all duration-300"
                                 >
                                     En savoir plus
                                 </a>
@@ -301,19 +618,19 @@
                             <h1 class="hero-text font-extrabold text-white">
                                 Organisation du Bien-Être Communautaire
                             </h1>
-                            <p class="mt-4 hero-subtext text-gray-100 font-bold">
+                            <p class="mt-3 hero-subtext text-gray-100 font-bold">
                                 Une ONG dédiée à l’aide humanitaire : dons essentiels pour hôpitaux et orphelinats.
                             </p>
-                            <div class="mt-6 flex flex-col sm:flex-row justify-center gap-4">
+                            <div class="mt-4 flex flex-col sm:flex-row justify-center gap-3">
                                 <a
                                     href="santos/dons.php"
-                                    class="inline-block bg-yellow text-black px-6 py-2 font-bold rounded-md hover:bg-gray-100 transition transform hover:scale-105"
+                                    class="hero-button inline-block bg-yellow text-black px-4 py-2 text-sm font-bold rounded-md hover:bg-gray-100 transition-all duration-300"
                                 >
                                     Faites un don
                                 </a>
                                 <a
                                     href="#about"
-                                    class="inline-block bg-yellow text-black px-6 py-2 font-bold rounded-md hover:bg-gray-100 transition transform hover:scale-105"
+                                    class="hero-button inline-block bg-yellow text-black px-4 py-2 text-sm font-bold rounded-md hover:bg-gray-100 transition-all duration-300"
                                 >
                                     En savoir plus
                                 </a>
@@ -330,19 +647,19 @@
                             <h1 class="hero-text font-extrabold text-white">
                                 Organisation du Bien-Être Communautaire
                             </h1>
-                            <p class="mt-4 hero-subtext text-gray-100 font-bold">
+                            <p class="mt-3 hero-subtext text-gray-100 font-bold">
                                 Une ONG dédiée à l’aide humanitaire : dons essentiels pour hôpitaux et orphelinats.
                             </p>
-                            <div class="mt-6 flex flex-col sm:flex-row justify-center gap-4">
+                            <div class="mt-4 flex flex-col sm:flex-row justify-center gap-3">
                                 <a
                                     href="santos/dons.php"
-                                    class="inline-block bg-yellow text-black px-6 py-2 font-bold rounded-md hover:bg-gray-100 transition transform hover:scale-105"
+                                    class="hero-button inline-block bg-yellow text-black px-4 py-2 text-sm font-bold rounded-md hover:bg-gray-100 transition-all duration-300"
                                 >
                                     Faites un don
                                 </a>
                                 <a
                                     href="#about"
-                                    class="inline-block bg-yellow text-black px-6 py-2 font-bold rounded-md hover:bg-gray-100 transition transform hover:scale-105"
+                                    class="hero-button inline-block bg-yellow text-black px-4 py-2 text-sm font-bold rounded-md hover:bg-gray-100 transition-all duration-300"
                                 >
                                     En savoir plus
                                 </a>
@@ -359,19 +676,19 @@
                             <h1 class="hero-text font-extrabold text-white">
                                 Organisation du Bien-Être Communautaire
                             </h1>
-                            <p class="mt-4 hero-subtext text-gray-100 font-bold">
+                            <p class="mt-3 hero-subtext text-gray-100 font-bold">
                                 Une ONG dédiée à l’aide humanitaire : dons essentiels pour hôpitaux et orphelinats.
                             </p>
-                            <div class="mt-6 flex flex-col sm:flex-row justify-center gap-4">
+                            <div class="mt-4 flex flex-col sm:flex-row justify-center gap-3">
                                 <a
                                     href="santos/dons.php"
-                                    class="inline-block bg-yellow text-black px-6 py-2 font-bold rounded-md hover:bg-gray-100 transition transform hover:scale-105"
+                                    class="hero-button inline-block bg-yellow text-black px-4 py-2 text-sm font-bold rounded-md hover:bg-gray-100 transition-all duration-300"
                                 >
                                     Faites un don
                                 </a>
                                 <a
                                     href="#about"
-                                    class="inline-block bg-yellow text-black px-6 py-2 font-bold rounded-md hover:bg-gray-100 transition transform hover:scale-105"
+                                    class="hero-button inline-block bg-yellow text-black px-4 py-2 text-sm font-bold rounded-md hover:bg-gray-100 transition-all duration-300"
                                 >
                                     En savoir plus
                                 </a>
@@ -384,170 +701,122 @@
     </section>
 
     <!-- Section Nos Actions -->
-    <section id="actions" class="py-12 bg-gray-100">
+    <section id="actions" class="py-8 bg-gray-100 section-animate">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-            <h2 class="text-2xl sm:text-3xl font-bold text-gray-900">Nos Actions</h2>
-            <p class="mt-4 text-sm sm:text-base font-bold text-gray-700 leading-relaxed">
-                Découvrez nos projets phares pour soutenir les hôpitaux et orphelinats. Nous mettons en œuvre divers programmes visant à améliorer l'accès aux soins et à offrir un environnement sûr et stimulant pour l'éducation des plus jeunes.
+            <h2 class="text-xl sm:text-2xl lg:text-3xl font-bold text-gray-900">Nos Actions</h2>
+            <p class="mt-3 text-sm sm:text-base font-bold text-gray-700 leading-relaxed">
+                Une organisation internationale à but non lucratif, active dans plusieurs domaines communautaires. Nous mettons en œuvre divers programmes visant à apporter le bien-être aux différentes communautés à travers notre planète.
             </p>
-            <div class="mt-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
+            <div class="mt-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
                 <!-- Élément 1 -->
-                <div class="bg-white p-4 rounded shadow-lg text-center action-card" x-data="{ expanded: false }" @click="expanded = !expanded; expandedCard = expanded ? 'card1' : null" :class="{ 'expanded': expanded }">
-                    <img src="{{ asset('image/fotos.jpg') }}" alt="Dons aux Hôpitaux" class="action-image">
-                    <h3 class="text-lg font-bold text-gray-800 mt-2">La Jeunesse</h3>
-                    <p class="text-sm text-gray-600 mt-2">
-                        Fourniture de matériel médical essentiel, formations pour le personnel et soutien aux infrastructures sanitaires dans les zones démunies.
-                    </p>
-                    <p class="text-xs text-gray-500 mt-2">Publié le : 15/09/2025</p>
-                    <div class="expanded-content text-sm text-gray-600">
-                        Nous collaborons avec des hôpitaux locaux pour fournir des équipements médicaux modernes, des formations spécialisées pour le personnel soignant, et des améliorations structurelles pour garantir des soins de qualité dans les régions les plus vulnérables.
-                    </div>
+                <div class="p-3 rounded shadow-lg text-center action-card cursor-pointer">
+                    <img src="{{ asset('image/ge.png') }}" alt="Dons aux Hôpitaux" class="action-image">
+                    <h3 class="text-base sm:text-lg font-bold text-gray-800 mt-2">La Jeunesse</h3>
+                    <p class="text-xs sm:text-sm text-gray-600 mt-2">L'Afrique possède une population extrêmement jeune... Agir en faveur des jeunes, c’est investir dans un avenir plus solide, plus innovant et plus équitable pour toute l’Afrique.</p>
+                    <button onclick="openModal('L\'Afrique possède une population extrêmement jeune, dans de nombreuses zones, près de 40 % des habitants ont moins de 15 ans, et plus de 400 millions de personnes sont âgées de 15 à 35 ans. Pourtant, ce secteur de la population fait face à des défis sérieux des millions de jeunes ne sont ni à l’école ni en formation ni en emploi (NEET), ce qui freine leur développement le manque d’opportunités économiques et le déficit de soutien financier demeurent des barrières majeures. Agir en faveur des jeunes, c’est investir dans un avenir plus solide, plus innovant et plus équitable pour toute l’Afrique.', 'La Jeunesse', '{{ asset('image/ge.png') }}')" class="text-xs bg-yellow text-black px-3 py-1 rounded-md mt-2 transition-all duration-200 hover:bg-gray-200 hover:scale-105">Voir plus</button>
+                    <p class="text-xs text-gray-500 mt-2">Publié le: 01/01/2024</p>
                 </div>
                 <!-- Élément 2 -->
-                <div class="bg-white p-4 rounded shadow-lg text-center action-card" x-data="{ expanded: false }" @click="expanded = !expanded; expandedCard = expanded ? 'card2' : null" :class="{ 'expanded': expanded }">
-                    <img src="{{ asset('image/fotos2.jpg') }}" alt="Soutien aux Orphelinats" class="action-image">
-                    <h3 class="text-lg font-bold text-gray-800 mt-2">L'environnement</h3>
-                    <p class="text-sm text-gray-600 mt-2">
-                        Dons alimentaires, éducatifs et matériels pour offrir un environnement chaleureux et bien équipé aux enfants en difficulté.
-                    </p>
-                    <p class="text-xs text-gray-500 mt-2">Publié le : 14/09/2025</p>
-                    <div class="expanded-content text-sm text-gray-600">
-                        Nos initiatives incluent la distribution de fournitures scolaires, de vêtements chauds et de repas équilibrés pour créer un cadre propice au développement des enfants orphelins.
-                    </div>
+                <div class="p-3 rounded shadow-lg text-center action-card cursor-pointer">
+                    <img src="{{ asset('image/vegete.png') }}" alt="Soutien aux Orphelinats" class="action-image">
+                    <h3 class="text-base sm:text-lg font-bold text-gray-800 mt-2">L'Environnement</h3>
+                    <p class="text-xs sm:text-sm text-gray-600 mt-2">La région du Bassin du Congo abrite l’une des dernières grandes étendues de forêt tropicale intacte au monde... C’est aussi préserver un patrimoine vital pour l’Afrique et pour l’humanité entière.</p>
+                    <button onclick="openModal('La région du Bassin du Congo abrite l’une des dernières grandes étendues de forêt tropicale intacte au monde, une zone critique pour la biodiversité, le climat, et les moyens de subsistance de millions de personnes. La forêt du Bassin du Congo joue un rôle majeur comme puits de carbone : elle peut capturer environ 0,61 gigatonne de CO₂ par an, ce qui contribue significativement à atténuer le changement climatique. La déforestation dans la région du Bassin du Congo a augmenté d’environ 5 %, remettant en question les engagements pris dans la Déclaration des Leaders de Glasgow pour stopper et inverser la perte de forêts d’ici 2030. Les conséquences sont multiples : perte de biodiversité avec des espèces endémiques menacées, dégradation des sols, changements dans les régimes hydriques, menaces pour la sécurité alimentaire, et un impact sur la résilience des communautés locales face aux aléas climatiques. Agir pour l’environnement, c’est prendre soin de la nature qui a toujours pris soin de nous. C’est aussi préserver un patrimoine vital pour l’Afrique et pour l’humanité entière.', 'L\'Environnement', '{{ asset('image/vegete.png') }}')" class="text-xs bg-yellow text-black px-3 py-1 rounded-md mt-2 transition-all duration-200 hover:bg-gray-200 hover:scale-105">Voir plus</button>
+                    <p class="text-xs text-gray-500 mt-2">Publié le: 01/01/2024</p>
                 </div>
                 <!-- Élément 3 -->
-                <div class="bg-white p-4 rounded shadow-lg text-center action-card" x-data="{ expanded: false }" @click="expanded = !expanded; expandedCard = expanded ? 'card3' : null" :class="{ 'expanded': expanded }">
-                    <img src="{{ asset('image/fotos.jpg') }}" alt="Programmes Communautaires" class="action-image">
-                    <h3 class="text-lg font-bold text-gray-800 mt-2">Les droits De l'Homme</h3>
-                    <p class="text-sm text-gray-600 mt-2">
-                        Initiatives pour sensibiliser aux enjeux de santé et d’éducation, ateliers communautaires et partenariats locaux pour un soutien durable.
-                    </p>
-                    <p class="text-xs text-gray-500 mt-2">Publié le : 13/09/2025</p>
-                    <div class="expanded-content text-sm text-gray-600">
-                        Nos programmes communautaires incluent des ateliers éducatifs sur les droits humains, des campagnes de sensibilisation et des partenariats avec des organisations locales pour promouvoir l’égalité et la justice sociale.
-                    </div>
+                <div class="p-3 rounded shadow-lg text-center action-card cursor-pointer">
+                    <img src="{{ asset('image/droit.png') }}" alt="Programmes Communautaires" class="action-image">
+                    <h3 class="text-base sm:text-lg font-bold text-gray-800 mt-2">Les Droits de l'Homme</h3>
+                    <p class="text-xs sm:text-sm text-gray-600 mt-2">En Afrique et ailleurs, de nombreuses personnes sont persécutées en raison de leur identité ethnique ou de leurs opinions... et construire des sociétés plus justes et démocratiques.</p>
+                    <button onclick="openModal('En Afrique et ailleurs, de nombreuses personnes sont persécutées en raison de leur identité ethnique ou de leurs opinions. Des individus sont arrêtés, emprisonnés ou même tués simplement pour avoir exprimé des opinions divergentes ou pour leur appartenance à des groupes ethniques minoritaires. Par exemple, des militants, des journalistes et des défenseurs des droits humains ont été victimes de harcèlement judiciaire, d\'arrestations arbitraires et de menaces graves pour avoir dénoncé des injustices ou exprimé des critiques envers les autorités. Or, la dignité humaine est universelle et inaliénable. Agir pour la défense des droits de l’Homme, c’est se lever contre l’injustice, et construire des sociétés plus justes et démocratiques.', 'Les Droits de l\'Homme', '{{ asset('image/droit.png') }}')" class="text-xs bg-yellow text-black px-3 py-1 rounded-md mt-2 transition-all duration-200 hover:bg-gray-200 hover:scale-105">Voir plus</button>
+                    <p class="text-xs text-gray-500 mt-2">Publié le: 01/01/2024</p>
                 </div>
                 <!-- Élément 4 -->
-                <div class="bg-white p-4 rounded shadow-lg text-center action-card" x-data="{ expanded: false }" @click="expanded = !expanded; expandedCard = expanded ? 'card4' : null" :class="{ 'expanded': expanded }">
-                    <img src="{{ asset('image/fotos4.jpg') }}" alt="Campagnes de Sensibilisation" class="action-image">
-                    <h3 class="text-lg font-bold text-gray-800 mt-2"> La Santé</h3>
-                    <p class="text-sm text-gray-600 mt-2">
-                        Organisation d’événements et de campagnes pour impliquer directement les citoyens et promouvoir une approche collective face aux défis sociaux.
-                    </p>
-                    <p class="text-xs text-gray-500 mt-2">Publié le : 12/09/2025</p>
-                    <div class="expanded-content text-sm text-gray-600">
-                        Nos campagnes de sensibilisation mobilisent les communautés à travers des événements éducatifs et des initiatives participatives pour relever les défis sociaux et promouvoir la santé publique.
-                    </div>
+                <div class="p-3 rounded shadow-lg text-center action-card cursor-pointer">
+                    <img src="{{ asset('image/santee.png') }}" alt="Campagnes de Sensibilisation" class="action-image">
+                    <h3 class="text-base sm:text-lg font-bold text-gray-800 mt-2">La Santé</h3>
+                    <p class="text-xs sm:text-sm text-gray-600 mt-2">La santé mondiale est marquée par des inégalités profondes... C’est œuvrer pour un avenir où chacun puisse accéder à des soins de qualité.</p>
+                    <button onclick="openModal('La santé mondiale est marquée par des inégalités profondes. En 2023, environ 260 000 femmes sont décédées des suites de complications liées à la grossesse et à l’accouchement, dont 92 % dans des pays à revenu faible ou intermédiaire. Parallèlement, la malnutrition infantile demeure un problème majeur. En 2025, 9,4 % des enfants âgés de 5 à 19 ans sont obèses, dépassant pour la première fois le taux d\'enfants en insuffisance pondérale, qui est de 9,2 %. Agir pour la santé mondiale, c’est investir dans la vie, l’éducation et le bien-être de chaque individu. C’est œuvrer pour un avenir où chacun, partout dans le monde, puisse accéder à des soins de qualité, indépendamment de sa situation géographique ou économique.', 'La Santé', '{{ asset('image/santee.png') }}')" class="text-xs bg-yellow text-black px-3 py-1 rounded-md mt-2 transition-all duration-200 hover:bg-gray-200 hover:scale-105">Voir plus</button>
+                    <p class="text-xs text-gray-500 mt-2">Publié le: 01/01/2024</p>
                 </div>
                 <!-- Élément 5 -->
-                <div class="bg-white p-4 rounded shadow-lg text-center action-card" x-data="{ expanded: false }" @click="expanded = !expanded; expandedCard = expanded ? 'card5' : null" :class="{ 'expanded': expanded }">
+                <div class="p-3 rounded shadow-lg text-center action-card cursor-pointer">
                     <img src="{{ asset('image/fotos2.jpg') }}" alt="Éducation pour Enfants" class="action-image">
-                    <h3 class="text-lg font-bold text-gray-800 mt-2">La Paix</h3>
-                    <p class="text-sm text-gray-600 mt-2">
-                        Fourniture de fournitures scolaires et création de programmes éducatifs pour soutenir l’apprentissage des enfants dans les orphelinats.
-                    </p>
-                    <p class="text-xs text-gray-500 mt-2">Publié le : 11/09/2025</p>
-                    <div class="expanded-content text-sm text-gray-600">
-                        Nous soutenons l’éducation en fournissant des livres, des fournitures scolaires et en organisant des programmes pédagogiques adaptés pour encourager l’apprentissage et le développement des enfants.
-                    </div>
+                    <h3 class="text-base sm:text-lg font-bold text-gray-800 mt-2">La Paix</h3>
+                    <p class="text-xs sm:text-sm text-gray-600 mt-2">Selon le Global Peace Index 2025, le niveau de paix mondiale est au plus bas... bâtir un avenir plus pacifique pour tous.</p>
+                    <button onclick="openModal('Selon le Global Peace Index 2025, le niveau de paix mondiale est au plus bas depuis la création de cet indice, avec une détérioration continue depuis 2014. En 2024, le monde a enregistré 152 000 décès liés aux conflits, le plus élevé depuis la Seconde Guerre mondiale. Actuellement, 59 conflits interétatiques ou internes sont actifs, un nombre record depuis la fin de la Seconde Guerre mondiale. Agir pour la paix, c’est œuvrer pour un monde plus juste, plus solidaire et plus harmonieux. Cela implique de promouvoir le dialogue, la coopération internationale, le désarmement et le respect des droits fondamentaux de chaque individu. En soutenant des initiatives locales et mondiales en faveur de la paix, nous pouvons contribuer à inverser cette tendance inquiétante et bâtir un avenir plus pacifique pour tous.', 'La Paix', '{{ asset('image/fotos2.jpg') }}')" class="text-xs bg-yellow text-black px-3 py-1 rounded-md mt-2 transition-all duration-200 hover:bg-gray-200 hover:scale-105">Voir plus</button>
+                    <p class="text-xs text-gray-500 mt-2">Publié le: 01/01/2024</p>
                 </div>
                 <!-- Élément 6 -->
-                <div class="bg-white p-4 rounded shadow-lg text-center action-card" x-data="{ expanded: false }" @click="expanded = !expanded; expandedCard = expanded ? 'card6' : null" :class="{ 'expanded': expanded }">
+                <div class="p-3 rounded shadow-lg text-center action-card cursor-pointer">
                     <img src="{{ asset('image/fotos.jpg') }}" alt="Soins d’Urgence" class="action-image">
-                    <h3 class="text-lg font-bold text-gray-800 mt-2">La Justice</h3>
-                    <p class="text-sm text-gray-600 mt-2">
-                        Mise en place de kits de premiers secours et interventions rapides pour répondre aux crises sanitaires dans les communautés vulnérables.
-                    </p>
-                    <p class="text-xs text-gray-500 mt-2">Publié le : 10/09/2025</p>
-                    <div class="expanded-content text-sm text-gray-600">
-                        Nos interventions d’urgence incluent la distribution de kits de premiers secours et la mise en place de cliniques mobiles pour répondre rapidement aux besoins médicaux des communautés en crise.
-                    </div>
+                    <h3 class="text-base sm:text-lg font-bold text-gray-800 mt-2">La Justice</h3>
+                    <p class="text-xs sm:text-sm text-gray-600 mt-2">La justice est un pilier fondamental pour des sociétés équitables... garantir que chaque individu puisse faire valoir ses droits.</p>
+                    <button onclick="openModal('La justice est un pilier fondamental pour des sociétés équitables et pacifiques. Cependant, dans de nombreuses régions du monde, les systèmes judiciaires sont confrontés à des défis majeurs : corruption, manque d’accès à la justice pour les populations marginalisées, et lenteur des procédures. Par exemple, en 2023, environ 4,4 milliards de personnes vivaient dans des pays où l’accès à la justice est limité, selon le World Justice Project. Agir pour la justice, c’est promouvoir l’égalité devant la loi, renforcer les institutions judiciaires et garantir que chaque individu, quel que soit son statut social, puisse faire valoir ses droits.', 'La Justice', '{{ asset('image/fotos.jpg') }}')" class="text-xs bg-yellow text-black px-3 py-1 rounded-md mt-2 transition-all duration-200 hover:bg-gray-200 hover:scale-105">Voir plus</button>
+                    <p class="text-xs text-gray-500 mt-2">Publié le: 01/01/2024</p>
                 </div>
                 <!-- Élément 7 -->
-                <div class="bg-white p-4 rounded shadow-lg text-center action-card" x-data="{ expanded: false }" @click="expanded = !expanded; expandedCard = expanded ? 'card7' : null" :class="{ 'expanded': expanded }">
+                <div class="p-3 rounded shadow-lg text-center action-card cursor-pointer">
                     <img src="{{ asset('image/fotos4.jpg') }}" alt="Renforcement des Capacités" class="action-image">
-                    <h3 class="text-lg font-bold text-gray-800 mt-2">Le Développement Durable</h3>
-                    <p class="text-sm text-gray-600 mt-2">
-                        Formations pour les professionnels de santé et les éducateurs pour améliorer la qualité des services dans les hôpitaux et orphelinats.
-                    </p>
-                    <p class="text-xs text-gray-500 mt-2">Publié le : 09/09/2025</p>
-                    <div class="expanded-content text-sm text-gray-600">
-                        Nos programmes de formation renforcent les compétences des professionnels de santé et des éducateurs pour offrir des services de qualité et durables dans les institutions partenaires.
-                    </div>
+                    <h3 class="text-base sm:text-lg font-bold text-gray-800 mt-2">Le Développement Durable</h3>
+                    <p class="text-xs sm:text-sm text-gray-600 mt-2">Le développement durable est essentiel pour répondre aux besoins actuels... promouvoir des pratiques agricoles durables et l’accès à l’énergie renouvelable.</p>
+                    <button onclick="openModal('Le développement durable est essentiel pour répondre aux besoins actuels sans compromettre les générations futures. Selon les Nations Unies, en 2023, environ 9,2 % de la population mondiale vivait en dessous du seuil de pauvreté international, tandis que le changement climatique continue de menacer les moyens de subsistance. Nos actions incluent des formations pour les professionnels de santé et les éducateurs, ainsi que des projets visant à promouvoir des pratiques agricoles durables et l’accès à l’énergie renouvelable.', 'Le Développement Durable', '{{ asset('image/fotos4.jpg') }}')" class="text-xs bg-yellow text-black px-3 py-1 rounded-md mt-2 transition-all duration-200 hover:bg-gray-200 hover:scale-105">Voir plus</button>
+                    <p class="text-xs text-gray-500 mt-2">Publié le: 01/01/2024</p>
                 </div>
                 <!-- Élément 8 -->
-                <div class="bg-white p-4 rounded shadow-lg text-center action-card" x-data="{ expanded: false }" @click="expanded = !expanded; expandedCard = expanded ? 'card8' : null" :class="{ 'expanded': expanded }">
+                <div class="p-3 rounded shadow-lg text-center action-card cursor-pointer">
                     <img src="{{ asset('image/fotos2.jpg') }}" alt="Aide Alimentaire" class="action-image">
-                    <h3 class="text-lg font-bold text-gray-800 mt-2"> Le bien-être des Communautés</h3>
-                    <p class="text-sm text-gray-600 mt-2">
-                        Distribution de repas nutritifs pour les enfants et les familles dans les zones touchées par l’insécurité alimentaire.
-                    </p>
-                    <p class="text-xs text-gray-500 mt-2">Publié le : 08/09/2025</p>
-                    <div class="expanded-content text-sm text-gray-600">
-                        Nos initiatives d’aide alimentaire garantissent des repas nutritifs aux enfants et aux familles, réduisant ainsi l’impact de l’insécurité alimentaire dans les zones vulnérables.
-                    </div>
+                    <h3 class="text-base sm:text-lg font-bold text-gray-800 mt-2">Le Bien-être des Communautés</h3>
+                    <p class="text-xs sm:text-sm text-gray-600 mt-2">Le bien-être des communautés est au cœur de nos actions... assurer une autosuffisance alimentaire à long terme.</p>
+                    <button onclick="openModal('Le bien-être des communautés est au cœur de nos actions. L’insécurité alimentaire touche environ 2,4 milliards de personnes dans le monde, selon la FAO en 2023. Nos initiatives incluent la distribution de repas nutritifs pour les enfants et les familles dans les zones touchées, ainsi que des programmes de formation pour améliorer les compétences agricoles et assurer une autosuffisance alimentaire à long terme.', 'Le Bien-être des Communautés', '{{ asset('image/fotos2.jpg') }}')" class="text-xs bg-yellow text-black px-3 py-1 rounded-md mt-2 transition-all duration-200 hover:bg-gray-200 hover:scale-105">Voir plus</button>
+                    <p class="text-xs text-gray-500 mt-2">Publié le: 01/01/2024</p>
                 </div>
                 <!-- Élément 9 -->
-                <div class="bg-white p-4 rounded shadow-lg text-center action-card" x-data="{ expanded: false }" @click="expanded = !expanded; expandedCard = expanded ? 'card9' : null" :class="{ 'expanded': expanded }">
+                <div class="p-3 rounded shadow-lg text-center action-card cursor-pointer">
                     <img src="{{ asset('image/fotos.jpg') }}" alt="Projets d’Infrastructure" class="action-image">
-                    <h3 class="text-lg font-bold text-gray-800 mt-2">La Culture</h3>
-                    <p class="text-sm text-gray-600 mt-2">
-                        Construction et rénovation de salles de classe et d’espaces médicaux pour améliorer les conditions d’apprentissage et de soin.
-                    </p>
-                    <p class="text-xs text-gray-500 mt-2">Publié le : 07/09/2025</p>
-                    <div class="expanded-content text-sm text-gray-600">
-                        Nous investissons dans la construction et la rénovation d’infrastructures éducatives et médicales pour offrir des environnements sûrs et modernes aux communautés.
-                    </div>
+                    <h3 class="text-base sm:text-lg font-bold text-gray-800 mt-2">La Culture</h3>
+                    <p class="text-xs sm:text-sm text-gray-600 mt-2">La culture est un vecteur puissant d’unité... offrir des opportunités éducatives.</p>
+                    <button onclick="openModal('La culture est un vecteur puissant d’unité et de progrès social. À travers des projets de construction et de rénovation de salles de classe et d’espaces culturels, nous promouvons l’accès à l’éducation culturelle et artistique. En 2023, environ 250 millions d’enfants n’avaient pas accès à une éducation de base, selon l’UNESCO. Nos initiatives visent à préserver et valoriser les patrimoines culturels tout en offrant des opportunités éducatives.', 'La Culture', '{{ asset('image/fotos.jpg') }}')" class="text-xs bg-yellow text-black px-3 py-1 rounded-md mt-2 transition-all duration-200 hover:bg-gray-200 hover:scale-105">Voir plus</button>
+                    <p class="text-xs text-gray-500 mt-2">Publié le: 01/01/2024</p>
                 </div>
                 <!-- Élément 10 -->
-                <div class="bg-white p-4 rounded shadow-lg text-center action-card" x-data="{ expanded: false }" @click="expanded = !expanded; expandedCard = expanded ? 'card10' : null" :class="{ 'expanded': expanded }">
+                <div class="p-3 rounded shadow-lg text-center action-card cursor-pointer">
                     <img src="{{ asset('image/fotos4.jpg') }}" alt="Santé Maternelle" class="action-image">
-                    <h3 class="text-lg font-bold text-gray-800 mt-2">L'Histoire</h3>
-                    <p class="text-sm text-gray-600 mt-2">
-                        Programmes pour soutenir les mères avec des consultations prénatales et des kits d’hygiène pour les nouveau-nés.
-                    </p>
-                    <p class="text-xs text-gray-500 mt-2">Publié le : 06/09/2025</p>
-                    <div class="expanded-content text-sm text-gray-600">
-                        Nos programmes de santé maternelle offrent des consultations prénatales, des kits d’hygiène et un soutien continu pour assurer la santé des mères et des nouveau-nés.
-                    </div>
+                    <h3 class="text-base sm:text-lg font-bold text-gray-800 mt-2">L'Histoire</h3>
+                    <p class="text-xs sm:text-sm text-gray-600 mt-2">Préserver l’histoire et la mémoire collective... favoriser la cohésion sociale et la transmission culturelle.</p>
+                    <button onclick="openModal('Préserver l’histoire et la mémoire collective est crucial pour renforcer l’identité des communautés. Nos programmes soutiennent les mères avec des consultations prénatales et des kits d’hygiène pour les nouveau-nés, tout en documentant les traditions et histoires locales pour les générations futures. Ces actions favorisent la cohésion sociale et la transmission culturelle.', 'L\'Histoire', '{{ asset('image/fotos4.jpg') }}')" class="text-xs bg-yellow text-black px-3 py-1 rounded-md mt-2 transition-all duration-200 hover:bg-gray-200 hover:scale-105">Voir plus</button>
+                    <p class="text-xs text-gray-500 mt-2">Publié le: 01/01/2024</p>
                 </div>
                 <!-- Élément 11 -->
-                <div class="bg-white p-4 rounded shadow-lg text-center action-card" x-data="{ expanded: false }" @click="expanded = !expanded; expandedCard = expanded ? 'card11' : null" :class="{ 'expanded': expanded }">
+                <div class="p-3 rounded shadow-lg text-center action-card cursor-pointer">
                     <img src="{{ asset('image/fotos2.jpg') }}" alt="Activités Récréatives" class="action-image">
-                    <h3 class="text-lg font-bold text-gray-800 mt-2">Le Panafricanisme</h3>
-                    <p class="text-sm text-gray-600 mt-2">
-                        Organisation d’activités sportives et culturelles pour favoriser le bien-être psychologique des enfants orphelins.
-                    </p>
-                    <p class="text-xs text-gray-500 mt-2">Publié le : 05/09/2025</p>
-                    <div class="expanded-content text-sm text-gray-600">
-                        Nos activités récréatives incluent des événements sportifs et culturels qui favorisent l’épanouissement psychologique et social des enfants orphelins.
-                    </div>
+                    <h3 class="text-base sm:text-lg font-bold text-gray-800 mt-2">Le Panafricanisme</h3>
+                    <p class="text-xs sm:text-sm text-gray-600 mt-2">Le panafricanisme promeut l’unité... encourager la coopération régionale pour un avenir commun prospère.</p>
+                    <button onclick="openModal('Le panafricanisme promeut l’unité et la solidarité entre les peuples africains. Nos activités sportives et culturelles, destinées aux enfants orphelins, visent à renforcer le sentiment d’appartenance et de fierté culturelle. Ces initiatives favorisent le bien-être psychologique et encouragent la coopération régionale pour un avenir commun prospère.', 'Le Panafricanisme', '{{ asset('image/fotos2.jpg') }}')" class="text-xs bg-yellow text-black px-3 py-1 rounded-md mt-2 transition-all duration-200 hover:bg-gray-200 hover:scale-105">Voir plus</button>
+                    <p class="text-xs text-gray-500 mt-2">Publié le: 01/01/2024</p>
                 </div>
                 <!-- Élément 12 -->
-                <div class="bg-white p-4 rounded shadow-lg text-center action-card" x-data="{ expanded: false }" @click="expanded = !expanded; expandedCard = expanded ? 'card12' : null" :class="{ 'expanded': expanded }">
+                <div class="p-3 rounded shadow-lg text-center action-card cursor-pointer">
                     <img src="{{ asset('image/fotos.jpg') }}" alt="Sensibilisation à l’Hygiène" class="action-image">
-                    <h3 class="text-lg font-bold text-gray-800 mt-2">Promotion de l’égalité et de l’équité</h3>
-                    <p class="text-sm text-gray-600 mt-2">
-                        Ateliers éducatifs pour promouvoir les pratiques d’hygiène dans les communautés et réduire les risques de maladies.
-                    </p>
-                    <p class="text-xs text-gray-500 mt-2">Publié le : 04/09/2025</p>
-                    <div class="expanded-content text-sm text-gray-600">
-                        Nos ateliers éducatifs sur l’hygiène enseignent des pratiques essentielles pour prévenir les maladies et promouvoir la santé communautaire à long terme.
-                    </div>
+                    <h3 class="text-base sm:text-lg font-bold text-gray-800 mt-2">Promotion de l’Égalité et de l’Équité</h3>
+                    <p class="text-xs sm:text-sm text-gray-600 mt-2">Promouvoir l’égalité et l’équité est essentiel... créer des communautés où chacun a les mêmes opportunités.</p>
+                    <button onclick="openModal('Promouvoir l’égalité et l’équité est essentiel pour des sociétés justes. Nos ateliers éducatifs sur l’hygiène réduisent les risques de maladies, tandis que nos campagnes de sensibilisation encouragent l’égalité des genres et l’inclusion sociale. Ces actions contribuent à créer des communautés où chacun a les mêmes opportunités.', 'Promotion de l’Égalité et de l’Équité', '{{ asset('image/fotos.jpg') }}')" class="text-xs bg-yellow text-black px-3 py-1 rounded-md mt-2 transition-all duration-200 hover:bg-gray-200 hover:scale-105">Voir plus</button>
+                    <p class="text-xs text-gray-500 mt-2">Publié le: 01/01/2024</p>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- Section À propos -->
-    <section id="about" class="py-12 bg-gray-200">
+    <section id="about" class="py-8 bg-gray-200 section-animate">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-            <h2 class="text-2xl sm:text-3xl font-bold text-gray-900">À propos d'ABEC</h2>
-            <p class="mt-4 text-sm sm:text-base font-bold text-gray-600 leading-relaxed">
+            <h2 class="text-xl sm:text-2xl lg:text-3xl font-bold text-gray-900">À propos d'ABEC</h2>
+            <p class="mt-3 text-sm sm:text-base font-bold text-gray-600 leading-relaxed">
                 L'Association pour le Bien-Être Communautaire (ABEC) est une ONG humanitaire engagée dans la lutte contre la pauvreté et l'injustice sociale. Nous croyons fermement que chaque individu mérite un accès aux soins de santé, à l'éducation et à des conditions de vie dignes. À travers nos différentes initiatives, nous soutenons les hôpitaux et les orphelinats en fournissant des dons essentiels, en organisant des campagnes de sensibilisation et en mobilisant des ressources pour aider les plus vulnérables. Ensemble, nous pouvons faire une différence significative dans la vie de ceux qui en ont besoin.
             </p>
-            <div class="mt-8 flex justify-center">
-                <video class="responsive-video rounded-lg shadow-lg" autoplay loop muted playsinline>
+            <div class="mt-6 flex justify-center">
+                <video class="responsive-video rounded-lg shadow-lg w-full max-w-[90%]" autoplay loop muted playsinline>
                     <source src="{{ asset('image/orange.mp4') }}" type="video/mp4">
                     Votre navigateur ne prend pas en charge la lecture de vidéos.
                 </video>
@@ -556,9 +825,9 @@
     </section>
 
     <!-- Section Nos Partenaires -->
-    <section id="partners" class="py-12 bg-gray-200">
+    <section id="partners" class="py-8 bg-gray-200 section-animate">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-            <h2 class="text-2xl sm:text-3xl font-bold text-gray-900 mb-8">Nos Partenaires</h2>
+            <h2 class="text-xl sm:text-2xl lg:text-3xl font-bold text-gray-900 mb-6">Nos Partenaires</h2>
             <div class="swiper mySwiper">
                 <div class="swiper-wrapper">
                     <div class="swiper-slide flex justify-center items-center">
@@ -573,41 +842,48 @@
                     <div class="swiper-slide flex justify-center items-center">
                         <img src="{{ asset('image/yo.png') }}" alt="Partenaire 5" class="partner-logo" />
                     </div>
+                    <!-- Duplicated slides to fix Swiper loop warning -->
+                    <div class="swiper-slide flex justify-center items-center">
+                        <img src="{{ asset('image/la paix.png') }}" alt="Partenaire 1" class="partner-logo" />
+                    </div>
+                    <div class="swiper-slide flex justify-center items-center">
+                        <img src="{{ asset('image/lion.png') }}" alt="Partenaire 2" class="partner-logo" />
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- Footer -->
-    <footer id="contact" class="bg-primary text-white" role="contentinfo">
+    <footer id="contact" class="bg-blue-800 text-white section-animate" role="contentinfo">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
-            <div class="flex flex-col items-center text-center space-y-4">
-                <nav class="flex flex-wrap justify-center gap-x-4 gap-y-2">
-                    <a href="#top" class="text-sm font-bold hover:text-gray-200">Accueil</a>
-                    <a href="#about" class="text-sm font-bold hover:text-gray-200">À propos</a>
-                    <a href="#actions" class="text-sm font-bold hover:text-gray-200">Nos Actions</a>
-                    <a href="{{route('news')}}" class="text-sm font-bold hover:text-gray-200">News</a>
-                    <a href="#contact" class="text-sm font-bold hover:text-gray-200">Contact</a>
+            <div class="flex flex-col items-center text-center space-y-3">
+                <nav class="flex flex-wrap justify-center gap-x-3 gap-y-2">
+                    <a href="#top" class="text-sm font-bold hover:text-gray-200 transition-colors duration-300">Accueil</a>
+                    <a href="#about" class="text-sm font-bold hover:text-gray-200 transition-colors duration-300">À propos</a>
+                    <a href="#actions" class="text-sm font-bold hover:text-gray-200 transition-colors duration-300">Nos Actions</a>
+                    <a href="{{route('news')}}" class="text-sm font-bold hover:text-gray-200 transition-colors duration-300">News</a>
+                    <a href="#contact" class="text-sm font-bold hover:text-gray-200 transition-colors duration-300">Contact</a>
                 </nav>
-                <hr class="my-4 border-gray-300 w-full" />
+                <hr class="my-3 border-gray-300 w-full" />
                 <p class="text-sm font-bold">Basée à Yaoundé, Cameroun</p>
-                <a href="#top" class="inline-block text-sm font-bold hover:text-gray-200">Retour en haut</a>
-                <hr class="my-4 border-gray-300 w-full" />
+                <a href="#top" class="inline-block text-sm font-bold hover:text-gray-200 transition-colors duration-300">Retour en haut</a>
+                <hr class="my-3 border-gray-300 w-full" />
                 <p class="text-sm font-bold">Organisation internationale. Tous droits réservés.</p>
                 <p class="text-xs mt-2">Suivez-nous sur nos réseaux sociaux :</p>
-                <div class="flex space-x-4 mt-2">
-                    <a href="https://www.facebook.com/profile.php?id=61568266295634" target="_blank" class="hover:opacity-80" title="Facebook">
+                <div class="flex space-x-3 mt-2">
+                    <a href="https://www.facebook.com/profile.php?id=61568266295634" target="_blank" class="hover:opacity-80 transition-opacity duration-300" title="Facebook">
                         <img src="{{ asset('image/feacebook.jpg') }}" alt="Facebook" class="w-6 h-6 rounded-full">
                     </a>
-                    <a href="https://whatsapp.com/channel/0029VaYTsNkD8SE42sDpnk1w" target="_blank" class="hover:opacity-80" title="WhatsApp">
+                    <a href="https://whatsapp.com/channel/0029VaYTsNkD8SE42sDpnk1w" target="_blank" class="hover:opacity-80 transition-opacity duration-300" title="WhatsApp">
                         <img src="{{ asset('image/wastapp.jpg') }}" alt="WhatsApp" class="w-6 h-6 rounded-full">
                     </a>
-                    <a href="https://www.instagram.com/abec.officiel/" target="_blank" class="hover:opacity-80" title="Instagram">
+                    <a href="https://www.instagram.com/abec.officiel/" target="_blank" class="hover:opacity-80 transition-opacity duration-300" title="Instagram">
                         <img src="{{ asset('image/insta.jpg') }}" alt="Instagram" class="w-6 h-6 rounded-full">
                     </a>
                 </div>
-                <div class="mt-4">
-                    <img src="{{ asset('image/ab.png') }}" alt="Logo ABEC" class="h-12 mx-auto">
+                <div class="mt-3">
+                    <img src="{{ asset('image/ab.png') }}" alt="Logo ABEC" class="h-10 mx-auto transition-transform duration-300 hover:scale-105">
                 </div>
             </div>
         </div>
@@ -616,45 +892,114 @@
     <!-- Swiper JS -->
     <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
     <script>
+      // Fonctions pour gérer la modale
+      function openModal(content, title, imageSrc) {
+          const modal = document.getElementById('modal');
+          const modalContent = document.getElementById('modalContent');
+          const modalTitle = document.getElementById('modalTitle');
+          const modalImage = document.getElementById('modalImage');
+          modalContent.innerHTML = content;
+          modalTitle.textContent = title;
+          modalImage.src = imageSrc;
+          modalImage.alt = title;
+          modal.classList.add('show');
+          console.log('Modal opened', { content, title, imageSrc, modalClass: modal.classList });
+      }
+
+      function closeModal() {
+          const modal = document.getElementById('modal');
+          modal.classList.remove('show');
+          console.log('Modal closed', { modalClass: modal.classList });
+      }
+
+      // Gestion du clic sur le fond de la modale pour la fermer
+      document.getElementById('modal').addEventListener('click', function(e) {
+          if (e.target === this) {
+              closeModal();
+          }
+      });
+
+      // Gestion du menu mobile
+      function toggleMobileMenu() {
+          const mobileMenu = document.getElementById('mobileMenu');
+          const menuOpenIcon = document.getElementById('menuOpenIcon');
+          const menuCloseIcon = document.getElementById('menuCloseIcon');
+          const isOpen = mobileMenu.classList.contains('open');
+          if (isOpen) {
+              mobileMenu.classList.remove('open');
+              mobileMenu.classList.add('hidden');
+              menuOpenIcon.classList.remove('hidden');
+              menuCloseIcon.classList.add('hidden');
+          } else {
+              mobileMenu.classList.add('open');
+              mobileMenu.classList.remove('hidden');
+              menuOpenIcon.classList.add('hidden');
+              menuCloseIcon.classList.remove('hidden');
+          }
+          console.log('Mobile menu toggled', { isOpen: !isOpen });
+      }
+
       // Initialize Swiper pour la section des partenaires
       const partnerSwiper = new Swiper(".mySwiper", {
-        effect: "slide",
-        loop: true,
-        centeredSlides: true,
-        slidesPerView: 3,
-        spaceBetween: 10,
-        speed: 5000,
-        autoplay: {
-          delay: 0,
-        },
-        breakpoints: {
-          320: { slidesPerView: 1, spaceBetween: 5 },
-          640: { slidesPerView: 2, spaceBetween: 8 },
-          1024: { slidesPerView: 3, spaceBetween: 10 }
-        }
+          effect: "slide",
+          loop: true,
+          centeredSlides: true,
+          slidesPerView: 2,
+          spaceBetween: 8,
+          speed: 800,
+          autoplay: {
+              delay: 3000,
+              pauseOnMouseEnter: true,
+          },
+          breakpoints: {
+              320: { slidesPerView: 1, spaceBetween: 4 },
+              640: { slidesPerView: 2, spaceBetween: 6 },
+              1024: { slidesPerView: 2, spaceBetween: 8 }
+          }
       });
 
       // Initialize Swiper pour la section hero
       const heroSwiper = new Swiper(".heroSwiper", {
-        effect: "fade",
-        fadeEffect: {
-          crossFade: true,
-        },
-        loop: true,
-        autoplay: {
-          delay: 5000,
-        },
+          effect: "fade",
+          fadeEffect: {
+              crossFade: true,
+          },
+          loop: true,
+          speed: 1000,
+          autoplay: {
+              delay: 4000,
+              disableOnInteraction: false,
+          },
       });
 
       // Gérer le spinner de chargement
       window.addEventListener('load', () => {
+          console.log('Page fully loaded, hiding spinner');
           const loading = document.getElementById('loading');
           setTimeout(() => {
-              loading.classList.add('hidden');
+              loading.classList.add('loading-hidden');
               setTimeout(() => {
                   loading.style.display = 'none';
-              }, 500); // Correspond à la durée de la transition CSS
-          }, 1000); // Délai avant de masquer le spinner
+                  console.log('Spinner hidden');
+              }, 700);
+          }, 800);
+      });
+
+      // Intersection Observer pour les animations d'entrée au scroll
+      document.addEventListener('DOMContentLoaded', () => {
+          console.log('DOM fully loaded, initializing IntersectionObserver');
+          const elements = document.querySelectorAll('.section-animate, .action-card, .responsive-video, .partner-logo, footer a, footer p');
+          const observer = new IntersectionObserver((entries) => {
+              entries.forEach(entry => {
+                  if (entry.isIntersecting) {
+                      console.log('Element visible:', entry.target);
+                      entry.target.classList.add('visible');
+                      observer.unobserve(entry.target);
+                  }
+              });
+          }, { threshold: 0.2 });
+
+          elements.forEach(element => observer.observe(element));
       });
     </script>
 </body>
