@@ -99,18 +99,18 @@
         }
 
         .swiper-slide-active .partner-logo {
-            transform: scale(2);
+            transform: scale(1);
             opacity: 1;
         }
 
-        /* Alignement des logos à droite dans la section partenaires */
+        .SWIPER-SLIDE-ACTIVE .PARTNER-LOGO* Alignement des logos à droite dans la section partenaires *.SWIPER-SLIDE-ACTIVE .PARTNER-LOGO 
         .mySwiper .swiper-slide {
             display: flex;
             justify-content: center;
             align-items: center;
         }
 
-        /* Hero Section */
+            TRANSFORM: SCALE(2) * Hero Section */
         .heroSwiper .swiper-slide {
             background-size: cover;
             background-position: center;
@@ -877,11 +877,9 @@
                     </div>
                     <!-- Duplicated slides to fix Swiper loop warning -->
                     <div class="swiper-slide flex justify-center items-center">
-                        <img src="{{ asset('image/la paix.png') }}" alt="Partenaire 1" class="partner-logo" />
+                        <img src="{{ asset('image/ee.png') }}" alt="Partenaire 1" class="partner-logo" />
                     </div>
-                    <div class="swiper-slide flex justify-center items-center">
-                        <img src="{{ asset('image/lion.png') }}" alt="Partenaire 2" class="partner-logo" />
-                    </div>
+                   
                 </div>
             </div>
         </div>
