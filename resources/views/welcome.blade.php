@@ -4,55 +4,46 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>ABEC - ONG Humanitaire</title>
-
     <!-- Favicon -->
     <link rel="icon" type="image/png" sizes="64x64" href="{{ asset('image/ab.png') }}">
     <link rel="apple-touch-icon" sizes="180x180" href="{{ asset('image/ab-180.png') }}">
     <link rel="icon" type="image/png" sizes="32x32" href="{{ asset('image/ab-32.png') }}">
     <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('image/ab-16.png') }}">
     <link rel="manifest" href="{{ asset('manifest.json') }}">
-
     <!-- Swiper CSS -->
     <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
-
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Police Arial Black -->
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Arial+Black&display=swap');
-
         body {
             background-color: #ffffff;
             font-family: 'Arial Black', sans-serif;
             overflow-x: hidden;
-            padding-top: 40px; /* Espace pour la top-bar fixe uniquement */
+            padding-top: 0; /* Supprimé le padding-top car la top-bar n'est plus fixe */
         }
-
         .font-all-bold, body, h1, h2, h3, p, a, li { font-weight: bold; }
-
         /* Smooth Scroll Behavior */
         html {
             scroll-behavior: smooth;
         }
-
-        /* Top Bar (reste fixe) */
+        /* Top Bar (non fixe, défile avec la page) */
         .top-bar {
-            position: fixed;
-            top: 0;
-            left: 0;
+            position: relative; /* Changé de fixed à relative */
             width: 100%;
             z-index: 50;
             transition: background-color 0.3s ease, box-shadow 0.3s ease;
+            margin-bottom: 8px; /* Espacement pour séparer de la main-header */
         }
-
         /* Main Header (non fixe, défile avec la page) */
         .main-header {
             width: 100%;
             z-index: 40;
             background-color: #ffffff;
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            padding-top: 0; /* Supprimé le padding-top car la top-bar n'est plus fixe */
         }
-
         /* Logo Styles */
         .logo-container {
             max-width: 36px; /* Mobile */
@@ -78,7 +69,6 @@
                 max-height: 80px; /* Desktop */
             }
         }
-
         /* Partner Logo Styles */
         .partner-logo {
             width: 80px;
@@ -91,7 +81,6 @@
             transform: scale(1.2) rotate(5deg);
             opacity: 1;
         }
-
         /* Hero Section */
         .heroSwiper .swiper-slide {
             background-size: cover;
@@ -102,7 +91,6 @@
         .heroSwiper .swiper-slide-active {
             opacity: 1;
         }
-
         /* Responsive text sizes with animation */
         .hero-text {
             font-size: clamp(1.5rem, 5vw, 3rem);
@@ -121,7 +109,6 @@
             transform: translateY(0);
             opacity: 1;
         }
-
         /* Hero buttons animation */
         .hero-button {
             transition: transform 0.3s ease, background-color 0.3s ease, opacity 0.3s ease;
@@ -135,7 +122,6 @@
         .hero-button:hover {
             transform: scale(1.1);
         }
-
         /* Responsive images in Nos Actions */
         .action-image {
             width: 100%;
@@ -148,7 +134,6 @@
             transform: scale(1.05);
             opacity: 0.9;
         }
-
         /* Action Card Styles with Before/After */
         .action-card {
             background-color: #FFF8DC;
@@ -192,7 +177,6 @@
             transform: scale(1.05);
             box-shadow: 0 10px 15px rgba(0, 0, 0, 0.2);
         }
-
         /* Stagger animation for cards */
         .action-card:nth-child(1).visible { transition-delay: 0.1s; }
         .action-card:nth-child(2).visible { transition-delay: 0.2s; }
@@ -206,7 +190,6 @@
         .action-card:nth-child(10).visible { transition-delay: 0.2s; }
         .action-card:nth-child(11).visible { transition-delay: 0.3s; }
         .action-card:nth-child(12).visible { transition-delay: 0.4s; }
-
         /* Responsive video */
         .responsive-video {
             width: 100%;
@@ -220,7 +203,6 @@
             opacity: 1;
             transform: scale(1);
         }
-
         /* Loading Spinner Styles */
         #loading {
             display: flex;
@@ -246,7 +228,6 @@
             0% { transform: rotate(0deg); }
             100% { transform: rotate(360deg); }
         }
-
         /* Mobile Menu Animation */
         .mobile-menu {
             transform: translateX(100%);
@@ -263,7 +244,6 @@
         .mobile-menu a:hover {
             transform: translateX(5px);
         }
-
         /* Section Entrance Animation on Scroll */
         .section-animate {
             opacity: 0;
@@ -274,7 +254,6 @@
             opacity: 1;
             transform: translateY(0);
         }
-
         /* Navigation Links Animation */
         nav a {
             transition: background-color 0.3s ease, color 0.3s ease, transform 0.3s ease;
@@ -282,7 +261,6 @@
         nav a:hover {
             transform: translateY(-2px);
         }
-
         /* Modal Styles */
         .modal {
             position: fixed;
@@ -360,7 +338,6 @@
         .modal.show .modal-content p {
             opacity: 1;
         }
-
         /* Footer animations */
         footer a, footer p {
             transition: color 0.3s ease, transform 0.3s ease, opacity 0.3s ease;
@@ -374,17 +351,17 @@
         footer a:hover {
             transform: translateY(-2px);
         }
-
         /* Responsive adjustments */
         @media (max-width: 640px) {
             body {
-                padding-top: 32px; /* Espace réduit pour la top-bar uniquement */
+                padding-top: 0; /* Supprimé le padding-top réduit */
             }
             .top-bar {
-                height: 32px;
+                height: 40px;
+                margin-bottom: 12px; /* Augmenté pour plus d'espace en mobile */
             }
             .main-header {
-                padding-top: 32px; /* Espace pour la top-bar */
+                padding-top: 0; /* Supprimé le padding-top */
             }
             .hero-text {
                 font-size: clamp(1.25rem, 4vw, 2rem);
@@ -449,7 +426,6 @@
             }
         }
     </style>
-
     <script>
       tailwind.config = {
         theme: {
@@ -472,7 +448,6 @@
             <img src="{{ asset('image/ab.png') }}" alt="Logo ABEC" class="w-12 h-12 absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
         </div>
     </div>
-
     <!-- Modal -->
     <div class="modal" id="modal">
         <div class="modal-content">
@@ -485,7 +460,6 @@
             </svg>
         </div>
     </div>
-
     <!-- Top Bar -->
     <nav class="bg-primary text-white top-bar section-animate">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -507,7 +481,6 @@
             </div>
         </div>
     </nav>
-
     <!-- Nav Bar Principale -->
     <header class="bg-white shadow py-3 main-header section-animate">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -546,7 +519,6 @@
             <a href="{{route('branche')}}" class="block px-3 py-2 rounded-md text-sm font-bold text-gray-800 hover:bg-blue-500 hover:text-white transition-all duration-300">Evenements</a>
         </div>
     </header>
-
     <!-- Hero Section avec Swiper Slider -->
     <section class="relative h-[60vh] sm:h-[80vh] lg:h-screen overflow-hidden section-animate">
         <div class="swiper heroSwiper h-full">
@@ -699,7 +671,6 @@
             </div>
         </div>
     </section>
-
     <!-- Section Nos Actions -->
     <section id="actions" class="py-8 bg-gray-100 section-animate">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
@@ -742,78 +713,87 @@
                 </div>
                 <!-- Élément 5 -->
                 <div class="p-3 rounded shadow-lg text-center action-card cursor-pointer">
-                    <img src="{{ asset('image/fotos2.jpg') }}" alt="Éducation pour Enfants" class="action-image">
+                    <img src="{{ asset('image/paix.png') }}" alt="Éducation pour Enfants" class="action-image">
                     <h3 class="text-base sm:text-lg font-bold text-gray-800 mt-2">La Paix</h3>
                     <p class="text-xs sm:text-sm text-gray-600 mt-2">Selon le Global Peace Index 2025, le niveau de paix mondiale est au plus bas... bâtir un avenir plus pacifique pour tous.</p>
-                    <button onclick="openModal('Selon le Global Peace Index 2025, le niveau de paix mondiale est au plus bas depuis la création de cet indice, avec une détérioration continue depuis 2014. En 2024, le monde a enregistré 152 000 décès liés aux conflits, le plus élevé depuis la Seconde Guerre mondiale. Actuellement, 59 conflits interétatiques ou internes sont actifs, un nombre record depuis la fin de la Seconde Guerre mondiale. Agir pour la paix, c’est œuvrer pour un monde plus juste, plus solidaire et plus harmonieux. Cela implique de promouvoir le dialogue, la coopération internationale, le désarmement et le respect des droits fondamentaux de chaque individu. En soutenant des initiatives locales et mondiales en faveur de la paix, nous pouvons contribuer à inverser cette tendance inquiétante et bâtir un avenir plus pacifique pour tous.', 'La Paix', '{{ asset('image/fotos2.jpg') }}')" class="text-xs bg-yellow text-black px-3 py-1 rounded-md mt-2 transition-all duration-200 hover:bg-gray-200 hover:scale-105">Voir plus</button>
+                    <button onclick="openModal('Selon le Global Peace Index 2025, le niveau de paix mondiale est au plus bas depuis la création de cet indice, avec une détérioration continue depuis 2014. En 2024, le monde a enregistré 152 000 décès liés aux conflits, le plus élevé depuis la Seconde Guerre mondiale. Actuellement, 59 conflits interétatiques ou internes sont actifs, un nombre record depuis la fin de la Seconde Guerre mondiale. Agir pour la paix, c’est œuvrer pour un monde plus juste, plus solidaire et plus harmonieux. Cela implique de promouvoir le dialogue, la coopération internationale, le désarmement et le respect des droits fondamentaux de chaque individu. En soutenant des initiatives locales et mondiales en faveur de la paix, nous pouvons contribuer à inverser cette tendance inquiétante et bâtir un avenir plus pacifique pour tous.', 'La Paix', '{{ asset('image/paix.png') }}')" class="text-xs bg-yellow text-black px-3 py-1 rounded-md mt-2 transition-all duration-200 hover:bg-gray-200 hover:scale-105">Voir plus</button>
                     <p class="text-xs text-gray-500 mt-2">Publié le: 01/01/2024</p>
                 </div>
                 <!-- Élément 6 -->
                 <div class="p-3 rounded shadow-lg text-center action-card cursor-pointer">
-                    <img src="{{ asset('image/fotos.jpg') }}" alt="Soins d’Urgence" class="action-image">
-                    <h3 class="text-base sm:text-lg font-bold text-gray-800 mt-2">La Justice</h3>
-                    <p class="text-xs sm:text-sm text-gray-600 mt-2">La justice est un pilier fondamental pour des sociétés équitables... garantir que chaque individu puisse faire valoir ses droits.</p>
-                    <button onclick="openModal('La justice est un pilier fondamental pour des sociétés équitables et pacifiques. Cependant, dans de nombreuses régions du monde, les systèmes judiciaires sont confrontés à des défis majeurs : corruption, manque d’accès à la justice pour les populations marginalisées, et lenteur des procédures. Par exemple, en 2023, environ 4,4 milliards de personnes vivaient dans des pays où l’accès à la justice est limité, selon le World Justice Project. Agir pour la justice, c’est promouvoir l’égalité devant la loi, renforcer les institutions judiciaires et garantir que chaque individu, quel que soit son statut social, puisse faire valoir ses droits.', 'La Justice', '{{ asset('image/fotos.jpg') }}')" class="text-xs bg-yellow text-black px-3 py-1 rounded-md mt-2 transition-all duration-200 hover:bg-gray-200 hover:scale-105">Voir plus</button>
+                    <img src="{{ asset('image/bel.png') }}" alt="Soins d’Urgence" class="action-image">
+                    <h3 class="text-base sm:text-lg font-bold text-gray-800 mt-2">La justice</h3>
+                    <p class="text-xs sm:text-sm text-gray-600 mt-2"> La justice est essentielle pour garantir l'égalité, la dignité et les droits de chaque individu... Cela implique de renforcer les institutions judiciaires, de promouvoir l'éducation aux droits humains et de lutter contre toutes les formes de discrimination et d'injustice. 
+                    <button onclick="openModal('La justice est un pilier fondamental pour des sociétés équitables et pacifiques. Cependant, dans de nombreuses régions du monde, les systèmes judiciaires sont confrontés à des défis majeurs : corruption, manque d’accès à la justice pour les populations marginalisées, et lenteur des procédures. Par exemple, en 2023, environ 4,4 milliards de personnes vivaient dans des pays où l’accès à la justice est limité, selon le World Justice Project. Agir pour la justice, c’est promouvoir l’égalité devant la loi, renforcer les institutions judiciaires et garantir que chaque individu, quel que soit son statut social, puisse faire valoir ses droits.', 'La Justice', '{{ asset('image/bel.png') }}')" class="text-xs bg-yellow text-black px-3 py-1 rounded-md mt-2 transition-all duration-200 hover:bg-gray-200 hover:scale-105">Voir plus</button>
                     <p class="text-xs text-gray-500 mt-2">Publié le: 01/01/2024</p>
                 </div>
                 <!-- Élément 7 -->
                 <div class="p-3 rounded shadow-lg text-center action-card cursor-pointer">
-                    <img src="{{ asset('image/fotos4.jpg') }}" alt="Renforcement des Capacités" class="action-image">
+                    <img src="{{ asset('image/deve.png') }}" alt="Renforcement des Capacités" class="action-image">
                     <h3 class="text-base sm:text-lg font-bold text-gray-800 mt-2">Le Développement Durable</h3>
-                    <p class="text-xs sm:text-sm text-gray-600 mt-2">Le développement durable est essentiel pour répondre aux besoins actuels... promouvoir des pratiques agricoles durables et l’accès à l’énergie renouvelable.</p>
-                    <button onclick="openModal('Le développement durable est essentiel pour répondre aux besoins actuels sans compromettre les générations futures. Selon les Nations Unies, en 2023, environ 9,2 % de la population mondiale vivait en dessous du seuil de pauvreté international, tandis que le changement climatique continue de menacer les moyens de subsistance. Nos actions incluent des formations pour les professionnels de santé et les éducateurs, ainsi que des projets visant à promouvoir des pratiques agricoles durables et l’accès à l’énergie renouvelable.', 'Le Développement Durable', '{{ asset('image/fotos4.jpg') }}')" class="text-xs bg-yellow text-black px-3 py-1 rounded-md mt-2 transition-all duration-200 hover:bg-gray-200 hover:scale-105">Voir plus</button>
+                    <p class="text-xs sm:text-sm text-gray-600 mt-2">Selon le Rapport sur le développement durable en Afrique 2024, moins de 6 % des 32 cibles ...., tout en bénéficiant d’un développement économique équitable et inclusif.</p>
+                    <button onclick="openModal('Le développement durable est essentiel pour répondre aux besoins actuels sans compromettre les générations futures. Selon les Nations Unies, en 2023, environ 9,2 % de la population mondiale vivait en dessous du seuil de pauvreté international, tandis que le changement climatique continue de menacer les moyens de subsistance. Nos actions incluent des formations pour les professionnels de santé et les éducateurs, ainsi que des projets visant à promouvoir des pratiques agricoles durables et l’accès à l’énergie renouvelable.', 'Le Développement Durable', '{{ asset('image/deve.png') }}')" class="text-xs bg-yellow text-black px-3 py-1 rounded-md mt-2 transition-all duration-200 hover:bg-gray-200 hover:scale-105">Voir plus</button>
                     <p class="text-xs text-gray-500 mt-2">Publié le: 01/01/2024</p>
                 </div>
                 <!-- Élément 8 -->
                 <div class="p-3 rounded shadow-lg text-center action-card cursor-pointer">
-                    <img src="{{ asset('image/fotos2.jpg') }}" alt="Aide Alimentaire" class="action-image">
+                    <img src="{{ asset('image/pont.png') }}" alt="Aide Alimentaire" class="action-image">
                     <h3 class="text-base sm:text-lg font-bold text-gray-800 mt-2">Le Bien-être des Communautés</h3>
-                    <p class="text-xs sm:text-sm text-gray-600 mt-2">Le bien-être des communautés est au cœur de nos actions... assurer une autosuffisance alimentaire à long terme.</p>
-                    <button onclick="openModal('Le bien-être des communautés est au cœur de nos actions. L’insécurité alimentaire touche environ 2,4 milliards de personnes dans le monde, selon la FAO en 2023. Nos initiatives incluent la distribution de repas nutritifs pour les enfants et les familles dans les zones touchées, ainsi que des programmes de formation pour améliorer les compétences agricoles et assurer une autosuffisance alimentaire à long terme.', 'Le Bien-être des Communautés', '{{ asset('image/fotos2.jpg') }}')" class="text-xs bg-yellow text-black px-3 py-1 rounded-md mt-2 transition-all duration-200 hover:bg-gray-200 hover:scale-105">Voir plus</button>
+                    <p class="text-xs sm:text-sm text-gray-600 mt-2">Le bien-être des communautés est un objectif fondamental pour construire un monde juste, inclusif et durable...
+Agir pour le bien-être des communautés, c’est investir dans des sociétés inclusives, solidaires et résilientes.</p>
+                        <button onclick="openModal('Le bien-être des communautés est au cœur de nos actions. L’insécurité alimentaire touche environ 2,4 milliards de personnes dans le monde, selon la FAO en 2023. Nos initiatives incluent la distribution de repas nutritifs pour les enfants et les familles dans les zones touchées, ainsi que des programmes de formation pour améliorer les compétences agricoles et assurer une autosuffisance alimentaire à long terme.', 'Le Bien-être des Communautés', '{{ asset('image/pont.png') }}')" class="text-xs bg-yellow text-black px-3 py-1 rounded-md mt-2 transition-all duration-200 hover:bg-gray-200 hover:scale-105">Voir plus</button>
                     <p class="text-xs text-gray-500 mt-2">Publié le: 01/01/2024</p>
                 </div>
                 <!-- Élément 9 -->
                 <div class="p-3 rounded shadow-lg text-center action-card cursor-pointer">
-                    <img src="{{ asset('image/fotos.jpg') }}" alt="Projets d’Infrastructure" class="action-image">
+                    <img src="{{ asset('image/f.png') }}" alt="Projets d’Infrastructure" class="action-image">
                     <h3 class="text-base sm:text-lg font-bold text-gray-800 mt-2">La Culture</h3>
-                    <p class="text-xs sm:text-sm text-gray-600 mt-2">La culture est un vecteur puissant d’unité... offrir des opportunités éducatives.</p>
-                    <button onclick="openModal('La culture est un vecteur puissant d’unité et de progrès social. À travers des projets de construction et de rénovation de salles de classe et d’espaces culturels, nous promouvons l’accès à l’éducation culturelle et artistique. En 2023, environ 250 millions d’enfants n’avaient pas accès à une éducation de base, selon l’UNESCO. Nos initiatives visent à préserver et valoriser les patrimoines culturels tout en offrant des opportunités éducatives.', 'La Culture', '{{ asset('image/fotos.jpg') }}')" class="text-xs bg-yellow text-black px-3 py-1 rounded-md mt-2 transition-all duration-200 hover:bg-gray-200 hover:scale-105">Voir plus</button>
+                    <p class="text-xs sm:text-sm text-gray-600 mt-2">
+                        L'Afrique est un continent riche d'une diversité culturelle exceptionnelle, avec plus de 3 000 groupes ethniques et plus de 2 000 langues parlées à travers ses 54 pays... C’est investir dans la mémoire collective pour construire un futur où la culture continue de nourrir l’épanouissement et la fierté des communautés africaines.</p>
+                   <button onclick="openModal('L\'Afrique est un continent riche d\'une diversité culturelle exceptionnelle, avec plus de 3 000 groupes ethniques et plus de 2 000 langues parlées à travers ses 54 pays. La culture africaine englobe les traditions orales, la musique, la danse, les arts plastiques, les vêtements, les rituels, la gastronomie et les systèmes de croyances, qui reflètent l’histoire, les valeurs et l’identité de chaque communauté. la culture africaine fait face à des menaces : globalisation, perte des langues et savoirs ancestraux, urbanisation rapide et faible soutien institutionnel. La jeunesse, qui constitue plus de 60 % de la population africaine, doit être au centre de la transmission et de la valorisation de ce patrimoine. Agir pour la culture africaine, c’est préserver notre identité, promouvoir la diversité et encourager les nouvelles générations à s’approprier et transmettre les richesses culturelles. C’est investir dans la mémoire collective pour construire un futur où la culture continue de nourrir l’épanouissement et la fierté des communautés africaines.', 'La Culture', '{{ asset('image/f.png') }}')" class="text-xs bg-yellow text-black px-3 py-1 rounded-md mt-2 transition-all duration-200 hover:bg-gray-200 hover:scale-105">Voir plus</button>
                     <p class="text-xs text-gray-500 mt-2">Publié le: 01/01/2024</p>
                 </div>
                 <!-- Élément 10 -->
                 <div class="p-3 rounded shadow-lg text-center action-card cursor-pointer">
-                    <img src="{{ asset('image/fotos4.jpg') }}" alt="Santé Maternelle" class="action-image">
+                    <img src="{{ asset('image/h.png') }}" alt="Santé Maternelle" class="action-image">
                     <h3 class="text-base sm:text-lg font-bold text-gray-800 mt-2">L'Histoire</h3>
-                    <p class="text-xs sm:text-sm text-gray-600 mt-2">Préserver l’histoire et la mémoire collective... favoriser la cohésion sociale et la transmission culturelle.</p>
-                    <button onclick="openModal('Préserver l’histoire et la mémoire collective est crucial pour renforcer l’identité des communautés. Nos programmes soutiennent les mères avec des consultations prénatales et des kits d’hygiène pour les nouveau-nés, tout en documentant les traditions et histoires locales pour les générations futures. Ces actions favorisent la cohésion sociale et la transmission culturelle.', 'L\'Histoire', '{{ asset('image/fotos4.jpg') }}')" class="text-xs bg-yellow text-black px-3 py-1 rounded-md mt-2 transition-all duration-200 hover:bg-gray-200 hover:scale-105">Voir plus</button>
+                    <p class="text-xs sm:text-sm text-gray-600 mt-2">                   L’Afrique possède une histoire millénaire, riche de civilisations anciennes comme l’Égypte, le royaume de Kongo, le Mali, le Ghana et de nombreux ... Agir pour l’histoire africaine, c’est préserver la mémoire du continent, valoriser ses héritages et apprendre des leçons du passé pour construire un avenir éclairé, juste et autonome.</p>
+               <button onclick="openModal('L’Afrique possède une histoire millénaire, riche de civilisations anciennes comme l’Égypte, le royaume de Kongo, le Mali, le Ghana et de nombreux autres royaumes et empires qui ont façonné le continent. Cette histoire, transmise à travers les traditions orales, les manuscrits, les monuments et les arts, est le socle de l’identité et de la mémoire collective africaine. La jeunesse africaine, qui représente plus de 60 % de la population du continent, joue un rôle clé dans la revalorisation et la transmission de ce patrimoine historique. Agir pour l’histoire africaine, c’est préserver la mémoire du continent, valoriser ses héritages et apprendre des leçons du passé pour construire un avenir éclairé, juste et autonome.', 'L\'Histoire', '{{ asset('image/h.png') }}')" class="text-xs bg-yellow text-black px-3 py-1 rounded-md mt-2 transition-all duration-200 hover:bg-gray-200 hover:scale-105">Voir plus</button>
                     <p class="text-xs text-gray-500 mt-2">Publié le: 01/01/2024</p>
                 </div>
                 <!-- Élément 11 -->
                 <div class="p-3 rounded shadow-lg text-center action-card cursor-pointer">
-                    <img src="{{ asset('image/fotos2.jpg') }}" alt="Activités Récréatives" class="action-image">
+                    <img src="{{ asset('image/pp.png') }}" alt="Activités Récréatives" class="action-image">
                     <h3 class="text-base sm:text-lg font-bold text-gray-800 mt-2">Le Panafricanisme</h3>
-                    <p class="text-xs sm:text-sm text-gray-600 mt-2">Le panafricanisme promeut l’unité... encourager la coopération régionale pour un avenir commun prospère.</p>
-                    <button onclick="openModal('Le panafricanisme promeut l’unité et la solidarité entre les peuples africains. Nos activités sportives et culturelles, destinées aux enfants orphelins, visent à renforcer le sentiment d’appartenance et de fierté culturelle. Ces initiatives favorisent le bien-être psychologique et encouragent la coopération régionale pour un avenir commun prospère.', 'Le Panafricanisme', '{{ asset('image/fotos2.jpg') }}')" class="text-xs bg-yellow text-black px-3 py-1 rounded-md mt-2 transition-all duration-200 hover:bg-gray-200 hover:scale-105">Voir plus</button>
+                    <p class="text-xs sm:text-sm text-gray-600 mt-2">                       Le panafricanisme est un mouvement politique, social et culturel visant à unir les peuples africains et la diaspora africaine autour de valeurs communes de solidarité, de développement, de justice et d’autonomie... Agir pour le panafricanisme, c’est œuvrer pour l’unité et la solidarité du continent africain et de sa diaspora.</p>
+            <button onclick="openModal('Le panafricanisme est un mouvement politique, social et culturel visant à unir les peuples africains et la diaspora africaine autour de valeurs communes de solidarité, de développement, de justice et d’autonomie. Il repose sur la conviction que l’Afrique doit se libérer des divisions héritées de la colonisation, renforcer sa coopération et promouvoir son identité culturelle et économique sur la scène mondiale. Agir pour le panafricanisme, c’est œuvrer pour l’unité et la solidarité du continent africain et de sa diaspora.', 'Le Panafricanisme', '{{ asset('image/pp.png') }}')" class="text-xs bg-yellow text-black px-3 py-1 rounded-md mt-2 transition-all duration-200 hover:bg-gray-200 hover:scale-105">Voir plus</button>
                     <p class="text-xs text-gray-500 mt-2">Publié le: 01/01/2024</p>
                 </div>
                 <!-- Élément 12 -->
                 <div class="p-3 rounded shadow-lg text-center action-card cursor-pointer">
-                    <img src="{{ asset('image/fotos.jpg') }}" alt="Sensibilisation à l’Hygiène" class="action-image">
+                    <img src="{{ asset('image/b.png') }}" alt="Sensibilisation à l’Hygiène" class="action-image">
                     <h3 class="text-base sm:text-lg font-bold text-gray-800 mt-2">Promotion de l’Égalité et de l’Équité</h3>
-                    <p class="text-xs sm:text-sm text-gray-600 mt-2">Promouvoir l’égalité et l’équité est essentiel... créer des communautés où chacun a les mêmes opportunités.</p>
-                    <button onclick="openModal('Promouvoir l’égalité et l’équité est essentiel pour des sociétés justes. Nos ateliers éducatifs sur l’hygiène réduisent les risques de maladies, tandis que nos campagnes de sensibilisation encouragent l’égalité des genres et l’inclusion sociale. Ces actions contribuent à créer des communautés où chacun a les mêmes opportunités.', 'Promotion de l’Égalité et de l’Équité', '{{ asset('image/fotos.jpg') }}')" class="text-xs bg-yellow text-black px-3 py-1 rounded-md mt-2 transition-all duration-200 hover:bg-gray-200 hover:scale-105">Voir plus</button>
+                    <p class="text-xs sm:text-sm text-gray-600 mt-2">                       Dans de nombreuses régions du monde, et particulièrement en Afrique, les inégalités persistent encore : inégalités de genre... Promouvoir l’égalité et l’équité, c’est reconnaître la dignité de chaque personne et lui permettre de contribuer pleinement au développement collectif.</p>
+                <button onclick="openModal('Dans de nombreuses régions du monde, et particulièrement en Afrique, les inégalités persistent encore : inégalités de genre, économiques, sociales et éducatives, limitant l’accès des plus vulnérables aux ressources et aux opportunités. Promouvoir l’égalité et l’équité, c’est reconnaître la dignité de chaque personne et lui permettre de contribuer pleinement au développement collectif.', 'Promotion de l’Égalité et de l’Équité', '{{ asset('image/b.png') }}')" class="text-xs bg-yellow text-black px-3 py-1 rounded-md mt-2 transition-all duration-200 hover:bg-gray-200 hover:scale-105">Voir plus</button>
                     <p class="text-xs text-gray-500 mt-2">Publié le: 01/01/2024</p>
                 </div>
             </div>
         </div>
     </section>
-
     <!-- Section À propos -->
     <section id="about" class="py-8 bg-gray-200 section-animate">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
             <h2 class="text-xl sm:text-2xl lg:text-3xl font-bold text-gray-900">À propos d'ABEC</h2>
             <p class="mt-3 text-sm sm:text-base font-bold text-gray-600 leading-relaxed">
-                L'Association pour le Bien-Être Communautaire (ABEC) est une ONG humanitaire engagée dans la lutte contre la pauvreté et l'injustice sociale. Nous croyons fermement que chaque individu mérite un accès aux soins de santé, à l'éducation et à des conditions de vie dignes. À travers nos différentes initiatives, nous soutenons les hôpitaux et les orphelinats en fournissant des dons essentiels, en organisant des campagnes de sensibilisation et en mobilisant des ressources pour aider les plus vulnérables. Ensemble, nous pouvons faire une différence significative dans la vie de ceux qui en ont besoin.
+                L’Association du Bien-Être Communautaire (ABEC) est une organisation internationale basée au Cameroun, légalement reconnue et enregistrée auprès des institutions locales sous le numéro de déclaration 00001901/RDA/J06/SAAJP/BAPP.
+La Loi n°99/014 du 22 décembre 1999 régissant les Organisations Non Gouvernementales (ONG) ;
+La Loi n°90/053 du 19 décembre 1990 portant sur la liberté d'association au Cameroun.
+L’ABEC se distingue par une gouvernance inclusive et représentative, son équipe dirigeante rassemble des membres issus de plusieurs nationalité différentes, illustrant son ouverture et sa portée internationale.
+ les femmes y occupent des postes stratégiques, renforçant l’équité et la représentativité. fondée par un jeune visionnaire, l’organisation est dirigée majoritairement par des leaders jeunes, animés par la volonté d’impacter positivement leur génération à travers des actions concrètes.
+ l’ABEC s’appuie sur un réseau d’experts en droit, gestion de projet, communication, finance, développement durable et gestion des ressources humaines, garantissant le sérieux et la qualité de ses interventions.
+L’ABEC collabore étroitement avec un ensemble de petites et moyennes organisations locales et internationales qui lui font confiance.
+L’organisation a déjà initié et co-organisé plusieurs activités locales en partenariat avec des entreprises et des structures qui, convaincues par son engagement et sa détermination, continuent de la soutenir durablement.
+En résumé, l’ABEC incarne la vision d’une jeunesse multinationale et diversifiée, déterminée à changer le cours des choses. Malgré les défis liés au manque de ressources financières, elle poursuit avec conviction la réalisation de projets innovants et audacieux, au service du bien-être communautaire et du développement durable.
             </p>
             <div class="mt-6 flex justify-center">
                 <video class="responsive-video rounded-lg shadow-lg w-full max-w-[90%]" autoplay loop muted playsinline>
@@ -823,7 +803,6 @@
             </div>
         </div>
     </section>
-
     <!-- Section Nos Partenaires -->
     <section id="partners" class="py-8 bg-gray-200 section-animate">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
@@ -853,7 +832,6 @@
             </div>
         </div>
     </section>
-
     <!-- Footer -->
     <footer id="contact" class="bg-blue-800 text-white section-animate" role="contentinfo">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
@@ -888,7 +866,6 @@
             </div>
         </div>
     </footer>
-
     <!-- Swiper JS -->
     <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
     <script>
@@ -905,20 +882,17 @@
           modal.classList.add('show');
           console.log('Modal opened', { content, title, imageSrc, modalClass: modal.classList });
       }
-
       function closeModal() {
           const modal = document.getElementById('modal');
           modal.classList.remove('show');
           console.log('Modal closed', { modalClass: modal.classList });
       }
-
       // Gestion du clic sur le fond de la modale pour la fermer
       document.getElementById('modal').addEventListener('click', function(e) {
           if (e.target === this) {
               closeModal();
           }
       });
-
       // Gestion du menu mobile
       function toggleMobileMenu() {
           const mobileMenu = document.getElementById('mobileMenu');
@@ -938,7 +912,6 @@
           }
           console.log('Mobile menu toggled', { isOpen: !isOpen });
       }
-
       // Initialize Swiper pour la section des partenaires
       const partnerSwiper = new Swiper(".mySwiper", {
           effect: "slide",
@@ -957,7 +930,6 @@
               1024: { slidesPerView: 2, spaceBetween: 8 }
           }
       });
-
       // Initialize Swiper pour la section hero
       const heroSwiper = new Swiper(".heroSwiper", {
           effect: "fade",
@@ -971,7 +943,6 @@
               disableOnInteraction: false,
           },
       });
-
       // Gérer le spinner de chargement
       window.addEventListener('load', () => {
           console.log('Page fully loaded, hiding spinner');
@@ -984,7 +955,6 @@
               }, 700);
           }, 800);
       });
-
       // Intersection Observer pour les animations d'entrée au scroll
       document.addEventListener('DOMContentLoaded', () => {
           console.log('DOM fully loaded, initializing IntersectionObserver');
@@ -997,8 +967,7 @@
                       observer.unobserve(entry.target);
                   }
               });
-          }, { threshold: 0.2 });
-
+          }, { threshold: 0.1 }); // Seuil réduit à 0.1 pour une meilleure détection sur mobile
           elements.forEach(element => observer.observe(element));
       });
     </script>
