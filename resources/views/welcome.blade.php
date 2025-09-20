@@ -106,7 +106,7 @@
         /* Alignement des logos à droite dans la section partenaires */
         .mySwiper .swiper-slide {
             display: flex;
-            justify-content: flex-end;
+            justify-content: center;
             align-items: center;
         }
 
