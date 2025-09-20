@@ -693,7 +693,7 @@
                     <div class="h-full bg-cover bg-center flex items-center justify-center" style="background: url('{{ asset('image/pl.png') }}') center/cover no-repeat;">
                         <div class="text-center px-4">
                             <h1 class="hero-text font-extrabold text-white">Organisation du Bien-Être Communautaire</h1>
-                            <p class="mt-3 hero-subtext text-gray-100 font-bold">Une ONG dédiée à l’aide humanitaire : dons essentiels pour hôpitaux et orphelinats.</p>
+                             <p class="mt-3 hero-subtext text-gray-100 font-bold">Une Organisation internationale œuvrant dans le monde entier pour le Bien-être des communautés.</p>
                             <div class="mt-4 flex flex-col sm:flex-row justify-center gap-3">
                                 <a href="santos/dons.php" class="hero-button inline-block bg-yellow text-black px-4 py-2 text-sm font-bold rounded-md hover:bg-gray-100 transition-all duration-300">Faites un don</a>
                                 <a href="#about" class="hero-button inline-block bg-yellow text-black px-4 py-2 text-sm font-bold rounded-md hover:bg-gray-100 transition-all duration-300">En savoir plus</a>
@@ -705,7 +705,7 @@
                     <div class="h-full bg-cover bg-center flex items-center justify-center" style="background: url('{{ asset('image/enfants.png') }}') center/cover no-repeat;">
                         <div class="text-center px-4">
                             <h1 class="hero-text font-extrabold text-white">Organisation du Bien-Être Communautaire</h1>
-                            <p class="mt-3 hero-subtext text-gray-100 font-bold">Une ONG dédiée à l’aide humanitaire : dons essentiels pour hôpitaux et orphelinats.</p>
+                             <p class="mt-3 hero-subtext text-gray-100 font-bold">Une Organisation internationale œuvrant dans le monde entier pour le Bien-être des communautés.</p>
                             <div class="mt-4 flex flex-col sm:flex-row justify-center gap-3">
                                 <a href="santos/dons.php" class="hero-button inline-block bg-yellow text-black px-4 py-2 text-sm font-bold rounded-md hover:bg-gray-100 transition-all duration-300">Faites un don</a>
                                 <a href="#about" class="hero-button inline-block bg-yellow text-black px-4 py-2 text-sm font-bold rounded-md hover:bg-gray-100 transition-all duration-300">En savoir plus</a>
@@ -717,7 +717,7 @@
                     <div class="h-full bg-cover bg-center flex items-center justify-center" style="background: url('{{ asset('image/p.png') }}') center/cover no-repeat;">
                         <div class="text-center px-4">
                             <h1 class="hero-text font-extrabold text-white">Organisation du Bien-Être Communautaire</h1>
-                            <p class="mt-3 hero-subtext text-gray-100 font-bold">Une ONG dédiée à l’aide humanitaire : dons essentiels pour hôpitaux et orphelinats.</p>
+                             <p class="mt-3 hero-subtext text-gray-100 font-bold">Une Organisation internationale œuvrant dans le monde entier pour le Bien-être des communautés.</p>
                             <div class="mt-4 flex flex-col sm:flex-row justify-center gap-3">
                                 <a href="santos/dons.php" class="hero-button inline-block bg-yellow text-black px-4 py-2 text-sm font-bold rounded-md hover:bg-gray-100 transition-all duration-300">Faites un don</a>
                                 <a href="#about" class="hero-button inline-block bg-yellow text-black px-4 py-2 text-sm font-bold rounded-md hover:bg-gray-100 transition-all duration-300">En savoir plus</a>
@@ -729,7 +729,7 @@
                     <div class="h-full bg-cover bg-center flex items-center justify-center" style="background: url('{{ asset('image/e.png') }}') center/cover no-repeat;">
                         <div class="text-center px-4">
                             <h1 class="hero-text font-extrabold text-white">Organisation du Bien-Être Communautaire</h1>
-                            <p class="mt-3 hero-subtext text-gray-100 font-bold">Une ONG dédiée à l’aide humanitaire : dons essentiels pour hôpitaux et orphelinats.</p>
+                            <p class="mt-3 hero-subtext text-gray-100 font-bold">Une Organisation internationale œuvrant dans le monde entier pour le Bien-être des communautés.</p>
                             <div class="mt-4 flex flex-col sm:flex-row justify-center gap-3">
                                 <a href="santos/dons.php" class="hero-button inline-block bg-yellow text-black px-4 py-2 text-sm font-bold rounded-md hover:bg-gray-100 transition-all duration-300">Faites un don</a>
                                 <a href="#about" class="hero-button inline-block bg-yellow text-black px-4 py-2 text-sm font-bold rounded-md hover:bg-gray-100 transition-all duration-300">En savoir plus</a>
@@ -745,7 +745,7 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
             <h2 class="text-xl sm:text-2xl lg:text-3xl font-bold section-title">Nos Actions</h2>
             <p class="mt-3 text-sm sm:text-base font-bold text-gray-700 leading-relaxed">
-                Une organisation internationale à but non lucratif, active dans plusieurs domaines communautaires. Nous mettons en œuvre divers programmes visant à apporter le bien-être aux différentes communautés à travers le monde.
+                Nous mettons en œuvre divers programmes visant à apporter le bien-être aux différentes communautés à travers le monde.
             </p>
             <div class="mt-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
                 <!-- Élément 1 -->
@@ -809,7 +809,7 @@
                     <img src="{{ asset('image/f.png') }}" alt="Projets d’Infrastructure" class="action-image">
                     <h3 class="text-base sm:text-lg font-bold mt-2">La Culture</h3>
                     <p class="text-xs sm:text-sm text-gray-600 mt-2">L'Afrique est un continent riche d'une diversité culturelle exceptionnelle, avec plus de 3 000 groupes ethniques et plus de 2 000 langues parlées à travers ses 54 pays... C’est investir dans la mémoire collective pour construire un futur où la culture continue de nourrir l’épanouissement et la fierté des communautés africaines.</p>
-                    <button onclick="openModal('L\'Afrique est un continent riche d\'une diversité culturelle exceptionnelle, avec plus de 3 000 groupes ethniques et plus de 2 000 langues parlées à travers ses 54 pays. La culture africaine englobe les traditions orales, la musique, la danse, les arts plastiques, les vêtements, les rituels, la gastronomie et les systèmes de croyances, qui reflètent l’histoire, les valeurs et l’identité de chaque communauté. la culture africaine fait face à des menaces : globalisation, perte des langues et savoirs ancestraux, urbanisation rapide et faible soutien institutionnel. La jeunesse, qui constitue plus de 60 % de la population africaine, doit être au centre de la transmission et de la valorisation de ce patrimoine. Agir pour la culture africaine, c’est préserver notre identité, promouvoir la diversité et encourager les nouvelles générations à s’approprier et transmettre les richesses culturelles. C’est investir dans la mémoire collective pour construire un futur où la culture continue de nourrir l’épanouissement et la fierté des communautés africaines.', 'La Culture', '{{ asset('image/f.png') }}')" class="text-xs px-3 py-1 rounded-md mt-2 transition-all duration-200 hover:scale-105">Voir plus</button>
+                    <button onclick="openModal('L\'Afrique est un continent riche d\'une diversité culturelle exceptionnelle, avec plus de 3 000 groupes ethniques et plus de 2 000 langues parlées à travers ses 54 pays. La culture africaine englobe les traditions orales, la musique, la danse, les arts plastiques, les vêtements, les rituels, la gastronomie et les systèmes de croyances, qui reflètent l’histoire, les valeurs et l’identité de chaque communauté. la culture africaine fait face à des menaces : globalisation, perte des langues et savoirs ancestraux, urbanisation rapide et faible soutien institutionnel. La jeunesse, qui constitue plus de 60 % de la population africaine, doit être au centre de la transmission et de la valorisation de ce patrimoine. Agir pour la culture africaine, c’est préserver notre identité, promouvoir la diversité et encourager les nouvelles générations à s’approprier et transmettre les richesses culturelles. C’est investir dans la mémoire collective pour construire un futur où la culture continue de nourrir l’épanouissement et la fierté des communautés africaines.', 'La Culture', '{{ asset('image/f.png') }}')" class="text-xs px-3 py-1 rounded-md mt-2 transition-all duration-200 hover:scale-105 text-center">Voir plus</button>
                 </div>
                 <!-- Élément 10 -->
                 <div class="p-3 rounded shadow-lg text-center action-card cursor-pointer">
@@ -968,20 +968,32 @@
             console.log('Mobile menu toggled', { isOpen: !isOpen });
         }
 
-        const partnerSwiper = new Swiper(".mySwiper", {
-            effect: "slide",
-            loop: true,
-            centeredSlides: false,
-            slidesPerView: 2,
-            spaceBetween: 8,
-            speed: 800,
-            autoplay: { delay: 3000, pauseOnMouseEnter: true },
-            breakpoints: {
-                320: { slidesPerView: 1, spaceBetween: 4 },
-                640: { slidesPerView: 2, spaceBetween: 6 },
-                1024: { slidesPerView: 2, spaceBetween: 8 }
-            }
-        });
+       const partnerSwiper = new Swiper(".mySwiper", {
+    effect: "slide",
+    loop: true,
+    centeredSlides: false, // Par défaut, non centré pour mobile
+    slidesPerView: 2,
+    spaceBetween: 8,
+    speed: 800,
+    autoplay: { delay: 3000, pauseOnMouseEnter: true },
+    breakpoints: {
+        320: { 
+            slidesPerView: 1, 
+            spaceBetween: 4, 
+            centeredSlides: true // Centré pour mobile
+        },
+        640: { 
+            slidesPerView: 2, 
+            spaceBetween: 6, 
+            centeredSlides: true // Centré pour desktop (tablette)
+        },
+        1024: { 
+            slidesPerView: 2, 
+            spaceBetween: 8, 
+            centeredSlides: true // Centré pour desktop (grands écrans)
+        }
+    }
+});
 
         const heroSwiper = new Swiper(".heroSwiper", {
             effect: "fade",
