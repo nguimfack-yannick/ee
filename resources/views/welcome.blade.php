@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>ABEC - ONG Humanitaire</title>
+    <title>Association du Bien-Être Communautaire </title>
     <!-- Favicon -->
     <link rel="icon" type="image/png" sizes="64x64" href="{{ asset('image/ab.png') }}">
     <link rel="apple-touch-icon" sizes="180x180" href="{{ asset('image/ab-180.png') }}">
@@ -685,7 +685,7 @@
                     <h3 class="text-base sm:text-lg font-bold text-gray-800 mt-2">La Jeunesse</h3>
                     <p class="text-xs sm:text-sm text-gray-600 mt-2">L'Afrique possède une population extrêmement jeune... Agir en faveur des jeunes, c’est investir dans un avenir plus solide, plus innovant et plus équitable pour toute l’Afrique.</p>
                     <button onclick="openModal('L\'Afrique possède une population extrêmement jeune, dans de nombreuses zones, près de 40 % des habitants ont moins de 15 ans, et plus de 400 millions de personnes sont âgées de 15 à 35 ans. Pourtant, ce secteur de la population fait face à des défis sérieux des millions de jeunes ne sont ni à l’école ni en formation ni en emploi (NEET), ce qui freine leur développement le manque d’opportunités économiques et le déficit de soutien financier demeurent des barrières majeures. Agir en faveur des jeunes, c’est investir dans un avenir plus solide, plus innovant et plus équitable pour toute l’Afrique.', 'La Jeunesse', '{{ asset('image/ge.png') }}')" class="text-xs bg-yellow text-black px-3 py-1 rounded-md mt-2 transition-all duration-200 hover:bg-gray-200 hover:scale-105">Voir plus</button>
-                    <p class="text-xs text-gray-500 mt-2">Publié le: 01/01/2024</p>
+                    <!-- <p class="text-xs text-gray-500 mt-2">Publié le: 01/01/2024</p> -->
                 </div>
                 <!-- Élément 2 -->
                 <div class="p-3 rounded shadow-lg text-center action-card cursor-pointer">
@@ -693,7 +693,7 @@
                     <h3 class="text-base sm:text-lg font-bold text-gray-800 mt-2">L'Environnement</h3>
                     <p class="text-xs sm:text-sm text-gray-600 mt-2">La région du Bassin du Congo abrite l’une des dernières grandes étendues de forêt tropicale intacte au monde... C’est aussi préserver un patrimoine vital pour l’Afrique et pour l’humanité entière.</p>
                     <button onclick="openModal('La région du Bassin du Congo abrite l’une des dernières grandes étendues de forêt tropicale intacte au monde, une zone critique pour la biodiversité, le climat, et les moyens de subsistance de millions de personnes. La forêt du Bassin du Congo joue un rôle majeur comme puits de carbone : elle peut capturer environ 0,61 gigatonne de CO₂ par an, ce qui contribue significativement à atténuer le changement climatique. La déforestation dans la région du Bassin du Congo a augmenté d’environ 5 %, remettant en question les engagements pris dans la Déclaration des Leaders de Glasgow pour stopper et inverser la perte de forêts d’ici 2030. Les conséquences sont multiples : perte de biodiversité avec des espèces endémiques menacées, dégradation des sols, changements dans les régimes hydriques, menaces pour la sécurité alimentaire, et un impact sur la résilience des communautés locales face aux aléas climatiques. Agir pour l’environnement, c’est prendre soin de la nature qui a toujours pris soin de nous. C’est aussi préserver un patrimoine vital pour l’Afrique et pour l’humanité entière.', 'L\'Environnement', '{{ asset('image/vegete.png') }}')" class="text-xs bg-yellow text-black px-3 py-1 rounded-md mt-2 transition-all duration-200 hover:bg-gray-200 hover:scale-105">Voir plus</button>
-                    <p class="text-xs text-gray-500 mt-2">Publié le: 01/01/2024</p>
+                    <!-- <p class="text-xs text-gray-500 mt-2">Publié le: 01/01/2024</p> -->
                 </div>
                 <!-- Élément 3 -->
                 <div class="p-3 rounded shadow-lg text-center action-card cursor-pointer">
@@ -701,7 +701,7 @@
                     <h3 class="text-base sm:text-lg font-bold text-gray-800 mt-2">Les Droits de l'Homme</h3>
                     <p class="text-xs sm:text-sm text-gray-600 mt-2">En Afrique et ailleurs, de nombreuses personnes sont persécutées en raison de leur identité ethnique ou de leurs opinions... et construire des sociétés plus justes et démocratiques.</p>
                     <button onclick="openModal('En Afrique et ailleurs, de nombreuses personnes sont persécutées en raison de leur identité ethnique ou de leurs opinions. Des individus sont arrêtés, emprisonnés ou même tués simplement pour avoir exprimé des opinions divergentes ou pour leur appartenance à des groupes ethniques minoritaires. Par exemple, des militants, des journalistes et des défenseurs des droits humains ont été victimes de harcèlement judiciaire, d\'arrestations arbitraires et de menaces graves pour avoir dénoncé des injustices ou exprimé des critiques envers les autorités. Or, la dignité humaine est universelle et inaliénable. Agir pour la défense des droits de l’Homme, c’est se lever contre l’injustice, et construire des sociétés plus justes et démocratiques.', 'Les Droits de l\'Homme', '{{ asset('image/droit.png') }}')" class="text-xs bg-yellow text-black px-3 py-1 rounded-md mt-2 transition-all duration-200 hover:bg-gray-200 hover:scale-105">Voir plus</button>
-                    <p class="text-xs text-gray-500 mt-2">Publié le: 01/01/2024</p>
+                    <!-- <p class="text-xs text-gray-500 mt-2">Publié le: 01/01/2024</p> -->
                 </div>
                 <!-- Élément 4 -->
                 <div class="p-3 rounded shadow-lg text-center action-card cursor-pointer">
@@ -709,7 +709,7 @@
                     <h3 class="text-base sm:text-lg font-bold text-gray-800 mt-2">La Santé</h3>
                     <p class="text-xs sm:text-sm text-gray-600 mt-2">La santé mondiale est marquée par des inégalités profondes... C’est œuvrer pour un avenir où chacun puisse accéder à des soins de qualité.</p>
                     <button onclick="openModal('La santé mondiale est marquée par des inégalités profondes. En 2023, environ 260 000 femmes sont décédées des suites de complications liées à la grossesse et à l’accouchement, dont 92 % dans des pays à revenu faible ou intermédiaire. Parallèlement, la malnutrition infantile demeure un problème majeur. En 2025, 9,4 % des enfants âgés de 5 à 19 ans sont obèses, dépassant pour la première fois le taux d\'enfants en insuffisance pondérale, qui est de 9,2 %. Agir pour la santé mondiale, c’est investir dans la vie, l’éducation et le bien-être de chaque individu. C’est œuvrer pour un avenir où chacun, partout dans le monde, puisse accéder à des soins de qualité, indépendamment de sa situation géographique ou économique.', 'La Santé', '{{ asset('image/santee.png') }}')" class="text-xs bg-yellow text-black px-3 py-1 rounded-md mt-2 transition-all duration-200 hover:bg-gray-200 hover:scale-105">Voir plus</button>
-                    <p class="text-xs text-gray-500 mt-2">Publié le: 01/01/2024</p>
+                    <!-- <p class="text-xs text-gray-500 mt-2">Publié le: 01/01/2024</p> -->
                 </div>
                 <!-- Élément 5 -->
                 <div class="p-3 rounded shadow-lg text-center action-card cursor-pointer">
@@ -717,7 +717,7 @@
                     <h3 class="text-base sm:text-lg font-bold text-gray-800 mt-2">La Paix</h3>
                     <p class="text-xs sm:text-sm text-gray-600 mt-2">Selon le Global Peace Index 2025, le niveau de paix mondiale est au plus bas... bâtir un avenir plus pacifique pour tous.</p>
                     <button onclick="openModal('Selon le Global Peace Index 2025, le niveau de paix mondiale est au plus bas depuis la création de cet indice, avec une détérioration continue depuis 2014. En 2024, le monde a enregistré 152 000 décès liés aux conflits, le plus élevé depuis la Seconde Guerre mondiale. Actuellement, 59 conflits interétatiques ou internes sont actifs, un nombre record depuis la fin de la Seconde Guerre mondiale. Agir pour la paix, c’est œuvrer pour un monde plus juste, plus solidaire et plus harmonieux. Cela implique de promouvoir le dialogue, la coopération internationale, le désarmement et le respect des droits fondamentaux de chaque individu. En soutenant des initiatives locales et mondiales en faveur de la paix, nous pouvons contribuer à inverser cette tendance inquiétante et bâtir un avenir plus pacifique pour tous.', 'La Paix', '{{ asset('image/paix.png') }}')" class="text-xs bg-yellow text-black px-3 py-1 rounded-md mt-2 transition-all duration-200 hover:bg-gray-200 hover:scale-105">Voir plus</button>
-                    <p class="text-xs text-gray-500 mt-2">Publié le: 01/01/2024</p>
+                    <!-- <p class="text-xs text-gray-500 mt-2">Publié le: 01/01/2024</p> -->
                 </div>
                 <!-- Élément 6 -->
                 <div class="p-3 rounded shadow-lg text-center action-card cursor-pointer">
@@ -725,7 +725,7 @@
                     <h3 class="text-base sm:text-lg font-bold text-gray-800 mt-2">La justice</h3>
                     <p class="text-xs sm:text-sm text-gray-600 mt-2"> La justice est essentielle pour garantir l'égalité, la dignité et les droits de chaque individu... Cela implique de renforcer les institutions judiciaires, de promouvoir l'éducation aux droits humains et de lutter contre toutes les formes de discrimination et d'injustice. 
                     <button onclick="openModal('La justice est un pilier fondamental pour des sociétés équitables et pacifiques. Cependant, dans de nombreuses régions du monde, les systèmes judiciaires sont confrontés à des défis majeurs : corruption, manque d’accès à la justice pour les populations marginalisées, et lenteur des procédures. Par exemple, en 2023, environ 4,4 milliards de personnes vivaient dans des pays où l’accès à la justice est limité, selon le World Justice Project. Agir pour la justice, c’est promouvoir l’égalité devant la loi, renforcer les institutions judiciaires et garantir que chaque individu, quel que soit son statut social, puisse faire valoir ses droits.', 'La Justice', '{{ asset('image/bel.png') }}')" class="text-xs bg-yellow text-black px-3 py-1 rounded-md mt-2 transition-all duration-200 hover:bg-gray-200 hover:scale-105">Voir plus</button>
-                    <p class="text-xs text-gray-500 mt-2">Publié le: 01/01/2024</p>
+                    <!-- <p class="text-xs text-gray-500 mt-2">Publié le: 01/01/2024</p> -->
                 </div>
                 <!-- Élément 7 -->
                 <div class="p-3 rounded shadow-lg text-center action-card cursor-pointer">
@@ -733,7 +733,7 @@
                     <h3 class="text-base sm:text-lg font-bold text-gray-800 mt-2">Le Développement Durable</h3>
                     <p class="text-xs sm:text-sm text-gray-600 mt-2">Selon le Rapport sur le développement durable en Afrique 2024, moins de 6 % des 32 cibles ...., tout en bénéficiant d’un développement économique équitable et inclusif.</p>
                     <button onclick="openModal('Le développement durable est essentiel pour répondre aux besoins actuels sans compromettre les générations futures. Selon les Nations Unies, en 2023, environ 9,2 % de la population mondiale vivait en dessous du seuil de pauvreté international, tandis que le changement climatique continue de menacer les moyens de subsistance. Nos actions incluent des formations pour les professionnels de santé et les éducateurs, ainsi que des projets visant à promouvoir des pratiques agricoles durables et l’accès à l’énergie renouvelable.', 'Le Développement Durable', '{{ asset('image/deve.png') }}')" class="text-xs bg-yellow text-black px-3 py-1 rounded-md mt-2 transition-all duration-200 hover:bg-gray-200 hover:scale-105">Voir plus</button>
-                    <p class="text-xs text-gray-500 mt-2">Publié le: 01/01/2024</p>
+                    <!-- <p class="text-xs text-gray-500 mt-2">Publié le: 01/01/2024</p> -->
                 </div>
                 <!-- Élément 8 -->
                 <div class="p-3 rounded shadow-lg text-center action-card cursor-pointer">
@@ -742,7 +742,7 @@
                     <p class="text-xs sm:text-sm text-gray-600 mt-2">Le bien-être des communautés est un objectif fondamental pour construire un monde juste, inclusif et durable...
 Agir pour le bien-être des communautés, c’est investir dans des sociétés inclusives, solidaires et résilientes.</p>
                         <button onclick="openModal('Le bien-être des communautés est au cœur de nos actions. L’insécurité alimentaire touche environ 2,4 milliards de personnes dans le monde, selon la FAO en 2023. Nos initiatives incluent la distribution de repas nutritifs pour les enfants et les familles dans les zones touchées, ainsi que des programmes de formation pour améliorer les compétences agricoles et assurer une autosuffisance alimentaire à long terme.', 'Le Bien-être des Communautés', '{{ asset('image/pont.png') }}')" class="text-xs bg-yellow text-black px-3 py-1 rounded-md mt-2 transition-all duration-200 hover:bg-gray-200 hover:scale-105">Voir plus</button>
-                    <p class="text-xs text-gray-500 mt-2">Publié le: 01/01/2024</p>
+                    <!-- <p class="text-xs text-gray-500 mt-2">Publié le: 01/01/2024</p> -->
                 </div>
                 <!-- Élément 9 -->
                 <div class="p-3 rounded shadow-lg text-center action-card cursor-pointer">
@@ -751,7 +751,7 @@ Agir pour le bien-être des communautés, c’est investir dans des sociétés i
                     <p class="text-xs sm:text-sm text-gray-600 mt-2">
                         L'Afrique est un continent riche d'une diversité culturelle exceptionnelle, avec plus de 3 000 groupes ethniques et plus de 2 000 langues parlées à travers ses 54 pays... C’est investir dans la mémoire collective pour construire un futur où la culture continue de nourrir l’épanouissement et la fierté des communautés africaines.</p>
                    <button onclick="openModal('L\'Afrique est un continent riche d\'une diversité culturelle exceptionnelle, avec plus de 3 000 groupes ethniques et plus de 2 000 langues parlées à travers ses 54 pays. La culture africaine englobe les traditions orales, la musique, la danse, les arts plastiques, les vêtements, les rituels, la gastronomie et les systèmes de croyances, qui reflètent l’histoire, les valeurs et l’identité de chaque communauté. la culture africaine fait face à des menaces : globalisation, perte des langues et savoirs ancestraux, urbanisation rapide et faible soutien institutionnel. La jeunesse, qui constitue plus de 60 % de la population africaine, doit être au centre de la transmission et de la valorisation de ce patrimoine. Agir pour la culture africaine, c’est préserver notre identité, promouvoir la diversité et encourager les nouvelles générations à s’approprier et transmettre les richesses culturelles. C’est investir dans la mémoire collective pour construire un futur où la culture continue de nourrir l’épanouissement et la fierté des communautés africaines.', 'La Culture', '{{ asset('image/f.png') }}')" class="text-xs bg-yellow text-black px-3 py-1 rounded-md mt-2 transition-all duration-200 hover:bg-gray-200 hover:scale-105">Voir plus</button>
-                    <p class="text-xs text-gray-500 mt-2">Publié le: 01/01/2024</p>
+                    <!-- <p class="text-xs text-gray-500 mt-2">Publié le: 01/01/2024</p> -->
                 </div>
                 <!-- Élément 10 -->
                 <div class="p-3 rounded shadow-lg text-center action-card cursor-pointer">
@@ -759,7 +759,7 @@ Agir pour le bien-être des communautés, c’est investir dans des sociétés i
                     <h3 class="text-base sm:text-lg font-bold text-gray-800 mt-2">L'Histoire</h3>
                     <p class="text-xs sm:text-sm text-gray-600 mt-2">                   L’Afrique possède une histoire millénaire, riche de civilisations anciennes comme l’Égypte, le royaume de Kongo, le Mali, le Ghana et de nombreux ... Agir pour l’histoire africaine, c’est préserver la mémoire du continent, valoriser ses héritages et apprendre des leçons du passé pour construire un avenir éclairé, juste et autonome.</p>
                <button onclick="openModal('L’Afrique possède une histoire millénaire, riche de civilisations anciennes comme l’Égypte, le royaume de Kongo, le Mali, le Ghana et de nombreux autres royaumes et empires qui ont façonné le continent. Cette histoire, transmise à travers les traditions orales, les manuscrits, les monuments et les arts, est le socle de l’identité et de la mémoire collective africaine. La jeunesse africaine, qui représente plus de 60 % de la population du continent, joue un rôle clé dans la revalorisation et la transmission de ce patrimoine historique. Agir pour l’histoire africaine, c’est préserver la mémoire du continent, valoriser ses héritages et apprendre des leçons du passé pour construire un avenir éclairé, juste et autonome.', 'L\'Histoire', '{{ asset('image/h.png') }}')" class="text-xs bg-yellow text-black px-3 py-1 rounded-md mt-2 transition-all duration-200 hover:bg-gray-200 hover:scale-105">Voir plus</button>
-                    <p class="text-xs text-gray-500 mt-2">Publié le: 01/01/2024</p>
+                    <!-- <p class="text-xs text-gray-500 mt-2">Publié le: 01/01/2024</p> -->
                 </div>
                 <!-- Élément 11 -->
                 <div class="p-3 rounded shadow-lg text-center action-card cursor-pointer">
@@ -767,7 +767,7 @@ Agir pour le bien-être des communautés, c’est investir dans des sociétés i
                     <h3 class="text-base sm:text-lg font-bold text-gray-800 mt-2">Le Panafricanisme</h3>
                     <p class="text-xs sm:text-sm text-gray-600 mt-2">                       Le panafricanisme est un mouvement politique, social et culturel visant à unir les peuples africains et la diaspora africaine autour de valeurs communes de solidarité, de développement, de justice et d’autonomie... Agir pour le panafricanisme, c’est œuvrer pour l’unité et la solidarité du continent africain et de sa diaspora.</p>
             <button onclick="openModal('Le panafricanisme est un mouvement politique, social et culturel visant à unir les peuples africains et la diaspora africaine autour de valeurs communes de solidarité, de développement, de justice et d’autonomie. Il repose sur la conviction que l’Afrique doit se libérer des divisions héritées de la colonisation, renforcer sa coopération et promouvoir son identité culturelle et économique sur la scène mondiale. Agir pour le panafricanisme, c’est œuvrer pour l’unité et la solidarité du continent africain et de sa diaspora.', 'Le Panafricanisme', '{{ asset('image/pp.png') }}')" class="text-xs bg-yellow text-black px-3 py-1 rounded-md mt-2 transition-all duration-200 hover:bg-gray-200 hover:scale-105">Voir plus</button>
-                    <p class="text-xs text-gray-500 mt-2">Publié le: 01/01/2024</p>
+                    <!-- <p class="text-xs text-gray-500 mt-2">Publié le: 01/01/2024</p> -->
                 </div>
                 <!-- Élément 12 -->
                 <div class="p-3 rounded shadow-lg text-center action-card cursor-pointer">
@@ -775,34 +775,61 @@ Agir pour le bien-être des communautés, c’est investir dans des sociétés i
                     <h3 class="text-base sm:text-lg font-bold text-gray-800 mt-2">Promotion de l’Égalité et de l’Équité</h3>
                     <p class="text-xs sm:text-sm text-gray-600 mt-2">                       Dans de nombreuses régions du monde, et particulièrement en Afrique, les inégalités persistent encore : inégalités de genre... Promouvoir l’égalité et l’équité, c’est reconnaître la dignité de chaque personne et lui permettre de contribuer pleinement au développement collectif.</p>
                 <button onclick="openModal('Dans de nombreuses régions du monde, et particulièrement en Afrique, les inégalités persistent encore : inégalités de genre, économiques, sociales et éducatives, limitant l’accès des plus vulnérables aux ressources et aux opportunités. Promouvoir l’égalité et l’équité, c’est reconnaître la dignité de chaque personne et lui permettre de contribuer pleinement au développement collectif.', 'Promotion de l’Égalité et de l’Équité', '{{ asset('image/b.png') }}')" class="text-xs bg-yellow text-black px-3 py-1 rounded-md mt-2 transition-all duration-200 hover:bg-gray-200 hover:scale-105">Voir plus</button>
-                    <p class="text-xs text-gray-500 mt-2">Publié le: 01/01/2024</p>
+                    <!-- <p class="text-xs text-gray-500 mt-2">Publié le: 01/01/2024</p> -->
                 </div>
             </div>
         </div>
     </section>
     <!-- Section À propos -->
-    <section id="about" class="py-8 bg-gray-200 section-animate">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-            <h2 class="text-xl sm:text-2xl lg:text-3xl font-bold text-gray-900">À propos d'ABEC</h2>
-            <p class="mt-3 text-sm sm:text-base font-bold text-gray-600 leading-relaxed">
-                L’Association du Bien-Être Communautaire (ABEC) est une organisation internationale basée au Cameroun, légalement reconnue et enregistrée auprès des institutions locales sous le numéro de déclaration 00001901/RDA/J06/SAAJP/BAPP.
-La Loi n°99/014 du 22 décembre 1999 régissant les Organisations Non Gouvernementales (ONG) ;
-La Loi n°90/053 du 19 décembre 1990 portant sur la liberté d'association au Cameroun.
-L’ABEC se distingue par une gouvernance inclusive et représentative, son équipe dirigeante rassemble des membres issus de plusieurs nationalité différentes, illustrant son ouverture et sa portée internationale.
- les femmes y occupent des postes stratégiques, renforçant l’équité et la représentativité. fondée par un jeune visionnaire, l’organisation est dirigée majoritairement par des leaders jeunes, animés par la volonté d’impacter positivement leur génération à travers des actions concrètes.
- l’ABEC s’appuie sur un réseau d’experts en droit, gestion de projet, communication, finance, développement durable et gestion des ressources humaines, garantissant le sérieux et la qualité de ses interventions.
-L’ABEC collabore étroitement avec un ensemble de petites et moyennes organisations locales et internationales qui lui font confiance.
-L’organisation a déjà initié et co-organisé plusieurs activités locales en partenariat avec des entreprises et des structures qui, convaincues par son engagement et sa détermination, continuent de la soutenir durablement.
-En résumé, l’ABEC incarne la vision d’une jeunesse multinationale et diversifiée, déterminée à changer le cours des choses. Malgré les défis liés au manque de ressources financières, elle poursuit avec conviction la réalisation de projets innovants et audacieux, au service du bien-être communautaire et du développement durable.
-            </p>
-            <div class="mt-6 flex justify-center">
-                <video class="responsive-video rounded-lg shadow-lg w-full max-w-[90%]" autoplay loop muted playsinline>
-                    <source src="{{ asset('image/orange.mp4') }}" type="video/mp4">
-                    Votre navigateur ne prend pas en charge la lecture de vidéos.
-                </video>
-            </div>
-        </div>
-    </section>
+   <section id="about" class="py-8 bg-gray-200 section-animate">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+    <h2 class="text-xl sm:text-2xl lg:text-3xl font-bold text-gray-900">À propos d'ABEC</h2>
+    
+    <div class="mt-6 text-justify text-sm sm:text-base text-gray-700 leading-relaxed tracking-wide space-y-4 max-w-4xl mx-auto">
+      
+      <p>
+        L’Association du Bien-Être Communautaire (ABEC) est une organisation internationale basée au Cameroun, légalement reconnue et enregistrée auprès des institutions locales sous le numéro de déclaration 00001901/RDA/J06/SAAJP/BAPP.
+      </p>
+
+      <p>
+        La Loi n°99/014 du 22 décembre 1999 régissant les Organisations Non Gouvernementales (ONG) ; la Loi n°90/053 du 19 décembre 1990 portant sur la liberté d'association au Cameroun.
+      </p>
+
+      <p>
+        L’ABEC se distingue par une gouvernance inclusive et représentative. Son équipe dirigeante rassemble des membres issus de plusieurs nationalités différentes, illustrant son ouverture et sa portée internationale.
+      </p>
+
+      <p>
+        Les femmes y occupent des postes stratégiques, renforçant l’équité et la représentativité. Fondée par un jeune visionnaire, l’organisation est dirigée majoritairement par des leaders jeunes, animés par la volonté d’impacter positivement leur génération à travers des actions concrètes.
+      </p>
+
+      <p>
+        L’ABEC s’appuie sur un réseau d’experts en droit, gestion de projet, communication, finance, développement durable et gestion des ressources humaines, garantissant le sérieux et la qualité de ses interventions.
+      </p>
+
+      <p>
+        L’ABEC collabore étroitement avec un ensemble de petites et moyennes organisations locales et internationales qui lui font confiance.
+      </p>
+
+      <p>
+        L’organisation a déjà initié et co-organisé plusieurs activités locales en partenariat avec des entreprises et des structures qui, convaincues par son engagement et sa détermination, continuent de la soutenir durablement.
+      </p>
+
+      <p>
+        En résumé, l’ABEC incarne la vision d’une jeunesse multinationale et diversifiée, déterminée à changer le cours des choses. Malgré les défis liés au manque de ressources financières, elle poursuit avec conviction la réalisation de projets innovants et audacieux, au service du bien-être communautaire et du développement durable.
+      </p>
+
+    </div>
+
+    <div class="mt-8 flex justify-center">
+      <video class="responsive-video rounded-lg shadow-lg w-full max-w-[90%]" autoplay loop muted playsinline>
+        <source src="{{ asset('image/orange.mp4') }}" type="video/mp4">
+        Votre navigateur ne prend pas en charge la lecture de vidéos.
+      </video>
+    </div>
+  </div>
+</section>
+
     <!-- Section Nos Partenaires -->
     <section id="partners" class="py-8 bg-gray-200 section-animate">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">

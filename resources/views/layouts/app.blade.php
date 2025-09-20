@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ABEC - ONG</title>
+    <title>Association du Bien-Être Communautaire </title>
 
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 

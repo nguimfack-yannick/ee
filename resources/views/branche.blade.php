@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ABEC - Nos Événements</title>
+    <title>Association du Bien-Être Communautaire </title>
     <!-- Favicon -->
     <link rel="icon" type="image/png" sizes="64x64" href="{{ asset('image/ab.png') }}">
     <!-- Tailwind CSS CDN -->
