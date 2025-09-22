@@ -2,52 +2,12 @@
 
 @section('content')
 <style>
-    /* Custom CSS for expand/collapse and overlay */
-    .article-card {
-        transition: all 0.3s ease-in-out;
-        position: relative;
-        z-index: 10;
-        cursor: pointer;
-        padding: 3.5rem; /* Increased padding for larger images */
-        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.25); /* Stronger shadow behind cards */
+    /* ===== GLOBAL ===== */
+    body {
+        font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
     }
-    .article-card.expanded {
-        transform: scale(1.3); /* Larger scale for more emphasis */
-        z-index: 20;
-        box-shadow: 0 16px 32px rgba(0, 0, 0, 0.45); /* Stronger shadow for expanded state */
-    }
-    .article-content {
-        max-height: 0;
-        overflow: hidden;
-        transition: max-height 0.5s ease-in-out;
-    }
-    .article-card.expanded .article-content {
-        max-height: 500px; /* Unchanged, sufficient for content */
-    }
-    .overlay {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background: rgba(0, 0, 0, 0.7); /* Darker overlay for contrast */
-        z-index: 15;
-        opacity: 0;
-        visibility: hidden;
-        transition: opacity 0.3s ease-in-out;
-    }
-    .overlay.active {
-        opacity: 1;
-        visibility: visible;
-    }
-    .article-image {
-        width: 100%;
-        height: 700px; /* Increased height for maximum visibility */
-        object-fit: cover; /* Ensures image covers area without distortion */
-        border-radius: 8px;
-        margin-bottom: 3.5rem; /* Increased margin for spacing */
-    }
-    /* Loading Spinner Styles */
+
+    /* ===== LOADING SPINNER ===== */
     #loading {
         display: flex;
         align-items: center;
@@ -57,7 +17,7 @@
         left: 0;
         width: 100%;
         height: 100%;
-        background: rgba(255, 255, 255, 0.8); /* Semi-transparent white background */
+        background: rgba(255, 255, 255, 0.95);
         z-index: 9999;
         transition: opacity 0.5s ease-out;
     }
@@ -67,17 +27,15 @@
     }
     .spinner-container {
         position: relative;
-        width: 80px; /* Reduced size for better proportionality */
-        height: 80px;
+        width: 60px;
+        height: 60px;
     }
     .spinner-circle {
         position: absolute;
-        top: 0;
-        left: 0;
         width: 100%;
         height: 100%;
-        border: 4px solid transparent;
-        border-top-color: #2563EB; /* Tailwind's blue-600 */
+        border: 3px solid transparent;
+        border-top-color: #2563EB;
         border-radius: 50%;
         animation: spin 1s linear infinite;
     }
@@ -85,138 +43,319 @@
         position: absolute;
         top: 50%;
         left: 50%;
-        transform: translate(-50%, -50%); /* Precise centering */
-        width: 48px; /* 60% of spinner-container size for balance */
-        height: 48px;
-        object-fit: contain; /* Ensure logo scales correctly */
+        transform: translate(-50%, -50%);
+        width: 32px;
+        height: 32px;
+        object-fit: contain;
     }
     @keyframes spin {
         0% { transform: rotate(0deg); }
         100% { transform: rotate(360deg); }
     }
-    /* Ensure responsiveness for smaller screens */
+
+    /* ===== GRID CONTAINER ===== */
+    .articles-grid {
+        display: grid;
+        grid-template-columns: repeat(1, 1fr); /* Mobile */
+        gap: 1.5rem;
+    }
+
+    @media (min-width: 640px) {
+        .articles-grid {
+            grid-template-columns: repeat(2, 1fr); /* Tablet */
+        }
+    }
+
+    @media (min-width: 1024px) {
+        .articles-grid {
+            grid-template-columns: repeat(3, 1fr); /* Desktop */
+        }
+    }
+
+    /* ===== ARTICLE CARD ===== */
+    .article-card {
+        background: white;
+        border-radius: 12px;
+        overflow: hidden;
+        box-shadow: 0 3px 12px rgba(0,0,0,0.06);
+        transition: all 0.35s cubic-bezier(0.25, 0.8, 0.25, 1);
+        cursor: pointer;
+        position: relative;
+        z-index: 10;
+    }
+
+    /* ===== 🌟 EFFET OR AU SURVOL — NOUVEAU CODE AJOUTÉ ===== */
+    .article-card::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(90deg, transparent, rgba(255, 215, 0, 0.3), transparent); /* Or doux */
+        transition: left 0.6s ease;
+        z-index: 1;
+        pointer-events: none;
+    }
+
+    .article-card:hover::before {
+        left: 100%;
+    }
+
+    .article-card::after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 0;
+        height: 3px;
+        background-color: #FFD700; /* Jaune or */
+        transition: width 0.3s ease;
+        z-index: 2;
+    }
+
+    .article-card:hover::after {
+        width: 100%;
+    }
+
+    /* ===== Hover principal ===== */
+    .article-card:hover {
+        transform: translateY(-4px) scale(1.02);
+        box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+    }
+
+    .article-card.expanded {
+        transform: scale(1.05) translateY(-8px) !important;
+        z-index: 20;
+        box-shadow: 0 16px 40px rgba(0,0,0,0.2) !important;
+    }
+
+    .article-image {
+        width: 100%;
+        height: 160px; /* Réduit pour s'adapter à la grille */
+        object-fit: cover;
+        transition: transform 0.4s ease;
+    }
+
+    .article-card:hover .article-image,
+    .article-card.expanded .article-image {
+        transform: scale(1.05);
+    }
+
+    .article-body {
+        padding: 1rem;
+        position: relative;
+        z-index: 5; /* Pour que le texte soit au-dessus des effets */
+    }
+
+    .article-title {
+        font-size: 1.1rem;
+        font-weight: 700;
+        color: #1f2937;
+        line-height: 1.4;
+        margin-bottom: 0.5rem;
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+        transition: color 0.3s ease;
+    }
+
+    .article-card:hover .article-title,
+    .article-card.expanded .article-title {
+        color: #FFD700; /* Change aussi la couleur du titre en or au survol */
+    }
+
+    .article-content {
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.5s cubic-bezier(0.85, 0, 0.15, 1), opacity 0.3s ease;
+        opacity: 0;
+        font-size: 0.95rem;
+        line-height: 1.6;
+        color: #4b5563;
+        margin-top: 0.75rem;
+    }
+
+    .article-card.expanded .article-content {
+        max-height: 400px;
+        opacity: 1;
+        padding-top: 0.75rem;
+        border-top: 1px solid #f3f4f6;
+    }
+
+    .article-meta {
+        font-size: 0.8rem;
+        color: #6b7280;
+        margin-top: 0.75rem;
+        display: flex;
+        align-items: center;
+        gap: 0.3rem;
+    }
+
+    .article-meta::before {
+        content: "📰";
+        font-size: 0.9em;
+    }
+
+    /* ===== OVERLAY ===== */
+    .overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.6);
+        backdrop-filter: blur(4px);
+        z-index: 15;
+        opacity: 0;
+        visibility: hidden;
+        transition: all 0.3s ease;
+    }
+    .overlay.active {
+        opacity: 1;
+        visibility: visible;
+    }
+
+    /* ===== BUTTON ===== */
+    .btn-more {
+        display: inline-block;
+        background: linear-gradient(135deg, #FFD700, #DAA520); /* Dégradé or ! */
+        color: #000;
+        padding: 0.75rem 2rem;
+        font-weight: 600;
+        border-radius: 9999px;
+        text-decoration: none;
+        transition: all 0.3s ease;
+        box-shadow: 0 4px 15px rgba(255, 215, 0, 0.4);
+        margin-top: 2rem;
+        border: 2px solid #DAA520;
+    }
+
+    .btn-more:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 6px 20px rgba(255, 215, 0, 0.6);
+        background: linear-gradient(135deg, #DAA520, #B8860B);
+        color: white;
+    }
+
+    /* ===== RESPONSIVE ===== */
     @media (max-width: 640px) {
         .article-image {
-            height: 400px; /* Larger height for mobile */
+            height: 140px;
         }
-        .article-card {
-            padding: 2rem; /* Adjusted padding for mobile */
-            box-shadow: 0 5px 12px rgba(0, 0, 0, 0.2); /* Lighter shadow for mobile */
-        }
-        .article-card.expanded {
-            transform: scale(1.15); /* Slightly reduced scale for mobile */
-            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.35); /* Adjusted shadow for mobile */
-        }
-        .spinner-container {
-            width: 60px; /* Smaller size for mobile */
-            height: 60px;
-        }
-        .spinner-logo {
-            width: 36px; /* Adjusted logo size for mobile */
-            height: 36px;
+        .article-title {
+            font-size: 1.05rem;
         }
     }
 </style>
 
-<div class="max-w-5xl mx-auto py-10 relative">
-    <!-- Loading Spinner -->
-    <div id="loading" class="fixed inset-0 bg-white bg-opacity-80 flex items-center justify-center z-50">
-        <div class="spinner-container">
-            <!-- Cercle bleu rotatif -->
-            <div class="spinner-circle"></div>
-            <!-- Logo statique au centre -->
-            <img src="{{ asset('image/ab.png') }}" alt="Logo ABEC" class="spinner-logo">
-        </div>
+<!-- LOADING SPINNER -->
+<div id="loading" class="fixed inset-0 z-50">
+    <div class="spinner-container">
+        <div class="spinner-circle"></div>
+        <img src="{{ asset('image/ab.png') }}" alt="Logo ABEC" class="spinner-logo">
     </div>
+</div>
 
-    <h1 class="text-3xl font-bold mb-6 text-center text-blue-700">Actualités</h1>
+<div class="max-w-6xl mx-auto py-10 px-4 sm:px-6 lg:px-8 relative">
+    <h1 class="text-3xl sm:text-4xl font-extrabold text-center text-gray-800 mb-2">
+        Actualités
+    </h1>
+    <p class="text-center text-gray-600 mb-10">
+        Découvrez nos dernières actions sur le terrain.
+    </p>
 
-    <!-- Overlay for dark background -->
+    <!-- Overlay -->
     <div id="overlay" class="overlay"></div>
 
-    <!-- Article 1 -->
-    <div class="article-card bg-white shadow rounded-lg p-6 mb-8">
-        <img src="{{ asset('image/appl.jpg') }}" alt="Campagne de dons ABEC" class="article-image mb-4">
-        <h2 class="text-2xl font-bold text-gray-800">ABEC lance une nouvelle campagne de dons pour soutenir les orphelinats</h2>
-        <div class="article-content">
-            <p class="text-gray-700 mt-4 leading-relaxed">
-                L’ONG ABEC a officiellement lancé une nouvelle campagne de collecte de dons destinée aux orphelinats de Yaoundé et Douala.
-                Cette initiative vise à fournir des vivres, du matériel scolaire et des soins de santé aux enfants défavorisés.
-            </p>
-            <p class="text-gray-700 mt-4 leading-relaxed">
-                Grâce à votre générosité, nous avons déjà pu venir en aide à plus de 300 enfants lors de notre précédente action humanitaire.
-                Nous invitons tous nos partenaires et donateurs à continuer de nous soutenir afin de bâtir ensemble un avenir meilleur pour ces enfants.
-            </p>
-        </div>
-        <span class="text-sm text-gray-500 mt-2 block">Publié le {{ now()->format('d/m/Y') }}</span>
+    <!-- Grille d'articles -->
+    <div class="articles-grid">
+        @for ($i = 1; $i <= 10; $i++)
+            <div class="article-card">
+                <img src="{{ asset($i % 2 == 0 ? 'image/appl.jpg' : 'image/news.png') }}" alt="Actualité ABEC" class="article-image">
+                <div class="article-body">
+                    <h2 class="article-title">
+                        @if($i % 3 == 0)
+                            Nouvelle école construite à Douala grâce à vos dons
+                        @elseif($i % 3 == 1)
+                            Campagne de vaccination dans les quartiers défavorisés
+                        @else
+                            Formation professionnelle pour 50 jeunes à Yaoundé
+                        @endif
+                    </h2>
+                    <div class="article-content">
+                        <p class="mb-3">
+                            L’ONG ABEC continue son engagement sur le terrain avec des actions concrètes pour améliorer les conditions de vie des populations locales.
+                        </p>
+                        <p>
+                            Grâce à votre soutien, nous avons pu réaliser cette initiative qui impacte directement la vie de centaines de bénéficiaires.
+                        </p>
+                    </div>
+                    <div class="article-meta">
+                        Publié le {{ now()->subDays($i * 5)->format('d/m/Y') }}
+                    </div>
+                </div>
+            </div>
+        @endfor
     </div>
 
-    <!-- Article 2 -->
-    <div class="article-card bg-white shadow rounded-lg p-6 mb-8">
-        <img src="{{ asset('image/news.png') }}" alt="Campagne de dons ABEC" class="article-image mb-4">
-        <h2 class="text-2xl font-bold text-gray-800">Descente médicale au Centre Hospitalier Régional</h2>
-        <div class="article-content">
-            <p class="text-gray-700 mt-4 leading-relaxed">
-                La branche <strong>Santos</strong> a organisé une descente médicale au Centre Hospitalier Régional de Yaoundé.
-                L'équipe a fourni des consultations gratuites, distribué des médicaments essentiels et sensibilisé la population sur les bonnes pratiques sanitaires.
-            </p>
-            <p class="text-gray-700 mt-4 leading-relaxed">
-                Cette action s’inscrit dans le cadre des initiatives de santé publique de l’ONG, visant à améliorer l'accès aux soins pour les communautés locales.
-            </p>
-        </div>
-        <span class="text-sm text-gray-500 mt-2 block">Publié le {{ now()->format('d/m/Y') }}</span>
-    </div>
-
-    <!-- Bouton voir plus -->
-    <div class="text-center mt-10">
-        <a href="#"
-           class="inline-block bg-blue-600 text-white px-6 py-3 font-bold rounded-md hover:bg-blue-700 transition transform hover:scale-105">
+    <!-- Bouton Voir Plus -->
+    <div class="text-center mt-12">
+        <a href="#" class="btn-more">
             Voir plus d'actualités
         </a>
     </div>
 </div>
 
 <script>
-    document.addEventListener('DOMContentLoaded', () => {
-        const articles = document.querySelectorAll('.article-card');
-        const overlay = document.getElementById('overlay');
-        const loading = document.getElementById('loading');
+document.addEventListener('DOMContentLoaded', () => {
+    const articles = document.querySelectorAll('.article-card');
+    const overlay = document.getElementById('overlay');
+    const loading = document.getElementById('loading');
 
-        // Gérer le spinner de chargement
-        window.addEventListener('load', () => {
-            setTimeout(() => {
-                loading.classList.add('hidden');
-                setTimeout(() => {
-                    loading.style.display = 'none';
-                }, 500); // Correspond à la durée de la transition CSS
-            }, 1000); // Délai avant de masquer le spinner (ajustez si nécessaire)
-        });
+    // Masquer le loader après chargement
+    window.addEventListener('load', () => {
+        setTimeout(() => {
+            loading.classList.add('hidden');
+            setTimeout(() => loading.style.display = 'none', 500);
+        }, 800);
+    });
 
-        // Gérer l'expansion des articles
-        articles.forEach(article => {
-            article.addEventListener('click', () => {
-                const isExpanded = article.classList.contains('expanded');
-                
-                // Close all other articles
-                articles.forEach(otherArticle => {
-                    if (otherArticle !== article) {
-                        otherArticle.classList.remove('expanded');
-                    }
-                });
+    // Gestion de l'expansion des articles
+    articles.forEach(article => {
+        article.addEventListener('click', () => {
+            const isExpanded = article.classList.contains('expanded');
 
-                // Toggle current article
-                article.classList.toggle('expanded', !isExpanded);
-
-                // Toggle overlay
-                overlay.classList.toggle('active', !isExpanded);
+            // Fermer les autres articles
+            articles.forEach(a => {
+                if (a !== article) a.classList.remove('expanded');
             });
-        });
 
-        // Close overlay and articles when clicking overlay
-        overlay.addEventListener('click', () => {
-            articles.forEach(article => article.classList.remove('expanded'));
-            overlay.classList.remove('active');
+            // Toggle l'article courant
+            article.classList.toggle('expanded', !isExpanded);
+            overlay.classList.toggle('active', !isExpanded);
+
+            // Scroll doux vers l'article
+            if (!isExpanded) {
+                article.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+            }
         });
     });
+
+    // Fermer en cliquant sur l'overlay
+    overlay.addEventListener('click', () => {
+        articles.forEach(a => a.classList.remove('expanded'));
+        overlay.classList.remove('active');
+    });
+
+    // Fermer avec la touche Échap
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') {
+            articles.forEach(a => a.classList.remove('expanded'));
+            overlay.classList.remove('active');
+        }
+    });
+});
 </script>
 @endsection
