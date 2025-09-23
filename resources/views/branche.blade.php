@@ -88,6 +88,62 @@
           height: 36px;
         }
       }
+      /* Styles pour le footer compact */
+      .wave-divider {
+        position: absolute;
+        top: -1px;
+        left: 0;
+        width: 100%;
+        overflow: hidden;
+        line-height: 0;
+      }
+      .wave-divider svg {
+        position: relative;
+        display: block;
+        width: calc(100% + 1.3px);
+        height: 40px;
+      }
+      .wave-divider .shape-fill {
+        fill: url(#gradient-wave);
+      }
+      .footer-link {
+        transition: color 0.3s ease, transform 0.3s ease;
+      }
+      .footer-link:hover {
+        transform: translateX(5px);
+      }
+      .social-icon {
+        transition: transform 0.3s ease, opacity 0.3s ease;
+      }
+      .social-icon:hover {
+        transform: scale(1.2);
+        opacity: 0.8;
+      }
+      /* Animation pour la phrase défilante */
+      .marquee-container {
+        width: 100%;
+        overflow: hidden;
+        white-space: nowrap;
+        background-color: #1E90FF;
+        padding: 0.5rem 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+        z-index: 10;
+      }
+      .marquee-text {
+        display: inline-block;
+        font-size: 1rem;
+        font-weight: bold;
+        color: #FFD700;
+        animation: marquee 15s linear infinite;
+        text-align: center;
+      }
+      @keyframes marquee {
+        0% { transform: translateX(100%); }
+        100% { transform: translateX(-100%); }
+      }
     </style>
 </head>
 <body id="top" x-data="{ mobileMenuOpen: false }" class="bg-white font-sans antialiased">
@@ -272,34 +328,120 @@
         </div>
     </section>
 
-    <!-- Footer -->
-    <footer class="bg-primary text-white py-8">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-            <nav class="flex flex-col sm:flex-row justify-center gap-4 sm:gap-6 mb-6">
-                <a href="/" class="text-sm font-bold hover:text-gray-200 font-custom">Accueil</a>
-                <a href="#about" class="text-sm font-bold hover:text-gray-200 font-custom">À propos</a>
-                <a href="#actions" class="text-sm font-bold hover:text-gray-200 font-custom">Nos Actions</a>
-                <a href="{{ route('news') }}" class="text-sm font-bold hover:text-gray-200 font-custom">News</a>
-                <a href="#contact" class="text-sm font-bold hover:text-gray-200 font-custom">Contact</a>
-            </nav>
-            <hr class="my-4 border-gray-300 max-w-md mx-auto" />
-            <p class="text-sm font-bold font-custom">Basée à Yaoundé, Cameroun</p>
-            <a href="#top" class="mt-4 inline-block text-sm font-bold hover:text-gray-200 font-custom">▲ Retour en haut</a>
-            <hr class="my-4 border-gray-300 max-w-md mx-auto" />
-            <p class="text-sm font-bold font-custom">Organisation internationale. Tous droits réservés.</p>
-            <p class="text-xs mt-2 font-custom">Suivez-nous :</p>
-            <div class="flex justify-center space-x-4 mt-4">
-                <a href="https://www.facebook.com/profile.php?id=61568266295634" target="_blank" class="hover:opacity-80">
-                    <img src="{{ asset('image/feacebook.jpg') }}" alt="Facebook" class="w-6 h-6 rounded-full">
-                </a>
-                <a href="https://whatsapp.com/channel/0029VaYTsNkD8SE42sDpnk1w" target="_blank" class="hover:opacity-80">
-                    <img src="{{ asset('image/wastapp.jpg') }}" alt="WhatsApp" class="w-6 h-6 rounded-full">
-                </a>
-                <a href="https://www.instagram.com/abec.officiel/" target="_blank" class="hover:opacity-80">
-                    <img src="{{ asset('image/insta.jpg') }}" alt="Instagram" class="w-6 h-6 rounded-full">
-                </a>
+    <!-- Footer compact avec vague et phrase défilante centrée -->
+    <footer id="contact" class="bg-primary text-white relative pt-10 overflow-hidden">
+        <!-- Vague SVG compacte -->
+        <div class="wave-divider">
+            <svg data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
+                <defs>
+                    <linearGradient id="gradient-wave" x1="0%" y1="0%" x2="0%" y2="100%">
+                        <stop offset="0%" style="stop-color:#ffffff;stop-opacity:1" />
+                        <stop offset="100%" style="stop-color:#1E90FF;stop-opacity:0.8" />
+                    </linearGradient>
+                </defs>
+                <path d="M0,0 C300,100 900,100 1200,0 V120 H0 Z" class="shape-fill"></path>
+            </svg>
+        </div>
+        <!-- Phrase défilante centrée -->
+        <div class="marquee-container">
+            <span class="marquee-text">Grandir - Agir - Changer</span>
+        </div>
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+            <!-- Grille compacte -->
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-6">
+                <!-- Colonne Logo et Description -->
+                <div class="md:col-span-2">
+                    <div class="flex items-center mb-4">
+                        <img src="{{ asset('image/ab.png') }}" alt="Logo ABEC" class="w-12 h-12 mr-3">
+                        <div>
+                            <h2 class="text-lg font-bold mb-1 font-custom">ABEC</h2>
+                            <p class="text-yellow text-xs font-medium font-custom">Association du Bien-Être Communautaire</p>
+                        </div>
+                    </div>
+                    <p class="text-gray-200 text-sm mb-4 leading-relaxed font-custom">
+                        Nous œuvrons depuis 2010 pour améliorer les conditions de vie des communautés vulnérables au Cameroun.
+                    </p>
+                    <div class="flex space-x-3">
+                        <a href="https://www.facebook.com/profile.php?id=61568266295634" target="_blank" class="social-icon bg-white bg-opacity-20 p-1.5 rounded-full hover:bg-yellow transition-all duration-300">
+                            <img src="{{ asset('image/feacebook.jpg') }}" alt="Facebook" class="w-5 h-5">
+                        </a>
+                        <a href="https://whatsapp.com/channel/0029VaYTsNkD8SE42sDpnk1w" target="_blank" class="social-icon bg-white bg-opacity-20 p-1.5 rounded-full hover:bg-yellow transition-all duration-300">
+                            <img src="{{ asset('image/wastapp.jpg') }}" alt="WhatsApp" class="w-5 h-5">
+                        </a>
+                        <a href="https://www.instagram.com/abec.officiel/" target="_blank" class="social-icon bg-white bg-opacity-20 p-1.5 rounded-full hover:bg-yellow transition-all duration-300">
+                            <img src="{{ asset('image/insta.jpg') }}" alt="Instagram" class="w-5 h-5">
+                        </a>
+                        <a href="mailto:globaluniversalwelfare@gmail.com" class="social-icon bg-white bg-opacity-20 p-1.5 rounded-full hover:bg-yellow transition-all duration-300">
+                            <img src="{{ asset('image/m.jpg') }}" alt="Email" class="w-5 h-5">
+                        </a>
+                    </div>
+                </div>
+                <!-- Colonne Liens Rapides -->
+                <div>
+                    <h3 class="text-base font-bold mb-4 text-white border-b border-yellow pb-1 font-custom">Liens Rapides</h3>
+                    <ul class="space-y-2 text-sm">
+                        <li><a href="{{ url('/') }}" class="footer-link text-gray-200 hover:text-yellow flex items-center transition-all duration-300 font-custom"><span class="mr-2">→</span> Accueil</a></li>
+                        <li><a href="{{ url('/about') }}" class="footer-link text-gray-200 hover:text-yellow flex items-center transition-all duration-300 font-custom"><span class="mr-2">→</span> À propos</a></li>
+                        <li><a href="{{ url('/projects') }}" class="footer-link text-gray-200 hover:text-yellow flex items-center transition-all duration-300 font-custom"><span class="mr-2">→</span> Nos Projets</a></li>
+                        <li><a href="{{ url('/dons') }}" class="footer-link text-gray-200 hover:text-yellow flex items-center transition-all duration-300 font-custom"><span class="mr-2">→</span> Faire un don</a></li>
+                        <li><a href="{{ url('/contact') }}" class="footer-link text-gray-200 hover:text-yellow flex items-center transition-all duration-300 font-custom"><span class="mr-2">→</span> Contact</a></li>
+                    </ul>
+                </div>
+                <!-- Colonne Contact -->
+                <div>
+                    <h3 class="text-base font-bold mb-4 text-white border-b border-yellow pb-1 font-custom">Contact</h3>
+                    <div class="space-y-3 text-sm text-gray-200 font-custom">
+                        <div class="flex items-start">
+                            <svg class="w-4 h-4 mt-1 mr-2 text-yellow" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path>
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                            </svg>
+                            <p>Yaoundé, Cameroun<br>Quartier Mokolo</p>
+                        </div>
+                        <div class="flex items-center">
+                            <svg class="w-4 h-4 mr-2 text-yellow" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+                            </svg>
+                            <a href="mailto:globaluniversalwelfare@gmail.com" class="footer-link hover:text-yellow transition-all duration-300">globaluniversalwelfare@gmail.com</a>
+                        </div>
+                        <div class="flex items-center">
+                            <svg class="w-4 h-4 mr-2 text-yellow" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"></path>
+                            </svg>
+                            <p>+237 6XX XX XX XX</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Call-to-action compact -->
+            <div class="bg-white bg-opacity-10 rounded-lg p-4 mb-6 backdrop-blur-sm">
+                <div class="flex flex-col md:flex-row md:items-center justify-between">
+                    <div class="mb-3 md:mb-0">
+                        <h3 class="text-base font-bold text-white mb-1 font-custom">Rejoignez notre mission</h3>
+                        <p class="text-gray-200 text-sm font-custom">Votre soutien peut changer des vies.</p>
+                    </div>
+                    <a href="{{ url('/dons') }}" class="inline-block bg-yellow text-primary font-bold py-2 px-4 rounded-md hover:bg-opacity-90 transform hover:scale-105 transition-all duration-300 shadow-md font-custom">
+                        Faire un don
+                    </a>
+                </div>
+            </div>
+            <!-- Ligne de séparation et copyright -->
+            <div class="border-t border-white border-opacity-20 pt-4">
+                <div class="flex flex-col md:flex-row justify-between items-center">
+                    <p class="text-gray-300 text-xs mb-3 md:mb-0 font-custom">
+                        &copy; {{ date('Y') }} Association du Bien-Être Communautaire. Tous droits réservés.
+                    </p>
+                    <div class="flex space-x-4 text-xs">
+                        <a href="#" class="text-gray-300 hover:text-yellow transition-colors duration-300 font-custom">Mentions légales</a>
+                        <a href="#" class="text-gray-300 hover:text-yellow transition-colors duration-300 font-custom">Politique de confidentialité</a>
+                        <a href="#" class="text-gray-300 hover:text-yellow transition-colors duration-300 font-custom">Conditions d'utilisation</a>
+                    </div>
+                </div>
             </div>
         </div>
+        <!-- Éléments décoratifs réduits -->
+        <div class="absolute top-0 right-0 w-24 h-24 bg-yellow rounded-full opacity-10 -translate-y-1/2 translate-x-1/2"></div>
+        <div class="absolute bottom-0 left-0 w-16 h-16 bg-white rounded-full opacity-5 -translate-y-1/2 -translate-x-1/2"></div>
     </footer>
 
     <!-- Alpine.js -->

@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="fr">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
@@ -103,14 +102,13 @@
             opacity: 1;
         }
 
-        .SWIPER-SLIDE-ACTIVE .PARTNER-LOGO* Alignement des logos à droite dans la section partenaires *.SWIPER-SLIDE-ACTIVE .PARTNER-LOGO 
         .mySwiper .swiper-slide {
             display: flex;
             justify-content: center;
             align-items: center;
         }
 
-            TRANSFORM: SCALE(2) * Hero Section */
+        /* Hero Section */
         .heroSwiper .swiper-slide {
             background-size: cover;
             background-position: center;
@@ -378,7 +376,7 @@
 
         .modal-image {
             width: 100%;
-            max-height: 30vh; /* Réduction de la taille de l'image dans la modale */
+            max-height: 30vh;
             object-fit: cover;
             border-radius: 0.5rem;
         }
@@ -483,6 +481,72 @@
             color: #ffffff;
         }
 
+        /* Styles pour le footer compact */
+        .wave-divider {
+            position: absolute;
+            top: -1px;
+            left: 0;
+            width: 100%;
+            overflow: hidden;
+            line-height: 0;
+        }
+
+        .wave-divider svg {
+            position: relative;
+            display: block;
+            width: calc(100% + 1.3px);
+            height: 40px;
+        }
+
+        .wave-divider .shape-fill {
+            fill: url(#gradient-wave);
+        }
+
+        .footer-link {
+            transition: color 0.3s ease, transform 0.3s ease;
+        }
+
+        .footer-link:hover {
+            transform: translateX(5px);
+        }
+
+        .social-icon {
+            transition: transform 0.3s ease, opacity 0.3s ease;
+        }
+
+        .social-icon:hover {
+            transform: scale(1.2);
+            opacity: 0.8;
+        }
+
+        /* Animation pour la phrase défilante */
+        .marquee-container {
+            width: 100%;
+            overflow: hidden;
+            white-space: nowrap;
+            background-color: #1E90FF;
+            padding: 0.5rem 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            z-index: 10;
+        }
+
+        .marquee-text {
+            display: inline-block;
+            font-size: 1rem;
+            font-weight: bold;
+            color: #FFD700;
+            animation: marquee 15s linear infinite;
+            text-align: center;
+        }
+
+        @keyframes marquee {
+            0% { transform: translateX(100%); }
+            100% { transform: translateX(-100%); }
+        }
+
         /* Responsive adjustments */
         @media (max-width: 640px) {
             body {
@@ -521,7 +585,7 @@
             }
 
             .modal-image {
-                max-height: 20vh; /* Taille réduite pour mobile */
+                max-height: 20vh;
             }
 
             .modal-title {
@@ -560,7 +624,7 @@
             }
 
             .modal-image {
-                max-height: 25vh; /* Taille réduite pour tablette */
+                max-height: 25vh;
             }
 
             .partner-logo {
@@ -593,7 +657,6 @@
         }
     </script>
 </head>
-
 <body id="top" class="bg-white font-sans antialiased font-all-bold">
     <!-- Loading Spinner -->
     <div id="loading" class="fixed inset-0 bg-white bg-opacity-95 flex items-center justify-center z-50">
@@ -693,7 +756,7 @@
                     <div class="h-full bg-cover bg-center flex items-center justify-center" style="background: url('{{ asset('image/pl.png') }}') center/cover no-repeat;">
                         <div class="text-center px-4">
                             <h1 class="hero-text font-extrabold text-white">Organisation du Bien-Être Communautaire</h1>
-                             <p class="mt-3 hero-subtext text-gray-100 font-bold">Une Organisation internationale œuvrant dans le monde entier pour le Bien-être des communautés.</p>
+                            <p class="mt-3 hero-subtext text-gray-100 font-bold">Une Organisation internationale œuvrant dans le monde entier pour le Bien-être des communautés.</p>
                             <div class="mt-4 flex flex-col sm:flex-row justify-center gap-3">
                                 <a href="santos/dons.php" class="hero-button inline-block bg-yellow text-black px-4 py-2 text-sm font-bold rounded-md hover:bg-gray-100 transition-all duration-300">Faites un don</a>
                                 <a href="#about" class="hero-button inline-block bg-yellow text-black px-4 py-2 text-sm font-bold rounded-md hover:bg-gray-100 transition-all duration-300">En savoir plus</a>
@@ -705,7 +768,7 @@
                     <div class="h-full bg-cover bg-center flex items-center justify-center" style="background: url('{{ asset('image/enfants.png') }}') center/cover no-repeat;">
                         <div class="text-center px-4">
                             <h1 class="hero-text font-extrabold text-white">Organisation du Bien-Être Communautaire</h1>
-                             <p class="mt-3 hero-subtext text-gray-100 font-bold">Une Organisation internationale œuvrant dans le monde entier pour le Bien-être des communautés.</p>
+                            <p class="mt-3 hero-subtext text-gray-100 font-bold">Une Organisation internationale œuvrant dans le monde entier pour le Bien-être des communautés.</p>
                             <div class="mt-4 flex flex-col sm:flex-row justify-center gap-3">
                                 <a href="santos/dons.php" class="hero-button inline-block bg-yellow text-black px-4 py-2 text-sm font-bold rounded-md hover:bg-gray-100 transition-all duration-300">Faites un don</a>
                                 <a href="#about" class="hero-button inline-block bg-yellow text-black px-4 py-2 text-sm font-bold rounded-md hover:bg-gray-100 transition-all duration-300">En savoir plus</a>
@@ -717,7 +780,7 @@
                     <div class="h-full bg-cover bg-center flex items-center justify-center" style="background: url('{{ asset('image/p.png') }}') center/cover no-repeat;">
                         <div class="text-center px-4">
                             <h1 class="hero-text font-extrabold text-white">Organisation du Bien-Être Communautaire</h1>
-                             <p class="mt-3 hero-subtext text-gray-100 font-bold">Une Organisation internationale œuvrant dans le monde entier pour le Bien-être des communautés.</p>
+                            <p class="mt-3 hero-subtext text-gray-100 font-bold">Une Organisation internationale œuvrant dans le monde entier pour le Bien-être des communautés.</p>
                             <div class="mt-4 flex flex-col sm:flex-row justify-center gap-3">
                                 <a href="santos/dons.php" class="hero-button inline-block bg-yellow text-black px-4 py-2 text-sm font-bold rounded-md hover:bg-gray-100 transition-all duration-300">Faites un don</a>
                                 <a href="#about" class="hero-button inline-block bg-yellow text-black px-4 py-2 text-sm font-bold rounded-md hover:bg-gray-100 transition-all duration-300">En savoir plus</a>
@@ -879,44 +942,124 @@
                     <div class="swiper-slide flex justify-center items-center">
                         <img src="{{ asset('image/ee.png') }}" alt="Partenaire 1" class="partner-logo" />
                     </div>
-                   
                 </div>
             </div>
         </div>
     </section>
-    <!-- Footer -->
-    <footer id="contact" class="bg-blue-800 text-white section-animate" role="contentinfo">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
-            <div class="flex flex-col items-center text-center space-y-3">
-                <nav class="flex flex-wrap justify-center gap-x-3 gap-y-2">
-                    <a href="#top" class="text-sm font-bold hover:text-gray-200 transition-colors duration-300">Accueil</a>
-                    <a href="#about" class="text-sm font-bold hover:text-gray-200 transition-colors duration-300">À propos</a>
-                    <a href="#actions" class="text-sm font-bold hover:text-gray-200 transition-colors duration-300">Nos Actions</a>
-                    <a href="{{route('news')}}" class="text-sm font-bold hover:text-gray-200 transition-colors duration-300">News</a>
-                    <a href="#contact" class="text-sm font-bold hover:text-gray-200 transition-colors duration-300">Contact</a>
-                </nav>
-                <hr class="my-3 border-gray-300 w-full" />
-                <p class="text-sm font-bold">Basée à Yaoundé, Cameroun</p>
-                <a href="#top" class="inline-block text-sm font-bold hover:text-gray-200 transition-colors duration-300">Retour en haut</a>
-                <hr class="my-3 border-gray-300 w-full" />
-                <p class="text-sm font-bold">Organisation internationale. Tous droits réservés.</p>
-                <p class="text-xs mt-2">Suivez-nous sur nos réseaux sociaux :</p>
-                <div class="flex space-x-3 mt-2">
-                    <a href="https://www.facebook.com/profile.php?id=61568266295634" target="_blank" class="hover:opacity-80 transition-opacity duration-300" title="Facebook">
-                        <img src="{{ asset('image/feacebook.jpg') }}" alt="Facebook" class="w-6 h-6 rounded-full">
-                    </a>
-                    <a href="https://whatsapp.com/channel/0029VaYTsNkD8SE42sDpnk1w" target="_blank" class="hover:opacity-80 transition-opacity duration-300" title="WhatsApp">
-                        <img src="{{ asset('image/wastapp.jpg') }}" alt="WhatsApp" class="w-6 h-6 rounded-full">
-                    </a>
-                    <a href="https://www.instagram.com/abec.officiel/" target="_blank" class="hover:opacity-80 transition-opacity duration-300" title="Instagram">
-                        <img src="{{ asset('image/insta.jpg') }}" alt="Instagram" class="w-6 h-6 rounded-full">
+    <!-- Footer compact avec vague et phrase défilante centrée -->
+    <footer id="contact" class="bg-primary text-white relative pt-10 overflow-hidden section-animate">
+        <!-- Vague SVG compacte -->
+        <div class="wave-divider">
+            <svg data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
+                <defs>
+                    <linearGradient id="gradient-wave" x1="0%" y1="0%" x2="0%" y2="100%">
+                        <stop offset="0%" style="stop-color:#ffffff;stop-opacity:1" />
+                        <stop offset="100%" style="stop-color:#1E90FF;stop-opacity:0.8" />
+                    </linearGradient>
+                </defs>
+                <path d="M0,0 C300,100 900,100 1200,0 V120 H0 Z" class="shape-fill"></path>
+            </svg>
+        </div>
+        <!-- Phrase défilante centrée -->
+        <div class="marquee-container">
+            <span class="marquee-text">Grandir - Agir - Changer</span>
+        </div>
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+            <!-- Grille compacte -->
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-6">
+                <!-- Colonne Logo et Description -->
+                <div class="md:col-span-2">
+                    <div class="flex items-center mb-4">
+                        <img src="{{ asset('image/ab.png') }}" alt="Logo ABEC" class="w-12 h-12 mr-3">
+                        <div>
+                            <h2 class="text-lg font-bold mb-1">ABEC</h2>
+                            <p class="text-yellow text-xs font-medium">Association du Bien-Être Communautaire</p>
+                        </div>
+                    </div>
+                    <p class="text-gray-200 text-sm mb-4 leading-relaxed">
+                        Nous œuvrons depuis 2010 pour améliorer les conditions de vie des communautés vulnérables au Cameroun.
+                    </p>
+                    <div class="flex space-x-3">
+                        <a href="https://www.facebook.com/profile.php?id=61568266295634" target="_blank" class="social-icon bg-white bg-opacity-20 p-1.5 rounded-full hover:bg-yellow transition-all duration-300">
+                            <img src="{{ asset('image/feacebook.jpg') }}" alt="Facebook" class="w-5 h-5">
+                        </a>
+                        <a href="https://whatsapp.com/channel/0029VaYTsNkD8SE42sDpnk1w" target="_blank" class="social-icon bg-white bg-opacity-20 p-1.5 rounded-full hover:bg-yellow transition-all duration-300">
+                            <img src="{{ asset('image/wastapp.jpg') }}" alt="WhatsApp" class="w-5 h-5">
+                        </a>
+                        <a href="https://www.instagram.com/abec.officiel/" target="_blank" class="social-icon bg-white bg-opacity-20 p-1.5 rounded-full hover:bg-yellow transition-all duration-300">
+                            <img src="{{ asset('image/insta.jpg') }}" alt="Instagram" class="w-5 h-5">
+                        </a>
+                        <a href="mailto:globaluniversalwelfare@gmail.com" class="social-icon bg-white bg-opacity-20 p-1.5 rounded-full hover:bg-yellow transition-all duration-300">
+                            <img src="{{ asset('image/m.jpg') }}" alt="Email" class="w-5 h-5">
+                        </a>
+                    </div>
+                </div>
+                <!-- Colonne Liens Rapides -->
+                <div>
+                    <h3 class="text-base font-bold mb-4 text-white border-b border-yellow pb-1">Liens Rapides</h3>
+                    <ul class="space-y-2 text-sm">
+                        <li><a href="{{ url('/') }}" class="footer-link text-gray-200 hover:text-yellow flex items-center transition-all duration-300"><span class="mr-2">→</span> Accueil</a></li>
+                        <li><a href="{{ url('/about') }}" class="footer-link text-gray-200 hover:text-yellow flex items-center transition-all duration-300"><span class="mr-2">→</span> À propos</a></li>
+                        <li><a href="{{ url('/projects') }}" class="footer-link text-gray-200 hover:text-yellow flex items-center transition-all duration-300"><span class="mr-2">→</span> Nos Projets</a></li>
+                        <li><a href="{{ url('/dons') }}" class="footer-link text-gray-200 hover:text-yellow flex items-center transition-all duration-300"><span class="mr-2">→</span> Faire un don</a></li>
+                        <li><a href="{{ url('/contact') }}" class="footer-link text-gray-200 hover:text-yellow flex items-center transition-all duration-300"><span class="mr-2">→</span> Contact</a></li>
+                    </ul>
+                </div>
+                <!-- Colonne Contact -->
+                <div>
+                    <h3 class="text-base font-bold mb-4 text-white border-b border-yellow pb-1">Contact</h3>
+                    <div class="space-y-3 text-sm text-gray-200">
+                        <div class="flex items-start">
+                            <svg class="w-4 h-4 mt-1 mr-2 text-yellow" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path>
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                            </svg>
+                            <p>Yaoundé, Cameroun<br>Quartier Mokolo</p>
+                        </div>
+                        <div class="flex items-center">
+                            <svg class="w-4 h-4 mr-2 text-yellow" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+                            </svg>
+                            <a href="mailto:globaluniversalwelfare@gmail.com" class="footer-link hover:text-yellow transition-all duration-300">globaluniversalwelfare@gmail.com</a>
+                        </div>
+                        <div class="flex items-center">
+                            <svg class="w-4 h-4 mr-2 text-yellow" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"></path>
+                            </svg>
+                            <p>+237 6XX XX XX XX</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Call-to-action compact -->
+            <div class="bg-white bg-opacity-10 rounded-lg p-4 mb-6 backdrop-blur-sm">
+                <div class="flex flex-col md:flex-row md:items-center justify-between">
+                    <div class="mb-3 md:mb-0">
+                        <h3 class="text-base font-bold text-white mb-1">Rejoignez notre mission</h3>
+                        <p class="text-gray-200 text-sm">Votre soutien peut changer des vies.</p>
+                    </div>
+                    <a href="{{ url('/dons') }}" class="inline-block bg-yellow text-primary font-bold py-2 px-4 rounded-md hover:bg-opacity-90 transform hover:scale-105 transition-all duration-300 shadow-md">
+                        Faire un don
                     </a>
                 </div>
-                <div class="mt-3">
-                    <img src="{{ asset('image/ab.png') }}" alt="Logo ABEC" class="h-10 mx-auto transition-transform duration-300 hover:scale-105">
+            </div>
+            <!-- Ligne de séparation et copyright -->
+            <div class="border-t border-white border-opacity-20 pt-4">
+                <div class="flex flex-col md:flex-row justify-between items-center">
+                    <p class="text-gray-300 text-xs mb-3 md:mb-0">
+                        &copy; {{ date('Y') }} Association du Bien-Être Communautaire. Tous droits réservés.
+                    </p>
+                    <div class="flex space-x-4 text-xs">
+                        <a href="#" class="text-gray-300 hover:text-yellow transition-colors duration-300">Mentions légales</a>
+                        <a href="#" class="text-gray-300 hover:text-yellow transition-colors duration-300">Politique de confidentialité</a>
+                        <a href="#" class="text-gray-300 hover:text-yellow transition-colors duration-300">Conditions d'utilisation</a>
+                    </div>
                 </div>
             </div>
         </div>
+        <!-- Éléments décoratifs réduits -->
+        <div class="absolute top-0 right-0 w-24 h-24 bg-yellow rounded-full opacity-10 -translate-y-1/2 translate-x-1/2"></div>
+        <div class="absolute bottom-0 left-0 w-16 h-16 bg-white rounded-full opacity-5 -translate-y-1/2 -translate-x-1/2"></div>
     </footer>
     <!-- Swiper JS -->
     <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
@@ -966,32 +1109,32 @@
             console.log('Mobile menu toggled', { isOpen: !isOpen });
         }
 
-       const partnerSwiper = new Swiper(".mySwiper", {
-    effect: "slide",
-    loop: true,
-    centeredSlides: false, // Par défaut, non centré pour mobile
-    slidesPerView: 2,
-    spaceBetween: 8,
-    speed: 800,
-    autoplay: { delay: 3000, pauseOnMouseEnter: true },
-    breakpoints: {
-        320: { 
-            slidesPerView: 1, 
-            spaceBetween: 4, 
-            centeredSlides: true // Centré pour mobile
-        },
-        640: { 
-            slidesPerView: 2, 
-            spaceBetween: 6, 
-            centeredSlides: true // Centré pour desktop (tablette)
-        },
-        1024: { 
-            slidesPerView: 2, 
-            spaceBetween: 8, 
-            centeredSlides: true // Centré pour desktop (grands écrans)
-        }
-    }
-});
+        const partnerSwiper = new Swiper(".mySwiper", {
+            effect: "slide",
+            loop: true,
+            centeredSlides: false,
+            slidesPerView: 2,
+            spaceBetween: 8,
+            speed: 800,
+            autoplay: { delay: 3000, pauseOnMouseEnter: true },
+            breakpoints: {
+                320: { 
+                    slidesPerView: 1, 
+                    spaceBetween: 4, 
+                    centeredSlides: true
+                },
+                640: { 
+                    slidesPerView: 2, 
+                    spaceBetween: 6, 
+                    centeredSlides: true
+                },
+                1024: { 
+                    slidesPerView: 2, 
+                    spaceBetween: 8, 
+                    centeredSlides: true
+                }
+            }
+        });
 
         const heroSwiper = new Swiper(".heroSwiper", {
             effect: "fade",
@@ -1029,5 +1172,4 @@
         });
     </script>
 </body>
-
 </html>
