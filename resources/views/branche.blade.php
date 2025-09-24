@@ -1,160 +1,519 @@
+
 <!DOCTYPE html>
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Association du Bien-Être Communautaire </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Association du Bien-Être Communautaire - Événements</title>
     <!-- Favicon -->
     <link rel="icon" type="image/png" sizes="64x64" href="{{ asset('image/ab.png') }}">
+    <link rel="apple-touch-icon" sizes="180x180" href="{{ asset('image/ab-180.png') }}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{{ asset('image/ab-32.png') }}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('image/ab-16.png') }}">
+    <link rel="manifest" href="{{ asset('manifest.json') }}">
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Inter Font (Optional, retained from original) -->
     <link rel="stylesheet" href="https://rsms.me/inter/inter.css">
-    <script>
-      tailwind.config = {
-        theme: {
-          extend: {
-            colors: {
-              primary: '#1E90FF',
-              secondary: '#87CEFA',
-              yellow: '#FFD700'
-            },
-            fontFamily: {
-              'custom': ['Arial Black', 'sans-serif'],
-            }
-          }
-        }
-      }
-    </script>
     <style>
-      [x-cloak] { display: none; }
-      h1, h2, h3, .font-custom {
-        font-family: 'custom', sans-serif;
-      }
-      /* Loading Spinner Styles */
-      #loading {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background: rgba(255, 255, 255, 0.8); /* Semi-transparent white background */
-        z-index: 9999;
-        transition: opacity 0.5s ease-out;
-      }
-      #loading.hidden {
-        opacity: 0;
-        pointer-events: none;
-      }
-      .spinner-container {
-        position: relative;
-        width: 80px; /* Size of the spinner */
-        height: 80px;
-      }
-      .spinner-circle {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        border: 4px solid transparent;
-        border-top-color: #1E90FF; /* Matches primary color */
-        border-radius: 50%;
-        animation: spin 1s linear infinite;
-      }
-      .spinner-logo {
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%); /* Precise centering */
-        width: 48px; /* 60% of spinner-container size for balance */
-        height: 48px;
-        object-fit: contain; /* Ensure logo scales correctly */
-      }
-      @keyframes spin {
-        0% { transform: rotate(0deg); }
-        100% { transform: rotate(360deg); }
-      }
-      /* Responsive adjustments for spinner */
-      @media (max-width: 640px) {
+        @import url('https://fonts.googleapis.com/css2?family=Arial+Black&display=swap');
+
+        /* Global styles */
+        body {
+            background-color: #ffffff;
+            font-family: 'Arial Black', sans-serif;
+            overflow-x: hidden;
+            padding-top: 0;
+            opacity: 0;
+            transition: opacity 0.7s ease-out;
+        }
+
+        body.loaded {
+            opacity: 1;
+        }
+
+        .font-custom,
+        h1, h2, h3, p, a, li {
+            font-family: 'Arial Black', sans-serif;
+            font-weight: bold;
+            text-align: center; /* Centrer tous les titres et textes */
+        }
+
+        /* Smooth Scroll Behavior */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* Loading Spinner Styles */
+        #loading {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.95);
+            z-index: 9999;
+            transition: opacity 0.7s ease-out;
+        }
+
+        #loading.hidden {
+            opacity: 0;
+            pointer-events: none;
+        }
+
         .spinner-container {
-          width: 60px; /* Smaller size for mobile */
-          height: 60px;
+            position: relative;
+            width: 80px;
+            height: 80px;
         }
+
+        .spinner-circle {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            border: 4px solid transparent;
+            border-top-color: #1E90FF;
+            border-radius: 50%;
+            animation: spin 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
+        }
+
         .spinner-logo {
-          width: 36px; /* Adjusted logo size for mobile */
-          height: 36px;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 48px;
+            height: 48px;
+            object-fit: contain;
         }
-      }
-      /* Styles pour le footer compact */
-      .wave-divider {
-        position: absolute;
-        top: -1px;
-        left: 0;
-        width: 100%;
-        overflow: hidden;
-        line-height: 0;
-      }
-      .wave-divider svg {
-        position: relative;
-        display: block;
-        width: calc(100% + 1.3px);
-        height: 40px;
-      }
-      .wave-divider .shape-fill {
-        fill: url(#gradient-wave);
-      }
-      .footer-link {
-        transition: color 0.3s ease, transform 0.3s ease;
-      }
-      .footer-link:hover {
-        transform: translateX(5px);
-      }
-      .social-icon {
-        transition: transform 0.3s ease, opacity 0.3s ease;
-      }
-      .social-icon:hover {
-        transform: scale(1.2);
-        opacity: 0.8;
-      }
-      /* Animation pour la phrase défilante */
-      .marquee-container {
-        width: 100%;
-        overflow: hidden;
-        white-space: nowrap;
-        background-color: #1E90FF;
-        padding: 0.5rem 0;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        position: relative;
-        z-index: 10;
-      }
-      .marquee-text {
-        display: inline-block;
-        font-size: 1rem;
-        font-weight: bold;
-        color: #FFD700;
-        animation: marquee 15s linear infinite;
-        text-align: center;
-      }
-      @keyframes marquee {
-        0% { transform: translateX(100%); }
-        100% { transform: translateX(-100%); }
-      }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* Modal Styles */
+        .modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+            display: none;
+            transition: opacity 0.3s ease;
+        }
+
+        .modal.show {
+            display: flex !important;
+            opacity: 1;
+        }
+
+        .modal-content {
+            background: #FFF8DC;
+            border-radius: 0.5rem;
+            padding: 1.5rem;
+            max-width: 95%;
+            max-height: 90vh;
+            overflow-y: auto;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+            opacity: 0;
+            transform: scale(0.9) translateY(20px);
+            transition: opacity 0.4s ease, transform 0.4s ease;
+        }
+
+        .modal.show .modal-content {
+            opacity: 1;
+            transform: scale(1) translateY(0);
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            cursor: pointer;
+            width: 24px;
+            height: 24px;
+            transition: transform 0.2s ease, opacity 0.2s ease;
+        }
+
+        .modal-close:hover {
+            transform: scale(1.2);
+            opacity: 0.8;
+        }
+
+        .modal-image {
+            width: 100%;
+            max-height: 30vh;
+            object-fit: cover;
+            border-radius: 0.5rem;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .modal-title {
+            font-size: clamp(1.25rem, 3vw, 1.5rem);
+            color: #1E90FF;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+            background: rgba(255, 248, 220, 0.8);
+            padding: 0.5rem;
+            border-radius: 0.25rem;
+            text-align: center;
+            transform: translateY(20px);
+            opacity: 0;
+            transition: transform 0.4s ease, opacity 0.4s ease;
+        }
+
+        .modal.show .modal-title {
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        .modal-content p {
+            font-size: clamp(0.75rem, 2vw, 0.875rem);
+            color: #333333;
+            line-height: 1.6;
+            transition: opacity 0.4s ease 0.2s;
+            opacity: 0;
+        }
+
+        .modal.show .modal-content p {
+            opacity: 1;
+        }
+
+        /* Event Card Styles (Adapted from action-card) */
+        .event-card {
+            background-color: #FFF8DC;
+            position: relative;
+            overflow: hidden;
+            border-radius: 0.5rem;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            transition: transform 0.5s ease, box-shadow 0.5s ease, opacity 0.5s ease;
+            opacity: 0;
+            transform: translateY(50px);
+            cursor: pointer;
+        }
+
+        .event-card.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .event-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 215, 0, 0.3), transparent);
+            transition: left 0.6s ease;
+            z-index: 1;
+        }
+
+        .event-card:hover::before {
+            left: 100%;
+        }
+
+        .event-card::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 3px;
+            background-color: #FFD700;
+            transition: width 0.3s ease;
+            z-index: 2;
+        }
+
+        .event-card:hover::after {
+            width: 100%;
+        }
+
+        .event-card:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .event-image {
+            width: 100%;
+            height: 100px;
+            object-fit: cover;
+            border-radius: 0.5rem 0.5rem 0 0;
+            transition: transform 0.3s ease, opacity 0.3s ease;
+        }
+
+        .event-card:hover .event-image {
+            transform: scale(1.05);
+            opacity: 0.9;
+        }
+
+        .event-body {
+            padding: 1rem;
+            text-align: center;
+            position: relative;
+            z-index: 5;
+        }
+
+        .event-meta {
+            font-size: clamp(0.75rem, 2vw, 0.875rem);
+            color: #6b7280;
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.3rem;
+        }
+
+        .event-meta::before {
+            content: "🗓️";
+            font-size: 0.9em;
+        }
+
+        .event-title {
+            font-size: clamp(1rem, 2.5vw, 1.25rem);
+            color: #1E90FF;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+            margin-bottom: 0.5rem;
+            line-height: 1.4;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+            transition: color 0.3s ease;
+        }
+
+        .event-card:hover .event-title {
+            color: #FFD700;
+        }
+
+        .event-content {
+            font-size: clamp(0.75rem, 2vw, 0.875rem);
+            color: #333333;
+            line-height: 1.6;
+            margin-top: 0.5rem;
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        .event-button {
+            color: #000000;
+            background-color: #FFD700;
+            border: 1px solid #FFD700;
+            padding: 0.5rem 1rem;
+            font-size: clamp(0.75rem, 2vw, 0.875rem);
+            font-weight: bold;
+            border-radius: 0.25rem;
+            text-align: center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: fit-content;
+            margin: 0.5rem auto 0;
+            transition: all 0.3s ease;
+        }
+
+        .event-button:hover {
+            background-color: #DAA520;
+            color: #ffffff;
+            transform: scale(1.05);
+        }
+
+        /* Grid Container */
+        .events-grid {
+            display: grid;
+            grid-template-columns: repeat(1, 1fr);
+            gap: 1.5rem;
+            padding: 1rem 0;
+        }
+
+        @media (min-width: 640px) {
+            .events-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (min-width: 1024px) {
+            .events-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        /* Section Title */
+        .section-title {
+            text-transform: uppercase;
+            color: #1E90FF;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+            position: relative;
+            display: inline-block;
+            font-size: clamp(1.5rem, 4vw, 2.5rem);
+            animation: colorCycle 3s ease-in-out infinite;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 110%;
+            height: 110%;
+            background: rgba(0, 0, 0, 0.1);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+            z-index: -1;
+            border-radius: 0.25rem;
+        }
+
+        /* Hero Title Animation */
+        .hero-title {
+            font-size: clamp(2rem, 5vw, 4rem);
+            font-weight: 900;
+            text-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+            animation: colorCycle 3s ease-in-out infinite;
+        }
+
+        @keyframes colorCycle {
+            0% { color: #1E90FF; }
+            50% { color: #FFD700; }
+            100% { color: #1E90FF; }
+        }
+
+        /* Stagger Animation for Cards */
+        .event-card:nth-child(1).visible { transition-delay: 0.1s; }
+        .event-card:nth-child(2).visible { transition-delay: 0.2s; }
+        .event-card:nth-child(3).visible { transition-delay: 0.3s; }
+
+        /* Section Animation */
+        .section-animate {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.5s ease, transform 0.5s ease;
+        }
+
+        .section-animate.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Responsive Adjustments */
+        @media (max-width: 640px) {
+            .event-image {
+                height: 80px;
+            }
+            .event-title {
+                font-size: clamp(0.875rem, 2.5vw, 1rem);
+            }
+            .event-content, .event-meta {
+                font-size: clamp(0.7rem, 1.8vw, 0.8rem);
+            }
+            .event-button {
+                padding: 0.4rem 0.8rem;
+                font-size: clamp(0.7rem, 1.8vw, 0.8rem);
+            }
+            .modal-content {
+                padding: 1rem;
+                max-width: 98%;
+            }
+            .modal-image {
+                max-height: 20vh;
+            }
+            .modal-title {
+                font-size: clamp(1rem, 2.5vw, 1.25rem);
+            }
+            .modal-content p {
+                font-size: clamp(0.7rem, 1.8vw, 0.8rem);
+            }
+            .spinner-container {
+                width: 60px;
+                height: 60px;
+            }
+            .spinner-logo {
+                width: 36px;
+                height: 36px;
+            }
+            .hero-title {
+                font-size: clamp(1.5rem, 4vw, 2.5rem);
+            }
+        }
+
+        @media (min-width: 641px) and (max-width: 1023px) {
+            .event-image {
+                height: 110px;
+            }
+            .event-title {
+                font-size: clamp(1rem, 2.5vw, 1.125rem);
+            }
+            .modal-content {
+                max-width: 90%;
+            }
+            .modal-image {
+                max-height: 25vh;
+            }
+            .hero-title {
+                font-size: clamp(2rem, 4.5vw, 3rem);
+            }
+        }
+
+        @media (min-width: 1024px) {
+            .event-image {
+                height: 130px;
+            }
+            .hero-title {
+                font-size: clamp(2.5rem, 5vw, 4rem);
+            }
+        }
+
+        /* Hide elements during Alpine.js initialization */
+        [x-cloak] { display: none; }
     </style>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#1E90FF',
+                        secondary: '#87CEFA',
+                        yellow: '#FFD700'
+                    },
+                    fontFamily: {
+                        custom: ['Arial Black', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
 </head>
 <body id="top" x-data="{ mobileMenuOpen: false }" class="bg-white font-sans antialiased">
 
     <!-- Loading Spinner -->
-    <div id="loading" class="fixed inset-0 bg-white bg-opacity-80 flex items-center justify-center z-50">
+    <div id="loading" class="fixed inset-0 bg-white bg-opacity-95 flex items-center justify-center z-50">
         <div class="spinner-container">
-            <!-- Cercle bleu rotatif -->
             <div class="spinner-circle"></div>
-            <!-- Logo statique au centre -->
             <img src="{{ asset('image/ab.png') }}" alt="Logo ABEC" class="spinner-logo">
+        </div>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal" id="modal">
+        <div class="modal-content">
+            <img id="modalImage" class="modal-image" src="" alt="">
+            <h3 class="modal-title" id="modalTitle"></h3>
+            <p class="text-gray-600" id="modalContent"></p>
+            <svg class="modal-close" onclick="closeModal()" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="18" y1="6" x2="6" y2="18"></line>
+                <line x1="6" y1="6" x2="18" y2="18"></line>
+            </svg>
         </div>
     </div>
 
@@ -163,17 +522,17 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex items-center justify-between h-10">
                 <div class="flex items-center space-x-4">
-                    <a href="https://www.facebook.com/profile.php?id=61568266295634" target="_blank">
+                    <a href="https://www.facebook.com/profile.php?id=61568266295634" target="_blank" class="hover:opacity-80 transition-opacity duration-300">
                         <img src="{{ asset('image/feacebook.jpg') }}" alt="Facebook" class="w-6 h-6 rounded-full">
                     </a>
-                    <a href="https://whatsapp.com/channel/0029VaYTsNkD8SE42sDpnk1w" target="_blank">
+                    <a href="https://whatsapp.com/channel/0029VaYTsNkD8SE42sDpnk1w" target="_blank" class="hover:opacity-80 transition-opacity duration-300">
                         <img src="{{ asset('image/wastapp.jpg') }}" alt="WhatsApp" class="w-6 h-6 rounded-full">
                     </a>
-                    <a href="https://www.instagram.com/abec.officiel/" target="_blank">
+                    <a href="https://www.instagram.com/abec.officiel/" target="_blank" class="hover:opacity-80 transition-opacity duration-300">
                         <img src="{{ asset('image/insta.jpg') }}" alt="Instagram" class="w-6 h-6 rounded-full">
                     </a>
                 </div>
-                <a href="mailto:globaluniversalwelfare@gmail.com">
+                <a href="mailto:globaluniversalwelfare@gmail.com" class="hover:opacity-80 transition-opacity duration-300">
                     <img src="{{ asset('image/m.jpg') }}" alt="Email" class="w-6 h-6 rounded-full">
                 </a>
             </div>
@@ -181,102 +540,106 @@
     </nav>
 
     <!-- Header -->
-    <header class="bg-white shadow py-4">
+    <header class="bg-white shadow py-4 section-animate">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex items-center justify-between h-16">
                 <div class="flex-shrink-0">
-                    <img src="{{ asset('image/ab.png') }}" alt="logo" class="h-10 sm:h-12 md:h-14">
+                    <img src="{{ asset('image/ab.png') }}" alt="logo" class="h-10 sm:h-12 md:h-14 transition-transform duration-300 hover:scale-105">
                 </div>
                 <!-- Nav desktop -->
                 <nav class="hidden md:flex space-x-4">
-                    <a href="{{route('welcome')}}" class="px-3 py-2 text-sm text-gray-800 hover:bg-gray-200 font-bold font-custom">Accueil</a>
-                    <a href="{{ route('dons') }}" class="px-3 py-2 rounded-md text-sm font-bold text-gray-800 hover:bg-blue-500 hover:text-white">Dons</a>
-                    <a href="{{ route('news') }}" class="px-3 py-2 rounded-md text-sm font-bold text-gray-800 hover:bg-blue-500 hover:text-white">News</a>
+                    <a href="{{route('welcome')}}" class="px-3 py-2 text-sm font-bold text-gray-800 hover:bg-blue-500 hover:text-white transition-all duration-300 font-custom">Accueil</a>
+                    <a href="{{ route('dons') }}" class="px-3 py-2 text-sm font-bold text-gray-800 hover:bg-blue-500 hover:text-white transition-all duration-300 font-custom">Dons</a>
+                    <a href="{{ route('news') }}" class="px-3 py-2 text-sm font-bold text-gray-800 hover:bg-blue-500 hover:text-white transition-all duration-300 font-custom">News</a>
                 </nav>
-
                 <!-- Bouton Hamburger -->
                 <div class="md:hidden">
                     <button @click="mobileMenuOpen = !mobileMenuOpen" class="text-gray-500 focus:outline-none p-2">
-                        <svg x-show="!mobileMenuOpen" x-cloak xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none"
-                             viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                  d="M4 6h16M4 12h16M4 18h16"/>
+                        <svg x-show="!mobileMenuOpen" x-cloak xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
                         </svg>
-                        <svg x-show="mobileMenuOpen" x-cloak xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none"
-                             viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                  d="M6 18L18 6M6 6l12 12"/>
+                        <svg x-show="mobileMenuOpen" x-cloak xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
                         </svg>
                     </button>
                 </div>
             </div>
-
             <!-- Menu mobile -->
-            <div x-show="mobileMenuOpen" x-cloak class="md:hidden px-2 pt-2 pb-3 space-y-1 mt-4 bg-white rounded-lg shadow-lg">
-                <a href="{{route('welcome')}}" class="block px-3 py-2 text-base text-gray-800 hover:bg-gray-200 font-bold font-custom">Accueil</a>
-                <a href="{{route('dons')}}" class="block px-3 py-2 text-base text-gray-800 hover:bg-gray-200 font-bold font-custom">Dons</a>
-                <a href="{{route('news')}}" class="block px-3 py-2 text-base text-gray-800 hover:bg-gray-200 font-bold font-custom">News</a>
+            <div x-show="mobileMenuOpen" x-cloak class="md:hidden px-2 pt-2 pb-3 space-y-1 mt-4 bg-white rounded-lg shadow-lg mobile-menu">
+                <a href="{{route('welcome')}}" class="block px-3 py-2 text-base font-bold text-gray-800 hover:bg-blue-500 hover:text-white transition-all duration-300 font-custom">Accueil</a>
+                <a href="{{route('dons')}}" class="block px-3 py-2 text-base font-bold text-gray-800 hover:bg-blue-500 hover:text-white transition-all duration-300 font-custom">Dons</a>
+                <a href="{{route('news')}}" class="block px-3 py-2 text-base font-bold text-gray-800 hover:bg-blue-500 hover:text-white transition-all duration-300 font-custom">News</a>
             </div>
         </div>
     </header>
 
     <!-- Hero -->
-    <section class="relative bg-cover bg-center"
-             style="background: url('{{ asset('image/fotos.jpg') }}') center/cover no-repeat;">
+    <section class="relative bg-cover bg-center min-h-[60vh] sm:min-h-[80vh] lg:min-h-screen section-animate">
+        <div class="absolute inset-0 rounded-br-3xl overflow-hidden">
+            <img src="{{ asset('image/fotos.jpg') }}" alt="Hero Background" class="w-full h-full object-cover">
+        </div>
         <div class="absolute inset-0 bg-black bg-opacity-40"></div>
-        <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 md:py-32 flex items-center justify-center text-center">
-            <div class="text-white max-w-3xl">
-                <h1 class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold font-custom leading-tight">
+        <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-32 pb-24 md:pt-48 md:pb-40 flex items-center justify-center text-center">
+            <div class="text-white max-w-3xl mt-10 sm:mt-20">
+                <h1 class="hero-title font-extrabold font-custom leading-tight">
                     Nos Événements
                 </h1>
                 <p class="mt-4 text-lg sm:text-xl font-bold font-custom">
                     Découvrez nos actions passées et à venir.
                 </p>
-                <div class="mt-8">
-                    <a href="#upcoming-events" class="inline-block bg-yellow text-black px-6 py-3 font-bold rounded-md hover:bg-white hover:text-primary transition hover:scale-105 font-custom shadow-lg">
-                        Voir les événements
-                    </a>
-                </div>
+                <!-- Removed "Voir les événements" button -->
             </div>
         </div>
     </section>
 
     <!-- Événements à Venir -->
-    <section id="upcoming-events" class="py-12 md:py-16 bg-gray-200">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <h2 class="text-2xl sm:text-3xl font-bold text-gray-900 text-center font-custom mb-8 md:mb-12">Événements à Venir</h2>
-            <div class="grid gap-6 sm:gap-8 sm:grid-cols-2 lg:grid-cols-3">
+    <section id="upcoming-events" class="py-12 md:py-16 bg-gray-200 section-animate">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <h2 class="section-title mb-8 md:mb-12">Événements à Venir</h2>
+            <div class="events-grid">
                 <!-- Événement 1 -->
-                <div class="bg-white rounded-xl md:rounded-2xl shadow-lg overflow-hidden hover:scale-105 hover:shadow-2xl transition group">
-                    <img src="{{ asset('image/fotos.jpg') }}" alt="Plantation d'arbres" class="w-full h-48 sm:h-56 object-cover">
-                    <div class="p-4 sm:p-6">
-                        <span class="block text-xs sm:text-sm text-gray-500 font-bold">10 Juin 2024 • Yaoundé</span>
-                        <h3 class="text-lg sm:text-xl font-bold text-gray-800 mt-2 font-custom">Plantation d'arbres</h3>
-                        <p class="mt-2 sm:mt-3 text-gray-600 text-sm sm:text-base font-custom">
+                <div class="event-card" 
+                     data-modal-title="Plantation d'arbres" 
+                     data-modal-content="Rejoignez-nous pour planter 1000 arbres dans les écoles et espaces publics de Yaoundé. Cette initiative vise à promouvoir la durabilité environnementale et à sensibiliser les jeunes générations à l'importance de la préservation de la nature."
+                     data-modal-image="{{ asset('image/fotos.jpg') }}">
+                    <img src="{{ asset('image/fotos.jpg') }}" alt="Plantation d'arbres" class="event-image">
+                    <div class="event-body">
+                        <div class="event-meta">10 Juin 2024 • Yaoundé</div>
+                        <h3 class="event-title">Plantation d'arbres</h3>
+                        <p class="event-content">
                             Rejoignez-nous pour planter 1000 arbres dans les écoles et espaces publics de la ville.
                         </p>
+                        <button class="event-button">Voir plus</button>
                     </div>
                 </div>
                 <!-- Événement 2 -->
-                <div class="bg-white rounded-xl md:rounded-2xl shadow-lg overflow-hidden hover:scale-105 hover:shadow-2xl transition group">
-                    <img src="{{ asset('image/fotos.jpg') }}" alt="Collecte de dons médicaux" class="w-full h-48 sm:h-56 object-cover">
-                    <div class="p-4 sm:p-6">
-                        <span class="block text-xs sm:text-sm text-gray-500 font-bold">25 Juillet 2024 • Douala</span>
-                        <h3 class="text-lg sm:text-xl font-bold text-gray-800 mt-2 font-custom">Collecte de dons médicaux</h3>
-                        <p class="mt-2 sm:mt-3 text-gray-600 text-sm sm:text-base font-custom">
+                <div class="event-card" 
+                     data-modal-title="Collecte de dons médicaux" 
+                     data-modal-content="Nous organisons une grande collecte de médicaments et matériel pour les hôpitaux ruraux de Douala. Votre contribution peut sauver des vies et améliorer l'accès aux soins dans les zones défavorisées."
+                     data-modal-image="{{ asset('image/fotos.jpg') }}">
+                    <img src="{{ asset('image/fotos.jpg') }}" alt="Collecte de dons médicaux" class="event-image">
+                    <div class="event-body">
+                        <div class="event-meta">25 Juillet 2024 • Douala</div>
+                        <h3 class="event-title">Collecte de dons médicaux</h3>
+                        <p class="event-content">
                             Nous organisons une grande collecte de médicaments et matériel pour les hôpitaux ruraux.
                         </p>
+                        <button class="event-button">Voir plus</button>
                     </div>
                 </div>
                 <!-- Événement 3 -->
-                <div class="bg-white rounded-xl md:rounded-2xl shadow-lg overflow-hidden hover:scale-105 hover:shadow-2xl transition group">
-                    <img src="{{ asset('image/fotos2.jpg') }}" alt="Atelier d'éducation financière" class="w-full h-48 sm:h-56 object-cover">
-                    <div class="p-4 sm:p-6">
-                        <span class="block text-xs sm:text-sm text-gray-500 font-bold">15 Août 2024 • Garoua</span>
-                        <h3 class="text-lg sm:text-xl font-bold text-gray-800 mt-2 font-custom">Atelier d'éducation financière</h3>
-                        <p class="mt-2 sm:mt-3 text-gray-600 text-sm sm:text-base font-custom">
+                <div class="event-card" 
+                     data-modal-title="Atelier d'éducation financière" 
+                     data-modal-content="Participez à notre formation gratuite pour les jeunes entrepreneurs à Garoua. Cet atelier vise à enseigner la gestion budgétaire et les compétences nécessaires pour développer des projets viables."
+                     data-modal-image="{{ asset('image/fotos2.jpg') }}">
+                    <img src="{{ asset('image/fotos2.jpg') }}" alt="Atelier d'éducation financière" class="event-image">
+                    <div class="event-body">
+                        <div class="event-meta">15 Août 2024 • Garoua</div>
+                        <h3 class="event-title">Atelier d'éducation financière</h3>
+                        <p class="event-content">
                             Formation gratuite pour les jeunes entrepreneurs sur la gestion de leur budget et projets.
                         </p>
+                        <button class="event-button">Voir plus</button>
                     </div>
                 </div>
             </div>
@@ -284,41 +647,53 @@
     </section>
 
     <!-- Événements Passés -->
-    <section id="past-events" class="py-12 md:py-16 bg-gray-100">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <h2 class="text-2xl sm:text-3xl font-bold text-gray-900 text-center font-custom mb-8 md:mb-12">Événements Passés</h2>
-            <div class="grid gap-6 sm:gap-8 sm:grid-cols-2 lg:grid-cols-3">
+    <section id="past-events" class="py-12 md:py-16 bg-gray-100 section-animate">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <h2 class="section-title mb-8 md:mb-12">Événements Passés</h2>
+            <div class="events-grid">
                 <!-- Événement 1 -->
-                <div class="bg-white rounded-xl md:rounded-2xl shadow-lg overflow-hidden hover:scale-105 hover:shadow-2xl transition group">
-                    <img src="{{ asset('image/fotos4.jpg') }}" alt="Distribution de fournitures scolaires" class="w-full h-48 sm:h-56 object-cover">
-                    <div class="p-4 sm:p-6">
-                        <span class="block text-xs sm:text-sm text-gray-500 font-bold">15 Mars 2024 • Yaoundé</span>
-                        <h3 class="text-lg sm:text-xl font-bold text-gray-800 mt-2 font-custom">Distribution de fournitures scolaires</h3>
-                        <p class="mt-2 sm:mt-3 text-gray-600 text-sm sm:text-base font-custom">
+                <div class="event-card" 
+                     data-modal-title="Distribution de fournitures scolaires" 
+                     data-modal-content="Nous avons distribué des cahiers, stylos et cartables à 200 enfants dans un orphelinat local à Yaoundé. Cette action a permis d'améliorer l'accès à l'éducation pour les enfants défavorisés."
+                     data-modal-image="{{ asset('image/fotos4.jpg') }}">
+                    <img src="{{ asset('image/fotos4.jpg') }}" alt="Distribution de fournitures scolaires" class="event-image">
+                    <div class="event-body">
+                        <div class="event-meta">15 Mars 2024 • Yaoundé</div>
+                        <h3 class="event-title">Distribution de fournitures scolaires</h3>
+                        <p class="event-content">
                             Nous avons offert des cahiers, stylos et cartables à 200 enfants dans un orphelinat local.
                         </p>
+                        <button class="event-button">Voir plus</button>
                     </div>
                 </div>
                 <!-- Événement 2 -->
-                <div class="bg-white rounded-xl md:rounded-2xl shadow-lg overflow-hidden hover:scale-105 hover:shadow-2xl transition group">
-                    <img src="{{ asset('image/fotos.jpg') }}" alt="Campagne de vaccination" class="w-full h-48 sm:h-56 object-cover">
-                    <div class="p-4 sm:p-6">
-                        <span class="block text-xs sm:text-sm text-gray-500 font-bold">22 Janvier 2024 • Douala</span>
-                        <h3 class="text-lg sm:text-xl font-bold text-gray-800 mt-2 font-custom">Campagne de vaccination</h3>
-                        <p class="mt-2 sm:mt-3 text-gray-600 text-sm sm:text-base font-custom">
+                <div class="event-card" 
+                     data-modal-title="Campagne de vaccination" 
+                     data-modal-content="En partenariat avec le ministère de la santé, nous avons vacciné plus de 500 personnes à Douala, contribuant à la prévention des maladies dans les communautés vulnérables."
+                     data-modal-image="{{ asset('image/fotos.jpg') }}">
+                    <img src="{{ asset('image/fotos.jpg') }}" alt="Campagne de vaccination" class="event-image">
+                    <div class="event-body">
+                        <div class="event-meta">22 Janvier 2024 • Douala</div>
+                        <h3 class="event-title">Campagne de vaccination</h3>
+                        <p class="event-content">
                             En partenariat avec le ministère de la santé, nous avons vacciné plus de 500 personnes.
                         </p>
+                        <button class="event-button">Voir plus</button>
                     </div>
                 </div>
                 <!-- Événement 3 -->
-                <div class="bg-white rounded-xl md:rounded-2xl shadow-lg overflow-hidden hover:scale-105 hover:shadow-2xl transition group">
-                    <img src="{{ asset('image/fotos.jpg') }}" alt="Nettoyage de quartier" class="w-full h-48 sm:h-56 object-cover">
-                    <div class="p-4 sm:p-6">
-                        <span class="block text-xs sm:text-sm text-gray-500 font-bold">5 Décembre 2023 • Bafoussam</span>
-                        <h3 class="text-lg sm:text-xl font-bold text-gray-800 mt-2 font-custom">Nettoyage de quartier</h3>
-                        <p class="mt-2 sm:mt-3 text-gray-600 text-sm sm:text-base font-custom">
+                <div class="event-card" 
+                     data-modal-title="Nettoyage de quartier" 
+                     data-modal-content="100 bénévoles ont participé à la collecte de déchets dans les rues du centre-ville de Bafoussam, améliorant l'hygiène et la propreté de la communauté."
+                     data-modal-image="{{ asset('image/fotos.jpg') }}">
+                    <img src="{{ asset('image/fotos.jpg') }}" alt="Nettoyage de quartier" class="event-image">
+                    <div class="event-body">
+                        <div class="event-meta">5 Décembre 2023 • Bafoussam</div>
+                        <h3 class="event-title">Nettoyage de quartier</h3>
+                        <p class="event-content">
                             100 bénévoles ont participé à la collecte de déchets dans les rues du centre-ville.
                         </p>
+                        <button class="event-button">Voir plus</button>
                     </div>
                 </div>
             </div>
@@ -328,135 +703,115 @@
         </div>
     </section>
 
-    <!-- Footer compact avec vague et phrase défilante centrée -->
-    <footer id="contact" class="bg-primary text-white relative pt-10 overflow-hidden">
-        <!-- Vague SVG compacte -->
-        <div class="wave-divider">
-            <svg data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
-                <defs>
-                    <linearGradient id="gradient-wave" x1="0%" y1="0%" x2="0%" y2="100%">
-                        <stop offset="0%" style="stop-color:#ffffff;stop-opacity:1" />
-                        <stop offset="100%" style="stop-color:#1E90FF;stop-opacity:0.8" />
-                    </linearGradient>
-                </defs>
-                <path d="M0,0 C300,100 900,100 1200,0 V120 H0 Z" class="shape-fill"></path>
-            </svg>
-        </div>
-        <!-- Phrase défilante centrée -->
-        <div class="marquee-container">
-            <span class="marquee-text">Grandir - Agir - Changer</span>
-        </div>
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-            <!-- Grille compacte -->
-            <div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-6">
-                <!-- Colonne Logo et Description -->
-                <div class="md:col-span-2">
-                    <div class="flex items-center mb-4">
-                        <img src="{{ asset('image/ab.png') }}" alt="Logo ABEC" class="w-12 h-12 mr-3">
-                        <div>
-                            <h2 class="text-lg font-bold mb-1 font-custom">ABEC</h2>
-                            <p class="text-yellow text-xs font-medium font-custom">Association du Bien-Être Communautaire</p>
-                        </div>
-                    </div>
-                    <p class="text-gray-200 text-sm mb-4 leading-relaxed font-custom">
-                        Nous œuvrons depuis 2010 pour améliorer les conditions de vie des communautés vulnérables au Cameroun.
-                    </p>
-                    <div class="flex space-x-3">
-                        <a href="https://www.facebook.com/profile.php?id=61568266295634" target="_blank" class="social-icon bg-white bg-opacity-20 p-1.5 rounded-full hover:bg-yellow transition-all duration-300">
-                            <img src="{{ asset('image/feacebook.jpg') }}" alt="Facebook" class="w-5 h-5">
-                        </a>
-                        <a href="https://whatsapp.com/channel/0029VaYTsNkD8SE42sDpnk1w" target="_blank" class="social-icon bg-white bg-opacity-20 p-1.5 rounded-full hover:bg-yellow transition-all duration-300">
-                            <img src="{{ asset('image/wastapp.jpg') }}" alt="WhatsApp" class="w-5 h-5">
-                        </a>
-                        <a href="https://www.instagram.com/abec.officiel/" target="_blank" class="social-icon bg-white bg-opacity-20 p-1.5 rounded-full hover:bg-yellow transition-all duration-300">
-                            <img src="{{ asset('image/insta.jpg') }}" alt="Instagram" class="w-5 h-5">
-                        </a>
-                        <a href="mailto:globaluniversalwelfare@gmail.com" class="social-icon bg-white bg-opacity-20 p-1.5 rounded-full hover:bg-yellow transition-all duration-300">
-                            <img src="{{ asset('image/m.jpg') }}" alt="Email" class="w-5 h-5">
-                        </a>
-                    </div>
-                </div>
-                <!-- Colonne Liens Rapides -->
-                <div>
-                    <h3 class="text-base font-bold mb-4 text-white border-b border-yellow pb-1 font-custom">Liens Rapides</h3>
-                    <ul class="space-y-2 text-sm">
-                        <li><a href="{{ url('/') }}" class="footer-link text-gray-200 hover:text-yellow flex items-center transition-all duration-300 font-custom"><span class="mr-2">→</span> Accueil</a></li>
-                        <li><a href="{{ url('/about') }}" class="footer-link text-gray-200 hover:text-yellow flex items-center transition-all duration-300 font-custom"><span class="mr-2">→</span> À propos</a></li>
-                        <li><a href="{{ url('/projects') }}" class="footer-link text-gray-200 hover:text-yellow flex items-center transition-all duration-300 font-custom"><span class="mr-2">→</span> Nos Projets</a></li>
-                        <li><a href="{{ url('/dons') }}" class="footer-link text-gray-200 hover:text-yellow flex items-center transition-all duration-300 font-custom"><span class="mr-2">→</span> Faire un don</a></li>
-                        <li><a href="{{ url('/contact') }}" class="footer-link text-gray-200 hover:text-yellow flex items-center transition-all duration-300 font-custom"><span class="mr-2">→</span> Contact</a></li>
-                    </ul>
-                </div>
-                <!-- Colonne Contact -->
-                <div>
-                    <h3 class="text-base font-bold mb-4 text-white border-b border-yellow pb-1 font-custom">Contact</h3>
-                    <div class="space-y-3 text-sm text-gray-200 font-custom">
-                        <div class="flex items-start">
-                            <svg class="w-4 h-4 mt-1 mr-2 text-yellow" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path>
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
-                            </svg>
-                            <p>Yaoundé, Cameroun<br>Quartier Mokolo</p>
-                        </div>
-                        <div class="flex items-center">
-                            <svg class="w-4 h-4 mr-2 text-yellow" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
-                            </svg>
-                            <a href="mailto:globaluniversalwelfare@gmail.com" class="footer-link hover:text-yellow transition-all duration-300">globaluniversalwelfare@gmail.com</a>
-                        </div>
-                        <div class="flex items-center">
-                            <svg class="w-4 h-4 mr-2 text-yellow" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"></path>
-                            </svg>
-                            <p>+237 6XX XX XX XX</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!-- Call-to-action compact -->
-            <div class="bg-white bg-opacity-10 rounded-lg p-4 mb-6 backdrop-blur-sm">
-                <div class="flex flex-col md:flex-row md:items-center justify-between">
-                    <div class="mb-3 md:mb-0">
-                        <h3 class="text-base font-bold text-white mb-1 font-custom">Rejoignez notre mission</h3>
-                        <p class="text-gray-200 text-sm font-custom">Votre soutien peut changer des vies.</p>
-                    </div>
-                    <a href="{{ url('/dons') }}" class="inline-block bg-yellow text-primary font-bold py-2 px-4 rounded-md hover:bg-opacity-90 transform hover:scale-105 transition-all duration-300 shadow-md font-custom">
-                        Faire un don
-                    </a>
-                </div>
-            </div>
-            <!-- Ligne de séparation et copyright -->
-            <div class="border-t border-white border-opacity-20 pt-4">
-                <div class="flex flex-col md:flex-row justify-between items-center">
-                    <p class="text-gray-300 text-xs mb-3 md:mb-0 font-custom">
-                        &copy; {{ date('Y') }} Association du Bien-Être Communautaire. Tous droits réservés.
-                    </p>
-                    <div class="flex space-x-4 text-xs">
-                        <a href="#" class="text-gray-300 hover:text-yellow transition-colors duration-300 font-custom">Mentions légales</a>
-                        <a href="#" class="text-gray-300 hover:text-yellow transition-colors duration-300 font-custom">Politique de confidentialité</a>
-                        <a href="#" class="text-gray-300 hover:text-yellow transition-colors duration-300 font-custom">Conditions d'utilisation</a>
-                    </div>
-                </div>
+    <!-- Footer -->
+    <footer class="bg-primary text-white py-8 section-animate">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <nav class="flex flex-col sm:flex-row justify-center gap-4 sm:gap-6 mb-6">
+                <a href="{{route('welcome')}}" class="text-sm font-bold hover:text-gray-200 font-custom">Accueil</a>
+                <a href="#about" class="text-sm font-bold hover:text-gray-200 font-custom">À propos</a>
+                <a href="#actions" class="text-sm font-bold hover:text-gray-200 font-custom">Nos Actions</a>
+                <a href="{{ route('news') }}" class="text-sm font-bold hover:text-gray-200 font-custom">News</a>
+                <a href="#contact" class="text-sm font-bold hover:text-gray-200 font-custom">Contact</a>
+            </nav>
+            <hr class="my-4 border-gray-300 max-w-md mx-auto" />
+            <p class="text-sm font-bold font-custom">Basée à Yaoundé, Cameroun</p>
+            <a href="#top" class="mt-4 inline-block text-sm font-bold hover:text-gray-200 font-custom">▲ Retour en haut</a>
+            <hr class="my-4 border-gray-300 max-w-md mx-auto" />
+            <p class="text-sm font-bold font-custom">Organisation internationale. Tous droits réservés.</p>
+            <p class="text-xs mt-2 font-custom">Suivez-nous :</p>
+            <div class="flex justify-center space-x-4 mt-4">
+                <a href="https://www.facebook.com/profile.php?id=61568266295634" target="_blank" class="hover:opacity-80">
+                    <img src="{{ asset('image/feacebook.jpg') }}" alt="Facebook" class="w-6 h-6 rounded-full">
+                </a>
+                <a href="https://whatsapp.com/channel/0029VaYTsNkD8SE42sDpnk1w" target="_blank" class="hover:opacity-80">
+                    <img src="{{ asset('image/wastapp.jpg') }}" alt="WhatsApp" class="w-6 h-6 rounded-full">
+                </a>
+                <a href="https://www.instagram.com/abec.officiel/" target="_blank" class="hover:opacity-80">
+                    <img src="{{ asset('image/insta.jpg') }}" alt="Instagram" class="w-6 h-6 rounded-full">
+                </a>
             </div>
         </div>
-        <!-- Éléments décoratifs réduits -->
-        <div class="absolute top-0 right-0 w-24 h-24 bg-yellow rounded-full opacity-10 -translate-y-1/2 translate-x-1/2"></div>
-        <div class="absolute bottom-0 left-0 w-16 h-16 bg-white rounded-full opacity-5 -translate-y-1/2 -translate-x-1/2"></div>
     </footer>
 
     <!-- Alpine.js -->
     <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
-    <!-- Spinner Script -->
+    <!-- JavaScript -->
     <script>
-      window.addEventListener('load', () => {
-          const loading = document.getElementById('loading');
-          setTimeout(() => {
-              loading.classList.add('hidden');
-              setTimeout(() => {
-                  loading.style.display = 'none';
-              }, 500); // Correspond à la durée de la transition CSS
-          }, 1000); // Délai avant de masquer le spinner (ajustez si nécessaire)
-      });
+        document.addEventListener('DOMContentLoaded', () => {
+            const elements = document.querySelectorAll('.section-animate, .event-card');
+            const loading = document.getElementById('loading');
+
+            // Fonctions pour gérer la modale
+            function openModal(content, title, imageSrc) {
+                const modal = document.getElementById('modal');
+                const modalContent = document.getElementById('modalContent');
+                const modalTitle = document.getElementById('modalTitle');
+                const modalImage = document.getElementById('modalImage');
+                modalContent.innerHTML = content || 'Contenu non disponible.';
+                modalTitle.textContent = title || 'Événement';
+                modalImage.src = imageSrc || '';
+                modalImage.alt = title || 'Image';
+                modal.classList.add('show');
+                console.log('Modal opened', { content, title, imageSrc });
+            }
+
+            function closeModal() {
+                const modal = document.getElementById('modal');
+                modal.classList.remove('show');
+                console.log('Modal closed');
+            }
+
+            // Masquer le loader après chargement
+            window.addEventListener('load', () => {
+                console.log('Page fully loaded, hiding spinner');
+                setTimeout(() => {
+                    loading.classList.add('hidden');
+                    setTimeout(() => {
+                        loading.style.display = 'none';
+                        document.body.classList.add('loaded');
+                    }, 700);
+                }, 800);
+            });
+
+            // Gestion des clics sur les boutons "Voir plus"
+            document.querySelectorAll('.event-button').forEach(button => {
+                button.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    const card = button.closest('.event-card');
+                    const title = card.dataset.modalTitle;
+                    const content = card.dataset.modalContent;
+                    const image = card.dataset.modalImage;
+                    openModal(content, title, image);
+                });
+            });
+
+            // Fermer la modale en cliquant à l'extérieur
+            document.getElementById('modal').addEventListener('click', function(e) {
+                if (e.target === this) {
+                    closeModal();
+                }
+            });
+
+            // Fermer la modale avec la touche Échap
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape') {
+                    closeModal();
+                }
+            });
+
+            // IntersectionObserver pour animations
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        console.log('Element visible:', entry.target);
+                        entry.target.classList.add('visible');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.1 });
+
+            elements.forEach(element => observer.observe(element));
+        });
     </script>
 </body>
 </html>
