@@ -31,3 +31,6 @@ Route::get('/dons', [DonController::class, 'dons'])->name('dons');
     
 Route::get('/news', [NewsController::class, 'index'])->name('news');
 
+Route::get('/faq', function () {
+    return view('faq');
+})->name('faq');

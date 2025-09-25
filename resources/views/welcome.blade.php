@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="fr">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
@@ -222,18 +223,53 @@
         }
 
         /* Stagger animation for cards */
-        .action-card:nth-child(1).visible { transition-delay: 0.1s; }
-        .action-card:nth-child(2).visible { transition-delay: 0.2s; }
-        .action-card:nth-child(3).visible { transition-delay: 0.3s; }
-        .action-card:nth-child(4).visible { transition-delay: 0.4s; }
-        .action-card:nth-child(5).visible { transition-delay: 0.1s; }
-        .action-card:nth-child(6).visible { transition-delay: 0.2s; }
-        .action-card:nth-child(7).visible { transition-delay: 0.3s; }
-        .action-card:nth-child(8).visible { transition-delay: 0.4s; }
-        .action-card:nth-child(9).visible { transition-delay: 0.1s; }
-        .action-card:nth-child(10).visible { transition-delay: 0.2s; }
-        .action-card:nth-child(11).visible { transition-delay: 0.3s; }
-        .action-card:nth-child(12).visible { transition-delay: 0.4s; }
+        .action-card:nth-child(1).visible {
+            transition-delay: 0.1s;
+        }
+
+        .action-card:nth-child(2).visible {
+            transition-delay: 0.2s;
+        }
+
+        .action-card:nth-child(3).visible {
+            transition-delay: 0.3s;
+        }
+
+        .action-card:nth-child(4).visible {
+            transition-delay: 0.4s;
+        }
+
+        .action-card:nth-child(5).visible {
+            transition-delay: 0.1s;
+        }
+
+        .action-card:nth-child(6).visible {
+            transition-delay: 0.2s;
+        }
+
+        .action-card:nth-child(7).visible {
+            transition-delay: 0.3s;
+        }
+
+        .action-card:nth-child(8).visible {
+            transition-delay: 0.4s;
+        }
+
+        .action-card:nth-child(9).visible {
+            transition-delay: 0.1s;
+        }
+
+        .action-card:nth-child(10).visible {
+            transition-delay: 0.2s;
+        }
+
+        .action-card:nth-child(11).visible {
+            transition-delay: 0.3s;
+        }
+
+        .action-card:nth-child(12).visible {
+            transition-delay: 0.4s;
+        }
 
         /* Responsive video */
         .responsive-video {
@@ -275,8 +311,13 @@
         }
 
         @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
         }
 
         /* Mobile Menu Animation */
@@ -543,8 +584,13 @@
         }
 
         @keyframes marquee {
-            0% { transform: translateX(100%); }
-            100% { transform: translateX(-100%); }
+            0% {
+                transform: translateX(100%);
+            }
+
+            100% {
+                transform: translateX(-100%);
+            }
         }
 
         /* Responsive adjustments */
@@ -657,6 +703,7 @@
         }
     </script>
 </head>
+
 <body id="top" class="bg-white font-sans antialiased font-all-bold">
     <!-- Loading Spinner -->
     <div id="loading" class="fixed inset-0 bg-white bg-opacity-95 flex items-center justify-center z-50">
@@ -711,8 +758,9 @@
                     <a href="#about" class="px-2 py-1 rounded-md text-sm font-bold text-gray-800 hover:bg-blue-500 hover:text-white transition-all duration-300">À propos</a>
                     <a href="{{route('news')}}" class="px-2 py-1 rounded-md text-sm font-bold text-gray-800 hover:bg-blue-500 hover:text-white transition-all duration-300">News</a>
                     <a href="#contact" class="px-2 py-1 rounded-md text-sm font-bold text-gray-800 hover:bg-blue-500 hover:text-white transition-all duration-300">Contact</a>
+                     <a href="{{ route('branche') }}" class="px-2 py-1 rounded-md text-sm font-bold text-gray-800 hover:bg-blue-500 hover:text-white transition-all duration-300">Evenements</a>
                     <a href="{{ url('/dons') }}" class="px-2 py-1 rounded-md text-sm font-bold text-gray-800 hover:bg-blue-500 hover:text-white transition-all duration-300">Dons</a>
-                    <a href="{{ route('branche') }}" class="px-2 py-1 rounded-md text-sm font-bold text-gray-800 hover:bg-blue-500 hover:text-white transition-all duration-300">Evenements</a>
+                   
                 </nav>
                 <div class="md:hidden">
                     <button onclick="toggleMobileMenu()" class="text-gray-500 focus:outline-none transition-transform duration-300" id="mobileMenuButton">
@@ -732,8 +780,9 @@
             <a href="#actions" class="block px-3 py-2 rounded-md text-sm font-bold text-gray-800 hover:bg-blue-500 hover:text-white transition-all duration-300">Nos Actions</a>
             <a href="{{route('news')}}" class="block px-3 py-2 rounded-md text-sm font-bold text-gray-800 hover:bg-blue-500 hover:text-white transition-all duration-300">News</a>
             <a href="#contact" class="block px-3 py-2 rounded-md text-sm font-bold text-gray-800 hover:bg-blue-500 hover:text-white transition-all duration-300">Contact</a>
+             <a href="{{ route('branche') }}" class="px-2 py-1 rounded-md text-sm font-bold text-gray-800 hover:bg-blue-500 hover:text-white transition-all duration-300">Evenements</a>
             <a href="{{ url('/dons') }}" class="block px-3 py-2 rounded-md text-sm font-bold text-gray-800 hover:bg-blue-500 hover:text-white transition-all duration-300">Dons</a>
-            <a href="{{route('branche')}}" class="block px-3 py-2 rounded-md text-sm font-bold text-gray-800 hover:bg-blue-500 hover:text-white transition-all duration-300">Evenements</a>
+          
         </div>
     </header>
     <!-- Hero Section avec Swiper Slider -->
@@ -865,7 +914,7 @@
                     <img src="{{ asset('image/pont.png') }}" alt="Aide Alimentaire" class="action-image">
                     <h3 class="text-base sm:text-lg font-bold mt-2">Le Bien-être des Communautés</h3>
                     <p class="text-xs sm:text-sm text-gray-600 mt-2">Le bien-être des communautés est un objectif fondamental pour construire un monde juste, inclusif et durable... Agir pour le bien-être des communautés, c’est investir dans des sociétés inclusives, solidaires et résilientes.</p>
-                    <button onclick="openModal('Le bien-être des communautés est au cœur de nos actions. L’insécurité alimentaire touche environ 2,4 milliards de personnes dans le monde, selon la FAO en 2023. Nos initiatives incluent la distribution de repas nutritifs pour les enfants et les familles dans les zones touchées, ainsi que des programmes de formation pour améliorer les compétences agricoles et assurer une autosuffisance alimentaire à long terme.', 'Le Bien-être des Communautés', '{{ asset('image/pont.png') }}')" class="text-xs px-3 py-1 rounded-md mt-2 transition-all duration-200 hover:scale-105">Voir plus</button>
+                    <button onclick="openModal('Le bien-être des communautés est au cœur de nos actions. L'insécurité alimentaire touche environ 2,4 milliards de personnes dans le monde, selon la FAO en 2023. Nos initiatives incluent la distribution de repas nutritifs pour les enfants et les familles dans les zones touchées, ainsi que des programmes de formation pour améliorer les compétences agricoles et assurer une autosuffisance alimentaire à long terme.', 'Le Bien-être des Communautés', '{{ asset('image/pont.png') }}')" class="text-xs px-3 py-1 rounded-md mt-2 transition-all duration-200 hover:scale-105">Voir plus</button>
                 </div>
                 <!-- Élément 9 -->
                 <div class="p-3 rounded shadow-lg text-center action-card cursor-pointer">
@@ -962,7 +1011,7 @@
         </div>
         <!-- Phrase défilante centrée -->
         <div class="marquee-container">
-            <span class="marquee-text">Grandir - Agir - Changer</span>
+            <span class="marquee-text">Agir - Grandir - Changer</span>
         </div>
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
             <!-- Grille compacte -->
@@ -977,7 +1026,7 @@
                         </div>
                     </div>
                     <p class="text-gray-200 text-sm mb-4 leading-relaxed">
-                        Nous œuvrons depuis 2010 pour améliorer les conditions de vie des communautés vulnérables au Cameroun.
+                        Nous œuvrons depuis 2024 pour améliorer les conditions de vie des communautés vulnérables au Cameroun.
                     </p>
                     <div class="flex space-x-3">
                         <a href="https://www.facebook.com/profile.php?id=61568266295634" target="_blank" class="social-icon bg-white bg-opacity-20 p-1.5 rounded-full hover:bg-yellow transition-all duration-300">
@@ -1000,9 +1049,10 @@
                     <ul class="space-y-2 text-sm">
                         <li><a href="{{ url('/') }}" class="footer-link text-gray-200 hover:text-yellow flex items-center transition-all duration-300"><span class="mr-2">→</span> Accueil</a></li>
                         <li><a href="{{ url('/about') }}" class="footer-link text-gray-200 hover:text-yellow flex items-center transition-all duration-300"><span class="mr-2">→</span> À propos</a></li>
-                        <li><a href="{{ url('/projects') }}" class="footer-link text-gray-200 hover:text-yellow flex items-center transition-all duration-300"><span class="mr-2">→</span> Nos Projets</a></li>
+                        <li><a href="{{ url('/news') }}" class="footer-link text-gray-200 hover:text-yellow flex items-center transition-all duration-300"><span class="mr-2">→</span> News</a></li>
                         <li><a href="{{ url('/dons') }}" class="footer-link text-gray-200 hover:text-yellow flex items-center transition-all duration-300"><span class="mr-2">→</span> Faire un don</a></li>
-                        <li><a href="{{ url('/contact') }}" class="footer-link text-gray-200 hover:text-yellow flex items-center transition-all duration-300"><span class="mr-2">→</span> Contact</a></li>
+                           <li><a href="{{ url('/projects') }}" class="footer-link text-gray-200 hover:text-yellow flex items-center transition-all duration-300"><span class="mr-2">→</span>Evenements</a></li>
+                        <!-- <li><a href="{{ url('/contact') }}" class="footer-link text-gray-200 hover:text-yellow flex items-center transition-all duration-300"><span class="mr-2">→</span> Contact</a></li> -->
                     </ul>
                 </div>
                 <!-- Colonne Contact -->
@@ -1014,19 +1064,20 @@
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path>
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
                             </svg>
-                            <p>Yaoundé, Cameroun<br>Quartier Mokolo</p>
+                            <p>Yaoundé, Cameroun<br></p>
                         </div>
-                        <div class="flex items-center">
-                            <svg class="w-4 h-4 mr-2 text-yellow" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
-                            </svg>
-                            <a href="mailto:globaluniversalwelfare@gmail.com" class="footer-link hover:text-yellow transition-all duration-300">globaluniversalwelfare@gmail.com</a>
-                        </div>
+
                         <div class="flex items-center">
                             <svg class="w-4 h-4 mr-2 text-yellow" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"></path>
                             </svg>
-                            <p>+237 6XX XX XX XX</p>
+                            <p>+237 6 21 62 06 77</p>
+                        </div>
+                        <div class="flex items-center">
+                            <svg class="w-4 h-4 mr-2 text-yellow" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                            </svg>
+                            <a href="{{ url('/faq') }}" class="text-gray-200 hover:text-yellow transition-all duration-300">FAQ</a>
                         </div>
                     </div>
                 </div>
@@ -1075,13 +1126,20 @@
             modalImage.src = imageSrc;
             modalImage.alt = title;
             modal.classList.add('show');
-            console.log('Modal opened', { content, title, imageSrc, modalClass: modal.classList });
+            console.log('Modal opened', {
+                content,
+                title,
+                imageSrc,
+                modalClass: modal.classList
+            });
         }
 
         function closeModal() {
             const modal = document.getElementById('modal');
             modal.classList.remove('show');
-            console.log('Modal closed', { modalClass: modal.classList });
+            console.log('Modal closed', {
+                modalClass: modal.classList
+            });
         }
 
         document.getElementById('modal').addEventListener('click', function(e) {
@@ -1106,7 +1164,9 @@
                 menuOpenIcon.classList.add('hidden');
                 menuCloseIcon.classList.remove('hidden');
             }
-            console.log('Mobile menu toggled', { isOpen: !isOpen });
+            console.log('Mobile menu toggled', {
+                isOpen: !isOpen
+            });
         }
 
         const partnerSwiper = new Swiper(".mySwiper", {
@@ -1116,21 +1176,24 @@
             slidesPerView: 2,
             spaceBetween: 8,
             speed: 800,
-            autoplay: { delay: 3000, pauseOnMouseEnter: true },
+            autoplay: {
+                delay: 3000,
+                pauseOnMouseEnter: true
+            },
             breakpoints: {
-                320: { 
-                    slidesPerView: 1, 
-                    spaceBetween: 4, 
+                320: {
+                    slidesPerView: 1,
+                    spaceBetween: 4,
                     centeredSlides: true
                 },
-                640: { 
-                    slidesPerView: 2, 
-                    spaceBetween: 6, 
+                640: {
+                    slidesPerView: 2,
+                    spaceBetween: 6,
                     centeredSlides: true
                 },
-                1024: { 
-                    slidesPerView: 2, 
-                    spaceBetween: 8, 
+                1024: {
+                    slidesPerView: 2,
+                    spaceBetween: 8,
                     centeredSlides: true
                 }
             }
@@ -1138,10 +1201,15 @@
 
         const heroSwiper = new Swiper(".heroSwiper", {
             effect: "fade",
-            fadeEffect: { crossFade: true },
+            fadeEffect: {
+                crossFade: true
+            },
             loop: true,
             speed: 1000,
-            autoplay: { delay: 4000, disableOnInteraction: false }
+            autoplay: {
+                delay: 4000,
+                disableOnInteraction: false
+            }
         });
 
         window.addEventListener('load', () => {
@@ -1167,9 +1235,12 @@
                         observer.unobserve(entry.target);
                     }
                 });
-            }, { threshold: 0.1 });
+            }, {
+                threshold: 0.1
+            });
             elements.forEach(element => observer.observe(element));
         });
     </script>
 </body>
+
 </html>

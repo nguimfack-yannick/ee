@@ -214,7 +214,8 @@
             <nav class="hidden md:flex space-x-4">
                 <a href="/" class="px-3 py-2 rounded-md text-sm font-bold text-gray-800 hover:bg-blue-500 hover:text-white">Accueil</a>
                 <a href="/news" class="px-3 py-2 rounded-md text-sm font-bold text-gray-800 hover:bg-blue-500 hover:text-white">News</a>
-                <a href="#contact" class="px-3 py-2 rounded-md text-sm font-bold text-gray-800 hover:bg-blue-500 hover:text-white">Contact</a>
+                <a href="/branche" class="px-3 py-2 rounded-md text-sm font-bold text-gray-800 hover:bg-blue-500 hover:text-white">Evenements</a>
+                <!-- <a href="#contact" class="px-3 py-2 rounded-md text-sm font-bold text-gray-800 hover:bg-blue-500 hover:text-white">Contact</a> -->
             </nav>
             <div class="md:hidden">
                 <button @click="mobileMenuOpen = !mobileMenuOpen" class="text-gray-500 focus:outline-none">
@@ -230,7 +231,7 @@
         <div x-show="mobileMenuOpen" x-cloak class="md:hidden px-2 pt-2 pb-3 space-y-1">
             <a href="/" class="block px-3 py-2 rounded-md text-base font-bold text-gray-800 hover:bg-blue-500 hover:text-white">Accueil</a>
             <a href="/news" class="block px-3 py-2 rounded-md text-base font-bold text-gray-800 hover:bg-blue-500 hover:text-white">News</a>
-            <a href="/contact" class="block px-3 py-2 rounded-md text-base font-bold text-gray-800 hover:bg-blue-500 hover:text-white">Contact</a>
+          <a href="/branche" class="px-3 py-2 rounded-md text-sm font-bold text-gray-800 hover:bg-blue-500 hover:text-white">Evenements</a>
         </div>
     </header>
 
@@ -267,7 +268,8 @@
         <!-- Section Informations sur les Dons -->
         <section id="donation-info" class="py-16 bg-gray-200">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <h2 class="text-3xl font-bold text-gray-900 text-center">Pourquoi Donner à ABEC ?</h2>
+                <!-- ✅ Titre modifié en bleu -->
+                <h2 class="text-3xl font-bold text-primary text-center">Pourquoi Donner à ABEC ?</h2>
                 <p class="mt-4 text-gray-600 leading-relaxed text-center max-w-3xl mx-auto">
                     Votre générosité permet de fournir des ressources vitales aux hôpitaux et orphelinats. Chaque don,
                     qu’il soit grand ou petit, contribue à améliorer la qualité de vie des personnes dans le besoin.
@@ -293,7 +295,8 @@
         <!-- Section Formulaire de Don -->
         <section id="donation-form" class="py-16 bg-gray-100">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <h2 class="text-3xl font-bold text-gray-900 text-center">Faites Votre Don</h2>
+                <!-- ✅ Titre modifié en bleu -->
+                <h2 class="text-3xl font-bold text-primary text-center">Faites Votre Don</h2>
                 <form action="{{ route('dons.store') }}" method="POST" class="mt-8 max-w-lg mx-auto" @submit="isLoading = true">
                     @csrf
                     @if ($errors->has('general'))
@@ -387,7 +390,7 @@
     </main>
 
     <!-- Footer compact avec vague et phrase défilante centrée -->
-    <footer id="contact" class="bg-primary text-white relative pt-10 overflow-hidden">
+  <footer id="contact" class="bg-primary text-white relative pt-10 overflow-hidden section-animate">
         <!-- Vague SVG compacte -->
         <div class="wave-divider">
             <svg data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
@@ -402,7 +405,7 @@
         </div>
         <!-- Phrase défilante centrée -->
         <div class="marquee-container">
-            <span class="marquee-text">Grandir - Agir - Changer</span>
+            <span class="marquee-text">Agir - Grandir - Changer</span>
         </div>
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
             <!-- Grille compacte -->
@@ -417,7 +420,7 @@
                         </div>
                     </div>
                     <p class="text-gray-200 text-sm mb-4 leading-relaxed">
-                        Nous œuvrons depuis 2010 pour améliorer les conditions de vie des communautés vulnérables au Cameroun.
+                        Nous œuvrons depuis 2024 pour améliorer les conditions de vie des communautés vulnérables au Cameroun.
                     </p>
                     <div class="flex space-x-3">
                         <a href="https://www.facebook.com/profile.php?id=61568266295634" target="_blank" class="social-icon bg-white bg-opacity-20 p-1.5 rounded-full hover:bg-yellow transition-all duration-300">
@@ -440,9 +443,10 @@
                     <ul class="space-y-2 text-sm">
                         <li><a href="{{ url('/') }}" class="footer-link text-gray-200 hover:text-yellow flex items-center transition-all duration-300"><span class="mr-2">→</span> Accueil</a></li>
                         <li><a href="{{ url('/about') }}" class="footer-link text-gray-200 hover:text-yellow flex items-center transition-all duration-300"><span class="mr-2">→</span> À propos</a></li>
-                        <li><a href="{{ url('/projects') }}" class="footer-link text-gray-200 hover:text-yellow flex items-center transition-all duration-300"><span class="mr-2">→</span> Nos Projets</a></li>
+                        <li><a href="{{ url('/news') }}" class="footer-link text-gray-200 hover:text-yellow flex items-center transition-all duration-300"><span class="mr-2">→</span> News</a></li>
                         <li><a href="{{ url('/dons') }}" class="footer-link text-gray-200 hover:text-yellow flex items-center transition-all duration-300"><span class="mr-2">→</span> Faire un don</a></li>
-                        <li><a href="{{ url('/contact') }}" class="footer-link text-gray-200 hover:text-yellow flex items-center transition-all duration-300"><span class="mr-2">→</span> Contact</a></li>
+                           <li><a href="{{ url('/projects') }}" class="footer-link text-gray-200 hover:text-yellow flex items-center transition-all duration-300"><span class="mr-2">→</span>Evenements</a></li>
+                        <!-- <li><a href="{{ url('/contact') }}" class="footer-link text-gray-200 hover:text-yellow flex items-center transition-all duration-300"><span class="mr-2">→</span> Contact</a></li> -->
                     </ul>
                 </div>
                 <!-- Colonne Contact -->
@@ -454,19 +458,20 @@
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path>
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
                             </svg>
-                            <p>Yaoundé, Cameroun<br>Quartier Mokolo</p>
+                            <p>Yaoundé, Cameroun<br></p>
                         </div>
-                        <div class="flex items-center">
-                            <svg class="w-4 h-4 mr-2 text-yellow" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
-                            </svg>
-                            <a href="mailto:globaluniversalwelfare@gmail.com" class="footer-link hover:text-yellow transition-all duration-300">globaluniversalwelfare@gmail.com</a>
-                        </div>
+
                         <div class="flex items-center">
                             <svg class="w-4 h-4 mr-2 text-yellow" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"></path>
                             </svg>
-                            <p>+237 6XX XX XX XX</p>
+                            <p>+237 6 21 62 06 77</p>
+                        </div>
+                        <div class="flex items-center">
+                            <svg class="w-4 h-4 mr-2 text-yellow" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                            </svg>
+                            <a href="{{ url('/faq') }}" class="text-gray-200 hover:text-yellow transition-all duration-300">FAQ</a>
                         </div>
                     </div>
                 </div>

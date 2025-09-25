@@ -16,7 +16,6 @@
     <link rel="stylesheet" href="https://rsms.me/inter/inter.css">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Arial+Black&display=swap');
-
         /* Global styles */
         body {
             background-color: #ffffff;
@@ -26,24 +25,26 @@
             opacity: 0;
             transition: opacity 0.7s ease-out;
         }
-
         body.loaded {
             opacity: 1;
         }
-
         .font-custom,
-        h1, h2, h3, p, a, li {
+        h1,
+        h2,
+        h3,
+        p,
+        a,
+        li {
             font-family: 'Arial Black', sans-serif;
             font-weight: bold;
-            text-align: center; /* Centrer tous les titres et textes */
+            text-align: center;
         }
-
         /* Smooth Scroll Behavior */
         html {
             scroll-behavior: smooth;
         }
 
-        /* Loading Spinner Styles */
+        /* === NOUVEAU LOADING SPINNER === */
         #loading {
             display: flex;
             align-items: center;
@@ -57,41 +58,44 @@
             z-index: 9999;
             transition: opacity 0.7s ease-out;
         }
-
         #loading.hidden {
             opacity: 0;
             pointer-events: none;
         }
-
-        .spinner-container {
+        .spinner-wrapper {
             position: relative;
-            width: 80px;
-            height: 80px;
+            width: 100px;
+            height: 100px;
         }
-
-        .spinner-circle {
+        .orbit-circle {
             position: absolute;
+            top: 0;
+            left: 0;
             width: 100%;
             height: 100%;
-            border: 4px solid transparent;
-            border-top-color: #1E90FF;
+            border: 3px solid transparent;
             border-radius: 50%;
-            animation: spin 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
+            border-top-color: #1E90FF;
+            border-right-color: #1E90FF;
+            animation: rotateOrbit 1.8s linear infinite;
         }
-
         .spinner-logo {
             position: absolute;
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            width: 48px;
-            height: 48px;
+            width: 50px;
+            height: 50px;
             object-fit: contain;
+            z-index: 2;
         }
-
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
+        @keyframes rotateOrbit {
+            0% {
+                transform: rotate(0deg);
+            }
+            100% {
+                transform: rotate(360deg);
+            }
         }
 
         /* Modal Styles */
@@ -108,12 +112,10 @@
             display: none;
             transition: opacity 0.3s ease;
         }
-
         .modal.show {
             display: flex !important;
             opacity: 1;
         }
-
         .modal-content {
             background: #FFF8DC;
             border-radius: 0.5rem;
@@ -129,12 +131,10 @@
             transform: scale(0.9) translateY(20px);
             transition: opacity 0.4s ease, transform 0.4s ease;
         }
-
         .modal.show .modal-content {
             opacity: 1;
             transform: scale(1) translateY(0);
         }
-
         .modal-close {
             position: absolute;
             top: 12px;
@@ -144,12 +144,10 @@
             height: 24px;
             transition: transform 0.2s ease, opacity 0.2s ease;
         }
-
         .modal-close:hover {
             transform: scale(1.2);
             opacity: 0.8;
         }
-
         .modal-image {
             width: 100%;
             max-height: 30vh;
@@ -157,7 +155,6 @@
             border-radius: 0.5rem;
             box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
         }
-
         .modal-title {
             font-size: clamp(1.25rem, 3vw, 1.5rem);
             color: #1E90FF;
@@ -170,12 +167,10 @@
             opacity: 0;
             transition: transform 0.4s ease, opacity 0.4s ease;
         }
-
         .modal.show .modal-title {
             transform: translateY(0);
             opacity: 1;
         }
-
         .modal-content p {
             font-size: clamp(0.75rem, 2vw, 0.875rem);
             color: #333333;
@@ -183,12 +178,11 @@
             transition: opacity 0.4s ease 0.2s;
             opacity: 0;
         }
-
         .modal.show .modal-content p {
             opacity: 1;
         }
 
-        /* Event Card Styles (Adapted from action-card) */
+        /* Event Card Styles */
         .event-card {
             background-color: #FFF8DC;
             position: relative;
@@ -200,12 +194,10 @@
             transform: translateY(50px);
             cursor: pointer;
         }
-
         .event-card.visible {
             opacity: 1;
             transform: translateY(0);
         }
-
         .event-card::before {
             content: '';
             position: absolute;
@@ -217,11 +209,9 @@
             transition: left 0.6s ease;
             z-index: 1;
         }
-
         .event-card:hover::before {
             left: 100%;
         }
-
         .event-card::after {
             content: '';
             position: absolute;
@@ -233,16 +223,13 @@
             transition: width 0.3s ease;
             z-index: 2;
         }
-
         .event-card:hover::after {
             width: 100%;
         }
-
         .event-card:hover {
             transform: scale(1.05);
             box-shadow: 0 10px 15px rgba(0, 0, 0, 0.2);
         }
-
         .event-image {
             width: 100%;
             height: 100px;
@@ -250,19 +237,16 @@
             border-radius: 0.5rem 0.5rem 0 0;
             transition: transform 0.3s ease, opacity 0.3s ease;
         }
-
         .event-card:hover .event-image {
             transform: scale(1.05);
             opacity: 0.9;
         }
-
         .event-body {
             padding: 1rem;
             text-align: center;
             position: relative;
             z-index: 5;
         }
-
         .event-meta {
             font-size: clamp(0.75rem, 2vw, 0.875rem);
             color: #6b7280;
@@ -272,12 +256,10 @@
             justify-content: center;
             gap: 0.3rem;
         }
-
         .event-meta::before {
             content: "🗓️";
             font-size: 0.9em;
         }
-
         .event-title {
             font-size: clamp(1rem, 2.5vw, 1.25rem);
             color: #1E90FF;
@@ -290,10 +272,12 @@
             overflow: hidden;
             transition: color 0.3s ease;
         }
-
+        /* === SUPPRESSION DE LA COULEUR OR AU SURVOL === */
+        /* Ancienne règle supprimée :
         .event-card:hover .event-title {
             color: #FFD700;
         }
+        */
 
         .event-content {
             font-size: clamp(0.75rem, 2vw, 0.875rem);
@@ -305,7 +289,6 @@
             -webkit-box-orient: vertical;
             overflow: hidden;
         }
-
         .event-button {
             color: #000000;
             background-color: #FFD700;
@@ -322,7 +305,6 @@
             margin: 0.5rem auto 0;
             transition: all 0.3s ease;
         }
-
         .event-button:hover {
             background-color: #DAA520;
             color: #ffffff;
@@ -336,13 +318,11 @@
             gap: 1.5rem;
             padding: 1rem 0;
         }
-
         @media (min-width: 640px) {
             .events-grid {
                 grid-template-columns: repeat(2, 1fr);
             }
         }
-
         @media (min-width: 1024px) {
             .events-grid {
                 grid-template-columns: repeat(3, 1fr);
@@ -359,7 +339,6 @@
             font-size: clamp(1.5rem, 4vw, 2.5rem);
             animation: colorCycle 3s ease-in-out infinite;
         }
-
         .section-title::after {
             content: '';
             position: absolute;
@@ -381,17 +360,28 @@
             text-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
             animation: colorCycle 3s ease-in-out infinite;
         }
-
         @keyframes colorCycle {
-            0% { color: #1E90FF; }
-            50% { color: #FFD700; }
-            100% { color: #1E90FF; }
+            0% {
+                color: #1E90FF;
+            }
+            50% {
+                color: #FFD700;
+            }
+            100% {
+                color: #1E90FF;
+            }
         }
 
         /* Stagger Animation for Cards */
-        .event-card:nth-child(1).visible { transition-delay: 0.1s; }
-        .event-card:nth-child(2).visible { transition-delay: 0.2s; }
-        .event-card:nth-child(3).visible { transition-delay: 0.3s; }
+        .event-card:nth-child(1).visible {
+            transition-delay: 0.1s;
+        }
+        .event-card:nth-child(2).visible {
+            transition-delay: 0.2s;
+        }
+        .event-card:nth-child(3).visible {
+            transition-delay: 0.3s;
+        }
 
         /* Section Animation */
         .section-animate {
@@ -399,7 +389,6 @@
             transform: translateY(20px);
             transition: opacity 0.5s ease, transform 0.5s ease;
         }
-
         .section-animate.visible {
             opacity: 1;
             transform: translateY(0);
@@ -414,36 +403,30 @@
             overflow: hidden;
             line-height: 0;
         }
-
         .wave-divider svg {
             position: relative;
             display: block;
             width: calc(100% + 1.3px);
             height: 40px;
         }
-
         .wave-divider .shape-fill {
             fill: url(#gradient-wave);
         }
-
         .footer-link {
             transition: color 0.3s ease, transform 0.3s ease;
         }
-
         .footer-link:hover {
             transform: translateX(5px);
         }
-
         .social-icon {
             transition: transform 0.3s ease, opacity 0.3s ease;
         }
-
         .social-icon:hover {
             transform: scale(1.2);
             opacity: 0.8;
         }
 
-        /* Animation pour la phrase défilante */
+        /* Marquee */
         .marquee-container {
             width: 100%;
             overflow: hidden;
@@ -456,7 +439,6 @@
             position: relative;
             z-index: 10;
         }
-
         .marquee-text {
             display: inline-block;
             font-size: 1rem;
@@ -465,82 +447,44 @@
             animation: marquee 15s linear infinite;
             text-align: center;
         }
-
         @keyframes marquee {
-            0% { transform: translateX(100%); }
-            100% { transform: translateX(-100%); }
+            0% {
+                transform: translateX(100%);
+            }
+            100% {
+                transform: translateX(-100%);
+            }
         }
 
-        /* Responsive Adjustments */
+        /* Responsive */
         @media (max-width: 640px) {
-            .event-image {
-                height: 80px;
-            }
-            .event-title {
-                font-size: clamp(0.875rem, 2.5vw, 1rem);
-            }
-            .event-content, .event-meta {
-                font-size: clamp(0.7rem, 1.8vw, 0.8rem);
-            }
-            .event-button {
-                padding: 0.4rem 0.8rem;
-                font-size: clamp(0.7rem, 1.8vw, 0.8rem);
-            }
-            .modal-content {
-                padding: 1rem;
-                max-width: 98%;
-            }
-            .modal-image {
-                max-height: 20vh;
-            }
-            .modal-title {
-                font-size: clamp(1rem, 2.5vw, 1.25rem);
-            }
-            .modal-content p {
-                font-size: clamp(0.7rem, 1.8vw, 0.8rem);
-            }
-            .spinner-container {
-                width: 60px;
-                height: 60px;
-            }
-            .spinner-logo {
-                width: 36px;
-                height: 36px;
-            }
-            .hero-title {
-                font-size: clamp(1.5rem, 4vw, 2.5rem);
-            }
+            .event-image { height: 80px; }
+            .event-title { font-size: clamp(0.875rem, 2.5vw, 1rem); }
+            .event-content, .event-meta { font-size: clamp(0.7rem, 1.8vw, 0.8rem); }
+            .event-button { padding: 0.4rem 0.8rem; font-size: clamp(0.7rem, 1.8vw, 0.8rem); }
+            .modal-content { padding: 1rem; max-width: 98%; }
+            .modal-image { max-height: 20vh; }
+            .modal-title { font-size: clamp(1rem, 2.5vw, 1.25rem); }
+            .modal-content p { font-size: clamp(0.7rem, 1.8vw, 0.8rem); }
+            .spinner-wrapper { width: 70px; height: 70px; }
+            .spinner-logo { width: 35px; height: 35px; }
+            .hero-title { font-size: clamp(1.5rem, 4vw, 2.5rem); }
         }
-
         @media (min-width: 641px) and (max-width: 1023px) {
-            .event-image {
-                height: 110px;
-            }
-            .event-title {
-                font-size: clamp(1rem, 2.5vw, 1.125rem);
-            }
-            .modal-content {
-                max-width: 90%;
-            }
-            .modal-image {
-                max-height: 25vh;
-            }
-            .hero-title {
-                font-size: clamp(2rem, 4.5vw, 3rem);
-            }
+            .event-image { height: 110px; }
+            .event-title { font-size: clamp(1rem, 2.5vw, 1.125rem); }
+            .modal-content { max-width: 90%; }
+            .modal-image { max-height: 25vh; }
+            .hero-title { font-size: clamp(2rem, 4.5vw, 3rem); }
         }
-
         @media (min-width: 1024px) {
-            .event-image {
-                height: 130px;
-            }
-            .hero-title {
-                font-size: clamp(2.5rem, 5vw, 4rem);
-            }
+            .event-image { height: 130px; }
+            .hero-title { font-size: clamp(2.5rem, 5vw, 4rem); }
         }
 
-        /* Hide elements during Alpine.js initialization */
-        [x-cloak] { display: none; }
+        [x-cloak] {
+            display: none;
+        }
     </style>
     <script>
         tailwind.config = {
@@ -560,11 +504,10 @@
     </script>
 </head>
 <body id="top" x-data="{ mobileMenuOpen: false }" class="bg-white font-sans antialiased">
-
     <!-- Loading Spinner -->
     <div id="loading" class="fixed inset-0 bg-white bg-opacity-95 flex items-center justify-center z-50">
-        <div class="spinner-container">
-            <div class="spinner-circle"></div>
+        <div class="spinner-wrapper">
+            <div class="orbit-circle"></div>
             <img src="{{ asset('image/ab.png') }}" alt="Logo ABEC" class="spinner-logo">
         </div>
     </div>
@@ -611,29 +554,27 @@
                 <div class="flex-shrink-0">
                     <img src="{{ asset('image/ab.png') }}" alt="logo" class="h-10 sm:h-12 md:h-14 transition-transform duration-300 hover:scale-105">
                 </div>
-                <!-- Nav desktop -->
                 <nav class="hidden md:flex space-x-4">
                     <a href="{{route('welcome')}}" class="px-3 py-2 text-sm font-bold text-gray-800 hover:bg-blue-500 hover:text-white transition-all duration-300 font-custom">Accueil</a>
-                    <a href="{{ route('dons') }}" class="px-3 py-2 text-sm font-bold text-gray-800 hover:bg-blue-500 hover:text-white transition-all duration-300 font-custom">Dons</a>
                     <a href="{{ route('news') }}" class="px-3 py-2 text-sm font-bold text-gray-800 hover:bg-blue-500 hover:text-white transition-all duration-300 font-custom">News</a>
+                      <a href="{{ route('dons') }}" class="px-3 py-2 text-sm font-bold text-gray-800 hover:bg-blue-500 hover:text-white transition-all duration-300 font-custom">Dons</a>
                 </nav>
-                <!-- Bouton Hamburger -->
                 <div class="md:hidden">
                     <button @click="mobileMenuOpen = !mobileMenuOpen" class="text-gray-500 focus:outline-none p-2">
                         <svg x-show="!mobileMenuOpen" x-cloak xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
                         </svg>
                         <svg x-show="mobileMenuOpen" x-cloak xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
                         </svg>
                     </button>
                 </div>
             </div>
-            <!-- Menu mobile -->
             <div x-show="mobileMenuOpen" x-cloak class="md:hidden px-2 pt-2 pb-3 space-y-1 mt-4 bg-white rounded-lg shadow-lg mobile-menu">
                 <a href="{{route('welcome')}}" class="block px-3 py-2 text-base font-bold text-gray-800 hover:bg-blue-500 hover:text-white transition-all duration-300 font-custom">Accueil</a>
+                  <a href="{{route('news')}}" class="block px-3 py-2 text-base font-bold text-gray-800 hover:bg-blue-500 hover:text-white transition-all duration-300 font-custom">News</a>
                 <a href="{{route('dons')}}" class="block px-3 py-2 text-base font-bold text-gray-800 hover:bg-blue-500 hover:text-white transition-all duration-300 font-custom">Dons</a>
-                <a href="{{route('news')}}" class="block px-3 py-2 text-base font-bold text-gray-800 hover:bg-blue-500 hover:text-white transition-all duration-300 font-custom">News</a>
+              
             </div>
         </div>
     </header>
@@ -652,7 +593,6 @@
                 <p class="mt-4 text-lg sm:text-xl font-bold font-custom">
                     Découvrez nos actions passées et à venir.
                 </p>
-                <!-- Removed "Voir les événements" button -->
             </div>
         </div>
     </section>
@@ -663,10 +603,10 @@
             <h2 class="section-title mb-8 md:mb-12">Événements à Venir</h2>
             <div class="events-grid">
                 <!-- Événement 1 -->
-                <div class="event-card" 
-                     data-modal-title="Plantation d'arbres" 
-                     data-modal-content="Rejoignez-nous pour planter 1000 arbres dans les écoles et espaces publics de Yaoundé. Cette initiative vise à promouvoir la durabilité environnementale et à sensibiliser les jeunes générations à l'importance de la préservation de la nature."
-                     data-modal-image="{{ asset('image/fotos.jpg') }}">
+                <div class="event-card"
+                    data-modal-title="Plantation d'arbres"
+                    data-modal-content="Rejoignez-nous pour planter 1000 arbres dans les écoles et espaces publics de Yaoundé. Cette initiative vise à promouvoir la durabilité environnementale et à sensibiliser les jeunes générations à l'importance de la préservation de la nature."
+                    data-modal-image="{{ asset('image/fotos.jpg') }}">
                     <img src="{{ asset('image/fotos.jpg') }}" alt="Plantation d'arbres" class="event-image">
                     <div class="event-body">
                         <div class="event-meta">10 Juin 2024 • Yaoundé</div>
@@ -678,10 +618,10 @@
                     </div>
                 </div>
                 <!-- Événement 2 -->
-                <div class="event-card" 
-                     data-modal-title="Collecte de dons médicaux" 
-                     data-modal-content="Nous organisons une grande collecte de médicaments et matériel pour les hôpitaux ruraux de Douala. Votre contribution peut sauver des vies et améliorer l'accès aux soins dans les zones défavorisées."
-                     data-modal-image="{{ asset('image/fotos.jpg') }}">
+                <div class="event-card"
+                    data-modal-title="Collecte de dons médicaux"
+                    data-modal-content="Nous organisons une grande collecte de médicaments et matériel pour les hôpitaux ruraux de Douala. Votre contribution peut sauver des vies et améliorer l'accès aux soins dans les zones défavorisées."
+                    data-modal-image="{{ asset('image/fotos.jpg') }}">
                     <img src="{{ asset('image/fotos.jpg') }}" alt="Collecte de dons médicaux" class="event-image">
                     <div class="event-body">
                         <div class="event-meta">25 Juillet 2024 • Douala</div>
@@ -693,10 +633,10 @@
                     </div>
                 </div>
                 <!-- Événement 3 -->
-                <div class="event-card" 
-                     data-modal-title="Atelier d'éducation financière" 
-                     data-modal-content="Participez à notre formation gratuite pour les jeunes entrepreneurs à Garoua. Cet atelier vise à enseigner la gestion budgétaire et les compétences nécessaires pour développer des projets viables."
-                     data-modal-image="{{ asset('image/fotos2.jpg') }}">
+                <div class="event-card"
+                    data-modal-title="Atelier d'éducation financière"
+                    data-modal-content="Participez à notre formation gratuite pour les jeunes entrepreneurs à Garoua. Cet atelier vise à enseigner la gestion budgétaire et les compétences nécessaires pour développer des projets viables."
+                    data-modal-image="{{ asset('image/fotos2.jpg') }}">
                     <img src="{{ asset('image/fotos2.jpg') }}" alt="Atelier d'éducation financière" class="event-image">
                     <div class="event-body">
                         <div class="event-meta">15 Août 2024 • Garoua</div>
@@ -717,10 +657,10 @@
             <h2 class="section-title mb-8 md:mb-12">Événements Passés</h2>
             <div class="events-grid">
                 <!-- Événement 1 -->
-                <div class="event-card" 
-                     data-modal-title="Distribution de fournitures scolaires" 
-                     data-modal-content="Nous avons distribué des cahiers, stylos et cartables à 200 enfants dans un orphelinat local à Yaoundé. Cette action a permis d'améliorer l'accès à l'éducation pour les enfants défavorisés."
-                     data-modal-image="{{ asset('image/fotos4.jpg') }}">
+                <div class="event-card"
+                    data-modal-title="Distribution de fournitures scolaires"
+                    data-modal-content="Nous avons distribué des cahiers, stylos et cartables à 200 enfants dans un orphelinat local à Yaoundé. Cette action a permis d'améliorer l'accès à l'éducation pour les enfants défavorisés."
+                    data-modal-image="{{ asset('image/fotos4.jpg') }}">
                     <img src="{{ asset('image/fotos4.jpg') }}" alt="Distribution de fournitures scolaires" class="event-image">
                     <div class="event-body">
                         <div class="event-meta">15 Mars 2024 • Yaoundé</div>
@@ -732,10 +672,10 @@
                     </div>
                 </div>
                 <!-- Événement 2 -->
-                <div class="event-card" 
-                     data-modal-title="Campagne de vaccination" 
-                     data-modal-content="En partenariat avec le ministère de la santé, nous avons vacciné plus de 500 personnes à Douala, contribuant à la prévention des maladies dans les communautés vulnérables."
-                     data-modal-image="{{ asset('image/fotos.jpg') }}">
+                <div class="event-card"
+                    data-modal-title="Campagne de vaccination"
+                    data-modal-content="En partenariat avec le ministère de la santé, nous avons vacciné plus de 500 personnes à Douala, contribuant à la prévention des maladies dans les communautés vulnérables."
+                    data-modal-image="{{ asset('image/fotos.jpg') }}">
                     <img src="{{ asset('image/fotos.jpg') }}" alt="Campagne de vaccination" class="event-image">
                     <div class="event-body">
                         <div class="event-meta">22 Janvier 2024 • Douala</div>
@@ -747,10 +687,10 @@
                     </div>
                 </div>
                 <!-- Événement 3 -->
-                <div class="event-card" 
-                     data-modal-title="Nettoyage de quartier" 
-                     data-modal-content="100 bénévoles ont participé à la collecte de déchets dans les rues du centre-ville de Bafoussam, améliorant l'hygiène et la propreté de la communauté."
-                     data-modal-image="{{ asset('image/fotos.jpg') }}">
+                <div class="event-card"
+                    data-modal-title="Nettoyage de quartier"
+                    data-modal-content="100 bénévoles ont participé à la collecte de déchets dans les rues du centre-ville de Bafoussam, améliorant l'hygiène et la propreté de la communauté."
+                    data-modal-image="{{ asset('image/fotos.jpg') }}">
                     <img src="{{ asset('image/fotos.jpg') }}" alt="Nettoyage de quartier" class="event-image">
                     <div class="event-body">
                         <div class="event-meta">5 Décembre 2023 • Bafoussam</div>
@@ -770,7 +710,6 @@
 
     <!-- Footer -->
     <footer id="contact" class="bg-primary text-white relative pt-10 overflow-hidden section-animate">
-        <!-- Vague SVG compacte -->
         <div class="wave-divider">
             <svg data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
                 <defs>
@@ -782,16 +721,13 @@
                 <path d="M0,0 C300,100 900,100 1200,0 V120 H0 Z" class="shape-fill"></path>
             </svg>
         </div>
-        <!-- Phrase défilante centrée -->
         <div class="marquee-container">
-            <span class="marquee-text">Grandir - Agir - Changer</span>
+            <span class="marquee-text">Agir - Grandir - Changer</span>
         </div>
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-            <!-- Grille compacte -->
             <div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-6">
-                <!-- Colonne Logo et Description -->
                 <div class="md:col-span-2">
-                    <div class="flex items-center mb-4 justify-center">
+                    <div class="flex items-center mb-4">
                         <img src="{{ asset('image/ab.png') }}" alt="Logo ABEC" class="w-12 h-12 mr-3">
                         <div>
                             <h2 class="text-lg font-bold mb-1">ABEC</h2>
@@ -799,9 +735,9 @@
                         </div>
                     </div>
                     <p class="text-gray-200 text-sm mb-4 leading-relaxed">
-                        Nous œuvrons depuis 2010 pour améliorer les conditions de vie des communautés vulnérables au Cameroun.
+                        Nous œuvrons depuis 2024 pour améliorer les conditions de vie des communautés vulnérables au Cameroun.
                     </p>
-                    <div class="flex space-x-3 justify-center">
+                    <div class="flex space-x-3">
                         <a href="https://www.facebook.com/profile.php?id=61568266295634" target="_blank" class="social-icon bg-white bg-opacity-20 p-1.5 rounded-full hover:bg-yellow transition-all duration-300">
                             <img src="{{ asset('image/feacebook.jpg') }}" alt="Facebook" class="w-5 h-5">
                         </a>
@@ -816,56 +752,52 @@
                         </a>
                     </div>
                 </div>
-                <!-- Colonne Liens Rapides -->
                 <div>
                     <h3 class="text-base font-bold mb-4 text-white border-b border-yellow pb-1">Liens Rapides</h3>
                     <ul class="space-y-2 text-sm">
-                        <li><a href="{{ route('welcome') }}" class="footer-link text-gray-200 hover:text-yellow flex items-center transition-all duration-300"><span class="mr-2">→</span> Accueil</a></li>
-                        <li><a href="#about" class="footer-link text-gray-200 hover:text-yellow flex items-center transition-all duration-300"><span class="mr-2">→</span> À propos</a></li>
-                        <li><a href="#actions" class="footer-link text-gray-200 hover:text-yellow flex items-center transition-all duration-300"><span class="mr-2">→</span> Nos Actions</a></li>
-                        <li><a href="{{ route('dons') }}" class="footer-link text-gray-200 hover:text-yellow flex items-center transition-all duration-300"><span class="mr-2">→</span> Faire un don</a></li>
-                        <li><a href="#contact" class="footer-link text-gray-200 hover:text-yellow flex items-center transition-all duration-300"><span class="mr-2">→</span> Contact</a></li>
+                        <li><a href="{{ url('/') }}" class="footer-link text-gray-200 hover:text-yellow flex items-center transition-all duration-300"><span class="mr-2">→</span> Accueil</a></li>
+                        <li><a href="{{ url('/about') }}" class="footer-link text-gray-200 hover:text-yellow flex items-center transition-all duration-300"><span class="mr-2">→</span> À propos</a></li>
+                        <li><a href="{{ url('/news') }}" class="footer-link text-gray-200 hover:text-yellow flex items-center transition-all duration-300"><span class="mr-2">→</span> News</a></li>
+                        <li><a href="{{ url('/dons') }}" class="footer-link text-gray-200 hover:text-yellow flex items-center transition-all duration-300"><span class="mr-2">→</span> Faire un don</a></li>
+                        <li><a href="{{ url('/projects') }}" class="footer-link text-gray-200 hover:text-yellow flex items-center transition-all duration-300"><span class="mr-2">→</span>Evenements</a></li>
                     </ul>
                 </div>
-                <!-- Colonne Contact -->
                 <div>
                     <h3 class="text-base font-bold mb-4 text-white border-b border-yellow pb-1">Contact</h3>
                     <div class="space-y-3 text-sm text-gray-200">
-                        <div class="flex items-start justify-center">
+                        <div class="flex items-start">
                             <svg class="w-4 h-4 mt-1 mr-2 text-yellow" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path>
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
                             </svg>
-                            <p>Yaoundé, Cameroun<br>Quartier Mokolo</p>
+                            <p>Yaoundé, Cameroun<br></p>
                         </div>
-                        <div class="flex items-center justify-center">
-                            <svg class="w-4 h-4 mr-2 text-yellow" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
-                            </svg>
-                            <a href="mailto:globaluniversalwelfare@gmail.com" class="footer-link hover:text-yellow transition-all duration-300">globaluniversalwelfare@gmail.com</a>
-                        </div>
-                        <div class="flex items-center justify-center">
+                        <div class="flex items-center">
                             <svg class="w-4 h-4 mr-2 text-yellow" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"></path>
                             </svg>
-                            <p>+237 6XX XX XX XX</p>
+                            <p>+237 6 21 62 06 77</p>
+                        </div>
+                        <div class="flex items-center">
+                            <svg class="w-4 h-4 mr-2 text-yellow" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                            </svg>
+                            <a href="{{ url('/faq') }}" class="text-gray-200 hover:text-yellow transition-all duration-300">FAQ</a>
                         </div>
                     </div>
                 </div>
             </div>
-            <!-- Call-to-action compact -->
             <div class="bg-white bg-opacity-10 rounded-lg p-4 mb-6 backdrop-blur-sm">
                 <div class="flex flex-col md:flex-row md:items-center justify-between">
                     <div class="mb-3 md:mb-0">
                         <h3 class="text-base font-bold text-white mb-1">Rejoignez notre mission</h3>
                         <p class="text-gray-200 text-sm">Votre soutien peut changer des vies.</p>
                     </div>
-                    <a href="{{ route('dons') }}" class="inline-block bg-yellow text-primary font-bold py-2 px-4 rounded-md hover:bg-opacity-90 transform hover:scale-105 transition-all duration-300 shadow-md">
+                    <a href="{{ url('/dons') }}" class="inline-block bg-yellow text-primary font-bold py-2 px-4 rounded-md hover:bg-opacity-90 transform hover:scale-105 transition-all duration-300 shadow-md">
                         Faire un don
                     </a>
                 </div>
             </div>
-            <!-- Ligne de séparation et copyright -->
             <div class="border-t border-white border-opacity-20 pt-4">
                 <div class="flex flex-col md:flex-row justify-between items-center">
                     <p class="text-gray-300 text-xs mb-3 md:mb-0">
@@ -879,20 +811,19 @@
                 </div>
             </div>
         </div>
-        <!-- Éléments décoratifs réduits -->
         <div class="absolute top-0 right-0 w-24 h-24 bg-yellow rounded-full opacity-10 -translate-y-1/2 translate-x-1/2"></div>
         <div class="absolute bottom-0 left-0 w-16 h-16 bg-white rounded-full opacity-5 -translate-y-1/2 -translate-x-1/2"></div>
     </footer>
 
     <!-- Alpine.js -->
     <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
+
     <!-- JavaScript -->
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             const elements = document.querySelectorAll('.section-animate, .event-card');
             const loading = document.getElementById('loading');
 
-            // Fonctions pour gérer la modale
             function openModal(content, title, imageSrc) {
                 const modal = document.getElementById('modal');
                 const modalContent = document.getElementById('modalContent');
@@ -903,18 +834,14 @@
                 modalImage.src = imageSrc || '';
                 modalImage.alt = title || 'Image';
                 modal.classList.add('show');
-                console.log('Modal opened', { content, title, imageSrc });
             }
 
             function closeModal() {
                 const modal = document.getElementById('modal');
                 modal.classList.remove('show');
-                console.log('Modal closed');
             }
 
-            // Masquer le loader après chargement
             window.addEventListener('load', () => {
-                console.log('Page fully loaded, hiding spinner');
                 setTimeout(() => {
                     loading.classList.add('hidden');
                     setTimeout(() => {
@@ -924,7 +851,6 @@
                 }, 800);
             });
 
-            // Gestion des clics sur les boutons "Voir plus"
             document.querySelectorAll('.event-button').forEach(button => {
                 button.addEventListener('click', (e) => {
                     e.stopPropagation();
@@ -936,25 +862,21 @@
                 });
             });
 
-            // Fermer la modale en cliquant à l'extérieur
             document.getElementById('modal').addEventListener('click', function(e) {
                 if (e.target === this) {
                     closeModal();
                 }
             });
 
-            // Fermer la modale avec la touche Échap
             document.addEventListener('keydown', (e) => {
                 if (e.key === 'Escape') {
                     closeModal();
                 }
             });
 
-            // IntersectionObserver pour animations
             const observer = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {
-                        console.log('Element visible:', entry.target);
                         entry.target.classList.add('visible');
                         observer.unobserve(entry.target);
                     }
