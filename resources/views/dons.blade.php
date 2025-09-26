@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Association du Bien-Être Communautaire</title>
+    <title>Organisationdu Bien-Être Communautaire</title>
     <link rel="icon" type="image/png" sizes="64x64" href="{{ asset('image/ab.png') }}">
 
     <!-- Tailwind CDN & Police Inter -->
@@ -189,7 +189,7 @@
     <div x-show="isLoading" x-cloak class="loading-overlay">
         <div class="spinner-container">
             <div class="spinner-circle"></div>
-            <img src="{{ asset('image/ab.png') }}" alt="Logo ABEC" class="spinner-logo">
+            <img src="{{ asset('image/ab.png') }}" alt="Logo ABEC" class="spinner-logo transition-transform duration-300 hover:scale-105">
         </div>
     </div>
 
@@ -494,10 +494,10 @@
                     <p class="text-gray-300 text-xs mb-3 md:mb-0">
                         &copy; {{ date('Y') }} Association du Bien-Être Communautaire. Tous droits réservés.
                     </p>
-                    <div class="flex space-x-4 text-xs">
-                        <a href="#" class="text-gray-300 hover:text-yellow transition-colors duration-300">Mentions légales</a>
-                        <a href="#" class="text-gray-300 hover:text-yellow transition-colors duration-300">Politique de confidentialité</a>
-                        <a href="#" class="text-gray-300 hover:text-yellow transition-colors duration-300">Conditions d'utilisation</a>
+                     <div class="flex space-x-4 text-xs">
+                        <a href="{{ route('mention') }}" class="text-gray-300 hover:text-yellow transition-colors duration-300">Mentions légales</a>
+                        <a href="{{ route('politique') }}"" class="text-gray-300 hover:text-yellow transition-colors duration-300">Politique de confidentialité</a>
+                        <a href="{{ route('copitt') }}" class="text-gray-300 hover:text-yellow transition-colors duration-300">Conditions d'utilisation</a>
                     </div>
                 </div>
             </div>

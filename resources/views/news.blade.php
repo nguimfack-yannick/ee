@@ -270,7 +270,7 @@
 
         .article-title {
             font-size: clamp(0.875rem, 2.5vw, 1rem);
-            color: #1E90FF;
+            color: #1E90FF !important; /* Force la couleur bleue avec !important */
             text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
             margin-bottom: 0.5rem;
             line-height: 1.4;
@@ -278,10 +278,12 @@
             -webkit-line-clamp: 2;
             -webkit-box-orient: vertical;
             overflow: hidden;
+            transition: none; /* Supprime toute transition de couleur */
         }
 
+        /* SUPPRESSION COMPLÈTE DU CHANGEMENT DE COULEUR AU HOVER */
         .article-card:hover .article-title {
-            color: #FFD700;
+            color: #1E90FF !important; /* Garde toujours la couleur bleue */
         }
 
         .article-content {
@@ -309,7 +311,7 @@
             font-size: 0.9em;
         }
 
-        /* Button styles from first document */
+        /* Button styles - COULEUR OR */
         .article-button {
             color: #000000;
             background-color: #FFD700;
@@ -325,12 +327,58 @@
             width: fit-content;
             margin: 0.5rem auto 0;
             transition: all 0.3s ease;
+            cursor: pointer;
+            position: relative;
+            z-index: 10;
         }
 
         .article-button:hover {
             background-color: #DAA520;
             color: #ffffff;
             transform: scale(1.05);
+        }
+
+        /* Bouton "Voir plus d'actualités" - COULEUR OR */
+        .btn-more {
+            display: inline-block;
+            background: linear-gradient(135deg, #FFD700, #FFA500);
+            color: #000000;
+            padding: 12px 30px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(255, 215, 0, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-more::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .btn-more:hover::before {
+            left: 100%;
+        }
+
+        .btn-more:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(255, 215, 0, 0.4);
+            background: linear-gradient(135deg, #DAA520, #FFD700);
+            color: #ffffff;
+        }
+
+        .btn-more:active {
+            transform: translateY(0);
+            box-shadow: 0 2px 10px rgba(255, 215, 0, 0.3);
         }
 
         /* Section Title from first document */
@@ -377,6 +425,10 @@
                 padding: 0.4rem 0.8rem;
                 font-size: 0.7rem;
             }
+            .btn-more {
+                padding: 10px 20px;
+                font-size: 0.9rem;
+            }
         }
 
         @media (min-width: 641px) and (max-width: 1023px) {
@@ -413,7 +465,7 @@
 <div id="loading" class="fixed inset-0 z-50">
     <div class="spinner-container">
         <div class="spinner-circle"></div>
-        <img src="{{ asset('image/ab.png') }}" alt="Logo ABEC" class="spinner-logo">
+        <img src="{{ asset('image/ab.png') }}" alt="Logo ABEC" class="spinner-logo w-12 h-12">
     </div>
 </div>
 
@@ -430,11 +482,52 @@
     </div>
 </div>
 
+<?php
+// CONFIGURATION FACILE - MODIFIEZ ICI VOS TEXTES ET IMAGES
+$newsConfig = [
+    'sectionTitle' => 'Actualités',
+    'sectionSubtitle' => 'Découvrez ce qui se passe chez nous actuellement.',
+    'moreButtonText' => 'Voir plus d\'actualités',
+    'moreButtonLink' => '#grille-section', // Lien vers la section grille
+    'articles' => [
+        [
+            'title' => 'Nouvelle école construite à Douala grâce à vos dons',
+            'content' => 'L\'ONG ABEC continue son engagement sur le terrain avec des actions concrètes pour améliorer les conditions de vie des populations locales. Grâce à votre soutien, nous avons pu réaliser cette initiative qui impacte directement la vie de centaines de bénéficiaires.',
+            'fullContent' => 'L\'ONG ABEC continue son engagement sur le terrain avec des actions concrètes pour améliorer les conditions de vie des populations locales. Grâce à votre soutien, nous avons pu réaliser cette initiative qui impacte directement la vie de centaines de bénéficiaires. Cette action s\'inscrit dans notre mission de développement durable et d\'amélioration des conditions de vie des communautés les plus vulnérables. Nous remercions tous nos partenaires et donateurs qui rendent ces projets possibles.',
+            'image' => 'image/news.png',
+            'date' => '15/12/2024'
+        ],
+        [
+            'title' => 'Campagne de vaccination dans les quartiers défavorisés',
+            'content' => 'Une grande campagne de vaccination a été organisée dans plusieurs quartiers de la ville. Cette initiative vise à protéger les populations les plus vulnérables contre diverses maladies.',
+            'fullContent' => 'Une grande campagne de vaccination a été organisée dans plusieurs quartiers de la ville. Cette initiative vise à protéger les populations les plus vulnérables contre diverses maladies. Plus de 500 personnes ont déjà bénéficié de cette campagne gratuite organisée en partenariat avec le ministère de la santé.',
+            'image' => 'image/appl.jpg',
+            'date' => '10/12/2024'
+        ],
+        [
+            'title' => 'Formation professionnelle pour 50 jeunes à Yaoundé',
+            'content' => 'Un programme de formation professionnelle a été lancé pour donner aux jeunes les compétences nécessaires pour intégrer le marché du travail.',
+            'fullContent' => 'Un programme de formation professionnelle a été lancé pour donner aux jeunes les compétences nécessaires pour intégrer le marché du travail. Cette formation de 6 mois couvre plusieurs domaines : informatique, couture, mécanique et agriculture. Les participants recevront un certificat reconnu par l\'État.',
+            'image' => 'image/news.png',
+            'date' => '05/12/2024'
+        ],
+        [
+            'title' => 'Distribution de kits scolaires aux enfants défavorisés',
+            'content' => 'Plus de 200 kits scolaires ont été distribués aux enfants des familles les plus démunies pour faciliter leur retour à l\'école.',
+            'fullContent' => 'Plus de 200 kits scolaires ont été distribués aux enfants des familles les plus démunies pour faciliter leur retour à l\'école. Chaque kit contient des cahiers, stylos, crayons, règles et un sac d\'école. Cette action s\'inscrit dans notre programme d\'aide à la scolarisation des enfants vulnérables.',
+            'image' => 'image/appl.jpg',
+            'date' => '01/12/2024'
+        ]
+    ]
+];
+?>
+
 <div class="max-w-7xl mx-auto py-10 px-4 sm:px-6 lg:px-8 relative section-animate">
     <div class="text-center">
-        <h2 class="text-xl sm:text-2xl lg:text-3xl font-bold section-title">Actualités</h2>
-        <p class="text-center text-gray-600 mb-10 font-bold">
-            Découvrez ce qui se passe chez nous actuellement.
+        <h2 class="text-xl sm:text-2xl lg:text-3xl font-bold section-title">{{ $newsConfig['sectionTitle'] }}</h2>
+        <!-- ESPACEMENT AJOUTÉ ENTRE LE TITRE ET LE SOUS-TITRE -->
+        <p class="text-center text-gray-600 mb-10 font-bold mt-6">
+            {{ $newsConfig['sectionSubtitle'] }}
         </p>
     </div>
 
@@ -442,66 +535,63 @@
     <div id="overlay" class="overlay"></div>
 
     <!-- Grille d'articles -->
-    <div class="articles-grid">
-        @for ($i = 1; $i <= 4; $i++)
+    <div class="articles-grid" id="grille-section">
+        @foreach($newsConfig['articles'] as $index => $article)
             <div class="article-card cursor-pointer">
-                <img src="{{ asset($i % 2 == 0 ? 'image/appl.jpg' : 'image/news.png') }}" alt="Actualité ABEC" class="article-image">
+                <img src="{{ asset($article['image']) }}" alt="Actualité ABEC" class="article-image">
                 <div class="article-body">
-                    <h2 class="article-title">
-                        @if($i % 3 == 0)
-                            Nouvelle école construite à Douala grâce à vos dons
-                        @elseif($i % 3 == 1)
-                            Campagne de vaccination dans les quartiers défavorisés
-                        @else
-                            Formation professionnelle pour 50 jeunes à Yaoundé
-                        @endif
-                    </h2>
-                    <p class="article-content">
-                        L’ONG ABEC continue son engagement sur le terrain avec des actions concrètes pour améliorer les conditions de vie des populations locales. Grâce à votre soutien, nous avons pu réaliser cette initiative qui impacte directement la vie de centaines de bénéficiaires.
-                    </p>
+                    <h2 class="article-title">{{ $article['title'] }}</h2>
+                    <p class="article-content">{{ $article['content'] }}</p>
                     <div class="article-meta">
-                        Publié le {{ now()->subDays($i * 5)->format('d/m/Y') }}
+                        Publié le {{ $article['date'] }}
                     </div>
-                    <button onclick="openModal(@js('L’ONG ABEC continue son engagement sur le terrain avec des actions concrètes pour améliorer les conditions de vie des populations locales. Grâce à votre soutien, nous avons pu réaliser cette initiative qui impacte directement la vie de centaines de bénéficiaires.'), '@if($i % 3 == 0)Nouvelle école construite à Douala grâce à vos dons@elseif($i % 3 == 1)Campagne de vaccination dans les quartiers défavorisés@elseFormation professionnelle pour 50 jeunes à Yaoundé@endif', '{{ asset($i % 2 == 0 ? 'image/appl.jpg' : 'image/news.png') }}')" class="article-button">Voir plus</button>
+                    <button onclick="openModal(
+                        '{{ addslashes($article['fullContent']) }}',
+                        '{{ addslashes($article['title']) }}',
+                        '{{ asset($article['image']) }}'
+                    )" class="article-button">Voir plus</button>
                 </div>
             </div>
-        @endfor
+        @endforeach
     </div>
 
     <!-- Bouton Voir Plus -->
     <div class="text-center mt-12">
-        <a href="#" class="btn-more">
-            Voir plus d'actualités
+        <a href="{{ $newsConfig['moreButtonLink'] }}" class="btn-more">
+            {{ $newsConfig['moreButtonText'] }}
         </a>
     </div>
 </div>
 
 <script>
+// Fonction globale pour ouvrir la modal
+function openModal(content, title, imageSrc) {
+    const modal = document.getElementById('modal');
+    const modalContent = document.getElementById('modalContent');
+    const modalTitle = document.getElementById('modalTitle');
+    const modalImage = document.getElementById('modalImage');
+    
+    modalContent.innerHTML = content;
+    modalTitle.textContent = title;
+    modalImage.src = imageSrc;
+    modalImage.alt = title;
+    modal.classList.add('show');
+    
+    console.log('Modal opened', { content, title, imageSrc });
+}
+
+// Fonction globale pour fermer la modal
+function closeModal() {
+    const modal = document.getElementById('modal');
+    modal.classList.remove('show');
+    console.log('Modal closed');
+}
+
 document.addEventListener('DOMContentLoaded', () => {
     const articles = document.querySelectorAll('.article-card');
     const overlay = document.getElementById('overlay');
     const loading = document.getElementById('loading');
     const elements = document.querySelectorAll('.section-animate, .article-card');
-
-    // Fonctions pour gérer la modale
-    function openModal(content, title, imageSrc) {
-        const modal = document.getElementById('modal');
-        const modalContent = document.getElementById('modalContent');
-        const modalTitle = document.getElementById('modalTitle');
-        const modalImage = document.getElementById('modalImage');
-        modalContent.innerHTML = content;
-        modalTitle.textContent = title;
-        modalImage.src = imageSrc;
-        modalImage.alt = title;
-        modal.classList.add('show');
-        console.log('Modal opened', { content, title, imageSrc, modalClass: modal.classList });
-    }
-
-    function closeModal() {
-        const modal = document.getElementById('modal');
-        modal.classList.remove('show');
-        console.log('Modal closed', { modalClass: modal.classList });
-    }
 
     // Masquer le loader après chargement
     window.addEventListener('load', () => {
@@ -512,11 +602,14 @@ document.addEventListener('DOMContentLoaded', () => {
         }, 800);
     });
 
-    // Gestion de l'expansion des articles
+    // Gestion des clics sur les articles (éviter les conflits avec les boutons)
     articles.forEach(article => {
         article.addEventListener('click', (e) => {
             // Éviter que le clic sur le bouton "Voir plus" déclenche l'expansion
-            if (e.target.classList.contains('article-button')) return;
+            if (e.target.classList.contains('article-button') || e.target.closest('.article-button')) {
+                e.stopPropagation();
+                return;
+            }
             
             const isExpanded = article.classList.contains('expanded');
 
@@ -547,6 +640,14 @@ document.addEventListener('DOMContentLoaded', () => {
         if (e.key === 'Escape') {
             articles.forEach(a => a.classList.remove('expanded'));
             overlay.classList.remove('active');
+            closeModal();
+        }
+    });
+
+    // Fermer la modal en cliquant à l'extérieur
+    document.getElementById('modal').addEventListener('click', (e) => {
+        if (e.target.id === 'modal') {
+            closeModal();
         }
     });
 

@@ -34,3 +34,14 @@ Route::get('/news', [NewsController::class, 'index'])->name('news');
 Route::get('/faq', function () {
     return view('faq');
 })->name('faq');
+
+Route::get('/copitt', function () {
+    return view('copitt');
+})->name('copitt');
+
+Route::get('/politique', function () {
+    return view('politique');
+})->name('politique');
+Route::get('/mention', function () {
+    return view('mention');
+})->name('mention');

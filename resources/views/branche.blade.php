@@ -1,9 +1,10 @@
+```php
 <!DOCTYPE html>
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Association du Bien-Être Communautaire - Événements</title>
+    <title>Organisation du Bien-Être Communautaire - Événements</title>
     <!-- Favicon -->
     <link rel="icon" type="image/png" sizes="64x64" href="{{ asset('image/ab.png') }}">
     <link rel="apple-touch-icon" sizes="180x180" href="{{ asset('image/ab-180.png') }}">
@@ -44,7 +45,7 @@
             scroll-behavior: smooth;
         }
 
-        /* === NOUVEAU LOADING SPINNER === */
+        /* === LOADING SPINNER === */
         #loading {
             display: flex;
             align-items: center;
@@ -58,38 +59,36 @@
             z-index: 9999;
             transition: opacity 0.7s ease-out;
         }
-        #loading.hidden {
+        #loading.loading-hidden {
             opacity: 0;
             pointer-events: none;
         }
         .spinner-wrapper {
             position: relative;
-            width: 100px;
-            height: 100px;
+            width: clamp(80px, 10vw, 100px);
+            height: clamp(80px, 10vw, 100px);
         }
-        .orbit-circle {
+        .spinner-circle {
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            border: 3px solid transparent;
-            border-radius: 50%;
+            border: 4px solid transparent;
             border-top-color: #1E90FF;
-            border-right-color: #1E90FF;
-            animation: rotateOrbit 1.8s linear infinite;
+            border-radius: 50%;
+            animation: spin 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
         }
         .spinner-logo {
             position: absolute;
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            width: 50px;
-            height: 50px;
+            width: clamp(40px, 5vw, 50px);
+            height: clamp(40px, 5vw, 50px);
             object-fit: contain;
-            z-index: 2;
         }
-        @keyframes rotateOrbit {
+        @keyframes spin {
             0% {
                 transform: rotate(0deg);
             }
@@ -272,13 +271,6 @@
             overflow: hidden;
             transition: color 0.3s ease;
         }
-        /* === SUPPRESSION DE LA COULEUR OR AU SURVOL === */
-        /* Ancienne règle supprimée :
-        .event-card:hover .event-title {
-            color: #FFD700;
-        }
-        */
-
         .event-content {
             font-size: clamp(0.75rem, 2vw, 0.875rem);
             color: #333333;
@@ -387,7 +379,7 @@
         .section-animate {
             opacity: 0;
             transform: translateY(20px);
-            transition: opacity 0.5s ease, transform 0.5s ease;
+            transition: opacity 0.8s ease, transform 0.8s ease;
         }
         .section-animate.visible {
             opacity: 1;
@@ -466,8 +458,6 @@
             .modal-image { max-height: 20vh; }
             .modal-title { font-size: clamp(1rem, 2.5vw, 1.25rem); }
             .modal-content p { font-size: clamp(0.7rem, 1.8vw, 0.8rem); }
-            .spinner-wrapper { width: 70px; height: 70px; }
-            .spinner-logo { width: 35px; height: 35px; }
             .hero-title { font-size: clamp(1.5rem, 4vw, 2.5rem); }
         }
         @media (min-width: 641px) and (max-width: 1023px) {
@@ -505,10 +495,17 @@
 </head>
 <body id="top" x-data="{ mobileMenuOpen: false }" class="bg-white font-sans antialiased">
     <!-- Loading Spinner -->
-    <div id="loading" class="fixed inset-0 bg-white bg-opacity-95 flex items-center justify-center z-50">
-        <div class="spinner-wrapper">
-            <div class="orbit-circle"></div>
+    <!-- <div id="loading" class="fixed inset-0 bg-white bg-opacity-95 flex items-center justify-center z-50">
+        <div class="">
+            <div class="spinner-circle"></div>
             <img src="{{ asset('image/ab.png') }}" alt="Logo ABEC" class="spinner-logo">
+        </div>
+    </div> -->
+
+      <div id="loading" class="fixed inset-0 bg-white bg-opacity-95 flex items-center justify-center z-50">
+        <div class="spinner-wrapper">
+            <div class="absolute inset-0 border-4 border-t-primary border-transparent rounded-full animate-spin"></div>
+            <img src="{{ asset('image/ab.png') }}" alt="Logo ABEC" class="w-12 h-12 absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
         </div>
     </div>
 
@@ -552,12 +549,12 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex items-center justify-between h-16">
                 <div class="flex-shrink-0">
-                    <img src="{{ asset('image/ab.png') }}" alt="logo" class="h-10 sm:h-12 md:h-14 transition-transform duration-300 hover:scale-105">
+                    <img src="{{ asset('image/ab.png') }}" alt="logo" class="h-10 sm:h-12 md:h-20 transition-transform duration-300 hover:scale-105">
                 </div>
                 <nav class="hidden md:flex space-x-4">
-                    <a href="{{route('welcome')}}" class="px-3 py-2 text-sm font-bold text-gray-800 hover:bg-blue-500 hover:text-white transition-all duration-300 font-custom">Accueil</a>
+                    <a href="{{ route('welcome') }}" class="px-3 py-2 text-sm font-bold text-gray-800 hover:bg-blue-500 hover:text-white transition-all duration-300 font-custom">Accueil</a>
                     <a href="{{ route('news') }}" class="px-3 py-2 text-sm font-bold text-gray-800 hover:bg-blue-500 hover:text-white transition-all duration-300 font-custom">News</a>
-                      <a href="{{ route('dons') }}" class="px-3 py-2 text-sm font-bold text-gray-800 hover:bg-blue-500 hover:text-white transition-all duration-300 font-custom">Dons</a>
+                    <a href="{{ route('dons') }}" class="px-3 py-2 text-sm font-bold text-gray-800 hover:bg-blue-500 hover:text-white transition-all duration-300 font-custom">Dons</a>
                 </nav>
                 <div class="md:hidden">
                     <button @click="mobileMenuOpen = !mobileMenuOpen" class="text-gray-500 focus:outline-none p-2">
@@ -571,14 +568,12 @@
                 </div>
             </div>
             <div x-show="mobileMenuOpen" x-cloak class="md:hidden px-2 pt-2 pb-3 space-y-1 mt-4 bg-white rounded-lg shadow-lg mobile-menu">
-                <a href="{{route('welcome')}}" class="block px-3 py-2 text-base font-bold text-gray-800 hover:bg-blue-500 hover:text-white transition-all duration-300 font-custom">Accueil</a>
-                  <a href="{{route('news')}}" class="block px-3 py-2 text-base font-bold text-gray-800 hover:bg-blue-500 hover:text-white transition-all duration-300 font-custom">News</a>
-                <a href="{{route('dons')}}" class="block px-3 py-2 text-base font-bold text-gray-800 hover:bg-blue-500 hover:text-white transition-all duration-300 font-custom">Dons</a>
-              
+                <a href="{{ route('welcome') }}" class="block px-3 py-2 text-base font-bold text-gray-800 hover:bg-blue-500 hover:text-white transition-all duration-300 font-custom">Accueil</a>
+                <a href="{{ route('news') }}" class="block px-3 py-2 text-base font-bold text-gray-800 hover:bg-blue-500 hover:text-white transition-all duration-300 font-custom">News</a>
+                <a href="{{ route('dons') }}" class="block px-3 py-2 text-base font-bold text-gray-800 hover:bg-blue-500 hover:text-white transition-all duration-300 font-custom">Dons</a>
             </div>
         </div>
     </header>
-
     <!-- Hero -->
     <section class="relative bg-cover bg-center min-h-[60vh] sm:min-h-[80vh] lg:min-h-screen section-animate">
         <div class="absolute inset-0 rounded-br-3xl overflow-hidden">
@@ -759,7 +754,7 @@
                         <li><a href="{{ url('/about') }}" class="footer-link text-gray-200 hover:text-yellow flex items-center transition-all duration-300"><span class="mr-2">→</span> À propos</a></li>
                         <li><a href="{{ url('/news') }}" class="footer-link text-gray-200 hover:text-yellow flex items-center transition-all duration-300"><span class="mr-2">→</span> News</a></li>
                         <li><a href="{{ url('/dons') }}" class="footer-link text-gray-200 hover:text-yellow flex items-center transition-all duration-300"><span class="mr-2">→</span> Faire un don</a></li>
-                        <li><a href="{{ url('/projects') }}" class="footer-link text-gray-200 hover:text-yellow flex items-center transition-all duration-300"><span class="mr-2">→</span>Evenements</a></li>
+                        <li><a href="{{ url('/projects') }}" class="footer-link text-gray-200 hover:text-yellow flex items-center transition-all duration-300"><span class="mr-2">→</span> Evenements</a></li>
                     </ul>
                 </div>
                 <div>
@@ -804,9 +799,9 @@
                         &copy; {{ date('Y') }} Association du Bien-Être Communautaire. Tous droits réservés.
                     </p>
                     <div class="flex space-x-4 text-xs">
-                        <a href="#" class="text-gray-300 hover:text-yellow transition-colors duration-300">Mentions légales</a>
-                        <a href="#" class="text-gray-300 hover:text-yellow transition-colors duration-300">Politique de confidentialité</a>
-                        <a href="#" class="text-gray-300 hover:text-yellow transition-colors duration-300">Conditions d'utilisation</a>
+                        <a href="{{ url('/mentions-legales') }}" class="text-gray-300 hover:text-yellow transition-colors duration-300">Mentions légales</a>
+                        <a href="{{ url('/privacy') }}" class="text-gray-300 hover:text-yellow transition-colors duration-300">Politique de confidentialité</a>
+                        <a href="{{ url('/conditions') }}" class="text-gray-300 hover:text-yellow transition-colors duration-300">Conditions d'utilisation</a>
                     </div>
                 </div>
             </div>
@@ -841,9 +836,10 @@
                 modal.classList.remove('show');
             }
 
+            // Masquer le loader après le chargement complet
             window.addEventListener('load', () => {
                 setTimeout(() => {
-                    loading.classList.add('hidden');
+                    loading.classList.add('loading-hidden');
                     setTimeout(() => {
                         loading.style.display = 'none';
                         document.body.classList.add('loaded');

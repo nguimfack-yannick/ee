@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="fr">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
@@ -18,14 +17,12 @@
     <!-- Police Arial Black -->
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Arial+Black&display=swap');
-
         body {
             background-color: #ffffff;
             font-family: 'Arial Black', sans-serif;
             overflow-x: hidden;
             padding-top: 0;
         }
-
         .font-all-bold,
         body,
         h1,
@@ -36,12 +33,71 @@
         li {
             font-weight: bold;
         }
-
         /* Smooth Scroll Behavior */
         html {
             scroll-behavior: smooth;
         }
 
+        /* Animation de la flèche vers le bas */
+        @keyframes bounceDown {
+            0%, 20%, 50%, 80%, 100% {
+                transform: translateY(0);
+            }
+            40% {
+                transform: translateY(6px);
+            }
+            60% {
+                transform: translateY(3px);
+            }
+        }
+        .bounce-down-arrow {
+            display: inline-block;
+            animation: bounceDown 2s infinite;
+            color: #1E90FF; /* primary color */
+            margin-left: 6px;
+            vertical-align: middle;
+        }
+
+        /* Flèche animée bleue pointant vers la section actions */
+        .animated-arrow {
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            cursor: pointer;
+            z-index: 10;
+        }
+        
+        .arrow-bounce {
+            animation: bounce 2s infinite;
+        }
+        
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {
+                transform: translateY(0);
+            }
+            40% {
+                transform: translateY(-10px);
+            }
+            60% {
+                transform: translateY(-5px);
+            }
+        }
+        
+        .arrow-svg {
+            width: 40px;
+            height: 40px;
+            fill: #1E90FF;
+            filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3));
+            transition: all 0.3s ease;
+        }
+        
+        .arrow-svg:hover {
+            fill: #0D47A1;
+            transform: scale(1.1);
+        }
+
+        /* Le reste de tes styles existants... */
         /* Top Bar (non fixe, défile avec la page) */
         .top-bar {
             position: relative;
@@ -50,7 +106,6 @@
             transition: background-color 0.3s ease, box-shadow 0.3s ease;
             margin-bottom: 8px;
         }
-
         /* Main Header (non fixe, défile avec la page) */
         .main-header {
             width: 100%;
@@ -59,7 +114,6 @@
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
             padding-top: 0;
         }
-
         /* Logo Styles */
         .logo-container {
             max-width: 36px;
@@ -68,27 +122,23 @@
             overflow: hidden;
             transition: transform 0.3s ease;
         }
-
         .logo-container img {
             width: 100%;
             height: auto;
             object-fit: contain;
         }
-
         @media (min-width: 641px) {
             .logo-container {
                 max-width: 48px;
                 max-height: 48px;
             }
         }
-
         @media (min-width: 1024px) {
             .logo-container {
                 max-width: 80px;
                 max-height: 80px;
             }
         }
-
         /* Partner Logo Styles */
         .partner-logo {
             width: 100px;
@@ -97,18 +147,15 @@
             transition: transform 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55), opacity 0.4s ease;
             opacity: 0;
         }
-
         .swiper-slide-active .partner-logo {
             transform: scale(1);
             opacity: 1;
         }
-
         .mySwiper .swiper-slide {
             display: flex;
             justify-content: center;
             align-items: center;
         }
-
         /* Hero Section */
         .heroSwiper .swiper-slide {
             background-size: cover;
@@ -116,11 +163,9 @@
             opacity: 0;
             transition: opacity 1s ease-in-out;
         }
-
         .heroSwiper .swiper-slide-active {
             opacity: 1;
         }
-
         /* Responsive text sizes with animation */
         .hero-text {
             font-size: clamp(1.5rem, 5vw, 3rem);
@@ -128,36 +173,30 @@
             opacity: 0;
             transition: transform 0.8s ease-out, opacity 0.8s ease-out;
         }
-
         .hero-subtext {
             font-size: clamp(0.875rem, 2.5vw, 1.125rem);
             transform: translateY(30px);
             opacity: 0;
             transition: transform 0.8s ease-out 0.2s, opacity 0.8s ease-out 0.2s;
         }
-
         .heroSwiper .swiper-slide-active .hero-text,
         .heroSwiper .swiper-slide-active .hero-subtext {
             transform: translateY(0);
             opacity: 1;
         }
-
         /* Hero buttons animation */
         .hero-button {
             transition: transform 0.3s ease, background-color 0.3s ease, opacity 0.3s ease;
             opacity: 0;
             transform: scale(0.95);
         }
-
         .heroSwiper .swiper-slide-active .hero-button {
             opacity: 1;
             transform: scale(1);
         }
-
         .hero-button:hover {
             transform: scale(1.1);
         }
-
         /* Responsive images in Nos Actions */
         .action-image {
             width: 100%;
@@ -166,12 +205,10 @@
             border-radius: 0.5rem;
             transition: transform 0.3s ease, opacity 0.3s ease;
         }
-
         .action-card:hover .action-image {
             transform: scale(1.05);
             opacity: 0.9;
         }
-
         /* Action Card Styles with Before/After */
         .action-card {
             background-color: #FFF8DC;
@@ -181,12 +218,10 @@
             opacity: 0;
             transform: translateY(50px);
         }
-
         .action-card.visible {
             opacity: 1;
             transform: translateY(0);
         }
-
         .action-card::before {
             content: '';
             position: absolute;
@@ -197,11 +232,9 @@
             background: linear-gradient(90deg, transparent, rgba(255, 215, 0, 0.3), transparent);
             transition: left 0.6s ease;
         }
-
         .action-card:hover::before {
             left: 100%;
         }
-
         .action-card::after {
             content: '';
             position: absolute;
@@ -212,65 +245,50 @@
             background-color: #FFD700;
             transition: width 0.3s ease;
         }
-
         .action-card:hover::after {
             width: 100%;
         }
-
         .action-card:hover {
             transform: scale(1.05);
             box-shadow: 0 10px 15px rgba(0, 0, 0, 0.2);
         }
-
         /* Stagger animation for cards */
         .action-card:nth-child(1).visible {
             transition-delay: 0.1s;
         }
-
         .action-card:nth-child(2).visible {
             transition-delay: 0.2s;
         }
-
         .action-card:nth-child(3).visible {
             transition-delay: 0.3s;
         }
-
         .action-card:nth-child(4).visible {
             transition-delay: 0.4s;
         }
-
         .action-card:nth-child(5).visible {
             transition-delay: 0.1s;
         }
-
         .action-card:nth-child(6).visible {
             transition-delay: 0.2s;
         }
-
         .action-card:nth-child(7).visible {
             transition-delay: 0.3s;
         }
-
         .action-card:nth-child(8).visible {
             transition-delay: 0.4s;
         }
-
         .action-card:nth-child(9).visible {
             transition-delay: 0.1s;
         }
-
         .action-card:nth-child(10).visible {
             transition-delay: 0.2s;
         }
-
         .action-card:nth-child(11).visible {
             transition-delay: 0.3s;
         }
-
         .action-card:nth-child(12).visible {
             transition-delay: 0.4s;
         }
-
         /* Responsive video */
         .responsive-video {
             width: 100%;
@@ -280,12 +298,10 @@
             transform: scale(0.95);
             transition: opacity 0.8s ease-out, transform 0.8s ease-out;
         }
-
         .responsive-video.visible {
             opacity: 1;
             transform: scale(1);
         }
-
         /* Loading Spinner Styles */
         #loading {
             display: flex;
@@ -300,67 +316,54 @@
             z-index: 9999;
             transition: opacity 0.7s ease-out;
         }
-
         .loading-hidden {
             opacity: 0;
             pointer-events: none;
         }
-
         .animate-spin {
             animation: spin 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
         }
-
         @keyframes spin {
             0% {
                 transform: rotate(0deg);
             }
-
             100% {
                 transform: rotate(360deg);
             }
         }
-
         /* Mobile Menu Animation */
         .mobile-menu {
             transform: translateX(100%);
             transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
             opacity: 0;
         }
-
         .mobile-menu.open {
             transform: translateX(0);
             opacity: 1;
         }
-
         .mobile-menu a {
             transition: background-color 0.3s ease, color 0.3s ease, transform 0.3s ease;
         }
-
         .mobile-menu a:hover {
             transform: translateX(5px);
         }
-
         /* Section Entrance Animation on Scroll */
         .section-animate {
             opacity: 0;
             transform: translateY(30px);
             transition: opacity 0.8s ease-out, transform 0.8s ease-out;
         }
-
         .section-animate.visible {
             opacity: 1;
             transform: translateY(0);
         }
-
         /* Navigation Links Animation */
         nav a {
             transition: background-color 0.3s ease, color 0.3s ease, transform 0.3s ease;
         }
-
         nav a:hover {
             transform: translateY(-2px);
         }
-
         /* Modal Styles */
         .modal {
             position: fixed;
@@ -375,12 +378,10 @@
             display: none;
             transition: opacity 0.3s ease;
         }
-
         .modal.show {
             display: flex !important;
             opacity: 1;
         }
-
         .modal-content {
             background: #FFF8DC;
             border-radius: 0.5rem;
@@ -396,12 +397,10 @@
             transform: scale(0.9);
             transition: opacity 0.3s ease, transform 0.3s ease;
         }
-
         .modal.show .modal-content {
             opacity: 1;
             transform: scale(1);
         }
-
         .modal-close {
             position: absolute;
             top: 8px;
@@ -409,19 +408,16 @@
             cursor: pointer;
             transition: transform 0.2s ease, opacity 0.2s ease;
         }
-
         .modal-close:hover {
             transform: scale(1.2);
             opacity: 0.8;
         }
-
         .modal-image {
             width: 100%;
             max-height: 30vh;
             object-fit: cover;
             border-radius: 0.5rem;
         }
-
         .modal-title {
             font-size: clamp(1.25rem, 3vw, 1.5rem);
             color: #1E90FF;
@@ -437,22 +433,18 @@
             justify-content: center;
             align-items: center;
         }
-
         .modal.show .modal-title {
             transform: translateY(0);
             opacity: 1;
         }
-
         .modal-content p {
             font-size: clamp(0.75rem, 2vw, 0.875rem);
             transition: opacity 0.4s ease 0.2s;
             opacity: 0;
         }
-
         .modal.show .modal-content p {
             opacity: 1;
         }
-
         /* Footer animations */
         footer a,
         footer p {
@@ -460,17 +452,14 @@
             opacity: 0;
             transform: translateY(10px);
         }
-
         footer.visible a,
         footer.visible p {
             opacity: 1;
             transform: translateY(0);
         }
-
         footer a:hover {
             transform: translateY(-2px);
         }
-
         /* Style pour les titres des sections avec ombre derrière */
         .section-title {
             text-transform: uppercase;
@@ -479,7 +468,6 @@
             position: relative;
             display: inline-block;
         }
-
         .section-title::after {
             content: '';
             position: absolute;
@@ -493,17 +481,14 @@
             z-index: -1;
             border-radius: 0.25rem;
         }
-
         /* Style pour les cartes de la section Nos Actions */
         .action-card h3 {
             color: #1E90FF;
             text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
         }
-
         .action-card p {
             color: #333333;
         }
-
         .action-card button {
             color: #000000;
             background-color: #FFD700;
@@ -516,12 +501,10 @@
             margin-left: auto;
             margin-right: auto;
         }
-
         .action-card button:hover {
             background-color: #DAA520;
             color: #ffffff;
         }
-
         /* Styles pour le footer compact */
         .wave-divider {
             position: absolute;
@@ -531,35 +514,28 @@
             overflow: hidden;
             line-height: 0;
         }
-
         .wave-divider svg {
             position: relative;
             display: block;
             width: calc(100% + 1.3px);
             height: 40px;
         }
-
         .wave-divider .shape-fill {
             fill: url(#gradient-wave);
         }
-
         .footer-link {
             transition: color 0.3s ease, transform 0.3s ease;
         }
-
         .footer-link:hover {
             transform: translateX(5px);
         }
-
         .social-icon {
             transition: transform 0.3s ease, opacity 0.3s ease;
         }
-
         .social-icon:hover {
             transform: scale(1.2);
             opacity: 0.8;
         }
-
         /* Animation pour la phrase défilante */
         .marquee-container {
             width: 100%;
@@ -573,7 +549,6 @@
             position: relative;
             z-index: 10;
         }
-
         .marquee-text {
             display: inline-block;
             font-size: 1rem;
@@ -582,108 +557,85 @@
             animation: marquee 15s linear infinite;
             text-align: center;
         }
-
         @keyframes marquee {
             0% {
                 transform: translateX(100%);
             }
-
             100% {
                 transform: translateX(-100%);
             }
         }
-
         /* Responsive adjustments */
         @media (max-width: 640px) {
             body {
                 padding-top: 0;
             }
-
             .top-bar {
                 height: 40px;
                 margin-bottom: 12px;
             }
-
             .main-header {
                 padding-top: 0;
             }
-
             .hero-text {
                 font-size: clamp(1.25rem, 4vw, 2rem);
             }
-
             .hero-subtext {
                 font-size: clamp(0.75rem, 2vw, 0.875rem);
             }
-
             .partner-logo {
                 width: 70px;
                 height: 70px;
             }
-
             .action-image {
                 height: 100px;
             }
-
             .modal-content {
                 padding: 0.75rem;
                 max-width: 98%;
             }
-
             .modal-image {
                 max-height: 20vh;
             }
-
             .modal-title {
                 font-size: clamp(1rem, 2.5vw, 1.25rem);
             }
-
             .modal-content p {
                 font-size: clamp(0.7rem, 1.8vw, 0.8rem);
             }
-
             .modal-close {
                 width: 20px;
                 height: 20px;
             }
-
             .action-card {
                 padding: 0.75rem;
             }
         }
-
         @media (min-width: 641px) and (max-width: 1023px) {
             .hero-text {
                 font-size: clamp(1.5rem, 4.5vw, 2.5rem);
             }
-
             .hero-subtext {
                 font-size: clamp(0.875rem, 2.5vw, 1rem);
             }
-
             .action-image {
                 height: 130px;
             }
-
             .modal-content {
                 max-width: 90%;
             }
-
             .modal-image {
                 max-height: 25vh;
             }
-
             .partner-logo {
                 width: 85px;
                 height: 85px;
             }
         }
-
         @media (min-width: 1024px) {
             .action-image {
                 height: 150px;
             }
-
             .modal-content {
                 max-width: 80%;
             }
@@ -703,7 +655,6 @@
         }
     </script>
 </head>
-
 <body id="top" class="bg-white font-sans antialiased font-all-bold">
     <!-- Loading Spinner -->
     <div id="loading" class="fixed inset-0 bg-white bg-opacity-95 flex items-center justify-center z-50">
@@ -739,7 +690,7 @@
                         <img src="{{ asset('image/insta.jpg') }}" alt="Instagram" class="w-6 h-6 rounded-full">
                     </a>
                 </div>
-                <a href="mailto:globaluniversalwelfare@gmail.com" class="hover:opacity-80 transition-opacity duration-300" title="Email">
+                <a href="/cdn-cgi/l/email-protection#4a2d2625282b263f24233c2f38392b263d2f262c2b382f0a2d272b232664292527" class="hover:opacity-80 transition-opacity duration-300" title="Email">
                     <img src="{{ asset('image/m.jpg') }}" alt="Email" class="w-6 h-6 rounded-full">
                 </a>
             </div>
@@ -760,7 +711,6 @@
                     <a href="#contact" class="px-2 py-1 rounded-md text-sm font-bold text-gray-800 hover:bg-blue-500 hover:text-white transition-all duration-300">Contact</a>
                      <a href="{{ route('branche') }}" class="px-2 py-1 rounded-md text-sm font-bold text-gray-800 hover:bg-blue-500 hover:text-white transition-all duration-300">Evenements</a>
                     <a href="{{ url('/dons') }}" class="px-2 py-1 rounded-md text-sm font-bold text-gray-800 hover:bg-blue-500 hover:text-white transition-all duration-300">Dons</a>
-                   
                 </nav>
                 <div class="md:hidden">
                     <button onclick="toggleMobileMenu()" class="text-gray-500 focus:outline-none transition-transform duration-300" id="mobileMenuButton">
@@ -782,7 +732,6 @@
             <a href="#contact" class="block px-3 py-2 rounded-md text-sm font-bold text-gray-800 hover:bg-blue-500 hover:text-white transition-all duration-300">Contact</a>
              <a href="{{ route('branche') }}" class="px-2 py-1 rounded-md text-sm font-bold text-gray-800 hover:bg-blue-500 hover:text-white transition-all duration-300">Evenements</a>
             <a href="{{ url('/dons') }}" class="block px-3 py-2 rounded-md text-sm font-bold text-gray-800 hover:bg-blue-500 hover:text-white transition-all duration-300">Dons</a>
-          
         </div>
     </header>
     <!-- Hero Section avec Swiper Slider -->
@@ -795,8 +744,18 @@
                             <h1 class="hero-text font-extrabold text-white">Organisation du Bien-Être Communautaire</h1>
                             <p class="mt-3 hero-subtext text-gray-100 font-bold">Une Organisation internationale œuvrant dans le monde entier pour le Bien-être des communautés.</p>
                             <div class="mt-4 flex flex-col sm:flex-row justify-center gap-3">
-                                <a href="santos/dons.php" class="hero-button inline-block bg-yellow text-black px-4 py-2 text-sm font-bold rounded-md hover:bg-gray-100 transition-all duration-300">Faites un don</a>
-                                <a href="#about" class="hero-button inline-block bg-yellow text-black px-4 py-2 text-sm font-bold rounded-md hover:bg-gray-100 transition-all duration-300">En savoir plus</a>
+                                <a href="santos/dons.php" class="hero-button inline-block bg-yellow text-black px-4 py-2 text-sm font-bold rounded-md hover:bg-gray-100 transition-all duration-300">
+                                    Faites un don
+                                    <svg class="bounce-down-arrow w-4 h-4 inline" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3" />
+                                    </svg>
+                                </a>
+                                <a href="#about" class="hero-button inline-block bg-yellow text-black px-4 py-2 text-sm font-bold rounded-md hover:bg-gray-100 transition-all duration-300">
+                                    En savoir plus
+                                    <svg class="bounce-down-arrow w-4 h-4 inline" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3" />
+                                    </svg>
+                                </a>
                             </div>
                         </div>
                     </div>
@@ -807,8 +766,18 @@
                             <h1 class="hero-text font-extrabold text-white">Organisation du Bien-Être Communautaire</h1>
                             <p class="mt-3 hero-subtext text-gray-100 font-bold">Une Organisation internationale œuvrant dans le monde entier pour le Bien-être des communautés.</p>
                             <div class="mt-4 flex flex-col sm:flex-row justify-center gap-3">
-                                <a href="santos/dons.php" class="hero-button inline-block bg-yellow text-black px-4 py-2 text-sm font-bold rounded-md hover:bg-gray-100 transition-all duration-300">Faites un don</a>
-                                <a href="#about" class="hero-button inline-block bg-yellow text-black px-4 py-2 text-sm font-bold rounded-md hover:bg-gray-100 transition-all duration-300">En savoir plus</a>
+                                <a href="santos/dons.php" class="hero-button inline-block bg-yellow text-black px-4 py-2 text-sm font-bold rounded-md hover:bg-gray-100 transition-all duration-300">
+                                    Faites un don
+                                    <svg class="bounce-down-arrow w-4 h-4 inline" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3" />
+                                    </svg>
+                                </a>
+                                <a href="#about" class="hero-button inline-block bg-yellow text-black px-4 py-2 text-sm font-bold rounded-md hover:bg-gray-100 transition-all duration-300">
+                                    En savoir plus
+                                    <svg class="bounce-down-arrow w-4 h-4 inline" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3" />
+                                    </svg>
+                                </a>
                             </div>
                         </div>
                     </div>
@@ -819,8 +788,18 @@
                             <h1 class="hero-text font-extrabold text-white">Organisation du Bien-Être Communautaire</h1>
                             <p class="mt-3 hero-subtext text-gray-100 font-bold">Une Organisation internationale œuvrant dans le monde entier pour le Bien-être des communautés.</p>
                             <div class="mt-4 flex flex-col sm:flex-row justify-center gap-3">
-                                <a href="santos/dons.php" class="hero-button inline-block bg-yellow text-black px-4 py-2 text-sm font-bold rounded-md hover:bg-gray-100 transition-all duration-300">Faites un don</a>
-                                <a href="#about" class="hero-button inline-block bg-yellow text-black px-4 py-2 text-sm font-bold rounded-md hover:bg-gray-100 transition-all duration-300">En savoir plus</a>
+                                <a href="santos/dons.php" class="hero-button inline-block bg-yellow text-black px-4 py-2 text-sm font-bold rounded-md hover:bg-gray-100 transition-all duration-300">
+                                    Faites un don
+                                    <svg class="bounce-down-arrow w-4 h-4 inline" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3" />
+                                    </svg>
+                                </a>
+                                <a href="#about" class="hero-button inline-block bg-yellow text-black px-4 py-2 text-sm font-bold rounded-md hover:bg-gray-100 transition-all duration-300">
+                                    En savoir plus
+                                    <svg class="bounce-down-arrow w-4 h-4 inline" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3" />
+                                    </svg>
+                                </a>
                             </div>
                         </div>
                     </div>
@@ -831,8 +810,18 @@
                             <h1 class="hero-text font-extrabold text-white">Organisation du Bien-Être Communautaire</h1>
                             <p class="mt-3 hero-subtext text-gray-100 font-bold">Une Organisation internationale œuvrant dans le monde entier pour le Bien-être des communautés.</p>
                             <div class="mt-4 flex flex-col sm:flex-row justify-center gap-3">
-                                <a href="santos/dons.php" class="hero-button inline-block bg-yellow text-black px-4 py-2 text-sm font-bold rounded-md hover:bg-gray-100 transition-all duration-300">Faites un don</a>
-                                <a href="#about" class="hero-button inline-block bg-yellow text-black px-4 py-2 text-sm font-bold rounded-md hover:bg-gray-100 transition-all duration-300">En savoir plus</a>
+                                <a href="santos/dons.php" class="hero-button inline-block bg-yellow text-black px-4 py-2 text-sm font-bold rounded-md hover:bg-gray-100 transition-all duration-300">
+                                    Faites un don
+                                    <svg class="bounce-down-arrow w-4 h-4 inline" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3" />
+                                    </svg>
+                                </a>
+                                <a href="#about" class="hero-button inline-block bg-yellow text-black px-4 py-2 text-sm font-bold rounded-md hover:bg-gray-100 transition-all duration-300">
+                                    En savoir plus
+                                    <svg class="bounce-down-arrow w-4 h-4 inline" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3" />
+                                    </svg>
+                                </a>
                             </div>
                         </div>
                     </div>
@@ -843,13 +832,32 @@
                             <h1 class="hero-text font-extrabold text-white">Organisation du Bien-Être Communautaire</h1>
                             <p class="mt-3 hero-subtext text-gray-100 font-bold">Une Organisation internationale œuvrant dans le monde entier pour le Bien-être des communautés.</p>
                             <div class="mt-4 flex flex-col sm:flex-row justify-center gap-3">
-                                <a href="santos/dons.php" class="hero-button inline-block bg-yellow text-black px-4 py-2 text-sm font-bold rounded-md hover:bg-gray-100 transition-all duration-300">Faites un don</a>
-                                <a href="#about" class="hero-button inline-block bg-yellow text-black px-4 py-2 text-sm font-bold rounded-md hover:bg-gray-100 transition-all duration-300">En savoir plus</a>
+                                <a href="santos/dons.php" class="hero-button inline-block bg-yellow text-black px-4 py-2 text-sm font-bold rounded-md hover:bg-gray-100 transition-all duration-300">
+                                    Faites un don
+                                    <svg class="bounce-down-arrow w-4 h-4 inline" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3" />
+                                    </svg>
+                                </a>
+                                <a href="#about" class="hero-button inline-block bg-yellow text-black px-4 py-2 text-sm font-bold rounded-md hover:bg-gray-100 transition-all duration-300">
+                                    En savoir plus
+                                    <svg class="bounce-down-arrow w-4 h-4 inline" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3" />
+                                    </svg>
+                                </a>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
+        </div>
+        
+        <!-- Flèche animée pointant vers la section actions -->
+        <div class="animated-arrow">
+            <a href="#actions" class="arrow-bounce inline-block">
+                <svg class="arrow-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                    <path d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z"/>
+                </svg>
+            </a>
         </div>
     </section>
     <!-- Section Nos Actions -->
@@ -864,85 +872,85 @@
                 <div class="p-3 rounded shadow-lg text-center action-card cursor-pointer">
                     <img src="{{ asset('image/ge.png') }}" alt="Dons aux Hôpitaux" class="action-image">
                     <h3 class="text-base sm:text-lg font-bold mt-2">La Jeunesse</h3>
-                    <p class="text-xs sm:text-sm text-gray-600 mt-2">L'Afrique possède une population extrêmement jeune... Agir en faveur des jeunes, c’est investir dans un avenir plus solide, plus innovant et plus équitable pour toute l’Afrique.</p>
-                    <button onclick="openModal('L\'Afrique possède une population extrêmement jeune, dans de nombreuses zones, près de 40 % des habitants ont moins de 15 ans, et plus de 400 millions de personnes sont âgées de 15 à 35 ans. Pourtant, ce secteur de la population fait face à des défis sérieux des millions de jeunes ne sont ni à l’école ni en formation ni en emploi (NEET), ce qui freine leur développement le manque d’opportunités économiques et le déficit de soutien financier demeurent des barrières majeures. Agir en faveur des jeunes, c’est investir dans un avenir plus solide, plus innovant et plus équitable pour toute l’Afrique.', 'La Jeunesse', '{{ asset('image/ge.png') }}')" class="text-xs px-3 py-1 rounded-md mt-2 transition-all duration-200 hover:scale-105">Voir plus</button>
+                    <p class="text-xs sm:text-sm text-gray-600 mt-2">L'Afrique possède une population extrêmement jeune... Agir en faveur des jeunes, c'est investir dans un avenir plus solide, plus innovant et plus équitable pour toute l'Afrique.</p>
+                    <button onclick="openModal('L\'Afrique possède une population extrêmement jeune, dans de nombreuses zones, près de 40 % des habitants ont moins de 15 ans, et plus de 400 millions de personnes sont âgées de 15 à 35 ans. Pourtant, ce secteur de la population fait face à des défis sérieux des millions de jeunes ne sont ni à l'école ni en formation ni en emploi (NEET), ce qui freine leur développement le manque d'opportunités économiques et le déficit de soutien financier demeurent des barrières majeures. Agir en faveur des jeunes, c'est investir dans un avenir plus solide, plus innovant et plus équitable pour toute l'Afrique.', 'La Jeunesse', '{{ asset('image/ge.png') }}')" class="text-xs px-3 py-1 rounded-md mt-2 transition-all duration-200 hover:scale-105">Voir plus</button>
                 </div>
                 <!-- Élément 2 -->
                 <div class="p-3 rounded shadow-lg text-center action-card cursor-pointer">
                     <img src="{{ asset('image/vegete.png') }}" alt="Soutien aux Orphelinats" class="action-image">
                     <h3 class="text-base sm:text-lg font-bold mt-2">L'Environnement</h3>
-                    <p class="text-xs sm:text-sm text-gray-600 mt-2">La région du Bassin du Congo abrite l’une des dernières grandes étendues de forêt tropicale intacte au monde... C’est aussi préserver un patrimoine vital pour l’Afrique et pour l’humanité entière.</p>
-                    <button onclick="openModal('La région du Bassin du Congo abrite l’une des dernières grandes étendues de forêt tropicale intacte au monde, une zone critique pour la biodiversité, le climat, et les moyens de subsistance de millions de personnes. La forêt du Bassin du Congo joue un rôle majeur comme puits de carbone : elle peut capturer environ 0,61 gigatonne de CO₂ par an, ce qui contribue significativement à atténuer le changement climatique. La déforestation dans la région du Bassin du Congo a augmenté d’environ 5 %, remettant en question les engagements pris dans la Déclaration des Leaders de Glasgow pour stopper et inverser la perte de forêts d’ici 2030. Les conséquences sont multiples : perte de biodiversité avec des espèces endémiques menacées, dégradation des sols, changements dans les régimes hydriques, menaces pour la sécurité alimentaire, et un impact sur la résilience des communautés locales face aux aléas climatiques. Agir pour l’environnement, c’est prendre soin de la nature qui a toujours pris soin de nous. C’est aussi préserver un patrimoine vital pour l’Afrique et pour l’humanité entière.', 'L\'Environnement', '{{ asset('image/vegete.png') }}')" class="text-xs px-3 py-1 rounded-md mt-2 transition-all duration-200 hover:scale-105">Voir plus</button>
+                    <p class="text-xs sm:text-sm text-gray-600 mt-2">La région du Bassin du Congo abrite l'une des dernières grandes étendues de forêt tropicale intacte au monde... C'est aussi préserver un patrimoine vital pour l'Afrique et pour l'humanité entière.</p>
+                    <button onclick="openModal('La région du Bassin du Congo abrite l'une des dernières grandes étendues de forêt tropicale intacte au monde, une zone critique pour la biodiversité, le climat, et les moyens de subsistance de millions de personnes. La forêt du Bassin du Congo joue un rôle majeur comme puits de carbone : elle peut capturer environ 0,61 gigatonne de CO₂ par an, ce qui contribue significativement à atténuer le changement climatique. La déforestation dans la région du Bassin du Congo a augmenté d'environ 5 %, remettant en question les engagements pris dans la Déclaration des Leaders de Glasgow pour stopper et inverser la perte de forêts d'ici 2030. Les conséquences sont multiples : perte de biodiversité avec des espèces endémiques menacées, dégradation des sols, changements dans les régimes hydriques, menaces pour la sécurité alimentaire, et un impact sur la résilience des communautés locales face aux aléas climatiques. Agir pour l'environnement, c'est prendre soin de la nature qui a toujours pris soin de nous. C'est aussi préserver un patrimoine vital pour l'Afrique et pour l'humanité entière.', 'L\'Environnement', '{{ asset('image/vegete.png') }}')" class="text-xs px-3 py-1 rounded-md mt-2 transition-all duration-200 hover:scale-105">Voir plus</button>
                 </div>
                 <!-- Élément 3 -->
                 <div class="p-3 rounded shadow-lg text-center action-card cursor-pointer">
                     <img src="{{ asset('image/droit.png') }}" alt="Programmes Communautaires" class="action-image">
                     <h3 class="text-base sm:text-lg font-bold mt-2">Les Droits de l'Homme</h3>
                     <p class="text-xs sm:text-sm text-gray-600 mt-2">En Afrique et ailleurs, de nombreuses personnes sont persécutées en raison de leur identité ethnique ou de leurs opinions... et construire des sociétés plus justes et démocratiques.</p>
-                    <button onclick="openModal('En Afrique et ailleurs, de nombreuses personnes sont persécutées en raison de leur identité ethnique ou de leurs opinions. Des individus sont arrêtés, emprisonnés ou même tués simplement pour avoir exprimé des opinions divergentes ou pour leur appartenance à des groupes ethniques minoritaires. Par exemple, des militants, des journalistes et des défenseurs des droits humains ont été victimes de harcèlement judiciaire, d\'arrestations arbitraires et de menaces graves pour avoir dénoncé des injustices ou exprimé des critiques envers les autorités. Or, la dignité humaine est universelle et inaliénable. Agir pour la défense des droits de l’Homme, c’est se lever contre l’injustice, et construire des sociétés plus justes et démocratiques.', 'Les Droits de l\'Homme', '{{ asset('image/droit.png') }}')" class="text-xs px-3 py-1 rounded-md mt-2 transition-all duration-200 hover:scale-105">Voir plus</button>
+                    <button onclick="openModal('En Afrique et ailleurs, de nombreuses personnes sont persécutées en raison de leur identité ethnique ou de leurs opinions. Des individus sont arrêtés, emprisonnés ou même tués simplement pour avoir exprimé des opinions divergentes ou pour leur appartenance à des groupes ethniques minoritaires. Par exemple, des militants, des journalistes et des défenseurs des droits humains ont été victimes de harcèlement judiciaire, d\'arrestations arbitraires et de menaces graves pour avoir dénoncé des injustices ou exprimé des critiques envers les autorités. Or, la dignité humaine est universelle et inaliénable. Agir pour la défense des droits de l'Homme, c'est se lever contre l'injustice, et construire des sociétés plus justes et démocratiques.', 'Les Droits de l\'Homme', '{{ asset('image/droit.png') }}')" class="text-xs px-3 py-1 rounded-md mt-2 transition-all duration-200 hover:scale-105">Voir plus</button>
                 </div>
                 <!-- Élément 4 -->
                 <div class="p-3 rounded shadow-lg text-center action-card cursor-pointer">
                     <img src="{{ asset('image/santee.png') }}" alt="Campagnes de Sensibilisation" class="action-image">
                     <h3 class="text-base sm:text-lg font-bold mt-2">La Santé</h3>
-                    <p class="text-xs sm:text-sm text-gray-600 mt-2">La santé mondiale est marquée par des inégalités profondes... C’est œuvrer pour un avenir où chacun puisse accéder à des soins de qualité.</p>
-                    <button onclick="openModal('La santé mondiale est marquée par des inégalités profondes. En 2023, environ 260 000 femmes sont décédées des suites de complications liées à la grossesse et à l’accouchement, dont 92 % dans des pays à revenu faible ou intermédiaire. Parallèlement, la malnutrition infantile demeure un problème majeur. En 2025, 9,4 % des enfants âgés de 5 à 19 ans sont obèses, dépassant pour la première fois le taux d\'enfants en insuffisance pondérale, qui est de 9,2 %. Agir pour la santé mondiale, c’est investir dans la vie, l’éducation et le bien-être de chaque individu. C’est œuvrer pour un avenir où chacun, partout dans le monde, puisse accéder à des soins de qualité, indépendamment de sa situation géographique ou économique.', 'La Santé', '{{ asset('image/santee.png') }}')" class="text-xs px-3 py-1 rounded-md mt-2 transition-all duration-200 hover:scale-105">Voir plus</button>
+                    <p class="text-xs sm:text-sm text-gray-600 mt-2">La santé mondiale est marquée par des inégalités profondes... C'est œuvrer pour un avenir où chacun puisse accéder à des soins de qualité.</p>
+                    <button onclick="openModal('La santé mondiale est marquée par des inégalités profondes. En 2023, environ 260 000 femmes sont décédées des suites de complications liées à la grossesse et à l'accouchement, dont 92 % dans des pays à revenu faible ou intermédiaire. Parallèlement, la malnutrition infantile demeure un problème majeur. En 2025, 9,4 % des enfants âgés de 5 à 19 ans sont obèses, dépassant pour la première fois le taux d\'enfants en insuffisance pondérale, qui est de 9,2 %. Agir pour la santé mondiale, c'est investir dans la vie, l'éducation et le bien-être de chaque individu. C'est œuvrer pour un avenir où chacun, partout dans le monde, puisse accéder à des soins de qualité, indépendamment de sa situation géographique ou économique.', 'La Santé', '{{ asset('image/santee.png') }}')" class="text-xs px-3 py-1 rounded-md mt-2 transition-all duration-200 hover:scale-105">Voir plus</button>
                 </div>
                 <!-- Élément 5 -->
                 <div class="p-3 rounded shadow-lg text-center action-card cursor-pointer">
                     <img src="{{ asset('image/paix.png') }}" alt="Éducation pour Enfants" class="action-image">
                     <h3 class="text-base sm:text-lg font-bold mt-2">La Paix</h3>
                     <p class="text-xs sm:text-sm text-gray-600 mt-2">Selon le Global Peace Index 2025, le niveau de paix mondiale est au plus bas... bâtir un avenir plus pacifique pour tous.</p>
-                    <button onclick="openModal('Selon le Global Peace Index 2025, le niveau de paix mondiale est au plus bas depuis la création de cet indice, avec une détérioration continue depuis 2014. En 2024, le monde a enregistré 152 000 décès liés aux conflits, le plus élevé depuis la Seconde Guerre mondiale. Actuellement, 59 conflits interétatiques ou internes sont actifs, un nombre record depuis la fin de la Seconde Guerre mondiale. Agir pour la paix, c’est œuvrer pour un monde plus juste, plus solidaire et plus harmonieux. Cela implique de promouvoir le dialogue, la coopération internationale, le désarmement et le respect des droits fondamentaux de chaque individu. En soutenant des initiatives locales et mondiales en faveur de la paix, nous pouvons contribuer à inverser cette tendance inquiétante et bâtir un avenir plus pacifique pour tous.', 'La Paix', '{{ asset('image/paix.png') }}')" class="text-xs px-3 py-1 rounded-md mt-2 transition-all duration-200 hover:scale-105">Voir plus</button>
+                    <button onclick="openModal('Selon le Global Peace Index 2025, le niveau de paix mondiale est au plus bas depuis la création de cet indice, avec une détérioration continue depuis 2014. En 2024, le monde a enregistré 152 000 décès liés aux conflits, le plus élevé depuis la Seconde Guerre mondiale. Actuellement, 59 conflits interétatiques ou internes sont actifs, un nombre record depuis la fin de la Seconde Guerre mondiale. Agir pour la paix, c'est œuvrer pour un monde plus juste, plus solidaire et plus harmonieux. Cela implique de promouvoir le dialogue, la coopération internationale, le désarmement et le respect des droits fondamentaux de chaque individu. En soutenant des initiatives locales et mondiales en faveur de la paix, nous pouvons contribuer à inverser cette tendance inquiétante et bâtir un avenir plus pacifique pour tous.', 'La Paix', '{{ asset('image/paix.png') }}')" class="text-xs px-3 py-1 rounded-md mt-2 transition-all duration-200 hover:scale-105">Voir plus</button>
                 </div>
                 <!-- Élément 6 -->
                 <div class="p-3 rounded shadow-lg text-center action-card cursor-pointer">
-                    <img src="{{ asset('image/bel.png') }}" alt="Soins d’Urgence" class="action-image">
+                    <img src="{{ asset('image/bel.png') }}" alt="Soins d'Urgence" class="action-image">
                     <h3 class="text-base sm:text-lg font-bold mt-2">La justice</h3>
                     <p class="text-xs sm:text-sm text-gray-600 mt-2"> La justice est essentielle pour garantir l'égalité, la dignité et les droits de chaque individu... Cela implique de renforcer les institutions judiciaires, de promouvoir l'éducation aux droits humains et de lutter contre toutes les formes de discrimination et d'injustice.</p>
-                    <button onclick="openModal('La justice est un pilier fondamental pour des sociétés équitables et pacifiques. Cependant, dans de nombreuses régions du monde, les systèmes judiciaires sont confrontés à des défis majeurs : corruption, manque d’accès à la justice pour les populations marginalisées, et lenteur des procédures. Par exemple, en 2023, environ 4,4 milliards de personnes vivaient dans des pays où l’accès à la justice est limité, selon le World Justice Project. Agir pour la justice, c’est promouvoir l’égalité devant la loi, renforcer les institutions judiciaires et garantir que chaque individu, quel que soit son statut social, puisse faire valoir ses droits.', 'La Justice', '{{ asset('image/bel.png') }}')" class="text-xs px-3 py-1 rounded-md mt-2 transition-all duration-200 hover:scale-105">Voir plus</button>
+                    <button onclick="openModal('La justice est un pilier fondamental pour des sociétés équitables et pacifiques. Cependant, dans de nombreuses régions du monde, les systèmes judiciaires sont confrontés à des défis majeurs : corruption, manque d'accès à la justice pour les populations marginalisées, et lenteur des procédures. Par exemple, en 2023, environ 4,4 milliards de personnes vivaient dans des pays où l'accès à la justice est limité, selon le World Justice Project. Agir pour la justice, c'est promouvoir l'égalité devant la loi, renforcer les institutions judiciaires et garantir que chaque individu, quel que soit son statut social, puisse faire valoir ses droits.', 'La Justice', '{{ asset('image/bel.png') }}')" class="text-xs px-3 py-1 rounded-md mt-2 transition-all duration-200 hover:scale-105">Voir plus</button>
                 </div>
                 <!-- Élément 7 -->
                 <div class="p-3 rounded shadow-lg text-center action-card cursor-pointer">
                     <img src="{{ asset('image/deve.png') }}" alt="Renforcement des Capacités" class="action-image">
                     <h3 class="text-base sm:text-lg font-bold mt-2">Le Développement Durable</h3>
-                    <p class="text-xs sm:text-sm text-gray-600 mt-2">Selon le Rapport sur le développement durable en Afrique 2024, moins de 6 % des 32 cibles ...., tout en bénéficiant d’un développement économique équitable et inclusif.</p>
-                    <button onclick="openModal('Le développement durable est essentiel pour répondre aux besoins actuels sans compromettre les générations futures. Selon les Nations Unies, en 2023, environ 9,2 % de la population mondiale vivait en dessous du seuil de pauvreté international, tandis que le changement climatique continue de menacer les moyens de subsistance. Nos actions incluent des formations pour les professionnels de santé et les éducateurs, ainsi que des projets visant à promouvoir des pratiques agricoles durables et l’accès à l’énergie renouvelable.', 'Le Développement Durable', '{{ asset('image/deve.png') }}')" class="text-xs px-3 py-1 rounded-md mt-2 transition-all duration-200 hover:scale-105">Voir plus</button>
+                    <p class="text-xs sm:text-sm text-gray-600 mt-2">Selon le Rapport sur le développement durable en Afrique 2024, moins de 6 % des 32 cibles ...., tout en bénéficiant d'un développement économique équitable et inclusif.</p>
+                    <button onclick="openModal('Le développement durable est essentiel pour répondre aux besoins actuels sans compromettre les générations futures. Selon les Nations Unies, en 2023, environ 9,2 % de la population mondiale vivait en dessous du seuil de pauvreté international, tandis que le changement climatique continue de menacer les moyens de subsistance. Nos actions incluent des formations pour les professionnels de santé et les éducateurs, ainsi que des projets visant à promouvoir des pratiques agricoles durables et l'accès à l'énergie renouvelable.', 'Le Développement Durable', '{{ asset('image/deve.png') }}')" class="text-xs px-3 py-1 rounded-md mt-2 transition-all duration-200 hover:scale-105">Voir plus</button>
                 </div>
                 <!-- Élément 8 -->
                 <div class="p-3 rounded shadow-lg text-center action-card cursor-pointer">
                     <img src="{{ asset('image/pont.png') }}" alt="Aide Alimentaire" class="action-image">
                     <h3 class="text-base sm:text-lg font-bold mt-2">Le Bien-être des Communautés</h3>
-                    <p class="text-xs sm:text-sm text-gray-600 mt-2">Le bien-être des communautés est un objectif fondamental pour construire un monde juste, inclusif et durable... Agir pour le bien-être des communautés, c’est investir dans des sociétés inclusives, solidaires et résilientes.</p>
-                    <button onclick="openModal('Le bien-être des communautés est au cœur de nos actions. L'insécurité alimentaire touche environ 2,4 milliards de personnes dans le monde, selon la FAO en 2023. Nos initiatives incluent la distribution de repas nutritifs pour les enfants et les familles dans les zones touchées, ainsi que des programmes de formation pour améliorer les compétences agricoles et assurer une autosuffisance alimentaire à long terme.', 'Le Bien-être des Communautés', '{{ asset('image/pont.png') }}')" class="text-xs px-3 py-1 rounded-md mt-2 transition-all duration-200 hover:scale-105">Voir plus</button>
+                    <p class="text-xs sm:text-sm text-gray-600 mt-2">Le bien-être des communautés est un objectif fondamental pour construire un monde juste, inclusif et durable... Agir pour le bien-être des communautés, c'est investir dans des sociétés inclusives, solidaires et résilientes.</p>
+                    <button onclick="openModal('Le bien-être des communautés est au cœur de nos actions. L\'insécurité alimentaire touche environ 2,4 milliards de personnes dans le monde, selon la FAO en 2023. Nos initiatives incluent la distribution de repas nutritifs pour les enfants et les familles dans les zones touchées, ainsi que des programmes de formation pour améliorer les compétences agricoles et assurer une autosuffisance alimentaire à long terme.', 'Le Bien-être des Communautés', '{{ asset('image/pont.png') }}')" class="text-xs px-3 py-1 rounded-md mt-2 transition-all duration-200 hover:scale-105">Voir plus</button>
                 </div>
                 <!-- Élément 9 -->
                 <div class="p-3 rounded shadow-lg text-center action-card cursor-pointer">
-                    <img src="{{ asset('image/f.png') }}" alt="Projets d’Infrastructure" class="action-image">
+                    <img src="{{ asset('image/f.png') }}" alt="Projets d'Infrastructure" class="action-image">
                     <h3 class="text-base sm:text-lg font-bold mt-2">La Culture</h3>
-                    <p class="text-xs sm:text-sm text-gray-600 mt-2">L'Afrique est un continent riche d'une diversité culturelle exceptionnelle, avec plus de 3 000 groupes ethniques et plus de 2 000 langues parlées à travers ses 54 pays... C’est investir dans la mémoire collective pour construire un futur où la culture continue de nourrir l’épanouissement et la fierté des communautés africaines.</p>
-                    <button onclick="openModal('L\'Afrique est un continent riche d\'une diversité culturelle exceptionnelle, avec plus de 3 000 groupes ethniques et plus de 2 000 langues parlées à travers ses 54 pays. La culture africaine englobe les traditions orales, la musique, la danse, les arts plastiques, les vêtements, les rituels, la gastronomie et les systèmes de croyances, qui reflètent l’histoire, les valeurs et l’identité de chaque communauté. la culture africaine fait face à des menaces : globalisation, perte des langues et savoirs ancestraux, urbanisation rapide et faible soutien institutionnel. La jeunesse, qui constitue plus de 60 % de la population africaine, doit être au centre de la transmission et de la valorisation de ce patrimoine. Agir pour la culture africaine, c’est préserver notre identité, promouvoir la diversité et encourager les nouvelles générations à s’approprier et transmettre les richesses culturelles. C’est investir dans la mémoire collective pour construire un futur où la culture continue de nourrir l’épanouissement et la fierté des communautés africaines.', 'La Culture', '{{ asset('image/f.png') }}')" class="text-xs px-3 py-1 rounded-md mt-2 transition-all duration-200 hover:scale-105 text-center">Voir plus</button>
+                    <p class="text-xs sm:text-sm text-gray-600 mt-2">L'Afrique est un continent riche d'une diversité culturelle exceptionnelle, avec plus de 3 000 groupes ethniques et plus de 2 000 langues parlées à travers ses 54 pays... C'est investir dans la mémoire collective pour construire un futur où la culture continue de nourrir l'épanouissement et la fierté des communautés africaines.</p>
+                    <button onclick="openModal('L\'Afrique est un continent riche d\'une diversité culturelle exceptionnelle, avec plus de 3 000 groupes ethniques et plus de 2 000 langues parlées à travers ses 54 pays. La culture africaine englobe les traditions orales, la musique, la danse, les arts plastiques, les vêtements, les rituels, la gastronomie et les systèmes de croyances, qui reflètent l'histoire, les valeurs et l'identité de chaque communauté. la culture africaine fait face à des menaces : globalisation, perte des langues et savoirs ancestraux, urbanisation rapide et faible soutien institutionnel. La jeunesse, qui constitue plus de 60 % de la population africaine, doit être au centre de la transmission et de la valorisation de ce patrimoine. Agir pour la culture africaine, c'est préserver notre identité, promouvoir la diversité et encourager les nouvelles générations à s'approprier et transmettre les richesses culturelles. C'est investir dans la mémoire collective pour construire un futur où la culture continue de nourrir l'épanouissement et la fierté des communautés africaines.', 'La Culture', '{{ asset('image/f.png') }}')" class="text-xs px-3 py-1 rounded-md mt-2 transition-all duration-200 hover:scale-105 text-center">Voir plus</button>
                 </div>
                 <!-- Élément 10 -->
                 <div class="p-3 rounded shadow-lg text-center action-card cursor-pointer">
                     <img src="{{ asset('image/h.png') }}" alt="Santé Maternelle" class="action-image">
                     <h3 class="text-base sm:text-lg font-bold mt-2">L'Histoire</h3>
-                    <p class="text-xs sm:text-sm text-gray-600 mt-2"> L’Afrique possède une histoire millénaire, riche de civilisations anciennes comme l’Égypte, le royaume de Kongo, le Mali, le Ghana et de nombreux ... Agir pour l’histoire africaine, c’est préserver la mémoire du continent, valoriser ses héritages et apprendre des leçons du passé pour construire un avenir éclairé, juste et autonome.</p>
-                    <button onclick="openModal('L’Afrique possède une histoire millénaire, riche de civilisations anciennes comme l’Égypte, le royaume de Kongo, le Mali, le Ghana et de nombreux autres royaumes et empires qui ont façonné le continent. Cette histoire, transmise à travers les traditions orales, les manuscrits, les monuments et les arts, est le socle de l’identité et de la mémoire collective africaine. La jeunesse africaine, qui représente plus de 60 % de la population du continent, joue un rôle clé dans la revalorisation et la transmission de ce patrimoine historique. Agir pour l’histoire africaine, c’est préserver la mémoire du continent, valoriser ses héritages et apprendre des leçons du passé pour construire un avenir éclairé, juste et autonome.', 'L\'Histoire', '{{ asset('image/h.png') }}')" class="text-xs px-3 py-1 rounded-md mt-2 transition-all duration-200 hover:scale-105">Voir plus</button>
+                    <p class="text-xs sm:text-sm text-gray-600 mt-2"> L'Afrique possède une histoire millénaire, riche de civilisations anciennes comme l'Égypte, le royaume de Kongo, le Mali, le Ghana et de nombreux ... Agir pour l'histoire africaine, c'est préserver la mémoire du continent, valoriser ses héritages et apprendre des leçons du passé pour construire un avenir éclairé, juste et autonome.</p>
+                    <button onclick="openModal('L'Afrique possède une histoire millénaire, riche de civilisations anciennes comme l'Égypte, le royaume de Kongo, le Mali, le Ghana et de nombreux autres royaumes et empires qui ont façonné le continent. Cette histoire, transmise à travers les traditions orales, les manuscrits, les monuments et les arts, est le socle de l'identité et de la mémoire collective africaine. La jeunesse africaine, qui représente plus de 60 % de la population du continent, joue un rôle clé dans la revalorisation et la transmission de ce patrimoine historique. Agir pour l'histoire africaine, c'est préserver la mémoire du continent, valoriser ses héritages et apprendre des leçons du passé pour construire un avenir éclairé, juste et autonome.', 'L\'Histoire', '{{ asset('image/h.png') }}')" class="text-xs px-3 py-1 rounded-md mt-2 transition-all duration-200 hover:scale-105">Voir plus</button>
                 </div>
                 <!-- Élément 11 -->
                 <div class="p-3 rounded shadow-lg text-center action-card cursor-pointer">
                     <img src="{{ asset('image/pp.png') }}" alt="Activités Récréatives" class="action-image">
                     <h3 class="text-base sm:text-lg font-bold mt-2">Le Panafricanisme</h3>
-                    <p class="text-xs sm:text-sm text-gray-600 mt-2"> Le panafricanisme est un mouvement politique, social et culturel visant à unir les peuples africains et la diaspora africaine autour de valeurs communes de solidarité, de développement, de justice et d’autonomie... Agir pour le panafricanisme, c’est œuvrer pour l’unité et la solidarité du continent africain et de sa diaspora.</p>
-                    <button onclick="openModal('Le panafricanisme est un mouvement politique, social et culturel visant à unir les peuples africains et la diaspora africaine autour de valeurs communes de solidarité, de développement, de justice et d’autonomie. Il repose sur la conviction que l’Afrique doit se libérer des divisions héritées de la colonisation, renforcer sa coopération et promouvoir son identité culturelle et économique sur la scène mondiale. Agir pour le panafricanisme, c’est œuvrer pour l’unité et la solidarité du continent africain et de sa diaspora.', 'Le Panafricanisme', '{{ asset('image/pp.png') }}')" class="text-xs px-3 py-1 rounded-md mt-2 transition-all duration-200 hover:scale-105">Voir plus</button>
+                    <p class="text-xs sm:text-sm text-gray-600 mt-2"> Le panafricanisme est un mouvement politique, social et culturel visant à unir les peuples africains et la diaspora africaine autour de valeurs communes de solidarité, de développement, de justice et d'autonomie... Agir pour le panafricanisme, c'est œuvrer pour l'unité et la solidarité du continent africain et de sa diaspora.</p>
+                    <button onclick="openModal('Le panafricanisme est un mouvement politique, social et culturel visant à unir les peuples africains et la diaspora africaine autour de valeurs communes de solidarité, de développement, de justice et d'autonomie. Il repose sur la conviction que l'Afrique doit se libérer des divisions héritées de la colonisation, renforcer sa coopération et promouvoir son identité culturelle et économique sur la scène mondiale. Agir pour le panafricanisme, c'est œuvrer pour l'unité et la solidarité du continent africain et de sa diaspora.', 'Le Panafricanisme', '{{ asset('image/pp.png') }}')" class="text-xs px-3 py-1 rounded-md mt-2 transition-all duration-200 hover:scale-105">Voir plus</button>
                 </div>
                 <!-- Élément 12 -->
                 <div class="p-3 rounded shadow-lg text-center action-card cursor-pointer">
-                    <img src="{{ asset('image/b.png') }}" alt="Sensibilisation à l’Hygiène" class="action-image">
-                    <h3 class="text-base sm:text-lg font-bold mt-2">Promotion de l’Égalité et de l’Équité</h3>
-                    <p class="text-xs sm:text-sm text-gray-600 mt-2"> Dans de nombreuses régions du monde, et particulièrement en Afrique, les inégalités persistent encore : inégalités de genre... Promouvoir l’égalité et l’équité, c’est reconnaître la dignité de chaque personne et lui permettre de contribuer pleinement au développement collectif.</p>
-                    <button onclick="openModal('Dans de nombreuses régions du monde, et particulièrement en Afrique, les inégalités persistent encore : inégalités de genre, économiques, sociales et éducatives, limitant l’accès des plus vulnérables aux ressources et aux opportunités. Promouvoir l’égalité et l’équité, c’est reconnaître la dignité de chaque personne et lui permettre de contribuer pleinement au développement collectif.', 'Promotion de l’Égalité et de l’Équité', '{{ asset('image/b.png') }}')" class="text-xs px-3 py-1 rounded-md mt-2 transition-all duration-200 hover:scale-105">Voir plus</button>
+                    <img src="{{ asset('image/b.png') }}" alt="Sensibilisation à l'Hygiène" class="action-image">
+                    <h3 class="text-base sm:text-lg font-bold mt-2">Promotion de l'Égalité et de l'Équité</h3>
+                    <p class="text-xs sm:text-sm text-gray-600 mt-2"> Dans de nombreuses régions du monde, et particulièrement en Afrique, les inégalités persistent encore : inégalités de genre... Promouvoir l'égalité et l'équité, c'est reconnaître la dignité de chaque personne et lui permettre de contribuer pleinement au développement collectif.</p>
+                    <button onclick="openModal('Dans de nombreuses régions du monde, et particulièrement en Afrique, les inégalités persistent encore : inégalités de genre, économiques, sociales et éducatives, limitant l'accès des plus vulnérables aux ressources et aux opportunités. Promouvoir l'égalité et l'équité, c'est reconnaître la dignité de chaque personne et lui permettre de contribuer pleinement au développement collectif.', 'Promotion de l'Égalité et de l'Équité', '{{ asset('image/b.png') }}')" class="text-xs px-3 py-1 rounded-md mt-2 transition-all duration-200 hover:scale-105">Voir plus</button>
                 </div>
             </div>
         </div>
@@ -952,14 +960,14 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
             <h2 class="text-xl sm:text-2xl lg:text-3xl font-bold section-title">À propos d'ABEC</h2>
             <div class="mt-6 text-justify text-sm sm:text-base text-gray-700 leading-relaxed tracking-wide space-y-4 max-w-4xl mx-auto">
-                <p>L’Association du Bien-Être Communautaire (ABEC) est une organisation internationale à but non lucratif, légalement reconnue et enregistrée auprès des institutions locales sous le numéro de déclaration 00001901/RDA/J06/SAAJP/BAPP.</p>
+                <p>L'Association du Bien-Être Communautaire (ABEC) est une organisation internationale à but non lucratif, légalement reconnue et enregistrée auprès des institutions locales sous le numéro de déclaration 00001901/RDA/J06/SAAJP/BAPP.</p>
                 <p>La Loi n°99/014 du 22 décembre 1999 régissant les Organisations Non Gouvernementales (ONG) ; la Loi n°90/053 du 19 décembre 1990 portant sur la liberté d'association au Cameroun.</p>
-                <p>L’ABEC se distingue par une gouvernance inclusive et représentative. Son équipe dirigeante rassemble des membres issus de plusieurs nationalités différentes, illustrant son ouverture et sa portée internationale.</p>
-                <p>Les femmes y occupent des postes stratégiques, renforçant l’équité et la représentativité. Fondée par un jeune visionnaire, l’organisation est dirigée majoritairement par des leaders jeunes, animés par la volonté d’impacter positivement leur génération à travers des actions concrètes.</p>
-                <p>L’ABEC s’appuie sur un réseau d’experts en droit, gestion de projet, communication, finance, développement durable et gestion des ressources humaines, garantissant le sérieux et la qualité de ses interventions.</p>
-                <p>L’ABEC collabore étroitement avec un ensemble de petites et moyennes organisations locales et internationales qui lui font confiance.</p>
-                <p>L’organisation a déjà initié et co-organisé plusieurs activités locales en partenariat avec des entreprises et des structures qui, convaincues par son engagement et sa détermination, continuent de la soutenir durablement.</p>
-                <p>En résumé, l’ABEC incarne la vision d’une jeunesse multinationale et diversifiée, déterminée à changer le cours des choses. Malgré les défis liés au manque de ressources financières, elle poursuit avec conviction la réalisation de projets innovants et audacieux, au service du bien-être communautaire et du développement durable.</p>
+                <p>L'ABEC se distingue par une gouvernance inclusive et représentative. Son équipe dirigeante rassemble des membres issus de plusieurs nationalités différentes, illustrant son ouverture et sa portée internationale.</p>
+                <p>Les femmes y occupent des postes stratégiques, renforçant l'équité et la représentativité. Fondée par un jeune visionnaire, l'organisation est dirigée majoritairement par des leaders jeunes, animés par la volonté d'impacter positivement leur génération à travers des actions concrètes.</p>
+                <p>L'ABEC s'appuie sur un réseau d'experts en droit, gestion de projet, communication, finance, développement durable et gestion des ressources humaines, garantissant le sérieux et la qualité de ses interventions.</p>
+                <p>L'ABEC collabore étroitement avec un ensemble de petites et moyennes organisations locales et internationales qui lui font confiance.</p>
+                <p>L'organisation a déjà initié et co-organisé plusieurs activités locales en partenariat avec des entreprises et des structures qui, convaincues par son engagement et sa détermination, continuent de la soutenir durablement.</p>
+                <p>En résumé, l'ABEC incarne la vision d'une jeunesse multinationale et diversifiée, déterminée à changer le cours des choses. Malgré les défis liés au manque de ressources financières, elle poursuit avec conviction la réalisation de projets innovants et audacieux, au service du bien-être communautaire et du développement durable.</p>
             </div>
             <div class="mt-8 flex justify-center">
                 <video class="responsive-video rounded-lg shadow-lg w-full max-w-[90%]" autoplay loop muted playsinline>
@@ -1038,7 +1046,7 @@
                         <a href="https://www.instagram.com/abec.officiel/" target="_blank" class="social-icon bg-white bg-opacity-20 p-1.5 rounded-full hover:bg-yellow transition-all duration-300">
                             <img src="{{ asset('image/insta.jpg') }}" alt="Instagram" class="w-5 h-5">
                         </a>
-                        <a href="mailto:globaluniversalwelfare@gmail.com" class="social-icon bg-white bg-opacity-20 p-1.5 rounded-full hover:bg-yellow transition-all duration-300">
+                        <a href="/cdn-cgi/l/email-protection#2d4a41424f4c415843445b485f5e4c415a48414b4c5f486d4a404c4441034e4240" class="social-icon bg-white bg-opacity-20 p-1.5 rounded-full hover:bg-yellow transition-all duration-300">
                             <img src="{{ asset('image/m.jpg') }}" alt="Email" class="w-5 h-5">
                         </a>
                     </div>
@@ -1066,7 +1074,6 @@
                             </svg>
                             <p>Yaoundé, Cameroun<br></p>
                         </div>
-
                         <div class="flex items-center">
                             <svg class="w-4 h-4 mr-2 text-yellow" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"></path>
@@ -1101,9 +1108,9 @@
                         &copy; {{ date('Y') }} Association du Bien-Être Communautaire. Tous droits réservés.
                     </p>
                     <div class="flex space-x-4 text-xs">
-                        <a href="#" class="text-gray-300 hover:text-yellow transition-colors duration-300">Mentions légales</a>
-                        <a href="#" class="text-gray-300 hover:text-yellow transition-colors duration-300">Politique de confidentialité</a>
-                        <a href="#" class="text-gray-300 hover:text-yellow transition-colors duration-300">Conditions d'utilisation</a>
+                        <a href="{{ route('mention') }}" class="text-gray-300 hover:text-yellow transition-colors duration-300">Mentions légales</a>
+                        <a href="{{ route('politique') }}"" class="text-gray-300 hover:text-yellow transition-colors duration-300">Politique de confidentialité</a>
+                        <a href="{{ route('copitt') }}" class="text-gray-300 hover:text-yellow transition-colors duration-300">Conditions d'utilisation</a>
                     </div>
                 </div>
             </div>
@@ -1113,7 +1120,7 @@
         <div class="absolute bottom-0 left-0 w-16 h-16 bg-white rounded-full opacity-5 -translate-y-1/2 -translate-x-1/2"></div>
     </footer>
     <!-- Swiper JS -->
-    <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
     <script>
         // Fonctions pour gérer la modale
         function openModal(content, title, imageSrc) {
@@ -1133,7 +1140,6 @@
                 modalClass: modal.classList
             });
         }
-
         function closeModal() {
             const modal = document.getElementById('modal');
             modal.classList.remove('show');
@@ -1141,13 +1147,11 @@
                 modalClass: modal.classList
             });
         }
-
         document.getElementById('modal').addEventListener('click', function(e) {
             if (e.target === this) {
                 closeModal();
             }
         });
-
         function toggleMobileMenu() {
             const mobileMenu = document.getElementById('mobileMenu');
             const menuOpenIcon = document.getElementById('menuOpenIcon');
@@ -1168,7 +1172,6 @@
                 isOpen: !isOpen
             });
         }
-
         const partnerSwiper = new Swiper(".mySwiper", {
             effect: "slide",
             loop: true,
@@ -1198,7 +1201,6 @@
                 }
             }
         });
-
         const heroSwiper = new Swiper(".heroSwiper", {
             effect: "fade",
             fadeEffect: {
@@ -1211,7 +1213,6 @@
                 disableOnInteraction: false
             }
         });
-
         window.addEventListener('load', () => {
             console.log('Page fully loaded, hiding spinner');
             const loading = document.getElementById('loading');
@@ -1223,7 +1224,6 @@
                 }, 700);
             }, 800);
         });
-
         document.addEventListener('DOMContentLoaded', () => {
             console.log('DOM fully loaded, initializing IntersectionObserver');
             const elements = document.querySelectorAll('.section-animate, .action-card, .responsive-video, .partner-logo, footer a, footer p');
@@ -1242,5 +1242,4 @@
         });
     </script>
 </body>
-
 </html>
