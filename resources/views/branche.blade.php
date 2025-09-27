@@ -1,4 +1,3 @@
-```php
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -8,7 +7,7 @@
     <!-- Favicon -->
     <link rel="icon" type="image/png" sizes="64x64" href="{{ asset('image/ab.png') }}">
     <link rel="apple-touch-icon" sizes="180x180" href="{{ asset('image/ab-180.png') }}">
-    <link rel="icon" type="image/png" sizes="32x32" href="{{ asset('image/ab-32.png') }}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{{ asset('image/ab-64.png') }}">
     <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('image/ab-16.png') }}">
     <link rel="manifest" href="{{ asset('manifest.json') }}">
     <!-- Tailwind CSS CDN -->
@@ -23,11 +22,6 @@
             font-family: 'Arial Black', sans-serif;
             overflow-x: hidden;
             padding-top: 0;
-            opacity: 0;
-            transition: opacity 0.7s ease-out;
-        }
-        body.loaded {
-            opacity: 1;
         }
         .font-custom,
         h1,
@@ -45,28 +39,34 @@
             scroll-behavior: smooth;
         }
 
-        /* === LOADING SPINNER === */
-        #loading {
-            display: flex;
-            align-items: center;
-            justify-content: center;
+        /* === LOADING SPINNER (updated, bordure rouge supprimée) === */
+        .loading-overlay {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(255, 255, 255, 0.95);
+            background: rgba(255, 255, 255, 0.8);
+            display: flex;
+            justify-content: center;
+            align-items: center;
             z-index: 9999;
-            transition: opacity 0.7s ease-out;
+            transition: opacity 0.5s ease-out;
         }
-        #loading.loading-hidden {
+        .loading-overlay[x-show="isLoading"] {
+            opacity: 1;
+        }
+        .loading-overlay:not([x-show="isLoading"]) {
             opacity: 0;
             pointer-events: none;
         }
-        .spinner-wrapper {
+        .spinner-container {
             position: relative;
-            width: clamp(80px, 10vw, 100px);
-            height: clamp(80px, 10vw, 100px);
+            width: 120px;
+            height: 120px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
         .spinner-circle {
             position: absolute;
@@ -77,23 +77,32 @@
             border: 4px solid transparent;
             border-top-color: #1E90FF;
             border-radius: 50%;
-            animation: spin 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
+            animation: spin 1s linear infinite;
         }
         .spinner-logo {
             position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: clamp(40px, 5vw, 50px);
-            height: clamp(40px, 5vw, 50px);
-            object-fit: contain;
+            top: 50% !important;
+            left: 50% !important;
+            transform: translate(-50%, -50%) !important;
+            width: 60px !important;
+            height: 60px !important;
+            object-fit: contain !important;
+            margin: 0 !important;
+            padding: 0 !important;
+            box-sizing: border-box !important;
         }
         @keyframes spin {
-            0% {
-                transform: rotate(0deg);
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        @media (max-width: 640px) {
+            .spinner-container {
+                width: 100px;
+                height: 100px;
             }
-            100% {
-                transform: rotate(360deg);
+            .spinner-logo {
+                width: 48px !important;
+                height: 48px !important;
             }
         }
 
@@ -448,6 +457,30 @@
             }
         }
 
+        /* No Events Marquee */
+        .no-events-marquee {
+            width: 100%;
+            overflow: hidden;
+            white-space: nowrap;
+            background-color: #1E90FF;
+            padding: 1rem 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            z-index: 10;
+            margin: 1rem 0;
+            border-radius: 0.5rem;
+        }
+        .no-events-marquee-text {
+            display: inline-block;
+            font-size: 1.25rem;
+            font-weight: bold;
+            color: #FFD700;
+            animation: marquee 10s linear infinite;
+            text-align: center;
+        }
+
         /* Responsive */
         @media (max-width: 640px) {
             .event-image { height: 80px; }
@@ -459,6 +492,7 @@
             .modal-title { font-size: clamp(1rem, 2.5vw, 1.25rem); }
             .modal-content p { font-size: clamp(0.7rem, 1.8vw, 0.8rem); }
             .hero-title { font-size: clamp(1.5rem, 4vw, 2.5rem); }
+            .no-events-marquee-text { font-size: 1rem; }
         }
         @media (min-width: 641px) and (max-width: 1023px) {
             .event-image { height: 110px; }
@@ -466,6 +500,7 @@
             .modal-content { max-width: 90%; }
             .modal-image { max-height: 25vh; }
             .hero-title { font-size: clamp(2rem, 4.5vw, 3rem); }
+            .no-events-marquee-text { font-size: 1.125rem; }
         }
         @media (min-width: 1024px) {
             .event-image { height: 130px; }
@@ -493,19 +528,12 @@
         }
     </script>
 </head>
-<body id="top" x-data="{ mobileMenuOpen: false }" class="bg-white font-sans antialiased">
-    <!-- Loading Spinner -->
-    <!-- <div id="loading" class="fixed inset-0 bg-white bg-opacity-95 flex items-center justify-center z-50">
-        <div class="">
+<body id="top" x-data="{ mobileMenuOpen: false, isLoading: true }" class="bg-white font-sans antialiased" @load.window="setTimeout(() => isLoading = false, 2000)">
+    <!-- LOADING SPINNER (unchanged) -->
+    <div x-show="isLoading" x-cloak class="loading-overlay">
+        <div class="spinner-container">
             <div class="spinner-circle"></div>
-            <img src="{{ asset('image/ab.png') }}" alt="Logo ABEC" class="spinner-logo">
-        </div>
-    </div> -->
-
-      <div id="loading" class="fixed inset-0 bg-white bg-opacity-95 flex items-center justify-center z-50">
-        <div class="spinner-wrapper">
-            <div class="absolute inset-0 border-4 border-t-primary border-transparent rounded-full animate-spin"></div>
-            <img src="{{ asset('image/ab.png') }}" alt="Logo ABEC" class="w-12 h-12 absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
+            <img src="{{ asset('image/ab.png') }}" alt="Logo ABEC" class="spinner-logo transition-transform duration-300 hover:scale-105">
         </div>
     </div>
 
@@ -537,7 +565,10 @@
                         <img src="{{ asset('image/insta.jpg') }}" alt="Instagram" class="w-6 h-6 rounded-full">
                     </a>
                 </div>
-                <a href="mailto:globaluniversalwelfare@gmail.com" class="hover:opacity-80 transition-opacity duration-300">
+                <a href="https://mail.google.com/mail/?view=cm&to=contact@universalwelfare.org" 
+                   target="_blank" 
+                   class="hover:opacity-80 transition-opacity duration-300" 
+                   title="Envoyer un email via Gmail">
                     <img src="{{ asset('image/m.jpg') }}" alt="Email" class="w-6 h-6 rounded-full">
                 </a>
             </div>
@@ -549,7 +580,7 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex items-center justify-between h-16">
                 <div class="flex-shrink-0">
-                    <img src="{{ asset('image/ab.png') }}" alt="logo" class="h-10 sm:h-12 md:h-20 transition-transform duration-300 hover:scale-105">
+                    <img src="{{ asset('image/ab.png') }}" alt="logo" class="h-16 sm:h-16 md:h-20 transition-transform duration-300 hover:scale-105">
                 </div>
                 <nav class="hidden md:flex space-x-4">
                     <a href="{{ route('welcome') }}" class="px-3 py-2 text-sm font-bold text-gray-800 hover:bg-blue-500 hover:text-white transition-all duration-300 font-custom">Accueil</a>
@@ -574,6 +605,7 @@
             </div>
         </div>
     </header>
+
     <!-- Hero -->
     <section class="relative bg-cover bg-center min-h-[60vh] sm:min-h-[80vh] lg:min-h-screen section-animate">
         <div class="absolute inset-0 rounded-br-3xl overflow-hidden">
@@ -596,52 +628,8 @@
     <section id="upcoming-events" class="py-12 md:py-16 bg-gray-200 section-animate">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
             <h2 class="section-title mb-8 md:mb-12">Événements à Venir</h2>
-            <div class="events-grid">
-                <!-- Événement 1 -->
-                <div class="event-card"
-                    data-modal-title="Plantation d'arbres"
-                    data-modal-content="Rejoignez-nous pour planter 1000 arbres dans les écoles et espaces publics de Yaoundé. Cette initiative vise à promouvoir la durabilité environnementale et à sensibiliser les jeunes générations à l'importance de la préservation de la nature."
-                    data-modal-image="{{ asset('image/fotos.jpg') }}">
-                    <img src="{{ asset('image/fotos.jpg') }}" alt="Plantation d'arbres" class="event-image">
-                    <div class="event-body">
-                        <div class="event-meta">10 Juin 2024 • Yaoundé</div>
-                        <h3 class="event-title">Plantation d'arbres</h3>
-                        <p class="event-content">
-                            Rejoignez-nous pour planter 1000 arbres dans les écoles et espaces publics de la ville.
-                        </p>
-                        <button class="event-button">Voir plus</button>
-                    </div>
-                </div>
-                <!-- Événement 2 -->
-                <div class="event-card"
-                    data-modal-title="Collecte de dons médicaux"
-                    data-modal-content="Nous organisons une grande collecte de médicaments et matériel pour les hôpitaux ruraux de Douala. Votre contribution peut sauver des vies et améliorer l'accès aux soins dans les zones défavorisées."
-                    data-modal-image="{{ asset('image/fotos.jpg') }}">
-                    <img src="{{ asset('image/fotos.jpg') }}" alt="Collecte de dons médicaux" class="event-image">
-                    <div class="event-body">
-                        <div class="event-meta">25 Juillet 2024 • Douala</div>
-                        <h3 class="event-title">Collecte de dons médicaux</h3>
-                        <p class="event-content">
-                            Nous organisons une grande collecte de médicaments et matériel pour les hôpitaux ruraux.
-                        </p>
-                        <button class="event-button">Voir plus</button>
-                    </div>
-                </div>
-                <!-- Événement 3 -->
-                <div class="event-card"
-                    data-modal-title="Atelier d'éducation financière"
-                    data-modal-content="Participez à notre formation gratuite pour les jeunes entrepreneurs à Garoua. Cet atelier vise à enseigner la gestion budgétaire et les compétences nécessaires pour développer des projets viables."
-                    data-modal-image="{{ asset('image/fotos2.jpg') }}">
-                    <img src="{{ asset('image/fotos2.jpg') }}" alt="Atelier d'éducation financière" class="event-image">
-                    <div class="event-body">
-                        <div class="event-meta">15 Août 2024 • Garoua</div>
-                        <h3 class="event-title">Atelier d'éducation financière</h3>
-                        <p class="event-content">
-                            Formation gratuite pour les jeunes entrepreneurs sur la gestion de leur budget et projets.
-                        </p>
-                        <button class="event-button">Voir plus</button>
-                    </div>
-                </div>
+            <div class="no-events-marquee">
+                <span class="no-events-marquee-text">Les événements ne sont pas encore disponibles...</span>
             </div>
         </div>
     </section>
@@ -653,15 +641,15 @@
             <div class="events-grid">
                 <!-- Événement 1 -->
                 <div class="event-card"
-                    data-modal-title="Distribution de fournitures scolaires"
-                    data-modal-content="Nous avons distribué des cahiers, stylos et cartables à 200 enfants dans un orphelinat local à Yaoundé. Cette action a permis d'améliorer l'accès à l'éducation pour les enfants défavorisés."
-                    data-modal-image="{{ asset('image/fotos4.jpg') }}">
-                    <img src="{{ asset('image/fotos4.jpg') }}" alt="Distribution de fournitures scolaires" class="event-image">
+                    data-modal-title="Presentations des dons"
+                    data-modal-content="Des dons ont été distribués à l’hôpital régional de Bafoussam afin de venir en aide directement aux patients. Cette initiative permet de soutenir leur bien-être, de faciliter l’accès aux soins et d’améliorer leur confort durant leur séjour à l’hôpital. Elle illustre l’importance de la solidarité envers les personnes malades et renforce l’accompagnement humanitaire au sein de la communauté."
+                    data-modal-image="{{ asset('image/a.jpeg') }}">
+                    <img src="{{ asset('image/a.jpeg') }}" alt="Distribution de fournitures scolaires" class="event-image">
                     <div class="event-body">
                         <div class="event-meta">15 Mars 2024 • Yaoundé</div>
-                        <h3 class="event-title">Distribution de fournitures scolaires</h3>
+                        <h3 class="event-title">Presentations des dons</h3>
                         <p class="event-content">
-                            Nous avons offert des cahiers, stylos et cartables à 200 enfants dans un orphelinat local.
+                            Des dons ont été distribués à l’hôpital régional de Bafoussam afin de venir en aide directement aux patients...
                         </p>
                         <button class="event-button">Voir plus</button>
                     </div>
@@ -670,8 +658,8 @@
                 <div class="event-card"
                     data-modal-title="Campagne de vaccination"
                     data-modal-content="En partenariat avec le ministère de la santé, nous avons vacciné plus de 500 personnes à Douala, contribuant à la prévention des maladies dans les communautés vulnérables."
-                    data-modal-image="{{ asset('image/fotos.jpg') }}">
-                    <img src="{{ asset('image/fotos.jpg') }}" alt="Campagne de vaccination" class="event-image">
+                    data-modal-image="{{ asset('image/b.jpeg') }}">
+                    <img src="{{ asset('image/b.jpeg') }}" alt="Campagne de vaccination" class="event-image">
                     <div class="event-body">
                         <div class="event-meta">22 Janvier 2024 • Douala</div>
                         <h3 class="event-title">Campagne de vaccination</h3>
@@ -705,6 +693,7 @@
 
     <!-- Footer -->
     <footer id="contact" class="bg-primary text-white relative pt-10 overflow-hidden section-animate">
+        <!-- Vague SVG compacte -->
         <div class="wave-divider">
             <svg data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
                 <defs>
@@ -716,11 +705,14 @@
                 <path d="M0,0 C300,100 900,100 1200,0 V120 H0 Z" class="shape-fill"></path>
             </svg>
         </div>
+        <!-- Phrase défilante centrée -->
         <div class="marquee-container">
-            <span class="marquee-text">Agir - Grandir - Changer</span>
+            <span class="marquee-text"> Grandir- Agir  - Changer</span>
         </div>
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+            <!-- Grille compacte -->
             <div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-6">
+                <!-- Colonne Logo et Description -->
                 <div class="md:col-span-2">
                     <div class="flex items-center mb-4">
                         <img src="{{ asset('image/ab.png') }}" alt="Logo ABEC" class="w-12 h-12 mr-3">
@@ -742,11 +734,12 @@
                         <a href="https://www.instagram.com/abec.officiel/" target="_blank" class="social-icon bg-white bg-opacity-20 p-1.5 rounded-full hover:bg-yellow transition-all duration-300">
                             <img src="{{ asset('image/insta.jpg') }}" alt="Instagram" class="w-5 h-5">
                         </a>
-                        <a href="mailto:globaluniversalwelfare@gmail.com" class="social-icon bg-white bg-opacity-20 p-1.5 rounded-full hover:bg-yellow transition-all duration-300">
+                        <a href="/cdn-cgi/l/email-protection#2d4a41424f4c415843445b485f5e4c415a48414b4c5f486d4a404c4441034e4240" class="social-icon bg-white bg-opacity-20 p-1.5 rounded-full hover:bg-yellow transition-all duration-300">
                             <img src="{{ asset('image/m.jpg') }}" alt="Email" class="w-5 h-5">
                         </a>
                     </div>
                 </div>
+                <!-- Colonne Liens Rapides -->
                 <div>
                     <h3 class="text-base font-bold mb-4 text-white border-b border-yellow pb-1">Liens Rapides</h3>
                     <ul class="space-y-2 text-sm">
@@ -754,9 +747,10 @@
                         <li><a href="{{ url('/about') }}" class="footer-link text-gray-200 hover:text-yellow flex items-center transition-all duration-300"><span class="mr-2">→</span> À propos</a></li>
                         <li><a href="{{ url('/news') }}" class="footer-link text-gray-200 hover:text-yellow flex items-center transition-all duration-300"><span class="mr-2">→</span> News</a></li>
                         <li><a href="{{ url('/dons') }}" class="footer-link text-gray-200 hover:text-yellow flex items-center transition-all duration-300"><span class="mr-2">→</span> Faire un don</a></li>
-                        <li><a href="{{ url('/projects') }}" class="footer-link text-gray-200 hover:text-yellow flex items-center transition-all duration-300"><span class="mr-2">→</span> Evenements</a></li>
+                        <li><a href="{{ url('/projects') }}" class="footer-link text-gray-200 hover:text-yellow flex items-center transition-all duration-300"><span class="mr-2">→</span>Evenements</a></li>
                     </ul>
                 </div>
+                <!-- Colonne Contact -->
                 <div>
                     <h3 class="text-base font-bold mb-4 text-white border-b border-yellow pb-1">Contact</h3>
                     <div class="space-y-3 text-sm text-gray-200">
@@ -782,6 +776,7 @@
                     </div>
                 </div>
             </div>
+            <!-- Call-to-action compact -->
             <div class="bg-white bg-opacity-10 rounded-lg p-4 mb-6 backdrop-blur-sm">
                 <div class="flex flex-col md:flex-row md:items-center justify-between">
                     <div class="mb-3 md:mb-0">
@@ -793,19 +788,21 @@
                     </a>
                 </div>
             </div>
+            <!-- Ligne de séparation et copyright -->
             <div class="border-t border-white border-opacity-20 pt-4">
                 <div class="flex flex-col md:flex-row justify-between items-center">
                     <p class="text-gray-300 text-xs mb-3 md:mb-0">
                         &copy; {{ date('Y') }} Association du Bien-Être Communautaire. Tous droits réservés.
                     </p>
                     <div class="flex space-x-4 text-xs">
-                        <a href="{{ url('/mentions-legales') }}" class="text-gray-300 hover:text-yellow transition-colors duration-300">Mentions légales</a>
-                        <a href="{{ url('/privacy') }}" class="text-gray-300 hover:text-yellow transition-colors duration-300">Politique de confidentialité</a>
-                        <a href="{{ url('/conditions') }}" class="text-gray-300 hover:text-yellow transition-colors duration-300">Conditions d'utilisation</a>
+                        <a href="{{ route('mention') }}" class="text-gray-300 hover:text-yellow transition-colors duration-300">Mentions légales</a>
+                        <a href="{{ route('politique') }}" class="text-gray-300 hover:text-yellow transition-colors duration-300">Politique de confidentialité</a>
+                        <a href="{{ route('copitt') }}" class="text-gray-300 hover:text-yellow transition-colors duration-300">Conditions d'utilisation</a>
                     </div>
                 </div>
             </div>
         </div>
+        <!-- Éléments décoratifs réduits -->
         <div class="absolute top-0 right-0 w-24 h-24 bg-yellow rounded-full opacity-10 -translate-y-1/2 translate-x-1/2"></div>
         <div class="absolute bottom-0 left-0 w-16 h-16 bg-white rounded-full opacity-5 -translate-y-1/2 -translate-x-1/2"></div>
     </footer>
@@ -817,7 +814,6 @@
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             const elements = document.querySelectorAll('.section-animate, .event-card');
-            const loading = document.getElementById('loading');
 
             function openModal(content, title, imageSrc) {
                 const modal = document.getElementById('modal');
@@ -835,17 +831,6 @@
                 const modal = document.getElementById('modal');
                 modal.classList.remove('show');
             }
-
-            // Masquer le loader après le chargement complet
-            window.addEventListener('load', () => {
-                setTimeout(() => {
-                    loading.classList.add('loading-hidden');
-                    setTimeout(() => {
-                        loading.style.display = 'none';
-                        document.body.classList.add('loaded');
-                    }, 700);
-                }, 800);
-            });
 
             document.querySelectorAll('.event-button').forEach(button => {
                 button.addEventListener('click', (e) => {

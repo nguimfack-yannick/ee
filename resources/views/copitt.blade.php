@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -140,9 +139,80 @@
         line-height: 1.6;
         text-align: center;
       }
+      /* Loading Spinner Styles */
+      .loading-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(255, 255, 255, 0.8);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 9999;
+        transition: opacity 0.5s ease-out;
+      }
+      .loading-overlay[x-show="isLoading"] {
+        opacity: 1;
+      }
+      .loading-overlay:not([x-show="isLoading"]) {
+        opacity: 0;
+        pointer-events: none;
+      }
+      .spinner-container {
+        position: relative;
+        width: 100px;
+        height: 100px;
+      }
+      .spinner-circle {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        border: 4px solid transparent;
+        border-top-color: #1E90FF;
+        border-radius: 50%;
+        animation: spin 1s linear infinite;
+      }
+      .spinner-logo {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 60px;
+        height: 60px;
+        object-fit: contain;
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      @keyframes spin {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
+      }
+      @media (max-width: 640px) {
+        .spinner-container {
+          width: 80px;
+          height: 80px;
+        }
+        .spinner-logo {
+          width: 48px;
+          height: 48px;
+        }
+      }
     </style>
 </head>
-<body id="top" x-data="{ mobileMenuOpen: false }" class="bg-white flex flex-col min-h-screen">
+<body id="top" x-data="{ mobileMenuOpen: false, isLoading: true }" class="bg-white flex flex-col min-h-screen" @load.window="setTimeout(() => isLoading = false, 2000)">
+    <!-- Loading Spinner -->
+    <div x-show="isLoading" x-cloak class="loading-overlay">
+        <div class="spinner-container">
+            <div class="spinner-circle"></div>
+            <img src="{{ asset('image/ab.png') }}" alt="Logo ABEC" class="spinner-logo transition-transform duration-300 hover:scale-105">
+        </div>
+    </div>
+
     <!-- Top Bar avec réseaux sociaux -->
     <nav class="bg-primary text-white">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between h-10">
@@ -151,7 +221,12 @@
                 <a href="https://whatsapp.com/channel/0029VaYTsNkD8SE42sDpnk1w" target="_blank"><img src="{{ asset('image/wastapp.jpg') }}" alt="WhatsApp" class="w-6 h-6 rounded-full"></a>
                 <a href="https://www.instagram.com/abec.officiel/" target="_blank"><img src="{{ asset('image/insta.jpg') }}" alt="Instagram" class="w-6 h-6 rounded-full"></a>
             </div>
-            <a href="mailto:globaluniversalwelfare@gmail.com"><img src="{{ asset('image/m.jpg') }}" alt="Email" class="w-6 h-6 rounded-full"></a>
+            <a href="https://mail.google.com/mail/?view=cm&to=contact@universalwelfare.org" 
+               target="_blank" 
+               class="hover:opacity-80 transition-opacity duration-300" 
+               title="Envoyer un email via Gmail">
+                <img src="{{ asset('image/m.jpg') }}" alt="Email" class="w-6 h-6 rounded-full">
+            </a>
         </div>
     </nav>
     <!-- Header principal -->
@@ -193,7 +268,7 @@
             <hr class="border-2 border-yellow mb-8">
             <h1 class="text-3xl font-bold text-primary mb-6 text-center">Conditions d'Utilisation et Avis de Copyright</h1>
             <hr class="border-2 border-yellow my-8">
-             <h2 class="text-2xl font-bold text-primary mt-8 mb-4 text-center">Conditions d'Utilisation</h2>
+            <h2 class="text-2xl font-bold text-primary mt-8 mb-4 text-center">Conditions d'Utilisation</h2>
             <p>Bienvenue sur le site web de l'Association du Bien-Être Communautaire (ABEC), accessible à l'adresse <a href="https://universalwelfare.org">universalwelfare.org</a>. En accédant ou en utilisant ce site, vous acceptez d'être lié par les présentes conditions d'utilisation. Si vous n'acceptez pas ces conditions, veuillez ne pas utiliser ce site.</p>
 
             <h3>1. Utilisation du Site</h3>
@@ -217,13 +292,24 @@
             <p>Ces conditions sont régies par les lois du Cameroun, en particulier la Loi n°90/053 du 19 décembre 1990 sur la liberté d'association et la Loi n°99/014 du 22 décembre 1999 régissant les ONG.</p>
 
             <hr class="border-2 border-yellow my-8">
-             <h2 class="text-2xl font-bold text-primary mt-8 mb-4 text-center">Avis de Copyright</h2>
+            <h2 class="text-2xl font-bold text-primary mt-8 mb-4 text-center">Avis de Copyright</h2>
            
             <p>© {{ date('Y') }} Association du Bien-Être Communautaire (ABEC). Tous droits réservés.</p>
             <ul>
                 <li>Tout le contenu de ce site, y compris les textes, graphiques, logos, images, clips audio/vidéo et logiciels, est protégé par les lois internationales sur le copyright et la propriété intellectuelle.</li>
                 <li>Aucune partie de ce site ne peut être reproduite, distribuée, transmise, copiée ou utilisée sans l'autorisation écrite préalable de l'ABEC.</li>
-                <li>Pour toute demande d'autorisation ou information supplémentaire, veuillez nous contacter à : <a href="mailto:globaluniversalwelfare@gmail.com">globaluniversalwelfare@gmail.com</a> ou au +237 6 21 62 06 77.</li>
+               <li>
+    Pour toute demande d'autorisation ou information supplémentaire, veuillez nous contacter à :  
+    E-mail : 
+    <a href="https://mail.google.com/mail/?view=cm&to=contact@universalwelfare.org" 
+       target="_blank" 
+       class="hover:opacity-80 transition-opacity duration-300" 
+       title="Envoyer un email via Gmail">
+        <img src="{{ asset('image/m.jpg') }}" alt="Email" class="w-6 h-6 rounded-full inline-block">
+    </a>  
+    ou au +237 6 21 62 06 77.
+</li>
+
             </ul>
 
             <p>Pour plus d'informations, veuillez consulter notre page <a href="https://universalwelfare.org/faq">FAQ</a> ou nous contacter directement.</p>
@@ -274,9 +360,12 @@
                         <a href="https://www.instagram.com/abec.officiel/" target="_blank" class="social-icon bg-white bg-opacity-20 p-1.5 rounded-full hover:bg-yellow transition-all duration-300">
                             <img src="{{ asset('image/insta.jpg') }}" alt="Instagram" class="w-5 h-5">
                         </a>
-                        <a href="mailto:globaluniversalwelfare@gmail.com" class="social-icon bg-white bg-opacity-20 p-1.5 rounded-full hover:bg-yellow transition-all duration-300">
-                            <img src="{{ asset('image/m.jpg') }}" alt="Email" class="w-5 h-5">
-                        </a>
+                                   <a href="https://mail.google.com/mail/?view=cm&to=contact@universalwelfare.org" 
+   target="_blank" 
+   class="hover:opacity-80 transition-opacity duration-300" 
+   title="Envoyer un email via Gmail">
+    <img src="{{ asset('image/m.jpg') }}" alt="Email" class="w-6 h-6 rounded-full">
+</a>
                     </div>
                 </div>
                 <!-- Colonne Liens Rapides -->
@@ -334,9 +423,9 @@
                     <p class="text-gray-300 text-xs mb-3 md:mb-0">
                         &copy; {{ date('Y') }} Association du Bien-Être Communautaire. Tous droits réservés.
                     </p>
-                   <div class="flex space-x-4 text-xs">
+                    <div class="flex space-x-4 text-xs">
                         <a href="{{ route('mention') }}" class="text-gray-300 hover:text-yellow transition-colors duration-300">Mentions légales</a>
-                        <a href="{{ route('politique') }}"" class="text-gray-300 hover:text-yellow transition-colors duration-300">Politique de confidentialité</a>
+                        <a href="{{ route('politique') }}" class="text-gray-300 hover:text-yellow transition-colors duration-300">Politique de confidentialité</a>
                         <a href="{{ route('copitt') }}" class="text-gray-300 hover:text-yellow transition-colors duration-300">Conditions d'utilisation</a>
                     </div>
                 </div>

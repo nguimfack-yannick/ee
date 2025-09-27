@@ -8,7 +8,7 @@
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Arial+Black&display=swap');
 
-        /* Global styles from first document */
+        /* Global styles */
         body {
             background-color: #ffffff;
             font-family: 'Arial Black', sans-serif;
@@ -27,35 +27,37 @@
             font-weight: bold;
         }
 
-        /* Smooth Scroll Behavior */
         html {
             scroll-behavior: smooth;
         }
 
-        /* Loading Spinner Styles from first document */
-        #loading {
-            display: flex;
-            align-items: center;
-            justify-content: center;
+        /* Loading Spinner - couvre toute la page */
+        #page-loading {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(255, 255, 255, 0.95);
+            background: #ffffff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             z-index: 9999;
-            transition: opacity 0.7s ease-out;
+            opacity: 1;
+            transition: opacity 0.6s ease-out, visibility 0.6s ease-out;
+            visibility: visible;
         }
 
-        #loading.hidden {
+        #page-loading.hidden {
             opacity: 0;
+            visibility: hidden;
             pointer-events: none;
         }
 
         .spinner-container {
             position: relative;
-            width: 60px;
-            height: 60px;
+            width: 80px;
+            height: 80px;
         }
 
         .spinner-circle {
@@ -63,7 +65,7 @@
             width: 100%;
             height: 100%;
             border: 4px solid transparent;
-            border-top-color: #1E90FF; /* primary color */
+            border-top-color: #1E90FF;
             border-radius: 50%;
             animation: spin 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
         }
@@ -73,8 +75,8 @@
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            width: 32px;
-            height: 32px;
+            width: 48px;
+            height: 48px;
             object-fit: contain;
         }
 
@@ -83,7 +85,7 @@
             100% { transform: rotate(360deg); }
         }
 
-        /* Modal Styles from first document */
+        /* Modal */
         .modal {
             position: fixed;
             top: 0;
@@ -175,26 +177,26 @@
             opacity: 1;
         }
 
-        /* Grid Container from first document (Nos Actions) */
+        /* Grid - 1 colonne mobile, 2 tablette, 3 desktop */
         .articles-grid {
             display: grid;
-            grid-template-columns: repeat(1, 1fr); /* Mobile: 1 column */
-            gap: 1rem;
+            grid-template-columns: repeat(1, 1fr);
+            gap: 1.5rem;
         }
 
         @media (min-width: 640px) {
             .articles-grid {
-                grid-template-columns: repeat(2, 1fr); /* Tablet: 2 columns */
+                grid-template-columns: repeat(2, 1fr);
             }
         }
 
         @media (min-width: 1024px) {
             .articles-grid {
-                grid-template-columns: repeat(4, 1fr); /* Desktop: 4 columns */
+                grid-template-columns: repeat(3, 1fr);
             }
         }
 
-        /* Article Card Styles from first document (action-card) */
+        /* Cards */
         .article-card {
             background-color: #FFF8DC;
             position: relative;
@@ -251,7 +253,7 @@
 
         .article-image {
             width: 100%;
-            height: 120px;
+            height: 140px;
             object-fit: cover;
             border-radius: 0.5rem;
             transition: transform 0.3s ease, opacity 0.3s ease;
@@ -270,7 +272,7 @@
 
         .article-title {
             font-size: clamp(0.875rem, 2.5vw, 1rem);
-            color: #1E90FF !important; /* Force la couleur bleue avec !important */
+            color: #1E90FF !important;
             text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
             margin-bottom: 0.5rem;
             line-height: 1.4;
@@ -278,12 +280,6 @@
             -webkit-line-clamp: 2;
             -webkit-box-orient: vertical;
             overflow: hidden;
-            transition: none; /* Supprime toute transition de couleur */
-        }
-
-        /* SUPPRESSION COMPLÈTE DU CHANGEMENT DE COULEUR AU HOVER */
-        .article-card:hover .article-title {
-            color: #1E90FF !important; /* Garde toujours la couleur bleue */
         }
 
         .article-content {
@@ -311,7 +307,7 @@
             font-size: 0.9em;
         }
 
-        /* Button styles - COULEUR OR */
+        /* Buttons */
         .article-button {
             color: #000000;
             background-color: #FFD700;
@@ -338,7 +334,6 @@
             transform: scale(1.05);
         }
 
-        /* Bouton "Voir plus d'actualités" - COULEUR OR */
         .btn-more {
             display: inline-block;
             background: linear-gradient(135deg, #FFD700, #FFA500);
@@ -381,7 +376,7 @@
             box-shadow: 0 2px 10px rgba(255, 215, 0, 0.3);
         }
 
-        /* Section Title from first document */
+        /* Section Title */
         .section-title {
             text-transform: uppercase;
             color: #1E90FF;
@@ -404,46 +399,22 @@
             border-radius: 0.25rem;
         }
 
-        /* Stagger animation for cards from first document */
-        .article-card:nth-child(1).visible { transition-delay: 0.1s; }
-        .article-card:nth-child(2).visible { transition-delay: 0.2s; }
-        .article-card:nth-child(3).visible { transition-delay: 0.3s; }
-        .article-card:nth-child(4).visible { transition-delay: 0.4s; }
-
-        /* Responsive adjustments from first document */
+        /* Responsive */
         @media (max-width: 640px) {
-            .article-image {
-                height: 100px;
-            }
-            .article-title {
-                font-size: clamp(0.75rem, 2vw, 0.875rem);
-            }
-            .article-content {
-                font-size: clamp(0.7rem, 1.8vw, 0.8rem);
-            }
-            .article-button {
-                padding: 0.4rem 0.8rem;
-                font-size: 0.7rem;
-            }
-            .btn-more {
-                padding: 10px 20px;
-                font-size: 0.9rem;
-            }
+            .article-image { height: 110px; }
+            .article-title { font-size: clamp(0.75rem, 2vw, 0.875rem); }
+            .article-content { font-size: clamp(0.7rem, 1.8vw, 0.8rem); }
+            .article-button { padding: 0.4rem 0.8rem; font-size: 0.7rem; }
+            .btn-more { padding: 10px 20px; font-size: 0.9rem; }
         }
 
         @media (min-width: 641px) and (max-width: 1023px) {
-            .article-image {
-                height: 130px;
-            }
-            .article-title {
-                font-size: clamp(0.875rem, 2.5vw, 1rem);
-            }
+            .article-image { height: 130px; }
+            .article-title { font-size: clamp(0.875rem, 2.5vw, 1rem); }
         }
 
         @media (min-width: 1024px) {
-            .article-image {
-                height: 150px;
-            }
+            .article-image { height: 150px; }
         }
     </style>
     <script>
@@ -461,11 +432,11 @@
     </script>
 </head>
 
-<!-- LOADING SPINNER -->
-<div id="loading" class="fixed inset-0 z-50">
+<!-- LOADING SPINNER GLOBAL -->
+<div id="page-loading">
     <div class="spinner-container">
         <div class="spinner-circle"></div>
-        <img src="{{ asset('image/ab.png') }}" alt="Logo ABEC" class="spinner-logo w-12 h-12">
+        <img src="{{ asset('image/ab.png') }}" alt="Logo ABEC" class="spinner-logo">
     </div>
 </div>
 
@@ -483,56 +454,53 @@
 </div>
 
 <?php
-// CONFIGURATION FACILE - MODIFIEZ ICI VOS TEXTES ET IMAGES
 $newsConfig = [
     'sectionTitle' => 'Actualités',
-    'sectionSubtitle' => 'Découvrez ce qui se passe chez nous actuellement.',
+    'sectionSubtitle' => 'Voici ce qu’il faut retenir de l’actualité récente.',
     'moreButtonText' => 'Voir plus d\'actualités',
-    'moreButtonLink' => '#grille-section', // Lien vers la section grille
+    'moreButtonLink' => '#grille-section',
     'articles' => [
         [
-            'title' => 'Nouvelle école construite à Douala grâce à vos dons',
-            'content' => 'L\'ONG ABEC continue son engagement sur le terrain avec des actions concrètes pour améliorer les conditions de vie des populations locales. Grâce à votre soutien, nous avons pu réaliser cette initiative qui impacte directement la vie de centaines de bénéficiaires.',
-            'fullContent' => 'L\'ONG ABEC continue son engagement sur le terrain avec des actions concrètes pour améliorer les conditions de vie des populations locales. Grâce à votre soutien, nous avons pu réaliser cette initiative qui impacte directement la vie de centaines de bénéficiaires. Cette action s\'inscrit dans notre mission de développement durable et d\'amélioration des conditions de vie des communautés les plus vulnérables. Nous remercions tous nos partenaires et donateurs qui rendent ces projets possibles.',
+            'title' => '📰 L’association "Du bien-être communautaire" en action à l’hôpital régional de Bafoussam',
+            'content' => 'Le 20 mars 2025, l’association Du bien-être communautaire a effectué une descente à l’hôpital régional de Bafoussam, dans le cadre de ses activités sociales. Cette initiative visait à apporter du soutien moral, matériel et sanitaire aux patients hospitalisés, en particulier ceux en situation de précarité.',
+            'fullContent' => 'Le 20 mars 2025, l’association Du bien-être communautaire a effectué une descente à l’hôpital régional de Bafoussam, dans le cadre de ses activités sociales. Cette initiative visait à apporter du soutien moral, matériel et sanitaire aux patients hospitalisés, en particulier ceux en situation de précarité. L’équipe de l’association a distribué des dons, échangé avec le personnel soignant et sensibilisé sur l’importance du bien-être mental dans le processus de guérison. Une action saluée tant par les bénéficiaires que par l’administration de l’hôpital, qui appelle à la multiplication de ce type de gestes solidaires dans les structures de santé. ',
             'image' => 'image/news.png',
-            'date' => '15/12/2024'
+            'date' => '27/07/2025'
         ],
         [
-            'title' => 'Campagne de vaccination dans les quartiers défavorisés',
-            'content' => 'Une grande campagne de vaccination a été organisée dans plusieurs quartiers de la ville. Cette initiative vise à protéger les populations les plus vulnérables contre diverses maladies.',
-            'fullContent' => 'Une grande campagne de vaccination a été organisée dans plusieurs quartiers de la ville. Cette initiative vise à protéger les populations les plus vulnérables contre diverses maladies. Plus de 500 personnes ont déjà bénéficié de cette campagne gratuite organisée en partenariat avec le ministère de la santé.',
+            'title' => '📰 L’Association du Bien-Être Communautaire (ABEC) lance un appel aux bénévoles volontaires',
+            'content' => 'En août 2025, l’ABEC a lancé un appel à toute personne prête à s’impliquer activement dans la vie de l’organisation. Cette campagne de mobilisation vise à recruter des bénévoles motivés, disponibles et capables de travailler en équipe, que ce soit à distance ou en présentiel.',
+            'fullContent' => 'En août 2025, l’ABEC a lancé un appel à toute personne prête à s’impliquer activement dans la vie de l’organisation. Cette campagne de mobilisation vise à recruter des bénévoles motivés, disponibles et capables de travailler en équipe, que ce soit à distance ou en présentiel.L’association recherche des profils multilingues (français, anglais), prêts à consacrer du temps et de l’énergie pour renforcer l’impact de ses activités dans le monde. Les missions peuvent inclure la communication, l’organisation d’événements, la production de contenu, ou encore la participation à des projets sociaux.🎯 Les places sont limitées.
+📩 Contact : contact@universalwelfare.org
+
+📱 WhatsApp : +237 6 21620677',
             'image' => 'image/appl.jpg',
             'date' => '10/12/2024'
         ],
         [
-            'title' => 'Formation professionnelle pour 50 jeunes à Yaoundé',
-            'content' => 'Un programme de formation professionnelle a été lancé pour donner aux jeunes les compétences nécessaires pour intégrer le marché du travail.',
-            'fullContent' => 'Un programme de formation professionnelle a été lancé pour donner aux jeunes les compétences nécessaires pour intégrer le marché du travail. Cette formation de 6 mois couvre plusieurs domaines : informatique, couture, mécanique et agriculture. Les participants recevront un certificat reconnu par l\'État.',
-            'image' => 'image/news.png',
+            'title' => '📄 Reconnaissance officielle de l’ABEC',
+            'content' => 'L’Association du Bien-Être Communautaire (ABEC) est officiellement reconnue par les autorités administratives camerounaises. Son récépissé de déclaration a été délivré sous le n°00001901/RDA/J06/SAAJP/BAPP en date du 20 novembre 2024, par le Préfet du Département du Mfoundi, région du Centre, Cameroun.',
+            'fullContent' => 'L’Association du Bien-Être Communautaire (ABEC) est officiellement reconnue par les autorités administratives camerounaises. Son récépissé de déclaration a été délivré sous le n°00001901/RDA/J06/SAAJP/BAPP en date du 20 novembre 2024, par le Préfet du Département du Mfoundi, région du Centre, Cameroun.
+
+Cette reconnaissance légale renforce la crédibilité de l’organisation et témoigne de son engagement dans la mise en œuvre d’actions sociales et humanitaires durables.
+
+📌 Pour toute collaboration ou demande d\'information :
+📞 +237 6 21620677
+📧 contact@universalwelfare.org',
+            'image' => 'image/teste.jpg',
             'date' => '05/12/2024'
         ],
-        [
-            'title' => 'Distribution de kits scolaires aux enfants défavorisés',
-            'content' => 'Plus de 200 kits scolaires ont été distribués aux enfants des familles les plus démunies pour faciliter leur retour à l\'école.',
-            'fullContent' => 'Plus de 200 kits scolaires ont été distribués aux enfants des familles les plus démunies pour faciliter leur retour à l\'école. Chaque kit contient des cahiers, stylos, crayons, règles et un sac d\'école. Cette action s\'inscrit dans notre programme d\'aide à la scolarisation des enfants vulnérables.',
-            'image' => 'image/appl.jpg',
-            'date' => '01/12/2024'
-        ]
     ]
 ];
 ?>
 
-<div class="max-w-7xl mx-auto py-10 px-4 sm:px-6 lg:px-8 relative section-animate">
+<div class="max-w-7xl mx-auto py-10 px-4 sm:px-6 lg:px-8 relative">
     <div class="text-center">
         <h2 class="text-xl sm:text-2xl lg:text-3xl font-bold section-title">{{ $newsConfig['sectionTitle'] }}</h2>
-        <!-- ESPACEMENT AJOUTÉ ENTRE LE TITRE ET LE SOUS-TITRE -->
-        <p class="text-center text-gray-600 mb-10 font-bold mt-6">
+        <p class="text-center text-gray-600 mb-8 font-bold mt-4">
             {{ $newsConfig['sectionSubtitle'] }}
         </p>
     </div>
-
-    <!-- Overlay -->
-    <div id="overlay" class="overlay"></div>
 
     <!-- Grille d'articles -->
     <div class="articles-grid" id="grille-section">
@@ -546,9 +514,9 @@ $newsConfig = [
                         Publié le {{ $article['date'] }}
                     </div>
                     <button onclick="openModal(
-                        '{{ addslashes($article['fullContent']) }}',
-                        '{{ addslashes($article['title']) }}',
-                        '{{ asset($article['image']) }}'
+                        `{{ str_replace(["\r", "\n"], ' ', addslashes($article['fullContent'])) }}`,
+                        `{{ addslashes($article['title']) }}`,
+                        `{{ asset($article['image']) }}`
                     )" class="article-button">Voir plus</button>
                 </div>
             </div>
@@ -556,7 +524,7 @@ $newsConfig = [
     </div>
 
     <!-- Bouton Voir Plus -->
-    <div class="text-center mt-12">
+    <div class="text-center mt-10">
         <a href="{{ $newsConfig['moreButtonLink'] }}" class="btn-more">
             {{ $newsConfig['moreButtonText'] }}
         </a>
@@ -564,105 +532,55 @@ $newsConfig = [
 </div>
 
 <script>
-// Fonction globale pour ouvrir la modal
 function openModal(content, title, imageSrc) {
     const modal = document.getElementById('modal');
     const modalContent = document.getElementById('modalContent');
     const modalTitle = document.getElementById('modalTitle');
     const modalImage = document.getElementById('modalImage');
     
-    modalContent.innerHTML = content;
+    modalContent.innerHTML = content.replace(/\n/g, '<br>');
     modalTitle.textContent = title;
     modalImage.src = imageSrc;
     modalImage.alt = title;
     modal.classList.add('show');
-    
-    console.log('Modal opened', { content, title, imageSrc });
 }
 
-// Fonction globale pour fermer la modal
 function closeModal() {
-    const modal = document.getElementById('modal');
-    modal.classList.remove('show');
-    console.log('Modal closed');
+    document.getElementById('modal').classList.remove('show');
 }
 
 document.addEventListener('DOMContentLoaded', () => {
-    const articles = document.querySelectorAll('.article-card');
-    const overlay = document.getElementById('overlay');
-    const loading = document.getElementById('loading');
-    const elements = document.querySelectorAll('.section-animate, .article-card');
+    const loadingScreen = document.getElementById('page-loading');
+    const cards = document.querySelectorAll('.article-card');
 
-    // Masquer le loader après chargement
+    // Masquer le loader après chargement complet + délai doux
     window.addEventListener('load', () => {
-        console.log('Page fully loaded, hiding spinner');
         setTimeout(() => {
-            loading.classList.add('hidden');
-            setTimeout(() => loading.style.display = 'none', 700);
-        }, 800);
+            loadingScreen.classList.add('hidden');
+        }, 600);
     });
 
-    // Gestion des clics sur les articles (éviter les conflits avec les boutons)
-    articles.forEach(article => {
-        article.addEventListener('click', (e) => {
-            // Éviter que le clic sur le bouton "Voir plus" déclenche l'expansion
-            if (e.target.classList.contains('article-button') || e.target.closest('.article-button')) {
-                e.stopPropagation();
-                return;
-            }
-            
-            const isExpanded = article.classList.contains('expanded');
-
-            // Fermer les autres articles
-            articles.forEach(a => {
-                if (a !== article) a.classList.remove('expanded');
-            });
-
-            // Toggle l'article courant
-            article.classList.toggle('expanded', !isExpanded);
-            overlay.classList.toggle('active', !isExpanded);
-
-            // Scroll doux vers l'article
-            if (!isExpanded) {
-                article.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-            }
-        });
-    });
-
-    // Fermer en cliquant sur l'overlay
-    overlay.addEventListener('click', () => {
-        articles.forEach(a => a.classList.remove('expanded'));
-        overlay.classList.remove('active');
-    });
-
-    // Fermer avec la touche Échap
-    document.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape') {
-            articles.forEach(a => a.classList.remove('expanded'));
-            overlay.classList.remove('active');
-            closeModal();
-        }
-    });
-
-    // Fermer la modal en cliquant à l'extérieur
-    document.getElementById('modal').addEventListener('click', (e) => {
-        if (e.target.id === 'modal') {
-            closeModal();
-        }
-    });
-
-    // IntersectionObserver pour animations
+    // Animation au scroll
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
-                console.log('Element visible:', entry.target);
                 entry.target.classList.add('visible');
                 observer.unobserve(entry.target);
             }
         });
     }, { threshold: 0.1 });
 
-    elements.forEach(element => observer.observe(element));
+    cards.forEach(card => observer.observe(card));
+
+    // Fermer modal avec Échap
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') closeModal();
+    });
+
+    // Fermer modal en cliquant à l'extérieur
+    document.getElementById('modal').addEventListener('click', (e) => {
+        if (e.target === e.currentTarget) closeModal();
+    });
 });
 </script>
 @endsection

@@ -201,7 +201,12 @@
                 <a href="https://whatsapp.com/channel/0029VaYTsNkD8SE42sDpnk1w" target="_blank"><img src="{{ asset('image/wastapp.jpg') }}" alt="WhatsApp" class="w-6 h-6 rounded-full"></a>
                 <a href="https://www.instagram.com/abec.officiel/" target="_blank"><img src="{{ asset('image/insta.jpg') }}" alt="Instagram" class="w-6 h-6 rounded-full"></a>
             </div>
-            <a href="mailto:globaluniversalwelfare@gmail.com"><img src="{{ asset('image/m.jpg') }}" alt="Email" class="w-6 h-6 rounded-full"></a>
+                    <a href="https://mail.google.com/mail/?view=cm&to=contact@universalwelfare.org" 
+   target="_blank" 
+   class="hover:opacity-80 transition-opacity duration-300" 
+   title="Envoyer un email via Gmail">
+    <img src="{{ asset('image/m.jpg') }}" alt="Email" class="w-6 h-6 rounded-full">
+</a>
         </div>
     </nav>
 
@@ -432,7 +437,7 @@
                         <a href="https://www.instagram.com/abec.officiel/" target="_blank" class="social-icon bg-white bg-opacity-20 p-1.5 rounded-full hover:bg-yellow transition-all duration-300">
                             <img src="{{ asset('image/insta.jpg') }}" alt="Instagram" class="w-5 h-5">
                         </a>
-                        <a href="mailto:globaluniversalwelfare@gmail.com" class="social-icon bg-white bg-opacity-20 p-1.5 rounded-full hover:bg-yellow transition-all duration-300">
+                        <a href="https://mail.google.com/mail/?view=cm&to=contact@universalwelfare.org" class="social-icon bg-white bg-opacity-20 p-1.5 rounded-full hover:bg-yellow transition-all duration-300">
                             <img src="{{ asset('image/m.jpg') }}" alt="Email" class="w-5 h-5">
                         </a>
                     </div>

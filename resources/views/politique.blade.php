@@ -1,14 +1,36 @@
-
 @extends('layouts.app')
 
 @section('content')
+    <!-- Loading Spinner -->
+    <div x-data="{ isLoading: true }" 
+         x-init="$nextTick(() => { window.addEventListener('load', () => setTimeout(() => isLoading = false, 2000)) })"
+         x-show="isLoading"
+         x-cloak
+         class="fixed inset-0 bg-white bg-opacity-80 flex items-center justify-center z-50">
+        <div class="relative w-20 h-20">
+            <div class="absolute inset-0 border-4 border-t-primary border-transparent rounded-full animate-spin"></div>
+            <div class="absolute inset-0 flex items-center justify-center">
+                <img src="{{ asset('image/ab.png') }}" alt="Logo ABEC" class="w-10 h-10 object-contain">
+            </div>
+        </div>
+    </div>
+
     <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div class="legal-content" style="font-family: 'Arial Black', Arial, sans-serif; font-weight: bold;">
             <hr class="border-2 border-yellow mb-8">
             <h1 class="text-3xl font-bold text-primary mb-6 text-center">Politique de Confidentialité</h1>
             <p class="text-gray-700 text-center"><strong>Date d'entrée en vigueur : 26 septembre 2025</strong></p>
             <p class="text-gray-700 text-center">Chez Universal Welfare, nous nous engageons à protéger votre vie privée et à traiter vos données personnelles de manière responsable. Cette Politique de Confidentialité explique comment nous collectons, utilisons, partageons et protégeons vos informations lorsque vous utilisez notre site web (<a href="https://universalwelfare.com" class="text-primary hover:underline">universalwelfare.com</a>), nos services et nos applications (ci-après désignés collectivement comme les « Services »). En accédant ou en utilisant nos Services, vous acceptez les pratiques décrites dans cette politique.</p>
-            <p class="text-gray-700 text-center">Si vous avez des questions sur cette Politique de Confidentialité, veuillez nous contacter à l'adresse <a href="mailto:privacy@universalwelfare.com" class="text-primary hover:underline">privacy@universalwelfare.com</a>.</p>
+           <p class="text-gray-700 text-center">
+    Si vous avez des questions sur cette Politique de Confidentialité, veuillez nous contacter à l'adresse 
+    <a href="https://mail.google.com/mail/?view=cm&to=contact@universalwelfare.org" 
+       target="_blank" 
+       class="hover:opacity-80 transition-opacity duration-300" 
+       title="Envoyer un email via Gmail">
+        <img src="{{ asset('image/m.jpg') }}" alt="Email" class="w-6 h-6 rounded-full inline-block">
+    </a>.
+</p>
+
 
             <hr class="border-2 border-yellow my-8">
             <h2 class="text-2xl font-bold text-primary mt-8 mb-4 text-center">1. Informations que nous collectons</h2>
@@ -72,7 +94,17 @@
                 <li>Limiter ou vous opposer à leur traitement.</li>
                 <li>Les exporter (portabilité).</li>
             </ul>
-            <p class="text-gray-700 text-center">Pour exercer ces droits, contactez-nous à <a href="mailto:privacy@universalwelfare.com" class="text-primary hover:underline">privacy@universalwelfare.com</a>. Nous répondrons dans un délai d'un mois.</p>
+           <p class="text-gray-700 text-center">
+    Pour exercer ces droits, contactez-nous à l'adresse 
+    <a href="https://mail.google.com/mail/?view=cm&to=contact@universalwelfare.org" 
+       target="_blank" 
+       class="hover:opacity-80 transition-opacity duration-300" 
+       title="Envoyer un email via Gmail">
+        <img src="{{ asset('image/m.jpg') }}" alt="Email" class="w-6 h-6 rounded-full inline-block">
+    </a>.
+     Nous répondrons dans un délai d'un mois.
+</p>
+
 
             <hr class="border-2 border-yellow my-8">
             <h2 class="text-2xl font-bold text-primary mt-8 mb-4 text-center">6. Sécurité de vos informations</h2>
@@ -94,47 +126,66 @@
             <h2 class="text-2xl font-bold text-primary mt-8 mb-4 text-center">10. Contactez-nous</h2>
             <p class="text-gray-700 text-center">Pour toute question, préoccupation ou réclamation concernant cette Politique :</p>
             <ul class="list-disc mx-auto text-gray-700 text-center" style="list-style-position: inside;">
-                <li>E-mail : <a href="mailto:privacy@universalwelfare.com" class="text-primary hover:underline">privacy@universalwelfare.com</a></li>
+               <li>
+    E-mail : 
+    <a href="https://mail.google.com/mail/?view=cm&to=contact@universalwelfare.org" 
+       target="_blank" 
+       class="hover:opacity-80 transition-opacity duration-300" 
+       title="Envoyer un email via Gmail">
+        <img src="{{ asset('image/m.jpg') }}" alt="Email" class="w-6 h-6 rounded-full inline-block">
+    </a>
+</li>
+
                 <li>Adresse postale : Universal Welfare, 123 Avenue du Bien-Être, Yaoundé, Cameroun</li>
             </ul>
             <p class="text-gray-700 text-center mt-6">Merci de faire confiance à Universal Welfare pour promouvoir un monde plus juste et solidaire.</p>
             <hr class="border-2 border-yellow mt-8">
         </div>
     </section>
-@endsection
 
-<style>
-    .legal-content {
-        max-width: 800px;
-        margin: 0 auto;
-        padding: 20px;
-        background-color: #f9f9f9;
-        border-radius: 0.5rem;
-        box-shadow: 0 2px 4px rgba(0,0,0,0.05);
-    }
-    .legal-content h1, .legal-content h2 {
-        color: #1E90FF;
-    }
-    .legal-content h2 {
-        border-bottom: 2px solid #FFD700;
-        padding-bottom: 10px;
-    }
-    .legal-content h3 {
-        color: #333;
-    }
-    .legal-content ul {
-        margin-top: 0.5rem;
-        margin-bottom: 1rem;
-    }
-    .legal-content a {
-        color: #1E90FF;
-        text-decoration: none;
-    }
-    .legal-content a:hover {
-        text-decoration: underline;
-    }
-    .legal-content p {
-        margin-bottom: 1rem;
-        line-height: 1.6;
-    }
-</style>
+    <!-- AlpineJS -->
+    <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
+
+    <style>
+        .legal-content {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f9f9f9;
+            border-radius: 0.5rem;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+        .legal-content h1, .legal-content h2 {
+            color: #1E90FF;
+            text-align: center;
+        }
+        .legal-content h2 {
+            border-bottom: 2px solid #FFD700;
+            padding-bottom: 10px;
+            margin-top: 1.5rem;
+        }
+        .legal-content h3 {
+            color: #333;
+            text-align: center;
+        }
+        .legal-content ul {
+            list-style-type: disc;
+            list-style-position: inside;
+            margin-top: 0.5rem;
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+        .legal-content a {
+            color: #1E90FF;
+            text-decoration: none;
+        }
+        .legal-content a:hover {
+            text-decoration: underline;
+        }
+        .legal-content p {
+            margin-bottom: 1rem;
+            line-height: 1.6;
+            text-align: center;
+        }
+    </style>
+@endsection
