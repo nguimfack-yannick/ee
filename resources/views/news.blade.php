@@ -141,8 +141,9 @@
 
         .modal-image {
             width: 100%;
-            max-height: 30vh;
+            max-height: 35vh; /* Augmenté pour refléter les images plus grandes */
             object-fit: cover;
+            object-position: center; /* Centre l'image */
             border-radius: 0.5rem;
         }
 
@@ -181,12 +182,14 @@
         .articles-grid {
             display: grid;
             grid-template-columns: repeat(1, 1fr);
-            gap: 1.5rem;
+            gap: 1rem; /* Réduit pour mobile */
+            padding: 1.5rem 0; /* Augmenté pour un meilleur espacement vertical */
         }
 
         @media (min-width: 640px) {
             .articles-grid {
                 grid-template-columns: repeat(2, 1fr);
+                gap: 1.5rem; /* Espacement normal pour tablette/desktop */
             }
         }
 
@@ -202,7 +205,7 @@
             position: relative;
             overflow: hidden;
             border-radius: 0.5rem;
-            box-shadow: 0 3px 12px rgba(0, 0, 0, 0.06);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12); /* Ombre renforcée */
             transition: transform 0.5s ease, box-shadow 0.5s ease, opacity 0.5s ease;
             opacity: 0;
             transform: translateY(50px);
@@ -248,30 +251,34 @@
 
         .article-card:hover {
             transform: scale(1.05);
-            box-shadow: 0 10px 15px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2);
         }
 
         .article-image {
             width: 100%;
-            height: 140px;
+            height: 250px; /* Augmenté de 200px à 250px pour desktop */
             object-fit: cover;
-            border-radius: 0.5rem;
+            object-position: center; /* Centre l'image */
+            border-radius: 0.5rem 0.5rem 0 0;
             transition: transform 0.3s ease, opacity 0.3s ease;
         }
 
-        .article-card:hover .article-image {
-            transform: scale(1.05);
-            opacity: 0.9;
+        /* Désactiver l'effet de zoom sur mobile */
+        @media (min-width: 640px) {
+            .article-card:hover .article-image {
+                transform: scale(1.05);
+                opacity: 0.9;
+            }
         }
 
         .article-body {
-            padding: 0.75rem;
+            padding: 1.25rem; /* Augmenté de 1rem à 1.25rem */
             position: relative;
             z-index: 5;
         }
 
         .article-title {
-            font-size: clamp(0.875rem, 2.5vw, 1rem);
+            font-size: clamp(1.1rem, 2.5vw, 1.3rem); /* Augmenté */
             color: #1E90FF !important;
             text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
             margin-bottom: 0.5rem;
@@ -283,7 +290,7 @@
         }
 
         .article-content {
-            font-size: clamp(0.75rem, 2vw, 0.875rem);
+            font-size: clamp(0.85rem, 2vw, 0.95rem); /* Augmenté */
             color: #333333;
             line-height: 1.6;
             margin-top: 0.5rem;
@@ -294,7 +301,7 @@
         }
 
         .article-meta {
-            font-size: 0.75rem;
+            font-size: clamp(0.8rem, 2vw, 0.85rem); /* Augmenté */
             color: #6b7280;
             margin-top: 0.5rem;
             display: flex;
@@ -313,7 +320,7 @@
             background-color: #FFD700;
             border: 1px solid #FFD700;
             padding: 0.5rem 1rem;
-            font-size: 0.75rem;
+            font-size: clamp(0.85rem, 2vw, 0.95rem); /* Augmenté */
             font-weight: bold;
             border-radius: 0.25rem;
             text-align: center;
@@ -383,6 +390,7 @@
             text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
             position: relative;
             display: inline-block;
+            font-size: clamp(1.5rem, 4vw, 2.5rem);
         }
 
         .section-title::after {
@@ -400,21 +408,45 @@
         }
 
         /* Responsive */
-        @media (max-width: 640px) {
-            .article-image { height: 110px; }
-            .article-title { font-size: clamp(0.75rem, 2vw, 0.875rem); }
-            .article-content { font-size: clamp(0.7rem, 1.8vw, 0.8rem); }
-            .article-button { padding: 0.4rem 0.8rem; font-size: 0.7rem; }
+        @media (max-width: 480px) {
+            .article-image {
+                height: 140px; /* Augmenté de 120px à 140px pour très petits écrans */
+            }
+            .article-title { font-size: clamp(0.9rem, 2.5vw, 1.1rem); }
+            .article-content { font-size: clamp(0.75rem, 1.8vw, 0.85rem); }
+            .article-meta { font-size: clamp(0.7rem, 1.8vw, 0.75rem); }
+            .article-button { padding: 0.4rem 0.8rem; font-size: clamp(0.75rem, 1.8vw, 0.85rem); }
             .btn-more { padding: 10px 20px; font-size: 0.9rem; }
+            .modal-image { max-height: 25vh; }
+            .modal-content { max-width: 98%; }
+        }
+
+        @media (max-width: 640px) and (min-width: 481px) {
+            .article-image {
+                height: 160px; /* Augmenté de 140px à 160px pour mobile */
+            }
+            .article-title { font-size: clamp(0.9rem, 2.5vw, 1.1rem); }
+            .article-content { font-size: clamp(0.75rem, 1.8vw, 0.85rem); }
+            .article-meta { font-size: clamp(0.7rem, 1.8vw, 0.75rem); }
+            .article-button { padding: 0.4rem 0.8rem; font-size: clamp(0.75rem, 1.8vw, 0.85rem); }
+            .btn-more { padding: 10px 20px; font-size: 0.9rem; }
+            .modal-image { max-height: 25vh; }
+            .modal-content { max-width: 98%; }
         }
 
         @media (min-width: 641px) and (max-width: 1023px) {
-            .article-image { height: 130px; }
-            .article-title { font-size: clamp(0.875rem, 2.5vw, 1rem); }
+            .article-image {
+                height: 200px; /* Augmenté de 160px à 200px pour tablette */
+            }
+            .article-title { font-size: clamp(1rem, 2.5vw, 1.2rem); }
+            .article-content { font-size: clamp(0.8rem, 2vw, 0.9rem); }
+            .article-meta { font-size: clamp(0.75rem, 2vw, 0.8rem); }
+            .modal-image { max-height: 30vh; }
+            .modal-content { max-width: 90%; }
         }
 
         @media (min-width: 1024px) {
-            .article-image { height: 150px; }
+            .article-image { height: 250px; } /* Déjà défini dans .article-image */
         }
     </style>
     <script>
@@ -461,34 +493,25 @@ $newsConfig = [
     'moreButtonLink' => '#grille-section',
     'articles' => [
         [
-            'title' => '📰 L’association "Du bien-être communautaire" en action à l’hôpital régional de Bafoussam',
-            'content' => 'Le 20 mars 2025, l’association Du bien-être communautaire a effectué une descente à l’hôpital régional de Bafoussam, dans le cadre de ses activités sociales. Cette initiative visait à apporter du soutien moral, matériel et sanitaire aux patients hospitalisés, en particulier ceux en situation de précarité.',
-            'fullContent' => 'Le 20 mars 2025, l’association Du bien-être communautaire a effectué une descente à l’hôpital régional de Bafoussam, dans le cadre de ses activités sociales. Cette initiative visait à apporter du soutien moral, matériel et sanitaire aux patients hospitalisés, en particulier ceux en situation de précarité. L’équipe de l’association a distribué des dons, échangé avec le personnel soignant et sensibilisé sur l’importance du bien-être mental dans le processus de guérison. Une action saluée tant par les bénéficiaires que par l’administration de l’hôpital, qui appelle à la multiplication de ce type de gestes solidaires dans les structures de santé. ',
-            'image' => 'image/news.png',
-            'date' => '27/07/2025'
+            'title' => '📰 L’Association du Bien-Être Communautaire (ABEC) lance un appel aux bénévoles volontaires',
+            'content' => 'En août 2024, l’ABEC a lancé un appel à toute personne prête à s’impliquer activement dans la vie de l’organisation. Cette campagne de mobilisation vise à recruter des bénévoles motivés, disponibles et capables de travailler en équipe, que ce soit à distance ou en présentiel.',
+            'fullContent' => 'En août 2024, l’ABEC a lancé un appel à toute personne prête à s’impliquer activement dans la vie de l’organisation. Cette campagne de mobilisation vise à recruter des bénévoles motivés, disponibles et capables de travailler en équipe, que ce soit à distance ou en présentiel. L’association recherche des profils multilingues (français, anglais), prêts à consacrer du temps et de l’énergie pour renforcer l’impact de ses activités dans le monde. Les missions peuvent inclure la communication, l’organisation d’événements, la production de contenu, ou encore la participation à des projets sociaux. 🎯 Les places sont limitées. 📩 Contact : contact@universalwelfare.org 📱 WhatsApp : +237 6 21620677',
+            'image' => 'image/appl.jpg',
+            'date' => '31/08/2025'
         ],
         [
-            'title' => '📰 L’Association du Bien-Être Communautaire (ABEC) lance un appel aux bénévoles volontaires',
-            'content' => 'En août 2025, l’ABEC a lancé un appel à toute personne prête à s’impliquer activement dans la vie de l’organisation. Cette campagne de mobilisation vise à recruter des bénévoles motivés, disponibles et capables de travailler en équipe, que ce soit à distance ou en présentiel.',
-            'fullContent' => 'En août 2025, l’ABEC a lancé un appel à toute personne prête à s’impliquer activement dans la vie de l’organisation. Cette campagne de mobilisation vise à recruter des bénévoles motivés, disponibles et capables de travailler en équipe, que ce soit à distance ou en présentiel.L’association recherche des profils multilingues (français, anglais), prêts à consacrer du temps et de l’énergie pour renforcer l’impact de ses activités dans le monde. Les missions peuvent inclure la communication, l’organisation d’événements, la production de contenu, ou encore la participation à des projets sociaux.🎯 Les places sont limitées.
-📩 Contact : contact@universalwelfare.org
-
-📱 WhatsApp : +237 6 21620677',
-            'image' => 'image/appl.jpg',
-            'date' => '10/12/2024'
+            'title' => '📰 L’association "Du bien-être communautaire" en action à l’hôpital régional de Bafoussam',
+            'content' => 'Le 20 mars 2025, l’association Du bien-être communautaire a effectué une descente à l’hôpital régional de Bafoussam, dans le cadre de ses activités sociales. Cette initiative visait à apporter du soutien moral, matériel et sanitaire aux patients hospitalisés, en particulier ceux en situation de précarité.',
+            'fullContent' => 'Le 20 mars 2025, l’association Du bien-être communautaire a effectué une descente à l’hôpital régional de Bafoussam, dans le cadre de ses activités sociales. Cette initiative visait à apporter du soutien moral, matériel et sanitaire aux patients hospitalisés, en particulier ceux en situation de précarité. L’équipe de l’association a distribué des dons, échangé avec le personnel soignant et sensibilisé sur l’importance du bien-être mental dans le processus de guérison. Une action saluée tant par les bénéficiaires que par l’administration de l’hôpital, qui appelle à la multiplication de ce type de gestes solidaires dans les structures de santé.',
+            'image' => 'image/news.png',
+            'date' => '27/03/2025'
         ],
         [
             'title' => '📄 Reconnaissance officielle de l’ABEC',
             'content' => 'L’Association du Bien-Être Communautaire (ABEC) est officiellement reconnue par les autorités administratives camerounaises. Son récépissé de déclaration a été délivré sous le n°00001901/RDA/J06/SAAJP/BAPP en date du 20 novembre 2024, par le Préfet du Département du Mfoundi, région du Centre, Cameroun.',
-            'fullContent' => 'L’Association du Bien-Être Communautaire (ABEC) est officiellement reconnue par les autorités administratives camerounaises. Son récépissé de déclaration a été délivré sous le n°00001901/RDA/J06/SAAJP/BAPP en date du 20 novembre 2024, par le Préfet du Département du Mfoundi, région du Centre, Cameroun.
-
-Cette reconnaissance légale renforce la crédibilité de l’organisation et témoigne de son engagement dans la mise en œuvre d’actions sociales et humanitaires durables.
-
-📌 Pour toute collaboration ou demande d\'information :
-📞 +237 6 21620677
-📧 contact@universalwelfare.org',
+            'fullContent' => 'L’Association du Bien-Être Communautaire (ABEC) est officiellement reconnue par les autorités administratives camerounaises. Son récépissé de déclaration a été délivré sous le n°00001901/RDA/J06/SAAJP/BAPP en date du 20 novembre 2024, par le Préfet du Département du Mfoundi, région du Centre, Cameroun. Cette reconnaissance légale renforce la crédibilité de l’organisation et témoigne de son engagement dans la mise en œuvre d’actions sociales et humanitaires durables. 📌 Pour toute collaboration ou demande d\'information : 📞 +237 6 21620677 📧 contact@universalwelfare.org',
             'image' => 'image/teste.jpg',
-            'date' => '05/12/2024'
+            'date' => '20/11/2024'
         ],
     ]
 ];
@@ -506,7 +529,7 @@ Cette reconnaissance légale renforce la crédibilité de l’organisation et t�
     <div class="articles-grid" id="grille-section">
         @foreach($newsConfig['articles'] as $index => $article)
             <div class="article-card cursor-pointer">
-                <img src="{{ asset($article['image']) }}" alt="Actualité ABEC" class="article-image">
+                <img src="{{ asset($article['image']) }}" alt="Actualité ABEC" class="article-image" loading="lazy">
                 <div class="article-body">
                     <h2 class="article-title">{{ $article['title'] }}</h2>
                     <p class="article-content">{{ $article['content'] }}</p>

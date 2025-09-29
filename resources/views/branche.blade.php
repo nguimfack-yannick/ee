@@ -12,11 +12,9 @@
     <link rel="manifest" href="{{ asset('manifest.json') }}">
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Inter Font (Optional, retained from original) -->
     <link rel="stylesheet" href="https://rsms.me/inter/inter.css">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Arial+Black&display=swap');
-        /* Global styles */
         body {
             background-color: #ffffff;
             font-family: 'Arial Black', sans-serif;
@@ -34,12 +32,9 @@
             font-weight: bold;
             text-align: center;
         }
-        /* Smooth Scroll Behavior */
-        html {
-            scroll-behavior: smooth;
-        }
+        html { scroll-behavior: smooth; }
 
-        /* === LOADING SPINNER (updated, bordure rouge supprimée) === */
+        /* === LOADING SPINNER === */
         .loading-overlay {
             position: fixed;
             top: 0;
@@ -53,13 +48,8 @@
             z-index: 9999;
             transition: opacity 0.5s ease-out;
         }
-        .loading-overlay[x-show="isLoading"] {
-            opacity: 1;
-        }
-        .loading-overlay:not([x-show="isLoading"]) {
-            opacity: 0;
-            pointer-events: none;
-        }
+        .loading-overlay[x-show="isLoading"] { opacity: 1; }
+        .loading-overlay:not([x-show="isLoading"]) { opacity: 0; pointer-events: none; }
         .spinner-container {
             position: relative;
             width: 120px;
@@ -87,26 +77,17 @@
             width: 60px !important;
             height: 60px !important;
             object-fit: contain !important;
-            margin: 0 !important;
-            padding: 0 !important;
-            box-sizing: border-box !important;
         }
         @keyframes spin {
             0% { transform: rotate(0deg); }
             100% { transform: rotate(360deg); }
         }
         @media (max-width: 640px) {
-            .spinner-container {
-                width: 100px;
-                height: 100px;
-            }
-            .spinner-logo {
-                width: 48px !important;
-                height: 48px !important;
-            }
+            .spinner-container { width: 100px; height: 100px; }
+            .spinner-logo { width: 48px !important; height: 48px !important; }
         }
 
-        /* Modal Styles */
+        /* Modal Styles - ✅ IMAGES AGRANDIES */
         .modal {
             position: fixed;
             top: 0;
@@ -156,13 +137,22 @@
             transform: scale(1.2);
             opacity: 0.8;
         }
+
+        /* 🔥 IMAGE AGRANDIE DANS LE MODAL 🔥 */
         .modal-image {
             width: 100%;
-            max-height: 30vh;
+            min-height: 200px; /* Hauteur minimale pour mobile */
+            max-height: 40vh; /* Mobile */
             object-fit: cover;
             border-radius: 0.5rem;
             box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
         }
+        @media (min-width: 640px) {
+            .modal-image {
+                max-height: 50vh;
+            }
+        }
+
         .modal-title {
             font-size: clamp(1.25rem, 3vw, 1.5rem);
             color: #1E90FF;
@@ -190,7 +180,7 @@
             opacity: 1;
         }
 
-        /* Event Card Styles */
+        /* Event Card */
         .event-card {
             background-color: #FFF8DC;
             position: relative;
@@ -238,9 +228,10 @@
             transform: scale(1.05);
             box-shadow: 0 10px 15px rgba(0, 0, 0, 0.2);
         }
+
         .event-image {
             width: 100%;
-            height: 100px;
+            min-height: 120px;
             object-fit: cover;
             border-radius: 0.5rem 0.5rem 0 0;
             transition: transform 0.3s ease, opacity 0.3s ease;
@@ -249,6 +240,7 @@
             transform: scale(1.05);
             opacity: 0.9;
         }
+
         .event-body {
             padding: 1rem;
             text-align: center;
@@ -312,7 +304,7 @@
             transform: scale(1.05);
         }
 
-        /* Grid Container */
+        /* Grid */
         .events-grid {
             display: grid;
             grid-template-columns: repeat(1, 1fr);
@@ -323,14 +315,16 @@
             .events-grid {
                 grid-template-columns: repeat(2, 1fr);
             }
+            .event-image { min-height: 140px; }
         }
         @media (min-width: 1024px) {
             .events-grid {
                 grid-template-columns: repeat(3, 1fr);
             }
+            .event-image { min-height: 160px; }
         }
 
-        /* Section Title */
+        /* Reste inchangé */
         .section-title {
             text-transform: uppercase;
             color: #1E90FF;
@@ -353,8 +347,6 @@
             z-index: -1;
             border-radius: 0.25rem;
         }
-
-        /* Hero Title Animation */
         .hero-title {
             font-size: clamp(2rem, 5vw, 4rem);
             font-weight: 900;
@@ -362,29 +354,13 @@
             animation: colorCycle 3s ease-in-out infinite;
         }
         @keyframes colorCycle {
-            0% {
-                color: #1E90FF;
-            }
-            50% {
-                color: #FFD700;
-            }
-            100% {
-                color: #1E90FF;
-            }
+            0% { color: #1E90FF; }
+            50% { color: #FFD700; }
+            100% { color: #1E90FF; }
         }
-
-        /* Stagger Animation for Cards */
-        .event-card:nth-child(1).visible {
-            transition-delay: 0.1s;
-        }
-        .event-card:nth-child(2).visible {
-            transition-delay: 0.2s;
-        }
-        .event-card:nth-child(3).visible {
-            transition-delay: 0.3s;
-        }
-
-        /* Section Animation */
+        .event-card:nth-child(1).visible { transition-delay: 0.1s; }
+        .event-card:nth-child(2).visible { transition-delay: 0.2s; }
+        .event-card:nth-child(3).visible { transition-delay: 0.3s; }
         .section-animate {
             opacity: 0;
             transform: translateY(20px);
@@ -395,7 +371,7 @@
             transform: translateY(0);
         }
 
-        /* Footer Styles */
+        /* Footer & autres styles inchangés */
         .wave-divider {
             position: absolute;
             top: -1px;
@@ -413,21 +389,10 @@
         .wave-divider .shape-fill {
             fill: url(#gradient-wave);
         }
-        .footer-link {
-            transition: color 0.3s ease, transform 0.3s ease;
-        }
-        .footer-link:hover {
-            transform: translateX(5px);
-        }
-        .social-icon {
-            transition: transform 0.3s ease, opacity 0.3s ease;
-        }
-        .social-icon:hover {
-            transform: scale(1.2);
-            opacity: 0.8;
-        }
-
-        /* Marquee */
+        .footer-link { transition: color 0.3s ease, transform 0.3s ease; }
+        .footer-link:hover { transform: translateX(5px); }
+        .social-icon { transition: transform 0.3s ease, opacity 0.3s ease; }
+        .social-icon:hover { transform: scale(1.2); opacity: 0.8; }
         .marquee-container {
             width: 100%;
             overflow: hidden;
@@ -449,15 +414,9 @@
             text-align: center;
         }
         @keyframes marquee {
-            0% {
-                transform: translateX(100%);
-            }
-            100% {
-                transform: translateX(-100%);
-            }
+            0% { transform: translateX(100%); }
+            100% { transform: translateX(-100%); }
         }
-
-        /* No Events Marquee */
         .no-events-marquee {
             width: 100%;
             overflow: hidden;
@@ -481,35 +440,27 @@
             text-align: center;
         }
 
-        /* Responsive */
         @media (max-width: 640px) {
-            .event-image { height: 80px; }
             .event-title { font-size: clamp(0.875rem, 2.5vw, 1rem); }
             .event-content, .event-meta { font-size: clamp(0.7rem, 1.8vw, 0.8rem); }
             .event-button { padding: 0.4rem 0.8rem; font-size: clamp(0.7rem, 1.8vw, 0.8rem); }
             .modal-content { padding: 1rem; max-width: 98%; }
-            .modal-image { max-height: 20vh; }
             .modal-title { font-size: clamp(1rem, 2.5vw, 1.25rem); }
             .modal-content p { font-size: clamp(0.7rem, 1.8vw, 0.8rem); }
             .hero-title { font-size: clamp(1.5rem, 4vw, 2.5rem); }
             .no-events-marquee-text { font-size: 1rem; }
         }
         @media (min-width: 641px) and (max-width: 1023px) {
-            .event-image { height: 110px; }
             .event-title { font-size: clamp(1rem, 2.5vw, 1.125rem); }
             .modal-content { max-width: 90%; }
-            .modal-image { max-height: 25vh; }
             .hero-title { font-size: clamp(2rem, 4.5vw, 3rem); }
             .no-events-marquee-text { font-size: 1.125rem; }
         }
         @media (min-width: 1024px) {
-            .event-image { height: 130px; }
             .hero-title { font-size: clamp(2.5rem, 5vw, 4rem); }
         }
 
-        [x-cloak] {
-            display: none;
-        }
+        [x-cloak] { display: none; }
     </style>
     <script>
         tailwind.config = {
@@ -529,11 +480,11 @@
     </script>
 </head>
 <body id="top" x-data="{ mobileMenuOpen: false, isLoading: true }" class="bg-white font-sans antialiased" @load.window="setTimeout(() => isLoading = false, 2000)">
-    <!-- LOADING SPINNER (unchanged) -->
+    <!-- LOADING SPINNER -->
     <div x-show="isLoading" x-cloak class="loading-overlay">
         <div class="spinner-container">
             <div class="spinner-circle"></div>
-            <img src="{{ asset('image/ab.png') }}" alt="Logo ABEC" class="spinner-logo transition-transform duration-300 hover:scale-105">
+            <img src="{{ asset('image/ab.png') }}" alt="Logo ABEC" class="spinner-logo">
         </div>
     </div>
 
@@ -567,8 +518,7 @@
                 </div>
                 <a href="https://mail.google.com/mail/?view=cm&to=contact@universalwelfare.org" 
                    target="_blank" 
-                   class="hover:opacity-80 transition-opacity duration-300" 
-                   title="Envoyer un email via Gmail">
+                   class="hover:opacity-80 transition-opacity duration-300">
                     <img src="{{ asset('image/m.jpg') }}" alt="Email" class="w-6 h-6 rounded-full">
                 </a>
             </div>
@@ -639,6 +589,37 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
             <h2 class="section-title mb-8 md:mb-12">Événements Passés</h2>
             <div class="events-grid">
+
+
+            <div class="event-card"
+                    data-modal-title="L'ABEC au contact de la population"
+                    data-modal-content="Lors de ses descentes sur le terrain, l’équipe se rapproche au maximum des bénéficiaires afin d’assurer une prise en charge de qualité et de favoriser des échanges fluides entre l’organisation et les populations concernées. Nous veillons à la transparence, notamment en ce qui concerne une distribution juste et équitable des ressources."
+                    data-modal-image="{{ asset('image/c.jpeg') }}">
+                    <img src="{{ asset('image/c.jpeg') }}" alt="Nettoyage de quartier" class="event-image">
+                    <div class="event-body">
+                        <div class="event-meta"> 25 Mars 2025 • Bafoussam</div>
+                        <h3 class="event-title">L'ABEC au contact de la population</h3>
+                        <p class="event-content">
+                           Lors de ses descentes sur le terrain, l’équipe se rapproche au maximum des bénéficiaires afin d’assurer une prise en charge de qualité et de favoriser des échanges fluides entre l’organisation et les populations concernées..... 
+                        </p>
+                        <button class="event-button">Voir plus</button>
+                    </div>
+                </div>
+
+                <div class="event-card"
+                    data-modal-title="L'équipe d'ABEC en action"
+                    data-modal-content="La descente de l'organisation du bien-être communautaire à l’Hôpital Régional de Bafoussam a été un moment fort d’action sociale, concrétisé après plusieurs mois de préparation. Toute l’équipe s’est mobilisée, depuis la collecte de fonds jusqu’aux démarches administratives, en passant par l’organisation logistique. Le jour J, l’équipe a fait preuve d’efficacité, et les résultats ont été parmi les meilleurs."
+                    data-modal-image="{{ asset('image/b.jpeg') }}">
+                    <img src="{{ asset('image/b.jpeg') }}" alt="Campagne de vaccination" class="event-image">
+                    <div class="event-body">
+                        <div class="event-meta">22 Mars 2025 • Bafoussam</div>
+                        <h3 class="event-title">L'équipe d'ABEC en action</h3>
+                        <p class="event-content">
+                          La descente de l'organisation du bien-être communautaire à l’Hôpital Régional de Bafoussam a été un moment fort d’action sociale, concrétisé après plusieurs mois de préparation.....
+                        </p>
+                        <button class="event-button">Voir plus</button>
+                    </div>
+                </div>
                 <!-- Événement 1 -->
                 <div class="event-card"
                     data-modal-title="Presentations des dons"
@@ -646,7 +627,7 @@
                     data-modal-image="{{ asset('image/a.jpeg') }}">
                     <img src="{{ asset('image/a.jpeg') }}" alt="Distribution de fournitures scolaires" class="event-image">
                     <div class="event-body">
-                        <div class="event-meta">15 Mars 2024 • Yaoundé</div>
+                        <div class="event-meta">20 Mars 2025 • Bafoussam</div>
                         <h3 class="event-title">Presentations des dons</h3>
                         <p class="event-content">
                             Des dons ont été distribués à l’hôpital régional de Bafoussam afin de venir en aide directement aux patients...
@@ -655,35 +636,35 @@
                     </div>
                 </div>
                 <!-- Événement 2 -->
-                <div class="event-card"
-                    data-modal-title="Campagne de vaccination"
-                    data-modal-content="En partenariat avec le ministère de la santé, nous avons vacciné plus de 500 personnes à Douala, contribuant à la prévention des maladies dans les communautés vulnérables."
+                <!-- <div class="event-card"
+                    data-modal-title="L'équipe d'ABEC en action"
+                    data-modal-content="La descente de l'organisation du bien-être communautaire à l’Hôpital Régional de Bafoussam a été un moment fort d’action sociale, concrétisé après plusieurs mois de préparation. Toute l’équipe s’est mobilisée, depuis la collecte de fonds jusqu’aux démarches administratives, en passant par l’organisation logistique. Le jour J, l’équipe a fait preuve d’efficacité, et les résultats ont été parmi les meilleurs."
                     data-modal-image="{{ asset('image/b.jpeg') }}">
                     <img src="{{ asset('image/b.jpeg') }}" alt="Campagne de vaccination" class="event-image">
                     <div class="event-body">
-                        <div class="event-meta">22 Janvier 2024 • Douala</div>
-                        <h3 class="event-title">Campagne de vaccination</h3>
+                        <div class="event-meta">20 Mars 2025 • Bafoussam</div>
+                        <h3 class="event-title">L'équipe d'ABEC en action</h3>
                         <p class="event-content">
-                            En partenariat avec le ministère de la santé, nous avons vacciné plus de 500 personnes.
+                          La descente de l'organisation du bien-être communautaire à l’Hôpital Régional de Bafoussam a été un moment fort d’action sociale, concrétisé après plusieurs mois de préparation.....
                         </p>
                         <button class="event-button">Voir plus</button>
                     </div>
-                </div>
+                </div> -->
                 <!-- Événement 3 -->
-                <div class="event-card"
-                    data-modal-title="Nettoyage de quartier"
-                    data-modal-content="100 bénévoles ont participé à la collecte de déchets dans les rues du centre-ville de Bafoussam, améliorant l'hygiène et la propreté de la communauté."
-                    data-modal-image="{{ asset('image/fotos.jpg') }}">
-                    <img src="{{ asset('image/fotos.jpg') }}" alt="Nettoyage de quartier" class="event-image">
+                <!-- <div class="event-card"
+                    data-modal-title="L'ABEC au contact de la population"
+                    data-modal-content="Lors de ses descentes sur le terrain, l’équipe se rapproche au maximum des bénéficiaires afin d’assurer une prise en charge de qualité et de favoriser des échanges fluides entre l’organisation et les populations concernées. Nous veillons à la transparence, notamment en ce qui concerne une distribution juste et équitable des ressources."
+                    data-modal-image="{{ asset('image/c.jpeg') }}">
+                    <img src="{{ asset('image/c.jpeg') }}" alt="Nettoyage de quartier" class="event-image">
                     <div class="event-body">
-                        <div class="event-meta">5 Décembre 2023 • Bafoussam</div>
-                        <h3 class="event-title">Nettoyage de quartier</h3>
+                        <div class="event-meta"> 25 Mars 2025 • Bafoussam</div>
+                        <h3 class="event-title">L'ABEC au contact de la population</h3>
                         <p class="event-content">
-                            100 bénévoles ont participé à la collecte de déchets dans les rues du centre-ville.
+                           Lors de ses descentes sur le terrain, l’équipe se rapproche au maximum des bénéficiaires afin d’assurer une prise en charge de qualité et de favoriser des échanges fluides entre l’organisation et les populations concernées..... 
                         </p>
                         <button class="event-button">Voir plus</button>
                     </div>
-                </div>
+                </div> -->
             </div>
             <p class="mt-8 md:mt-12 text-center text-gray-600 font-bold font-custom max-w-3xl mx-auto px-4 text-sm sm:text-base">
                 Chaque événement est une opportunité d’agir ensemble. Rejoignez-nous et faites partie du changement !
@@ -693,7 +674,6 @@
 
     <!-- Footer -->
     <footer id="contact" class="bg-primary text-white relative pt-10 overflow-hidden section-animate">
-        <!-- Vague SVG compacte -->
         <div class="wave-divider">
             <svg data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
                 <defs>
@@ -705,14 +685,11 @@
                 <path d="M0,0 C300,100 900,100 1200,0 V120 H0 Z" class="shape-fill"></path>
             </svg>
         </div>
-        <!-- Phrase défilante centrée -->
         <div class="marquee-container">
             <span class="marquee-text"> Grandir- Agir  - Changer</span>
         </div>
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-            <!-- Grille compacte -->
             <div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-6">
-                <!-- Colonne Logo et Description -->
                 <div class="md:col-span-2">
                     <div class="flex items-center mb-4">
                         <img src="{{ asset('image/ab.png') }}" alt="Logo ABEC" class="w-12 h-12 mr-3">
@@ -739,7 +716,6 @@
                         </a>
                     </div>
                 </div>
-                <!-- Colonne Liens Rapides -->
                 <div>
                     <h3 class="text-base font-bold mb-4 text-white border-b border-yellow pb-1">Liens Rapides</h3>
                     <ul class="space-y-2 text-sm">
@@ -750,7 +726,6 @@
                         <li><a href="{{ url('/projects') }}" class="footer-link text-gray-200 hover:text-yellow flex items-center transition-all duration-300"><span class="mr-2">→</span>Evenements</a></li>
                     </ul>
                 </div>
-                <!-- Colonne Contact -->
                 <div>
                     <h3 class="text-base font-bold mb-4 text-white border-b border-yellow pb-1">Contact</h3>
                     <div class="space-y-3 text-sm text-gray-200">
@@ -776,7 +751,6 @@
                     </div>
                 </div>
             </div>
-            <!-- Call-to-action compact -->
             <div class="bg-white bg-opacity-10 rounded-lg p-4 mb-6 backdrop-blur-sm">
                 <div class="flex flex-col md:flex-row md:items-center justify-between">
                     <div class="mb-3 md:mb-0">
@@ -788,7 +762,6 @@
                     </a>
                 </div>
             </div>
-            <!-- Ligne de séparation et copyright -->
             <div class="border-t border-white border-opacity-20 pt-4">
                 <div class="flex flex-col md:flex-row justify-between items-center">
                     <p class="text-gray-300 text-xs mb-3 md:mb-0">
@@ -802,7 +775,6 @@
                 </div>
             </div>
         </div>
-        <!-- Éléments décoratifs réduits -->
         <div class="absolute top-0 right-0 w-24 h-24 bg-yellow rounded-full opacity-10 -translate-y-1/2 translate-x-1/2"></div>
         <div class="absolute bottom-0 left-0 w-16 h-16 bg-white rounded-full opacity-5 -translate-y-1/2 -translate-x-1/2"></div>
     </footer>
