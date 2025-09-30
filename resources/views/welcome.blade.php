@@ -968,7 +968,7 @@
             </div>
             <div class="mt-8 flex justify-center">
                 <video class="responsive-video rounded-lg shadow-lg w-full max-w-[90%]" autoplay loop muted playsinline>
-                    <source src="{{ asset('image/orange.mp4') }}" type="video/mp4">
+                    <source src="{{ asset('image/Orange.mp4') }}" type="video/mp4">
                     Votre navigateur ne prend pas en charge la lecture de vidéos.
                 </video>
             </div>
@@ -1239,3 +1239,4 @@
         });
     </script>
 </body>
+</html>

@@ -347,8 +347,8 @@
                             <p class="text-yellow text-xs font-medium">Association du Bien-Être Communautaire</p>
                         </div>
                     </div>
-                    <p class="text-gray-200 text-sm mb-4 leading-relaxed">
-                        Nous œuvrons depuis 2024 pour améliorer les conditions de vie des communautés vulnérables au Cameroun.
+                      <p class="text-gray-200 text-sm mb-4 leading-relaxed">
+                        Nous œuvrons depuis 2021 pour améliorer les conditions de vie des communautés vulnérables dans plusieurs Pays.
                     </p>
                     <div class="flex space-x-3">
                         <a href="https://www.facebook.com/profile.php?id=61568266295634" target="_blank" class="social-icon bg-white bg-opacity-20 p-1.5 rounded-full hover:bg-yellow transition-all duration-300">

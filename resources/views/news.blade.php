@@ -494,7 +494,7 @@ $newsConfig = [
     'articles' => [
         [
             'title' => '📰 L’Association du Bien-Être Communautaire (ABEC) lance un appel aux bénévoles volontaires',
-            'content' => 'En août 2024, l’ABEC a lancé un appel à toute personne prête à s’impliquer activement dans la vie de l’organisation. Cette campagne de mobilisation vise à recruter des bénévoles motivés, disponibles et capables de travailler en équipe, que ce soit à distance ou en présentiel.',
+            'content' => 'En août 2025, l’ABEC a lancé un appel à toute personne prête à s’impliquer activement dans la vie de l’organisation. Cette campagne de mobilisation vise à recruter des bénévoles motivés, disponibles et capables de travailler en équipe, que ce soit à distance ou en présentiel.',
             'fullContent' => 'En août 2024, l’ABEC a lancé un appel à toute personne prête à s’impliquer activement dans la vie de l’organisation. Cette campagne de mobilisation vise à recruter des bénévoles motivés, disponibles et capables de travailler en équipe, que ce soit à distance ou en présentiel. L’association recherche des profils multilingues (français, anglais), prêts à consacrer du temps et de l’énergie pour renforcer l’impact de ses activités dans le monde. Les missions peuvent inclure la communication, l’organisation d’événements, la production de contenu, ou encore la participation à des projets sociaux. 🎯 Les places sont limitées. 📩 Contact : contact@universalwelfare.org 📱 WhatsApp : +237 6 21620677',
             'image' => 'image/appl.jpg',
             'date' => '31/08/2025'

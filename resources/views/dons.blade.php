@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>Organisation du Bien-Être Communautaire</title>
     <link rel="icon" type="image/png" sizes="64x64" href="{{ asset('image/ab.png') }}">
 
@@ -35,14 +36,14 @@
     <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
 
     <style>
-      [x-cloak] { display: none; }
+      [x-cloak] { display: none !important; }
       body { font-family: 'Arial Black', sans-serif; background-color: #ffffff; }
       .partner-logo { width: 100px; height: 100px; object-fit: contain; transition: transform 0.3s; }
       .swiper-slide-active .partner-logo { transform: scale(1.3); }
       .dropdown-menu { background-color: white; z-index: 50; }
       .font-all-bold, body, h1, h2, h3, p, a, li { font-weight: bold; font-family: 'Arial Black', sans-serif; }
 
-      /* Loading Spinner */
+      /* Loading Overlay */
       .loading-overlay {
         position: fixed;
         top: 0;
@@ -54,10 +55,14 @@
         justify-content: center;
         align-items: center;
         z-index: 9999;
+        opacity: 1;
+        pointer-events: all;
         transition: opacity 0.5s ease-out;
       }
-      .loading-overlay[x-show="isLoading"] { opacity: 1; }
-      .loading-overlay:not([x-show="isLoading"]) { opacity: 0; pointer-events: none; }
+      .loading-overlay[x-cloak] {
+        opacity: 0;
+        pointer-events: none;
+      }
 
       .spinner-container {
         position: relative;
@@ -175,7 +180,9 @@
       }
     </style>
 </head>
-<body id="top" x-data="{ mobileMenuOpen: false, isLoading: true }" class="bg-white font-all-bold flex flex-col min-h-screen" @load.window="setTimeout(() => isLoading = false, 2000)">
+<body id="top"
+      x-data="{ mobileMenuOpen: false, isLoading: false }"
+      class="bg-white font-all-bold flex flex-col min-h-screen">
 
     <!-- Loading Overlay -->
     <div x-show="isLoading" x-cloak class="loading-overlay">
@@ -256,8 +263,7 @@
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <h2 class="text-3xl font-bold text-primary text-center mb-6">Pourquoi Donner à ABEC ?</h2>
                 <p class="mt-2 text-gray-600 leading-relaxed text-center max-w-3xl mx-auto mb-8">
-                    Votre générosité permet de fournir des ressources vitales aux hôpitaux et orphelinats. Chaque don,
-                    qu’il soit grand ou petit, contribue à améliorer la qualité de vie des personnes dans le besoin.
+                   Votre générosité, qu’elle soit grande ou petite, permet de financer des projets qui contribuent au bien-être des communautés dans le besoin.
                 </p>
 
                 <!-- Diaporama Swiper -->
@@ -278,50 +284,66 @@
         <section id="donation-form" class="py-16 bg-gray-100">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <h2 class="text-3xl font-bold text-primary text-center">Faites Votre Don</h2>
-                <form action="{{ route('dons.store') }}" method="POST" class="mt-8 max-w-lg mx-auto" @submit="isLoading = true" x-data="{
-                    phone: '',
-                    countryPrefixes: {
-                        'CM|XAF': '+237',
-                        'BJ|XOF': '+229',
-                        'CI|XOF': '+225',
-                        'RW|RWF': '+250',
-                        'UG|UGX': '+256',
-                        'KE|KES': '+254'
-                    },
-                    selectedCountry: 'CM|XAF',
-                    updatePhone() {
-                        const prefix = this.countryPrefixes[this.selectedCountry] || '';
-                        if (!this.phone.startsWith(prefix)) {
-                            this.phone = prefix;
-                        }
-                    }
-                }" x-init="updatePhone()">
-                    @csrf
-                    @if ($errors->has('general'))
-                        <p class="text-red-500 text-center mb-4">{{ $errors->first('general') }}</p>
-                    @endif
 
-                    <div class="mb-4">
-                        <label for="nature" class="block text-gray-700 text-sm font-bold mb-2">Dons</label>
-                        <select id="nature" name="nature" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
-                            <option value="">Sélectionner la nature du don</option>
-                            <option value="Financier">Financier</option>
-                            <option value="Matériel">Matériel</option>
-                            <option value="Bénévole">Bénévole</option>
-                        </select>
-                        @error('nature')
-                            <span class="text-red-500 text-sm">{{ $message }}</span>
-                        @enderror
+                <!-- Messages de succès/erreur -->
+                @if (session('success'))
+                    <div class="mt-4 bg-green-100 border-l-4 border-green-500 text-green-700 p-4 rounded-md max-w-lg mx-auto text-center">
+                        <p>{{ session('success') }}</p>
                     </div>
+                @endif
+                @if ($errors->has('general'))
+                    <div class="mt-4 bg-red-100 border-l-4 border-red-500 text-red-700 p-4 rounded-md max-w-lg mx-auto text-center">
+                        <p>{{ $errors->first('general') }}</p>
+                    </div>
+                @endif
+                @if ($errors->any() && !$errors->has('general'))
+                    <div class="mt-4 bg-red-100 border-l-4 border-red-500 text-red-700 p-4 rounded-md max-w-lg mx-auto">
+                        <ul class="list-disc list-inside">
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif
+
+                <!-- Formulaire -->
+                <form 
+                    action="{{ route('dons.store') }}" 
+                    method="POST" 
+                    class="mt-8 max-w-lg mx-auto"
+                    x-data="{
+                        phone: '',
+                        countryPrefixes: {
+                            'CM|XAF': '+237',
+                            'BJ|XOF': '+229',
+                            'CI|XOF': '+225',
+                            'RW|RWF': '+250',
+                            'UG|UGX': '+256',
+                            'KE|KES': '+254'
+                        },
+                        selectedCountry: 'CM|XAF',
+                        updatePhone() {
+                            const prefix = this.countryPrefixes[this.selectedCountry] || '';
+                            if (!this.phone.startsWith(prefix)) {
+                                this.phone = prefix;
+                            }
+                        }
+                    }"
+                    x-init="updatePhone()"
+                    @submit="isLoading = true"
+                >
+                    @csrf
+                    <input type="hidden" name="nature" value="Financier">
 
                     <div class="mb-4">
-                        <label class="block text-gray-700 text-sm font-bold mb-2" for="pays">Sélectionnez un pays</label>
+                        <label class="block text-gray-700 text-sm font-bold mb-2" for="pays">Sélectionnez un pays *</label>
                         <select
                             id="pays"
                             name="country_currency"
                             x-model="selectedCountry"
                             @change="updatePhone()"
                             class="block appearance-none w-full bg-white border border-gray-300 text-gray-700 py-2 px-3 pr-8 rounded leading-tight focus:outline-none focus:shadow-outline"
+                            required
                         >
                             <option value="CM|XAF">Cameroun (XAF)</option>
                             <option value="BJ|XOF">Bénin (XOF)</option>
@@ -336,14 +358,15 @@
                     </div>
 
                     <div class="mb-4">
-                        <label for="phone" class="block text-gray-700 text-sm font-bold mb-2">Numéro de téléphone</label>
+                        <label for="phone" class="block text-gray-700 text-sm font-bold mb-2">Numéro de téléphone *</label>
                         <input
                             type="tel"
                             id="phone"
                             name="phone"
                             x-model="phone"
                             class="shadow border rounded w-full py-2 px-3 text-gray-700"
-                            placeholder="Ex: 696123456"
+                            placeholder="Ex: +237696123456"
+                            required
                         >
                         @error('phone')
                             <span class="text-red-500 text-sm">{{ $message }}</span>
@@ -351,39 +374,37 @@
                     </div>
 
                     <div class="mb-4">
-                        <label for="amount" class="block text-gray-700 text-sm font-bold mb-2">Montant (en Fcfa, si financier)</label>
-                        <input type="number" id="amount" name="amount" min="5" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" placeholder="Entrez un montant">
+                        <label for="amount" class="block text-gray-700 text-sm font-bold mb-2">Montant (en Fcfa) *</label>
+                        <input type="number" id="amount" name="amount" min="5" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" placeholder="Entrez un montant" required>
                         @error('amount')
                             <span class="text-red-500 text-sm">{{ $message }}</span>
                         @enderror
                     </div>
 
                     <div class="mb-4">
-                        <label for="name" class="block text-gray-700 text-sm font-bold mb-2">Nom (facultatif)</label>
-                        <input type="text" id="name" name="name" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" placeholder="Votre nom ou laisser vide">
-                    </div>
-
-                    <div class="mb-4">
-                        <label for="email" class="block text-gray-700 text-sm font-bold mb-2">Email (facultatif)</label>
-                        <input type="email" id="email" name="email" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" placeholder="Votre email (optionnel)">
-                    </div>
-
-                    <div class="mb-4">
-                        <label for="service" class="block text-gray-700 text-sm font-bold mb-2">Opérateur</label>
-                        <select id="service" name="service" class="shadow border rounded w-full py-2 px-3 text-gray-700">
-                            <option value="">Choisissez un opérateur</option>
-                            <option value="ORANGE">Orange</option>
-                            <option value="MTN">MTN</option>
-                        </select>
-                        @error('service')
+                        <label for="name" class="block text-gray-700 text-sm font-bold mb-2">Nom</label>
+                        <input type="text" id="name" name="name" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" placeholder="Votre nom (optionnel)">
+                        @error('name')
                             <span class="text-red-500 text-sm">{{ $message }}</span>
                         @enderror
                     </div>
 
                     <div class="mb-4">
-                        <label for="comment" class="block text-gray-700 text-sm font-bold mb-2">Commentaire (facultatif)</label>
-                        <textarea id="comment" name="comment" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" placeholder="Ex. : Don pour la campagne de santé"></textarea>
-                        @error('comment')
+                        <label for="email" class="block text-gray-700 text-sm font-bold mb-2">Email</label>
+                        <input type="email" id="email" name="email" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" placeholder="Votre email (optionnel)">
+                        @error('email')
+                            <span class="text-red-500 text-sm">{{ $message }}</span>
+                        @enderror
+                    </div>
+
+                    <div class="mb-4">
+                        <label for="service" class="block text-gray-700 text-sm font-bold mb-2">Opérateur *</label>
+                        <select id="service" name="service" class="shadow border rounded w-full py-2 px-3 text-gray-700" required>
+                            <option value="">Choisissez un opérateur</option>
+                            <option value="ORANGE">Orange</option>
+                            <option value="MTN">MTN</option>
+                        </select>
+                        @error('service')
                             <span class="text-red-500 text-sm">{{ $message }}</span>
                         @enderror
                     </div>
@@ -394,12 +415,6 @@
                         </button>
                     </div>
                 </form>
-
-                @if (session('success'))
-                    <p class="mt-4 text-green-600 text-center max-w-2xl mx-auto">
-                        {{ session('success') }}
-                    </p>
-                @endif
             </div>
         </section>
     </main>
@@ -418,7 +433,7 @@
             </svg>
         </div>
         <div class="marquee-container">
-            <span class="marquee-text">Agir - Grandir - Changer</span>
+            <span class="marquee-text">Grandir- Agir - Changer</span>
         </div>
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
             <div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-6">
@@ -431,7 +446,7 @@
                         </div>
                     </div>
                     <p class="text-gray-200 text-sm mb-4 leading-relaxed">
-                        Nous œuvrons depuis 2024 pour améliorer les conditions de vie des communautés vulnérables au Cameroun.
+                        Nous œuvrons depuis 2021 pour améliorer les conditions de vie des communautés vulnérables dans plusieurs Pays.
                     </p>
                     <div class="flex space-x-3">
                         <a href="https://www.facebook.com/profile.php?id=61568266295634" target="_blank" class="social-icon bg-white bg-opacity-20 p-1.5 rounded-full hover:bg-yellow transition-all duration-300">
