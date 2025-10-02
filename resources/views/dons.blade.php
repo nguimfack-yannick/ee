@@ -238,25 +238,33 @@
     <!-- Contenu dynamique -->
     <main class="flex-1">
         <!-- Section Don -->
-        <section class="relative h-screen bg-cover bg-center"
-                 style="background: url('{{ asset('image/dons.png') }}') center/auto 100% no-repeat;">
-            <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-full flex items-center justify-center">
-                <div class="text-center">
-                    <h1 class="text-5xl font-extrabold text-white sm:text-6xl">Faites un Don</h1>
-                    <p class="mt-4 text-xl text-gray-100">
-                        Soutenez nos missions humanitaires pour changer des vies.
-                    </p>
-                    <div class="mt-8 flex flex-col sm:flex-row justify-center gap-4">
-                        <a href="#donation-form" class="inline-block bg-yellow text-black px-8 py-3 font-bold rounded-md hover:bg-yellow-400 transition transform hover:scale-105">
-                            Donnez maintenant
-                        </a>
-                        <a href="#donation-info" class="inline-block bg-yellow text-black px-8 py-3 font-bold rounded-md hover:bg-yellow-400 transition transform hover:scale-105">
-                            En savoir plus
-                        </a>
-                    </div>
-                </div>
+      <!-- Section Don -->
+<section class="relative h-screen bg-cover bg-center"
+         style="background: url('{{ asset('image/dons.png') }}') center/auto 100% no-repeat;">
+    <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-full flex items-center justify-center">
+        <div class="text-center">
+            <h1 class="text-4xl sm:text-5xl md:text-6xl font-extrabold text-white">Faites un Don</h1>
+            <p class="mt-4 text-lg sm:text-xl text-gray-100 max-w-2xl mx-auto">
+                Soutenez nos missions humanitaires pour changer des vies.
+            </p>
+            <div class="mt-8 flex flex-col sm:flex-row justify-center gap-4">
+                <a href="#donation-form" class="inline-block bg-yellow text-black px-6 py-3 font-bold rounded-md hover:bg-yellow-400 transition transform hover:scale-105 shadow-md">
+                    Donnez maintenant
+                </a>
+                <a href="#donation-info" class="inline-block bg-yellow text-black px-6 py-3 font-bold rounded-md hover:bg-yellow-400 transition transform hover:scale-105 shadow-md">
+                    En savoir plus
+                </a>
             </div>
-        </section>
+
+            <!-- Flèche bleue vers le bas -->
+            <a href="#donation-info" class="mt-10 inline-block animate-bounce">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3" />
+                </svg>
+            </a>
+        </div>
+    </div>
+</section>
 
         <!-- Section Informations sur les Dons -->
         <section id="donation-info" class="py-12 bg-gray-200">
@@ -281,142 +289,158 @@
         </section>
 
         <!-- Section Formulaire de Don -->
-        <section id="donation-form" class="py-16 bg-gray-100">
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <h2 class="text-3xl font-bold text-primary text-center">Faites Votre Don</h2>
+       <!-- Section Formulaire de Don -->
+<section id="donation-form" class="py-10 sm:py-16 bg-gray-100">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <h2 class="text-2xl sm:text-3xl font-bold text-primary text-center mb-6 sm:mb-8">Faites Votre Don</h2>
 
-                <!-- Messages de succès/erreur -->
-                @if (session('success'))
-                    <div class="mt-4 bg-green-100 border-l-4 border-green-500 text-green-700 p-4 rounded-md max-w-lg mx-auto text-center">
-                        <p>{{ session('success') }}</p>
-                    </div>
-                @endif
-                @if ($errors->has('general'))
-                    <div class="mt-4 bg-red-100 border-l-4 border-red-500 text-red-700 p-4 rounded-md max-w-lg mx-auto text-center">
-                        <p>{{ $errors->first('general') }}</p>
-                    </div>
-                @endif
-                @if ($errors->any() && !$errors->has('general'))
-                    <div class="mt-4 bg-red-100 border-l-4 border-red-500 text-red-700 p-4 rounded-md max-w-lg mx-auto">
-                        <ul class="list-disc list-inside">
-                            @foreach ($errors->all() as $error)
-                                <li>{{ $error }}</li>
-                            @endforeach
-                        </ul>
-                    </div>
-                @endif
-
-                <!-- Formulaire -->
-                <form 
-                    action="{{ route('dons.store') }}" 
-                    method="POST" 
-                    class="mt-8 max-w-lg mx-auto"
-                    x-data="{
-                        phone: '',
-                        countryPrefixes: {
-                            'CM|XAF': '+237',
-                            'BJ|XOF': '+229',
-                            'CI|XOF': '+225',
-                            'RW|RWF': '+250',
-                            'UG|UGX': '+256',
-                            'KE|KES': '+254'
-                        },
-                        selectedCountry: 'CM|XAF',
-                        updatePhone() {
-                            const prefix = this.countryPrefixes[this.selectedCountry] || '';
-                            if (!this.phone.startsWith(prefix)) {
-                                this.phone = prefix;
-                            }
-                        }
-                    }"
-                    x-init="updatePhone()"
-                    @submit="isLoading = true"
-                >
-                    @csrf
-                    <input type="hidden" name="nature" value="Financier">
-
-                    <div class="mb-4">
-                        <label class="block text-gray-700 text-sm font-bold mb-2" for="pays">Sélectionnez un pays *</label>
-                        <select
-                            id="pays"
-                            name="country_currency"
-                            x-model="selectedCountry"
-                            @change="updatePhone()"
-                            class="block appearance-none w-full bg-white border border-gray-300 text-gray-700 py-2 px-3 pr-8 rounded leading-tight focus:outline-none focus:shadow-outline"
-                            required
-                        >
-                            <option value="CM|XAF">Cameroun (XAF)</option>
-                            <option value="BJ|XOF">Bénin (XOF)</option>
-                            <option value="CI|XOF">Côte d'Ivoire (XOF)</option>
-                            <option value="RW|RWF">Rwanda (RWF)</option>
-                            <option value="UG|UGX">Ouganda (UGX)</option>
-                            <option value="KE|KES">Kenya (KES)</option>
-                        </select>
-                        @error('country_currency')
-                            <span class="text-red-500 text-sm">{{ $message }}</span>
-                        @enderror
-                    </div>
-
-                    <div class="mb-4">
-                        <label for="phone" class="block text-gray-700 text-sm font-bold mb-2">Numéro de téléphone *</label>
-                        <input
-                            type="tel"
-                            id="phone"
-                            name="phone"
-                            x-model="phone"
-                            class="shadow border rounded w-full py-2 px-3 text-gray-700"
-                            placeholder="Ex: +237696123456"
-                            required
-                        >
-                        @error('phone')
-                            <span class="text-red-500 text-sm">{{ $message }}</span>
-                        @enderror
-                    </div>
-
-                    <div class="mb-4">
-                        <label for="amount" class="block text-gray-700 text-sm font-bold mb-2">Montant (en Fcfa) *</label>
-                        <input type="number" id="amount" name="amount" min="5" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" placeholder="Entrez un montant" required>
-                        @error('amount')
-                            <span class="text-red-500 text-sm">{{ $message }}</span>
-                        @enderror
-                    </div>
-
-                    <div class="mb-4">
-                        <label for="name" class="block text-gray-700 text-sm font-bold mb-2">Nom</label>
-                        <input type="text" id="name" name="name" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" placeholder="Votre nom (optionnel)">
-                        @error('name')
-                            <span class="text-red-500 text-sm">{{ $message }}</span>
-                        @enderror
-                    </div>
-
-                    <div class="mb-4">
-                        <label for="email" class="block text-gray-700 text-sm font-bold mb-2">Email</label>
-                        <input type="email" id="email" name="email" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" placeholder="Votre email (optionnel)">
-                        @error('email')
-                            <span class="text-red-500 text-sm">{{ $message }}</span>
-                        @enderror
-                    </div>
-
-                    <div class="mb-4">
-                        <label for="service" class="block text-gray-700 text-sm font-bold mb-2">Opérateur *</label>
-                        <select id="service" name="service" class="shadow border rounded w-full py-2 px-3 text-gray-700" required>
-                            <option value="">Choisissez un opérateur</option>
-                            <option value="ORANGE">Orange</option>
-                            <option value="MTN">MTN</option>
-                        </select>
-                        @error('service')
-                            <span class="text-red-500 text-sm">{{ $message }}</span>
-                        @enderror
-                    </div>
-
-                    <div class="text-center">
-                        <button type="submit" class="bg-yellow text-black px-6 py-3 font-bold rounded-md hover:bg-yellow-400 transition transform hover:scale-105">
-                            Soumettre le Don
-                        </button>
-                    </div>
-                </form>
+        <!-- Messages de succès/erreur -->
+        @if (session('success'))
+            <div class="mt-4 bg-green-100 border-l-4 border-green-500 text-green-700 p-3 sm:p-4 rounded-md max-w-lg mx-auto text-center text-sm sm:text-base">
+                <p>{{ session('success') }}</p>
             </div>
-        </section>
+        @endif
+        @if ($errors->has('general'))
+            <div class="mt-4 bg-red-100 border-l-4 border-red-500 text-red-700 p-3 sm:p-4 rounded-md max-w-lg mx-auto text-center text-sm sm:text-base">
+                <p>{{ $errors->first('general') }}</p>
+            </div>
+        @endif
+        @if ($errors->any() && !$errors->has('general'))
+            <div class="mt-4 bg-red-100 border-l-4 border-red-500 text-red-700 p-3 sm:p-4 rounded-md max-w-lg mx-auto text-sm sm:text-base">
+                <ul class="list-disc list-inside">
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
+
+        <!-- Formulaire -->
+        <form 
+            action="{{ route('dons.store') }}" 
+            method="POST" 
+            class="mt-6 sm:mt-8 max-w-lg mx-auto"
+            x-data="{
+                phone: '',
+                countryPrefixes: {
+                    'CM|XAF': '+237',
+                    'BJ|XOF': '+229',
+                    'CI|XOF': '+225',
+                    'RW|RWF': '+250',
+                    'UG|UGX': '+256',
+                    'KE|KES': '+254'
+                },
+                selectedCountry: 'CM|XAF',
+                showAlternativePayment: false,
+                updatePhone() {
+                    const prefix = this.countryPrefixes[this.selectedCountry] || '';
+                    if (!this.phone.startsWith(prefix)) {
+                        this.phone = prefix;
+                    }
+                }
+            }"
+            x-init="updatePhone()"
+            @submit="isLoading = true"
+        >
+            @csrf
+            <input type="hidden" name="nature" value="Financier">
+
+            <div class="mb-4">
+                <label class="block text-gray-700 text-sm font-bold mb-2" for="pays">Sélectionnez un pays *</label>
+                <select
+                    id="pays"
+                    name="country_currency"
+                    x-model="selectedCountry"
+                    @change="updatePhone()"
+                    class="block appearance-none w-full bg-white border border-gray-300 text-gray-700 py-2 px-3 rounded leading-tight focus:outline-none focus:shadow-outline"
+                    required
+                >
+                    <option value="CM|XAF">Cameroun (XAF)</option>
+                    <option value="BJ|XOF">Bénin (XOF)</option>
+                    <option value="CI|XOF">Côte d'Ivoire (XOF)</option>
+                    <option value="RW|RWF">Rwanda (RWF)</option>
+                    <option value="UG|UGX">Ouganda (UGX)</option>
+                    <option value="KE|KES">Kenya (KES)</option>
+                </select>
+                @error('country_currency')
+                    <span class="text-red-500 text-xs sm:text-sm">{{ $message }}</span>
+                @enderror
+            </div>
+
+            <div class="mb-4">
+                <label for="phone" class="block text-gray-700 text-sm font-bold mb-2">Numéro de téléphone *</label>
+                <input
+                    type="tel"
+                    id="phone"
+                    name="phone"
+                    x-model="phone"
+                    class="shadow border rounded w-full py-2 px-3 text-gray-700 text-sm sm:text-base"
+                    placeholder="Ex: +237696123456"
+                    required
+                >
+                @error('phone')
+                    <span class="text-red-500 text-xs sm:text-sm">{{ $message }}</span>
+                @enderror
+            </div>
+
+            <div class="mb-4">
+                <label for="amount" class="block text-gray-700 text-sm font-bold mb-2">Montant (en Fcfa) *</label>
+                <input type="number" id="amount" name="amount" min="5" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 text-sm sm:text-base leading-tight focus:outline-none focus:shadow-outline" placeholder="Entrez un montant" required>
+                @error('amount')
+                    <span class="text-red-500 text-xs sm:text-sm">{{ $message }}</span>
+                @enderror
+            </div>
+
+            <div class="mb-4">
+                <label for="name" class="block text-gray-700 text-sm font-bold mb-2">Nom</label>
+                <input type="text" id="name" name="name" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 text-sm sm:text-base leading-tight focus:outline-none focus:shadow-outline" placeholder="Votre nom (optionnel)">
+                @error('name')
+                    <span class="text-red-500 text-xs sm:text-sm">{{ $message }}</span>
+                @enderror
+            </div>
+
+            <div class="mb-4">
+                <label for="email" class="block text-gray-700 text-sm font-bold mb-2">Email</label>
+                <input type="email" id="email" name="email" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 text-sm sm:text-base leading-tight focus:outline-none focus:shadow-outline" placeholder="Votre email (optionnel)">
+                @error('email')
+                    <span class="text-red-500 text-xs sm:text-sm">{{ $message }}</span>
+                @enderror
+            </div>
+
+            <div class="mb-4">
+                <label for="service" class="block text-gray-700 text-sm font-bold mb-2">Opérateur *</label>
+                <select id="service" name="service" class="shadow border rounded w-full py-2 px-3 text-gray-700 text-sm sm:text-base" required>
+                    <option value="">Choisissez un opérateur</option>
+                    <option value="ORANGE">Orange</option>
+                    <option value="MTN">MTN</option>
+                </select>
+                @error('service')
+                    <span class="text-red-500 text-xs sm:text-sm">{{ $message }}</span>
+                @enderror
+            </div>
+
+            <div class="text-center space-y-4">
+                <button type="submit" class="bg-yellow text-black px-4 sm:px-6 py-2 sm:py-3 font-bold rounded-md hover:bg-yellow-400 transition transform hover:scale-105">
+                    Soumettre le Don
+                </button>
+
+                <!-- Bouton "Payer autrement" -->
+                <button 
+                    type="button" 
+                    @click="showAlternativePayment = !showAlternativePayment"
+                    class="block w-full sm:w-auto mt-2 mx-auto bg-gray-700 text-white px-4 sm:px-6 py-2 sm:py-3 font-bold rounded-md hover:bg-gray-800 transition"
+                >
+                    Payer autrement
+                </button>
+
+                <!-- Image affichée au clic -->
+                <div x-show="showAlternativePayment" class="mt-6">
+                    <img src="{{ asset('image/ww.jpg') }}" alt="Méthode de paiement alternative" class="mx-auto max-w-full h-auto rounded-lg shadow-md">
+                </div>
+            </div>
+        </form>
+    </div>
+</section>
     </main>
 
     <!-- Footer -->
@@ -433,7 +457,7 @@
             </svg>
         </div>
         <div class="marquee-container">
-            <span class="marquee-text">Grandir- Agir - Changer</span>
+            <span class="marquee-text"> Agir - Grandir - Changer</span>
         </div>
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
             <div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-6">
@@ -487,7 +511,7 @@
                             <svg class="w-4 h-4 mr-2 text-yellow" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"></path>
                             </svg>
-                            <p>+237 6 21 62 06 77</p>
+                            <p>+237 6 21 62 06 77 / +237 6 91 42 53 34</p>
                         </div>
                         <div class="flex items-center">
                             <svg class="w-4 h-4 mr-2 text-yellow" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">

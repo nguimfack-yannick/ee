@@ -610,7 +610,7 @@
                     data-modal-title="L'équipe d'ABEC en action"
                     data-modal-content="La descente de l'organisation du bien-être communautaire à l’Hôpital Régional de Bafoussam a été un moment fort d’action sociale, concrétisé après plusieurs mois de préparation. Toute l’équipe s’est mobilisée, depuis la collecte de fonds jusqu’aux démarches administratives, en passant par l’organisation logistique. Le jour J, l’équipe a fait preuve d’efficacité, et les résultats ont été parmi les meilleurs."
                     data-modal-image="{{ asset('image/b.jpeg') }}">
-                    <img src="{{ asset('image/b.jpeg') }}" alt="Campagne de vaccination" class="event-image">
+                    <img src="{{ asset('image/ngui.jpeg') }}" alt="Campagne de vaccination" class="event-image">
                     <div class="event-body">
                         <div class="event-meta">22 Mars 2025 • Bafoussam</div>
                         <h3 class="event-title">L'équipe d'ABEC en action</h3>
@@ -686,7 +686,7 @@
             </svg>
         </div>
         <div class="marquee-container">
-            <span class="marquee-text"> Grandir- Agir  - Changer</span>
+            <span class="marquee-text">Agir - Grandir - Changer</span>
         </div>
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
             <div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-6">
@@ -740,7 +740,7 @@
                             <svg class="w-4 h-4 mr-2 text-yellow" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"></path>
                             </svg>
-                            <p>+237 6 21 62 06 77</p>
+                    <p>+237 6 21 62 06 77 / +237 6 91 42 53 34</p>
                         </div>
                         <div class="flex items-center">
                             <svg class="w-4 h-4 mr-2 text-yellow" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">

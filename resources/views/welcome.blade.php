@@ -742,7 +742,7 @@
                             <h1 class="hero-text font-extrabold text-white">Organisation du Bien-Être Communautaire</h1>
                             <p class="mt-3 hero-subtext text-gray-100 font-bold">Une Organisation internationale œuvrant dans le monde entier pour le Bien-être des communautés.</p>
                             <div class="mt-4 flex flex-col sm:flex-row justify-center gap-3">
-                                <a href="santos/dons.php" class="hero-button inline-block bg-yellow text-black px-4 py-2 text-sm font-bold rounded-md hover:bg-gray-100 transition-all duration-300">
+                                <a href="{{ route('dons') }}" class="hero-button inline-block bg-yellow text-black px-4 py-2 text-sm font-bold rounded-md hover:bg-gray-100 transition-all duration-300">
                                     Faites un don
                                     <svg class="bounce-down-arrow w-4 h-4 inline" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3" />
@@ -764,7 +764,7 @@
                             <h1 class="hero-text font-extrabold text-white">Organisation du Bien-Être Communautaire</h1>
                             <p class="mt-3 hero-subtext text-gray-100 font-bold">Une Organisation internationale œuvrant dans le monde entier pour le Bien-être des communautés.</p>
                             <div class="mt-4 flex flex-col sm:flex-row justify-center gap-3">
-                                <a href="santos/dons.php" class="hero-button inline-block bg-yellow text-black px-4 py-2 text-sm font-bold rounded-md hover:bg-gray-100 transition-all duration-300">
+                                <a href="{{ route('dons') }}" class="hero-button inline-block bg-yellow text-black px-4 py-2 text-sm font-bold rounded-md hover:bg-gray-100 transition-all duration-300">
                                     Faites un don
                                     <svg class="bounce-down-arrow w-4 h-4 inline" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3" />
@@ -786,7 +786,7 @@
                             <h1 class="hero-text font-extrabold text-white">Organisation du Bien-Être Communautaire</h1>
                             <p class="mt-3 hero-subtext text-gray-100 font-bold">Une Organisation internationale œuvrant dans le monde entier pour le Bien-être des communautés.</p>
                             <div class="mt-4 flex flex-col sm:flex-row justify-center gap-3">
-                                <a href="santos/dons.php" class="hero-button inline-block bg-yellow text-black px-4 py-2 text-sm font-bold rounded-md hover:bg-gray-100 transition-all duration-300">
+                                <a href="{{ route('dons') }}"class="hero-button inline-block bg-yellow text-black px-4 py-2 text-sm font-bold rounded-md hover:bg-gray-100 transition-all duration-300">
                                     Faites un don
                                     <svg class="bounce-down-arrow w-4 h-4 inline" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3" />
@@ -808,7 +808,7 @@
                             <h1 class="hero-text font-extrabold text-white">Organisation du Bien-Être Communautaire</h1>
                             <p class="mt-3 hero-subtext text-gray-100 font-bold">Une Organisation internationale œuvrant dans le monde entier pour le Bien-être des communautés.</p>
                             <div class="mt-4 flex flex-col sm:flex-row justify-center gap-3">
-                                <a href="santos/dons.php" class="hero-button inline-block bg-yellow text-black px-4 py-2 text-sm font-bold rounded-md hover:bg-gray-100 transition-all duration-300">
+                                <a href="{{ route('dons') }}" class="hero-button inline-block bg-yellow text-black px-4 py-2 text-sm font-bold rounded-md hover:bg-gray-100 transition-all duration-300">
                                     Faites un don
                                     <svg class="bounce-down-arrow w-4 h-4 inline" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3" />
@@ -830,7 +830,7 @@
                             <h1 class="hero-text font-extrabold text-white">Organisation du Bien-Être Communautaire</h1>
                             <p class="mt-3 hero-subtext text-gray-100 font-bold">Une Organisation internationale œuvrant dans le monde entier pour le Bien-être des communautés.</p>
                             <div class="mt-4 flex flex-col sm:flex-row justify-center gap-3">
-                                <a href="santos/dons.php" class="hero-button inline-block bg-yellow text-black px-4 py-2 text-sm font-bold rounded-md hover:bg-gray-100 transition-all duration-300">
+                                <a href="{{ route('dons') }}" class="hero-button inline-block bg-yellow text-black px-4 py-2 text-sm font-bold rounded-md hover:bg-gray-100 transition-all duration-300">
                                     Faites un don
                                     <svg class="bounce-down-arrow w-4 h-4 inline" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3" />
@@ -960,7 +960,7 @@
                 <p>L'Association du Bien-Être Communautaire (ABEC) est une organisation internationale à but non lucratif, légalement reconnue et enregistrée auprès des institutions locales sous le numéro de déclaration 00001901/RDA/J06/SAAJP/BAPP.</p>
                 <p>La Loi n°99/014 du 22 décembre 1999 régissant les Organisations Non Gouvernementales (ONG) ; la Loi n°90/053 du 19 décembre 1990 portant sur la liberté d'association au Cameroun.</p>
                 <p>L'ABEC se distingue par une gouvernance inclusive et représentative. Son équipe dirigeante rassemble des membres issus de plusieurs nationalités différentes, illustrant son ouverture et sa portée internationale.</p>
-                <p>Les femmes y occupent des postes stratégiques, renforçant l'équité et la représentativité. Fondée par un jeune visionnaire, l'organisation est dirigée majoritairement par des leaders jeunes, animés par la volonté d'impacter positivement leur génération à travers des actions concrètes.</p>
+                <p>Les femmes y occupent des postes stratégiques, renforçant l'équité et la représentativité. Fondée par des jeunes visionnaires, l'organisation est dirigée majoritairement par des leaders jeunes, animés par la volonté d'impacter positivement leur génération à travers des actions concrètes.</p>
                 <p>L'ABEC s'appuie sur un réseau d'experts en droit, gestion de projet, communication, finance, développement durable et gestion des ressources humaines, garantissant le sérieux et la qualité de ses interventions.</p>
                 <p>L'ABEC collabore étroitement avec un ensemble de petites et moyennes organisations locales et internationales qui lui font confiance.</p>
                 <p>L'organisation a déjà initié et co-organisé plusieurs activités locales en partenariat avec des entreprises et des structures qui, convaincues par son engagement et sa détermination, continuent de la soutenir durablement.</p>
@@ -1031,7 +1031,7 @@
                         </div>
                     </div>
                     <p class="text-gray-200 text-sm mb-4 leading-relaxed">
-                        Nous œuvrons depuis 2024 pour améliorer les conditions de vie des communautés vulnérables au Cameroun.
+                        Nous œuvrons depuis 2021 pour améliorer les conditions de vie des communautés vulnérables dans plusieurs Pays
                     </p>
                     <div class="flex space-x-3">
                         <a href="https://www.facebook.com/profile.php?id=61568266295634" target="_blank" class="social-icon bg-white bg-opacity-20 p-1.5 rounded-full hover:bg-yellow transition-all duration-300">
@@ -1075,7 +1075,7 @@
                             <svg class="w-4 h-4 mr-2 text-yellow" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"></path>
                             </svg>
-                            <p>+237 6 21 62 06 77</p>
+                            <p>+237 6 21 62 06 77 / +237 6 91 42 53 34</p>
                         </div>
                         <div class="flex items-center">
                             <svg class="w-4 h-4 mr-2 text-yellow" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
