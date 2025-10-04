@@ -759,7 +759,7 @@
                     </div>
                 </div>
                 <div class="swiper-slide">
-                    <div class="h-full bg-cover bg-center flex items-center justify-center" style="background: url('{{ asset('image/pl.png') }}') center/cover no-repeat;">
+                    <div class="h-full bg-cover bg-center flex items-center justify-center" style="background: url('{{ asset('/image/pl.png') }}') center/cover no-repeat;">
                         <div class="text-center px-4">
                             <h1 class="hero-text font-extrabold text-white">Organisation du Bien-Être Communautaire</h1>
                             <p class="mt-3 hero-subtext text-gray-100 font-bold">Une Organisation internationale œuvrant dans le monde entier pour le Bien-être des communautés.</p>
@@ -1053,10 +1053,10 @@
                     <h3 class="text-base font-bold mb-4 text-white border-b border-yellow pb-1">Liens Rapides</h3>
                     <ul class="space-y-2 text-sm">
                         <li><a href="{{ url('/') }}" class="footer-link text-gray-200 hover:text-yellow flex items-center transition-all duration-300"><span class="mr-2">→</span> Accueil</a></li>
-                        <li><a href="{{ url('/about') }}" class="footer-link text-gray-200 hover:text-yellow flex items-center transition-all duration-300"><span class="mr-2">→</span> À propos</a></li>
+                        <li><a href="#about" class="footer-link text-gray-200 hover:text-yellow flex items-center transition-all duration-300"><span class="mr-2">→</span> À propos</a></li>
                         <li><a href="{{ url('/news') }}" class="footer-link text-gray-200 hover:text-yellow flex items-center transition-all duration-300"><span class="mr-2">→</span> News</a></li>
                         <li><a href="{{ url('/dons') }}" class="footer-link text-gray-200 hover:text-yellow flex items-center transition-all duration-300"><span class="mr-2">→</span> Faire un don</a></li>
-                           <li><a href="{{ url('/projects') }}" class="footer-link text-gray-200 hover:text-yellow flex items-center transition-all duration-300"><span class="mr-2">→</span>Evenements</a></li>
+                           <li><a href="{{ url('/branche') }}" class="footer-link text-gray-200 hover:text-yellow flex items-center transition-all duration-300"><span class="mr-2">→</span>Evenements</a></li>
                         <!-- <li><a href="{{ url('/contact') }}" class="footer-link text-gray-200 hover:text-yellow flex items-center transition-all duration-300"><span class="mr-2">→</span> Contact</a></li> -->
                     </ul>
                 </div>
@@ -1106,7 +1106,7 @@
                     </p>
                     <div class="flex space-x-4 text-xs">
                         <a href="{{ route('mention') }}" class="text-gray-300 hover:text-yellow transition-colors duration-300">Mentions légales</a>
-                        <a href="{{ route('politique') }}"" class="text-gray-300 hover:text-yellow transition-colors duration-300">Politique de confidentialité</a>
+                        <a href="{{ route('politique') }}"class="text-gray-300 hover:text-yellow transition-colors duration-300">Politique de confidentialité</a>
                         <a href="{{ route('copitt') }}" class="text-gray-300 hover:text-yellow transition-colors duration-300">Conditions d'utilisation</a>
                     </div>
                 </div>

@@ -23,7 +23,7 @@
             <h1 class="text-3xl font-bold text-primary mb-6 text-center">Mentions Légales</h1>
             <p class="text-gray-700 text-center"><strong>Date d'entrée en vigueur : 26 septembre 2025</strong></p>
             <p class="text-gray-700 text-center">
-                L’<strong>Association du Bien-Être Communautaire (ABEC)</strong> est une organisation à but non lucratif dédiée à la promotion du bien-être communautaire au Cameroun et en Afrique.  
+                L’<strong>Association du Bien-Être Communautaire (ABEC)</strong> est une organisation internationale à but non lucratif dédiée à la promotion du bien-être communautaire dans le monde.  
                 Ces Mentions Légales expliquent l'identité légale, les obligations et les informations relatives à notre organisation.  
                 En accédant ou en utilisant notre site web (<a href="universalwelfare.org" class="text-primary hover:underline">universalwelfare.org</a>), vous acceptez les dispositions décrites dans ces Mentions Légales.
             </p>
@@ -43,11 +43,11 @@
             <ul class="list-disc mx-auto text-gray-700 text-center" style="list-style-position: inside;">
                 <li><strong>Dénomination sociale</strong> : Association du Bien-Être Communautaire (ABEC)</li>
                 <li><strong>Forme juridique</strong> : Association déclarée et enregistrée au Cameroun.</li>
-                <li><strong>Statut</strong> : Organisation Non Gouvernementale (ONG) à but non lucratif.</li>
-                <li><strong>Objet social</strong> : Promouvoir le bien-être communautaire à travers des programmes sociaux, éducatifs, sanitaires, culturels et environnementaux, en mettant un accent particulier sur les communautés vulnérables.</li>
+                <li><strong>Statut</strong> : Organisation Non Gouvernementale (ONG) internationale à but non lucratif.</li>
+                <li><strong>Objet social</strong> : Promouvoir le bien-être communautaire à travers des programmes Jeunesse, L’Environnement, La Santé, La Paix,La Justice,Le Développement Durable,Le Bien-être des Communautés,La Culture,L’Histoire,Le Panafricanisme,Promotion de l’Égalité et de l’Équité en mettant un accent particulier sur les communautés vulnérables.</li>
                 <li><strong>Siège social</strong> : Yaoundé, Cameroun.</li>
                 <li><strong>Représentant légal</strong> : Ararat Kamani Rehoboth</li>
-                <li><strong>Date de création</strong> : 2024.</li>
+                <li><strong>Date de création</strong> : 2021.</li>
             </ul>
 
             <hr class="border-2 border-yellow my-8">
