@@ -996,6 +996,9 @@
                     <div class="swiper-slide flex justify-center items-center">
                         <img src="{{ asset('image/ee.png') }}" alt="Partenaire 1" class="partner-logo" />
                     </div>
+                    <div class="swiper-slide flex justify-center items-center">
+                        <img src="{{ asset('image/canvas.jpeg') }}" alt="canvas" class="partner-logo" />
+                    </div>
                 </div>
             </div>
         </div>
