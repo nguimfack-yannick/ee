@@ -45,3 +45,11 @@ Route::get('/politique', function () {
 Route::get('/mention', function () {
     return view('mention');
 })->name('mention');
+
+Route::get('/panaf', function () {
+    return view('panaf');
+})->name('panaf');
+
+Route::get('/aPropos', function () {
+    return view('aPropos');
+})->name('aPropos');
